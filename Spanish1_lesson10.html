@@ -1,0 +1,1447 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<script src="site.js" defer></script>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 10 文法解説 | スペイン語一列①</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<!-- dict modal -->
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 肯定の命令文</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 否定の命令文</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 接続法過去</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ 接続法過去完了</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 接続法過去・過去完了の用法</a>
+    <a class="fn-item" href="#sec6" data-tab="grammar" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 願望文</a>
+    <a class="fn-item" href="#sec7" data-tab="grammar" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 条件文</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec8" data-tab="renshu" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec9" data-tab="vocab" onclick="jumpToSection('sec9'); closeToc(); return false;">⑨ 語彙リスト</a>
+    <a class="fn-item" href="#sec10" data-tab="vocab" onclick="jumpToSection('sec10'); closeToc(); return false;">⑩ まとめ</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 10 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 10　文法解説</div>
+  <div class="cover-sub">スペイン語一列①　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br>「〜しなさい」「〜しないで」という命令、「〜だったらなあ」という願望、「もし〜なら…だろうに」という仮定の文が作れるようになります。<br><small>9課の接続法現在が土台になります。命令文（①②）と接続法過去（③〜⑦）はどちらも接続法の形を使うので、9課の活用を確認してから読み進めましょう。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 肯定の命令文</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 否定の命令文</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 接続法過去</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ 接続法過去完了</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 接続法過去・過去完了の用法</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 願望文</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 条件文</a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ 練習問題</a>
+    <a class="toc-item" href="#sec9" onclick="jumpToSection('sec9'); return false;">⑨ 語彙リスト</a>
+    <a class="toc-item" href="#sec10" onclick="jumpToSection('sec10'); return false;">⑩ まとめ</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：ven　／　tuviera　／　条件文…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 肯定の命令文 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">肯定の命令文</span>
+  <span class="sec-es">Oraciones imperativas afirmativas</span>
+</div>
+
+<p>スペイン語で<span class="hi">固有の命令形</span>を持つのは <span class="mono hi-r">tú</span> と <span class="mono hi-r">vosotros</span> だけです。それ以外の人称はすべて<span class="hi2">接続法現在</span>（9課）をそのまま使います。</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th></th><th style="background:#dde8f5;color:var(--accent)">単数</th><th style="background:#d8eeea;color:var(--accent2)">複数</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-rule">1人称</td><td class="td-c" style="color:var(--muted)">—</td><td class="td-c hi2">接続法現在</td></tr>
+    <tr><td class="td-rule">2人称</td><td class="td-c hi-r"><b>命令形</b></td><td class="td-c hi-r"><b>命令形</b></td></tr>
+    <tr><td class="td-rule">3人称</td><td class="td-c hi2">接続法現在</td><td class="td-c hi2">接続法現在</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ 3人称＝<span class="mono">usted / ustedes</span> への丁寧な命令。1人称複数＝<span class="mono">nosotros</span>「〜しましょう」。</p>
+
+<div class="sub" id="tu-meirei">1. tú に対する命令形</div>
+<p><span class="hi">直説法現在3人称単数形と同形</span>です。ただし以下の8語は不規則形を持ちます。</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>不定詞</th><th>命令形</th><th>不定詞</th><th>命令形</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">poner（置く）</td><td class="td-c mono hi-r"><b>pon</b></td><td class="mono">salir（出る）</td><td class="td-c mono hi-r"><b>sal</b></td></tr>
+    <tr><td class="mono">tener（持つ）</td><td class="td-c mono hi-r"><b>ten</b></td><td class="mono">hacer（する）</td><td class="td-c mono hi-r"><b>haz</b></td></tr>
+    <tr><td class="mono">venir（来る）</td><td class="td-c mono hi-r"><b>ven</b></td><td class="mono">decir（言う）</td><td class="td-c mono hi-r"><b>di</b></td></tr>
+    <tr><td class="mono">ir（行く）</td><td class="td-c mono hi-r"><b>ve</b></td><td class="mono">ser（〜である）</td><td class="td-c mono hi-r"><b>sé</b></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ <span class="mono">ve</span>（ir の命令）と <span class="mono">ve</span>（ver の直説法3単）、<span class="mono">sé</span>（ser の命令）と <span class="mono">sé</span>（saber の直説法1単）は同形。文脈で判断する。</p>
+
+<div class="sub" id="vosotros-meirei">2. vosotros に対する命令形</div>
+<p>不定詞の語末の <span class="mono hi-r">-r を -d に変える</span>だけ。<span class="hi">例外は一つもありません</span>。</p>
+<div style="text-align:center;font-size:14px;margin:8px 0;" class="mono">
+  hablar → habla<b>d</b>　／　volver → volve<b>d</b>　／　decir → deci<b>d</b>　／　ir → i<b>d</b>
+</div>
+
+<div class="sub" id="meirei-hyou">命令形の一覧表</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>人称</th>
+      <th style="background:#dde8f5;color:var(--accent)">hablar</th>
+      <th style="background:#d8eeea;color:var(--accent2)">volver</th>
+      <th style="background:#f0e8dd;color:#8b5020">decir</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono hi-r">habla</td><td class="td-c mono hi-r">vuelve</td><td class="td-c mono hi-r">di</td></tr>
+    <tr><td class="td-key td-c">usted</td><td class="td-c mono hi2">hable</td><td class="td-c mono hi2">vuelva</td><td class="td-c mono hi2">diga</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi2">hablemos</td><td class="td-c mono hi2">volvamos</td><td class="td-c mono hi2">digamos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono hi-r">hablad</td><td class="td-c mono hi-r">volved</td><td class="td-c mono hi-r">decid</td></tr>
+    <tr><td class="td-key td-c">ustedes</td><td class="td-c mono hi2">hablen</td><td class="td-c mono hi2">vuelvan</td><td class="td-c mono hi2">digan</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">赤色＝固有の命令形（tú・vosotros）／緑色＝接続法現在を流用（usted・nosotros・ustedes）。</p>
+
+<div class="ex"><span class="ex-sp"><span class="hi2">Espere</span> un momento, por favor.</span><span class="ex-ja">少々お待ちください。（usted）</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi-r">Volved</span> pronto.</span><span class="ex-ja">早く帰ってきなさい。（vosotros）</span></div>
+
+<div class="sub" id="meirei-daimeishi">3. 目的格代名詞・再帰代名詞の位置</div>
+<p><span class="hi-r">肯定命令では動詞の後ろに続けてつける</span>（1語になる）。アクセント位置が変わらないよう、アクセント記号が必要になる場合があります。</p>
+
+<div class="ex"><span class="ex-sp"><span class="hi">Ayúdanos</span> a llevar estas cajas.</span><span class="ex-ja">この箱を運ぶのを手伝って。（ayuda ＋ nos）</span></div>
+<div class="ex"><span class="ex-sp">Si necesitas algo, <span class="hi">dímelo</span>.</span><span class="ex-ja">何か必要なら、私にそれを言って。（di ＋ me ＋ lo）</span></div>
+
+<div class="box box-warn">
+  <div class="box-title">アクセント記号のルール</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li><span class="mono">ayuda</span>（a-YU-da）に <span class="mono">nos</span> が付くと音節が1つ増える → 元の位置を保つため <span class="mono hi-r">ayúdanos</span></li>
+    <li><span class="mono">di</span> は1音節だが、代名詞が2つ付くと <span class="mono hi-r">dímelo</span>（DÍ-me-lo）となり記号が必要</li>
+    <li>語順は3課・5課と同じ<span class="hi">「再帰 → 間接 → 直接」</span>（<span class="mono">dí-me-lo</span>）</li>
+    <li>否定命令では逆に<span class="hi-r">動詞の前</span>に置く（→②）</li>
+  </ul>
+</div>
+
+<div class="sub" id="saiki-meirei">4. 再帰動詞の nosotros / vosotros に対する命令</div>
+<div class="box box-rule">
+  <div class="box-title">活用語尾の -s, -d を取ってから -nos, -os を付ける</div>
+  <div class="tbl-wrap" style="margin-top:6px">
+  <table>
+    <thead><tr><th>人称</th><th style="background:#dde8f5;color:var(--accent)">levantarse（起きる）</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key td-c">tú</td><td class="td-c mono hi-r">levántate</td></tr>
+      <tr><td class="td-key td-c">usted</td><td class="td-c mono hi2">levántese</td></tr>
+      <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi-r">levantémonos<br><small style="color:var(--warn)">（× levantémo<u>s</u>nos）</small></td></tr>
+      <tr><td class="td-key td-c">vosotros</td><td class="td-c mono hi-r">levantaos<br><small style="color:var(--warn)">（× levanta<u>d</u>os）</small></td></tr>
+      <tr><td class="td-key td-c">ustedes</td><td class="td-c mono hi2">levántense</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:6px;">※ nosotros：<span class="mono">levantemos</span> の <span class="hi-r">-s を落として</span> ＋ <span class="mono">nos</span>。vosotros：<span class="mono">levantad</span> の <span class="hi-r">-d を落として</span> ＋ <span class="mono">os</span>。</p>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">-s</span> と <span class="mono">-d</span> が落ちるのは<b>同じ子音の連続を避ける</b>ためです。<span class="mono">levantemos＋nos</span> は <span class="mono">s-n</span>、<span class="mono">levantad＋os</span> は <span class="mono">d-o</span> の並びが発音しづらく、話し言葉の中で自然に脱落しました。唯一の例外は <span class="mono">ir</span> で、<span class="mono">idos</span> ではなく <span class="mono hi-r">idos</span>（規範）／口語では <span class="mono">iros</span> も広く使われます。</span>
+</div>
+
+<div class="mini-check" id="L10-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Habla</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">túに対する肯定命令は直説法3単と同形</span></span> más despacio, por favor.</div>
+  <div class="mini-check-ja">もっとゆっくり話してください。</div>
+<div class="srs-rate" data-qid="L10-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：肯定の命令文</div>
+
+  <div class="quiz-item" id="L10-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Ven</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">venir：túの不規則命令8語の一つ</span></span> aquí, por favor.</div>
+    <div class="quiz-ja">こっちに来て。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Ven</b>：venirのtúに対する命令形は不規則8語の一つ（pon/ten/ven/sal/haz/di/ve/sé）。</div>
+  <div class="srs-rate" data-qid="L10-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Siéntense</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ustedesの肯定命令は接続法現在＋代名詞後置</span></span>, por favor.</div>
+    <div class="quiz-ja">（あなたがた）お座りください。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Siéntense</b>：ustedesの肯定命令は接続法現在（sienten）をそのまま使い、再帰代名詞seを後ろに接続。アクセント記号に注意。</div>
+  <div class="srs-rate" data-qid="L10-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>hablar</b> の肯定命令形を書きなさい（tú・usted・nosotros・vosotros・ustedes）。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>tú</th><th>usted</th><th>nosotros</th><th>vosotros</th><th>ustedes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habla</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hable</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablemos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablad</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablen</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">tú＝直説法3単と同形。usted/nosotros/ustedes＝接続法現在。vosotros＝不定詞の-rを-dに変える。</div>
+  <div class="srs-rate" data-qid="L10-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ② 否定の命令文 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">否定の命令文</span>
+  <span class="sec-es">Oraciones imperativas negativas</span>
+</div>
+
+<div class="box box-rule" id="hitei-meirei">
+  <div class="box-title">否定命令のルール</div>
+  <div style="text-align:center;font-size:15px;font-weight:700;padding:10px 0;">
+    <span class="hi-r">すべての人称</span>に対して　<span class="mono hi">no</span> ＋ <span class="hi2">接続法現在</span>
+  </div>
+  <p class="note" style="margin:0;text-align:center;">＝ tú・vosotros の固有命令形は<span class="hi-r">使わない</span>。目的格・再帰代名詞は<span class="hi-r">動詞の前</span>に置く。</p>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>人称</th><th style="background:#d8eeea;color:var(--accent2)">肯定命令</th><th style="background:#fbe4e4;color:var(--warn)">否定命令</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono">habla ／ dilo</td><td class="td-c mono hi-r">no hables ／ no lo digas</td></tr>
+    <tr><td class="td-key td-c">usted</td><td class="td-c mono">hable ／ dígalo</td><td class="td-c mono hi-r">no hable ／ no lo diga</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono">hablemos</td><td class="td-c mono hi-r">no hablemos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono">hablad ／ decidlo</td><td class="td-c mono hi-r">no habléis ／ no lo digáis</td></tr>
+    <tr><td class="td-key td-c">ustedes</td><td class="td-c mono">hablen</td><td class="td-c mono hi-r">no hablen</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="ex"><span class="ex-sp"><span class="hi-r">No hables</span> mal de tu amigo.</span><span class="ex-ja">友達の悪口を言うな。</span></div>
+<div class="ex"><span class="ex-sp">Tenga cuidado con él; <span class="hi-r">no le dé</span> mucha confianza.</span><span class="ex-ja">彼には気をつけて。あまり信用しないでください。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi-r">No os preocupéis</span>; nos encargaremos de todo.</span><span class="ex-ja">心配しないで。私たちが全部引き受けます。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi-r">no hables</span>：肯定なら <span class="mono">habla</span> だが、否定では接続法 <span class="mono">hables</span></li>
+    <li><span class="mono hi-r">no le dé</span>：代名詞 <span class="mono">le</span> が<span class="hi">動詞の前</span>。<span class="mono">dé</span> は dar の接続法（アクセント記号）</li>
+    <li><span class="mono hi-r">no os preocupéis</span>：再帰代名詞 <span class="mono">os</span> も動詞の前。肯定なら <span class="mono">preocupaos</span></li>
+    <li><span class="mono">hablar mal de</span>：〜の悪口を言う ／ <span class="mono">encargarse de</span>：〜を引き受ける</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L10-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">No <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hables</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">全人称でno+接続法現在</span></span> tan alto.</div>
+  <div class="mini-check-ja">そんなに大きな声で話さないで。</div>
+<div class="srs-rate" data-qid="L10-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：否定の命令文</div>
+
+  <div class="quiz-item" id="L10-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No le <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">des</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">túに対するdarの否定命令は接続法</span></span> más dinero.</div>
+    <div class="quiz-ja">彼にこれ以上お金をあげないで。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>des</b>：darのtúに対する接続法現在。否定命令では全人称でno＋接続法現在を使う。</div>
+  <div class="srs-rate" data-qid="L10-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">os preocupéis</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">preocuparse：再帰代名詞は動詞の前</span></span>; nos encargaremos de todo.</div>
+    <div class="quiz-ja">心配しないで。私たちが全部引き受けます。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>os preocupéis</b>：否定命令では再帰代名詞は動詞の前に置く（肯定命令なら後ろに接続してpreocupaos）。</div>
+  <div class="srs-rate" data-qid="L10-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>hablar</b> の否定命令形を書きなさい（tú・usted・nosotros・vosotros・ustedes）。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>tú</th><th>usted</th><th>nosotros</th><th>vosotros</th><th>ustedes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c">no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hables</span></span></td>
+          <td class="td-c">no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hable</span></span></td>
+          <td class="td-c">no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablemos</span></span></td>
+          <td class="td-c">no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habléis</span></span></td>
+          <td class="td-c">no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablen</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">否定命令は全人称で「no＋接続法現在」を使う。肯定命令とは異なりtú形も接続法になる点に注意（no hables、habla命令とは違う形）。</div>
+  <div class="srs-rate" data-qid="L10-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ③ 接続法過去 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">接続法過去</span>
+  <span class="sec-es">Pretérito imperfecto de subjuntivo</span>
+</div>
+
+<div class="box box-rule" id="subj-kako-tsukurikata">
+  <div class="box-title">作り方（規則・不規則すべて共通）</div>
+  <div style="text-align:center;font-size:15px;font-weight:700;padding:10px 0;">
+    <span class="hi-r">直説法点過去 3人称複数形</span>から語末の <span class="mono hi-r">-ron</span> を取った形が語根
+  </div>
+  <div style="text-align:center;font-size:13.5px;" class="mono">
+    hablaron → habla- ＋ <b>-ra / -ras / -ra / -́ramos / -rais / -ran</b>
+  </div>
+</div>
+
+<div class="sub">規則活用</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>人称</th><th style="background:#dde8f5;color:var(--accent)">hablar</th><th style="background:#d8eeea;color:var(--accent2)">comer</th><th style="background:#f0e8dd;color:#8b5020">vivir</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r">habla<b>ra</b></td><td class="td-c mono hi-r">comie<b>ra</b></td><td class="td-c mono hi-r">vivie<b>ra</b></td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono">habla<b>ras</b></td><td class="td-c mono">comie<b>ras</b></td><td class="td-c mono">vivie<b>ras</b></td></tr>
+    <tr><td class="td-key td-c">él/ella</td><td class="td-c mono hi-r">habla<b>ra</b></td><td class="td-c mono hi-r">comie<b>ra</b></td><td class="td-c mono hi-r">vivie<b>ra</b></td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi2">habl<b>áramos</b></td><td class="td-c mono hi2">com<b>iéramos</b></td><td class="td-c mono hi2">viv<b>iéramos</b></td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono">habla<b>rais</b></td><td class="td-c mono">comie<b>rais</b></td><td class="td-c mono">vivie<b>rais</b></td></tr>
+    <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono">habla<b>ran</b></td><td class="td-c mono">comie<b>ran</b></td><td class="td-c mono">vivie<b>ran</b></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ <span class="hi-r">nosotros 形のみアクセント記号</span>が必要（<span class="mono">habláramos, comiéramos</span>）。yo 形と él/ella 形は同形。</p>
+
+<div class="sub" id="subj-kako-fukisoku">不規則活用</div>
+<p>作り方は規則活用と<span class="hi">まったく同じ</span>です。点過去が不規則な動詞は、その3人称複数形から語根を作るだけで自動的に正しい形になります。</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>人称</th><th style="background:#dde8f5;color:var(--accent)">dormir<br><small>durmieron</small></th><th style="background:#d8eeea;color:var(--accent2)">tener<br><small>tuvieron</small></th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r">durmiera</td><td class="td-c mono hi-r">tuviera</td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono">durmieras</td><td class="td-c mono">tuvieras</td></tr>
+    <tr><td class="td-key td-c">él/ella</td><td class="td-c mono">durmiera</td><td class="td-c mono">tuviera</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi2">durmiéramos</td><td class="td-c mono hi2">tuviéramos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono">durmierais</td><td class="td-c mono">tuvierais</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono">durmieran</td><td class="td-c mono">tuvieran</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="tbl-wrap" style="margin-top:10px">
+<table>
+  <thead>
+    <tr><th>人称</th><th style="background:#f0e8dd;color:#8b5020">decir<br><small>dijeron</small></th><th style="background:#f5e8f0;color:#8b2060">ser / ir<br><small>fueron</small></th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r">dijera</td><td class="td-c mono hi-r">fuera</td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono">dijeras</td><td class="td-c mono">fueras</td></tr>
+    <tr><td class="td-key td-c">él/ella</td><td class="td-c mono">dijera</td><td class="td-c mono">fuera</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi2">dijéramos</td><td class="td-c mono hi2">fuéramos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono">dijerais</td><td class="td-c mono">dijerais</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono">dijeran</td><td class="td-c mono">fueran</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ <span class="mono">ser</span> と <span class="mono">ir</span> は点過去が同形なので、接続法過去も同形（<span class="mono">fuera</span>）。<span class="mono">dijeron</span> のような j 語根（6課）は <span class="mono">dijera</span> となる。</p>
+
+<div class="box box-rule">
+  <div class="box-title">主要動詞の接続法過去（yo 形）早見</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th>不定詞</th><th>点過去3複</th><th>接続法過去</th><th>不定詞</th><th>点過去3複</th><th>接続法過去</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">estar</td><td class="mono">estuvieron</td><td class="td-c mono hi-r">estuviera</td><td class="mono">hacer</td><td class="mono">hicieron</td><td class="td-c mono hi-r">hiciera</td></tr>
+      <tr><td class="mono">poder</td><td class="mono">pudieron</td><td class="td-c mono hi-r">pudiera</td><td class="mono">poner</td><td class="mono">pusieron</td><td class="td-c mono hi-r">pusiera</td></tr>
+      <tr><td class="mono">querer</td><td class="mono">quisieron</td><td class="td-c mono hi-r">quisiera</td><td class="mono">saber</td><td class="mono">supieron</td><td class="td-c mono hi-r">supiera</td></tr>
+      <tr><td class="mono">venir</td><td class="mono">vinieron</td><td class="td-c mono hi-r">viniera</td><td class="mono">haber</td><td class="mono">hubieron</td><td class="td-c mono hi-r">hubiera</td></tr>
+      <tr><td class="mono">pedir</td><td class="mono">pidieron</td><td class="td-c mono hi-r">pidiera</td><td class="mono">leer</td><td class="mono">leyeron</td><td class="td-c mono hi-r">leyera</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="box box-warn" id="se-kei">
+  <div class="box-title">＊ 〈se 形〉と呼ばれる別の活用語尾</div>
+  <p style="font-size:13.5px;margin:4px 0;">接続法過去には <span class="mono hi-r">-ra 形</span>のほかに <span class="mono hi-r">-se 形</span>もあり、<span class="hi">意味はほぼ同じ</span>です。</p>
+  <div style="text-align:center;font-size:13.5px;margin:6px 0;" class="mono">
+    <b>-se, -ses, -se, -semos, -seis, -sen</b>
+  </div>
+  <div style="text-align:center;font-size:13.5px;" class="mono">
+    hablar: habla<b>se</b>, habla<b>ses</b>, habla<b>se</b>, hablá<b>semos</b>, habla<b>seis</b>, habla<b>sen</b>
+  </div>
+  <p class="note" style="margin-top:6px;">※ 中南米・話し言葉では -ra 形が優勢。-se 形は主にスペインの書き言葉で使われる。ただし<span class="hi-r">婉曲用法（quisiera など）は -ra 形のみ</span>。</p>
+</div>
+
+<div class="mini-check" id="L10-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Esperaba que tú <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hablaras</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">hablar：点過去3複からronを取って-ra系</span></span> con ella.</div>
+  <div class="mini-check-ja">私は君が彼女と話すことを望んでいた。</div>
+<div class="srs-rate" data-qid="L10-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：接続法過去</div>
+
+  <div class="quiz-item" id="L10-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Si yo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">tuviera</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">tener：点過去tuvieronから-ra形</span></span> más dinero, viajaría por el mundo.</div>
+    <div class="quiz-ja">もしもっとお金があれば、私は世界中を旅するだろう。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>tuviera</b>：tenerの点過去3複tuvieronから-ronを取り、-ra系語尾を付ける。条件文の仮定節で使う。</div>
+  <div class="srs-rate" data-qid="L10-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Quisiera <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">pedirte</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">婉曲用法：quisiera＋不定詞</span></span> un favor.</div>
+    <div class="quiz-ja">お願いがあるのですが。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>pedirte</b>：quisiera（婉曲用法）は最も丁寧な依頼表現。querer→quisiera（不規則語根quis-）。</div>
+  <div class="srs-rate" data-qid="L10-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>hablar</b> の接続法過去（-ra形）を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablara</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablaras</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablara</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habláramos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablarais</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablaran</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">接続法過去は点過去3人称複数（hablaron）から-ronを取り、-ra/-ras/-ra/-ramos/-rais/-ranを付ける。nosotros形のみアクセント記号が必要（habláramos）。</div>
+  <div class="srs-rate" data-qid="L10-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ④ 接続法過去完了 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">接続法過去完了</span>
+  <span class="sec-es">Pretérito pluscuamperfecto de subjuntivo</span>
+</div>
+
+<div class="box box-rule" id="subj-kakokanryo">
+  <div class="box-title">接続法過去完了の作り方</div>
+  <div style="text-align:center;font-size:15px;margin:10px 0 8px;font-weight:700;">
+    <span class="hi-r">haber の接続法過去（不規則活用）</span>　＋　<span class="hi2">過去分詞</span>
+  </div>
+  <p class="note" style="text-align:center;margin:0;">過去分詞は<span class="hi">性・数による変化なし</span></p>
+  <div class="tbl-wrap" style="margin-top:8px">
+  <table>
+    <thead><tr><th>人称</th><th style="background:#dde8f5;color:var(--accent)">haber の接続法過去</th><th>hablar の例</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r"><b>hubiera</b></td><td class="td-c mono">hubiera hablado</td></tr>
+      <tr><td class="td-key td-c">tú</td><td class="td-c mono hi-r"><b>hubieras</b></td><td class="td-c mono">hubieras hablado</td></tr>
+      <tr><td class="td-key td-c">él/ella</td><td class="td-c mono hi-r"><b>hubiera</b></td><td class="td-c mono">hubiera hablado</td></tr>
+      <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi2"><b>hubiéramos</b></td><td class="td-c mono">hubiéramos hablado</td></tr>
+      <tr><td class="td-key td-c">vosotros</td><td class="td-c mono hi-r"><b>hubierais</b></td><td class="td-c mono">hubierais hablado</td></tr>
+      <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono hi-r"><b>hubieran</b></td><td class="td-c mono">hubieran hablado</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:8px;">※ <span class="mono">hubiese, hubieses…</span> の se 形も使われる。</p>
+</div>
+
+<div class="box box-rule" id="subj-4tense">
+  <div class="box-title">接続法の4時制（全体像）</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th></th><th style="background:#dde8f5;color:var(--accent)">単純形</th><th style="background:#d8eeea;color:var(--accent2)">完了形</th></tr></thead>
+    <tbody>
+      <tr><td class="td-rule">現在系（9課）</td><td class="td-c mono"><b>hable</b><br><small>接続法現在</small></td><td class="td-c mono"><b>haya hablado</b><br><small>接続法現在完了</small></td></tr>
+      <tr><td class="td-rule">過去系（10課）</td><td class="td-c mono"><b>hablara</b><br><small>接続法過去</small></td><td class="td-c mono"><b>hubiera hablado</b><br><small>接続法過去完了</small></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:8px;">直説法の10以上の時制に対し、接続法はこの<span class="hi">4つだけ</span>。どれを使うかは<span class="hi2">主節の時制</span>と<span class="hi2">前後関係</span>で決まる。</p>
+</div>
+
+<div class="mini-check" id="L10-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Esperaba que ella ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hubiera llegado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(hubiera)＋過去分詞</span></span> a casa.</div>
+  <div class="mini-check-ja">彼女がもう家に着いていることを私は望んでいた。</div>
+<div class="srs-rate" data-qid="L10-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：接続法過去完了</div>
+
+  <div class="quiz-item" id="L10-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Si tú <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hubieras estudiado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(hubieras)＋過去分詞</span></span> más, habrías aprobado el examen.</div>
+    <div class="quiz-ja">君がもっと勉強していたら、試験に合格していただろう。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hubieras estudiado</b>：過去の反実仮想を表す条件文の仮定節。haberの接続法過去＋過去分詞。</div>
+  <div class="srs-rate" data-qid="L10-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No creía que ellos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hubieran dicho</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(hubieran)＋過去分詞</span></span> eso.</div>
+    <div class="quiz-ja">彼らがそんなことを言ったとは私は信じられなかった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hubieran dicho</b>：主節が過去（no creía）で、従属節の内容が主節より前に完了していたことを表す接続法過去完了。</div>
+  <div class="srs-rate" data-qid="L10-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">haber の接続法過去を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hubiera</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hubieras</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hubiera</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hubiéramos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hubierais</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hubieran</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">haberの接続法過去（hubiera系）は不規則な強変化型。接続法過去完了はこれに過去分詞を組み合わせて作る。</div>
+  <div class="srs-rate" data-qid="L10-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ⑤ 接続法過去・過去完了の用法 -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">接続法過去・過去完了の用法</span>
+  <span class="sec-es">Usos del pretérito imperfecto y pluscuamperfecto de subjuntivo</span>
+</div>
+
+<div class="sub" id="jisei-itchi">1. 時制の一致</div>
+<p>主節が<span class="hi">過去の時制</span>（点過去・線過去・過去完了・過去未来・過去未来完了など）で、かつ接続法を要求するとき、従属節では接続法過去または接続法過去完了を使います。</p>
+
+<div class="box box-rule">
+  <div class="box-title">どちらを使うか</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li>従属節の内容が主節の時点と<span class="hi">同時ないし後</span> → <span class="mono hi-r">接続法過去</span></li>
+    <li>従属節の内容が主節の時点<span class="hi">よりも前</span> → <span class="mono hi-r">接続法過去完了</span></li>
+  </ul>
+</div>
+
+<div class="ex"><span class="ex-sp">Yo no esperaba que <span class="hi">viniera</span> tanta gente a la conferencia.</span><span class="ex-ja">こんなに大勢の人が講演会に来るとは思っていなかった。</span></div>
+<div class="ex" style="margin-left:20px;"><span class="ex-arrow">☞</span><span class="ex-sp">Yo no espero que <span class="hi2">venga</span> tanta gente a la conferencia.</span><span class="ex-ja">（現在形なら接続法現在）</span></div>
+
+<div class="ex" style="margin-top:12px;"><span class="ex-sp">Él temía que ella <span class="hi">hubiera cometido</span> un grave error.</span><span class="ex-ja">彼は、彼女が重大な過ちを犯してしまったのではないかと恐れていた。</span></div>
+<div class="ex" style="margin-left:20px;"><span class="ex-arrow">☞</span><span class="ex-sp">Él teme que ella <span class="hi2">haya cometido</span> un grave error.</span><span class="ex-ja">（現在形なら接続法現在完了）</span></div>
+
+<div class="ex" style="margin-top:12px;"><span class="ex-sp">Me gustaría que me <span class="hi">contaras</span> lo que te ocurrió ayer.</span><span class="ex-ja">昨日君に起きたことを話してほしいのだけど。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">esperaba</span>（線過去）→ <span class="mono hi">viniera</span>：来るのは「思っていた」時点と同時か後 → 接続法過去</li>
+    <li><span class="mono">temía</span>（線過去）→ <span class="mono hi">hubiera cometido</span>：過ちは「恐れていた」時点より前 → 接続法過去完了</li>
+    <li><span class="mono">Me gustaría</span>（過去未来）も「過去の時制」の仲間として扱われ、従属節は接続法過去</li>
+    <li><span class="mono">conferencia</span>（女）講演会 ／ <span class="mono">cometer un error</span>：過ちを犯す ／ <span class="mono">ocurrir</span>（動）起こる</li>
+  </ul>
+</div>
+
+<div class="sub" id="enkyoku">2. 婉曲的な表現として</div>
+<p>主に <span class="mono hi">querer, gustar, deber</span> で使われ、丁寧・控えめな言い方になります（8課の過去未来の婉曲用法よりさらに柔らかい）。</p>
+
+<div class="ex"><span class="ex-sp"><span class="hi">Quisiéramos</span> que nos aclarara su intención.</span><span class="ex-ja">あなたのご意向を明らかにしていただきたいのですが。</span></div>
+<div class="ex"><span class="ex-sp">Me <span class="hi">hubiera gustado</span> terminar la tarea antes que vosotros.</span><span class="ex-ja">君たちより先に課題を終えたかったのだけれど。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Debieras</span> atender más a tu familia.</span><span class="ex-ja">もっと家族を大切にすべきだよ。</span></div>
+
+<div class="box">
+  <div class="box-title">丁寧さの段階</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th>形</th><th>丁寧さ</th><th>例</th></tr></thead>
+    <tbody>
+      <tr><td class="td-rule">直説法現在</td><td class="td-c">ふつう</td><td class="mono">Quiero hablar con usted.</td></tr>
+      <tr><td class="td-rule">過去未来（8課）</td><td class="td-c">丁寧</td><td class="mono">Querría / Me gustaría hablar con usted.</td></tr>
+      <tr><td class="td-rule">接続法過去</td><td class="td-c hi-r">より丁寧</td><td class="mono">Quisiera hablar con usted.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:6px;">※ <span class="mono">aclarar</span>（動）明らかにする ／ <span class="mono">intención</span>（女）意向 ／ <span class="mono">atender a</span>：〜に気を配る</p>
+</div>
+
+<div class="sub">3. 願望文や条件文の中で</div>
+<p>→ ⑥「願望文」・⑦「条件文」で詳しく扱います。</p>
+
+<div class="mini-check" id="L10-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Quisiera</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">querer：婉曲用法</span></span> hablar con usted.</div>
+  <div class="mini-check-ja">あなたとお話ししたいのですが。</div>
+<div class="srs-rate" data-qid="L10-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：接続法過去・過去完了の用法</div>
+
+  <div class="quiz-item" id="L10-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Le dije al doctor que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estaba</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">時制の一致：現在→線過去</span></span> mal del estómago.</div>
+    <div class="quiz-ja">胃の調子が悪いのだと私は医者に言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>estaba</b>：主節が過去（dije）で同時の内容なら従属節は線過去（直説法）。この文はser/estarの直説法の話で、接続法の時制の一致は主節が過去の場合、同時→接続法過去、以前→接続法過去完了になる。</div>
+  <div class="srs-rate" data-qid="L10-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Me <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hubiera gustado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">婉曲用法：過去完了形でさらに丁寧</span></span> verte antes.</div>
+    <div class="quiz-ja">もっと前に君に会いたかった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hubiera gustado</b>：me hubiera gustadoは婉曲用法の中でも過去の願望を丁寧に表す表現。</div>
+  <div class="srs-rate" data-qid="L10-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">丁寧度の順に並べなさい：直説法現在 ＜ <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">過去未来</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">8課で学んだ時制</span></span> ＜ 接続法過去。</div>
+    <div class="quiz-ja">Quiero ＜ Querría ＜ Quisiera の順で丁寧になる。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">丁寧度：直説法現在（quiero）＜過去未来（querría）＜接続法過去（quisiera）。婉曲用法は接続法過去が最も丁寧。</div>
+  <div class="srs-rate" data-qid="L10-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ⑥ 願望文 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">願望文</span>
+  <span class="sec-es">Oraciones desiderativas</span>
+</div>
+
+<p><span class="mono hi">Ojalá (que)</span> または <span class="mono hi">Que</span> ＋ 接続法で「〜だといいな」という願望を表します。<span class="hi-r">どの接続法時制を使うかで実現可能性が変わる</span>のがポイントです。</p>
+
+<div class="sub2">1. Ojalá (que) / Que ＋ 接続法現在・現在完了 → 実現の可能性がある</div>
+<div class="ex"><span class="ex-sp">¡Que te <span class="hi2">vaya</span> bien en el examen!</span><span class="ex-ja">試験がうまくいきますように！</span></div>
+<div class="ex"><span class="ex-sp">¡Ojalá (que) nos <span class="hi2">lleve</span> a la estación en su coche!</span><span class="ex-ja">彼が車で駅まで連れて行ってくれるといいな！</span></div>
+<div class="ex"><span class="ex-sp">¡Ojalá (que) os <span class="hi2">haya gustado</span> la comida!</span><span class="ex-ja">お食事を気に入っていただけたのならいいのですが！</span></div>
+
+<div class="sub2">2. Ojalá (que) / Que ＋ 接続法過去 → 実現の可能性がない／低い</div>
+<div class="ex"><span class="ex-sp">¡Ojalá (que) nos <span class="hi-r">llevara</span> a la estación en su coche!</span><span class="ex-ja">彼が車で駅まで連れて行ってくれたらなあ（でも無理だろう）。</span></div>
+<div class="ex"><span class="ex-sp">¡Ojalá (que) <span class="hi-r">pudiéramos</span> vernos antes de que te vayas!</span><span class="ex-ja">君が発つ前に会えたらいいのに。</span></div>
+
+<div class="sub2">3. Ojalá (que) / Que ＋ 接続法過去完了 → 過去の事実に反する</div>
+<div class="ex"><span class="ex-sp">¡Ojalá (que) nos <span class="hi-r">hubiera llevado</span> a la estación en su coche!</span><span class="ex-ja">彼が車で駅まで連れて行ってくれていたらなあ（実際はそうならなかった）。</span></div>
+<div class="ex"><span class="ex-sp">¡Ojalá (que) me <span class="hi-r">hubierais avisado</span> antes!</span><span class="ex-ja">もっと早く知らせてくれていたらよかったのに。</span></div>
+
+<div class="box box-rule" id="ganbou-hikaku">
+  <div class="box-title">同じ文を3段階で比べる</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th>時制</th><th>例文</th><th>ニュアンス</th></tr></thead>
+    <tbody>
+      <tr><td class="td-rule mono hi2">接続法現在</td><td class="mono">Ojalá nos lleve…</td><td class="td-ja">連れて行ってくれるかも（期待あり）</td></tr>
+      <tr><td class="td-rule mono hi-r">接続法過去</td><td class="mono">Ojalá nos llevara…</td><td class="td-ja">連れて行ってくれたらなあ（たぶん無理）</td></tr>
+      <tr><td class="td-rule mono hi-r">接続法過去完了</td><td class="mono">Ojalá nos hubiera llevado…</td><td class="td-ja">連れて行ってくれていたら（もう手遅れ）</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">ojalá</span> はアラビア語の <b>law šā’ allāh</b>（「アッラーが望むなら」）に由来します。イベリア半島が長くイスラーム支配下にあった歴史の名残で、スペイン語には <span class="mono">almohada</span>（枕）、<span class="mono">azúcar</span>（砂糖）、<span class="mono">alcalde</span>（市長）など <b>al-</b> で始まるアラビア語由来語が約4000語あるとされます。<span class="mono">ojalá</span> はその中でも最も日常的に使われる一語です。</span>
+</div>
+
+<div class="mini-check" id="L10-mc-6">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Ojalá <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">llueva</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">llover：可能性ありは接続法現在</span></span> mañana.</div>
+  <div class="mini-check-ja">明日雨が降るといいな。</div>
+<div class="srs-rate" data-qid="L10-mc-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-mc-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-mc-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-mc-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：願望文</div>
+
+  <div class="quiz-item" id="L10-qz-16">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Ojalá <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">tuviera</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">tener：可能性低いは接続法過去</span></span> más tiempo libre.</div>
+    <div class="quiz-ja">もっと自由な時間があればなあ（たぶん無理）。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>tuviera</b>：Ojalá＋接続法過去は「〜だったらなあ」という可能性の低い願望を表す。</div>
+  <div class="srs-rate" data-qid="L10-qz-16"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-16', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-16', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-16', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-17">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Ojalá nos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hubiera llevado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">llevar：過去反実は接続法過去完了</span></span> al concierto.</div>
+    <div class="quiz-ja">私たちをコンサートに連れて行ってくれていたらなあ（もう手遅れ）。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hubiera llevado</b>：Ojalá＋接続法過去完了は過去の反実仮想（もう実現不可能な過去への願望）を表す。</div>
+  <div class="srs-rate" data-qid="L10-qz-17"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-17', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-17', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-17', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-18">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Ojalá の3つの時制と、それぞれの可能性の度合いを対応させなさい。</div>
+    <div class="quiz-sentence">接続法現在＝<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">可能性あり</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">例：Ojalá llueva</span></span>／接続法過去＝<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">可能性低い</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">例：Ojalá tuviera</span></span>／接続法過去完了＝<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">過去の反実</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">例：Ojalá hubiera llevado</span></span>。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">Ojaláの後の時制によって、願望の実現可能性のニュアンスが変わる。この3段階を押さえることが重要。</div>
+  <div class="srs-rate" data-qid="L10-qz-18"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-18', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-18', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-18', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ⑦ 条件文 -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">条件文</span>
+  <span class="sec-es">Oraciones condicionales</span>
+</div>
+
+<p>「もし〜ならば…」を表す文です。<span class="hi">現実的な仮定か、事実に反する仮定か</span>で、条件節（Si〜）と帰結節の時制の組み合わせが決まります。</p>
+
+<div class="sub2">1. 直説法の条件文：現実的なことを想定する</div>
+<div class="box box-rule" id="joken1">
+  <div style="text-align:center;font-size:14px;font-weight:700;padding:8px 0;">
+    条件節：<span class="mono hi">Si ＋ 直説法現在</span>　／　帰結節：<span class="mono hi">直説法現在／直説法未来</span>
+  </div>
+</div>
+<div class="ex"><span class="ex-sp">Si <span class="hi">tenemos</span> tiempo, <span class="hi">visitamos</span> el jardín botánico.</span><span class="ex-ja">時間があれば、私たちは植物園を訪れる。</span></div>
+<div class="ex"><span class="ex-sp">Si <span class="hi">llueve</span> mañana, se <span class="hi">suspenderá</span> la excursión.</span><span class="ex-ja">明日雨が降れば、遠足は中止になるだろう。</span></div>
+<p class="note">※ <span class="hi-r">Si の直後に直説法未来は置けない</span>（× <span class="mono">Si lloverá</span>）。未来のことでも条件節は現在形。</p>
+
+<div class="sub2">2. 接続法過去の条件文：現在の事実に反すること／実現可能性がない・低いこと</div>
+<div class="box box-rule" id="joken2">
+  <div style="text-align:center;font-size:14px;font-weight:700;padding:8px 0;">
+    条件節：<span class="mono hi-r">Si ＋ 接続法過去</span>　／　帰結節：<span class="mono hi-r">過去未来</span>
+  </div>
+</div>
+<div class="ex"><span class="ex-sp">Si <span class="hi-r">tuviéramos</span> tiempo, <span class="hi-r">visitaríamos</span> el jardín botánico.</span><span class="ex-ja">もし時間があれば、植物園を訪れるのだが（実際は時間がない）。</span></div>
+<div class="ex"><span class="ex-sp">Si los profesores no <span class="hi-r">hicieran</span> tantos exámenes, <span class="hi-r">seríamos</span> más felices.</span><span class="ex-ja">先生たちがそんなに試験をしなければ、私たちはもっと幸せなのに。</span></div>
+
+<div class="sub2">3. 接続法過去完了の条件文：過去の事実に反することを仮定する</div>
+<div class="box box-rule" id="joken3">
+  <div style="text-align:center;font-size:14px;font-weight:700;padding:8px 0;">
+    条件節：<span class="mono hi-r">Si ＋ 接続法過去完了</span>　／　帰結節：<span class="mono hi-r">過去未来完了</span>
+  </div>
+</div>
+<div class="ex"><span class="ex-sp">Si <span class="hi-r">hubiéramos tenido</span> tiempo, <span class="hi-r">habríamos visitado</span> el jardín botánico.</span><span class="ex-ja">もし時間があったなら、植物園を訪れていただろうに（実際は訪れなかった）。</span></div>
+<div class="ex"><span class="ex-sp">Si no lo <span class="hi-r">hubieras apoyado</span>, él no <span class="hi-r">habría llegado</span> tan lejos.</span><span class="ex-ja">君が彼を支えていなかったら、彼はここまで来られなかっただろう。</span></div>
+
+<div class="box box-rule" id="joken-matome">
+  <div class="box-title">条件文3パターン早見表</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th style="width:22%">タイプ</th><th>条件節（Si〜）</th><th>帰結節</th></tr></thead>
+    <tbody>
+      <tr><td class="td-rule">① 現実的</td><td class="td-c mono hi">直説法現在</td><td class="td-c mono hi">直説法現在／未来</td></tr>
+      <tr><td class="td-rule">② 現在の事実に反する</td><td class="td-c mono hi-r">接続法過去</td><td class="td-c mono hi-r">過去未来</td></tr>
+      <tr><td class="td-rule">③ 過去の事実に反する</td><td class="td-c mono hi-r">接続法過去完了</td><td class="td-c mono hi-r">過去未来完了</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:8px;">覚え方：<span class="hi">Si 節には接続法「過去」系だけが入る</span>（接続法現在は Si 節に入らない）。帰結節は<span class="hi2">-ría 系（過去未来）</span>。</p>
+</div>
+
+<div class="box box-warn" id="aunque">
+  <div class="box-title">＊「aunque ＋ 直説法／接続法」は譲歩文を構成する</div>
+  <div class="ex"><span class="ex-sp">Aunque <span class="hi">hacía</span> mal tiempo ayer, <span class="hi">salimos</span> de excursión.</span><span class="ex-ja">昨日は天気が悪かったが、私たちは遠足に出かけた。（事実 → 直説法）</span></div>
+  <div class="ex"><span class="ex-sp">Aunque todo el mundo <span class="hi-r">estuviera</span> en contra, Jorge <span class="hi-r">llevaría</span> adelante su investigación.</span><span class="ex-ja">たとえ皆が反対したとしても、ホルヘは研究を進めるだろう。（仮定 → 接続法）</span></div>
+  <div class="ex"><span class="ex-sp">Aunque <span class="hi-r">hubieras tenido</span> la oportunidad de disculparte, no lo <span class="hi-r">habrías hecho</span>.</span><span class="ex-ja">たとえ謝る機会があったとしても、君はそうしなかっただろう。（過去の反実 → 接続法過去完了）</span></div>
+  <p class="note" style="margin-top:6px;">※ <span class="mono">estar en contra</span>：反対している ／ <span class="mono">llevar adelante</span>：推し進める ／ <span class="mono">disculparse</span>（再動）謝る</p>
+</div>
+
+<div class="mini-check" id="L10-mc-7">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Si <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">tengo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">現実の条件：直説法現在</span></span> tiempo, iré a verte.</div>
+  <div class="mini-check-ja">もし時間があれば、君に会いに行くよ。</div>
+<div class="srs-rate" data-qid="L10-mc-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-mc-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-mc-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-mc-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：条件文</div>
+
+  <div class="quiz-item" id="L10-qz-19">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Si yo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">fuera</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ser：現在の反実、接続法過去</span></span> rico, viajaría por todo el mundo.</div>
+    <div class="quiz-ja">もし私がお金持ちなら、世界中を旅するだろう。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>fuera</b>：Si＋接続法過去→過去未来のパターンで、現在の事実に反する仮定を表す。</div>
+  <div class="srs-rate" data-qid="L10-qz-19"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-19', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-19', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-19', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-20">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Si ellos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hubieran publicado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">publicar：過去の反実、接続法過去完了</span></span> el libro antes, habría tenido más éxito.</div>
+    <div class="quiz-ja">彼らがその本をもっと早く出版していたら、もっと成功しただろう。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hubieran publicado</b>：Si＋接続法過去完了→過去未来完了のパターンで、過去の事実に反する仮定を表す。</div>
+  <div class="srs-rate" data-qid="L10-qz-20"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-20', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-20', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-20', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L10-qz-21">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">条件文の3パターンを埋めなさい。</div>
+    <div class="quiz-sentence">①Si+直説法現在 → <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">直説法現在/未来</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">現実の条件</span></span>／②Si+接続法過去 → <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">過去未来</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">現在の反実</span></span>／③Si+接続法過去完了 → <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">過去未来完了</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">過去の反実</span></span>。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">条件文は「現実／現在の反実／過去の反実」の3パターンがあり、それぞれ仮定節と帰結節の時制が対応して決まる。</div>
+  <div class="srs-rate" data-qid="L10-qz-21"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L10-qz-21', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L10-qz-21', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L10-qz-21', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑧ 練習問題 -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">太字の不定詞を肯定命令または否定命令の適切な形にしなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Tienes frío? ¡<b>Ponerse</b> <span class="blank">______</span> el abrigo!</div>
+      <div class="q-ja">寒いの？　コートを着なさい！</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¡<span class="ans-fill">Ponte</span> el abrigo!</span>
+      </div>
+      <div class="q-exp"><b>Ponte</b>：<span class="mono">tú</span> に対する肯定命令。<span class="mono">poner</span> の tú 命令形は不規則 <span class="mono hi-r">pon</span>、これに再帰代名詞 <span class="mono">te</span> を後置して <span class="mono">ponte</span>。2音節でアクセントは PON なので記号不要。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Señor, no <b>olvidarse</b> <span class="blank">______</span> de llevar su paraguas.</div>
+      <div class="q-ja">お客様、傘をお持ちになるのをお忘れなく。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Señor, no <span class="ans-fill">se olvide</span> de llevar su paraguas.</span>
+      </div>
+      <div class="q-exp"><b>se olvide</b>：<span class="mono">Señor</span> への呼びかけなので <span class="mono">usted</span>。否定命令なので <span class="mono">no ＋ 接続法現在</span>、再帰代名詞は<span class="hi-r">動詞の前</span>。<br>※ <span class="mono">olvidarse de ＋ 不定詞</span>：〜するのを忘れる</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Os voy a decir una cosa muy importante. <b>Escucharme</b> <span class="blank">______</span> bien.</div>
+      <div class="q-ja">とても大事なことを言うよ。よく聞いて。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Escuchadme</span> bien.</span>
+      </div>
+      <div class="q-exp"><b>Escuchadme</b>：<span class="mono">Os</span> とあるので <span class="mono">vosotros</span>。肯定命令は不定詞の -r を -d に（<span class="mono">escuchad</span>）、代名詞 <span class="mono">me</span> を後置。<span class="hi-r">この場合 -d は落ちない</span>（落ちるのは再帰の <span class="mono">os</span> が付くときだけ）。<br>※ アクセントは es-cu-CHAD-me のまま3音節目なので記号不要。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Nuestro perro no los va a morder a ustedes. No <b>tener</b> <span class="blank">______</span> miedo.</div>
+      <div class="q-ja">うちの犬はあなた方を噛みませんよ。怖がらないでください。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">No <span class="ans-fill">tengan</span> miedo.</span>
+      </div>
+      <div class="q-exp"><b>tengan</b>：<span class="mono">a ustedes</span> とあるので <span class="mono">ustedes</span>。否定命令＝<span class="mono">no ＋ 接続法現在3複</span>。<span class="mono">tener</span> は yo 形 <span class="mono">tengo</span> から <span class="mono">tenga</span> 型。<br>※ <span class="mono">tener miedo</span>：怖がる ／ <span class="mono">morder</span>（動）噛む（o→ue型）</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">例にならって、主節の動詞を線過去にして全文を書き換えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">例（Ejemplo）</div>
+  <div class="q-item">
+    <span class="q-badge teal">例</span>
+    <div class="q-content">
+      <div class="q-sentence">Nos pide que usemos solamente español en la clase.</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">→ Nos <span class="ans-fill">pedía</span> que <span class="ans-fill">usáramos</span> solamente español en la clase.</span>
+      </div>
+      <div class="q-exp">主節を線過去にすると、従属節の接続法現在（<span class="mono">usemos</span>）は<span class="hi-r">接続法過去</span>（<span class="mono">usáramos</span>）に、接続法現在完了は接続法過去完了になる（時制の一致）。</div>
+    </div>
+  </div>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Se recomienda que el pago se haga antes de dos semanas.</div>
+      <div class="q-ja">支払いは2週間以内に行うことが推奨されている。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Se recomendaba que el pago se hiciera antes de dos semanas.</span></span>
+      </div>
+      <div class="q-exp"><b>hiciera</b>：<span class="mono">hacer</span> の接続法過去（点過去3複 <span class="mono">hicieron</span> → <span class="mono">hicie-</span>）。主節 <span class="mono">se recomienda</span> → <span class="mono">se recomendaba</span>（線過去）。どちらも再帰受身（5課）。<br>※ <span class="mono">pago</span>（男）支払い</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Es probable que no se consigan los objetivos del proyecto.</div>
+      <div class="q-ja">プロジェクトの目標は達成されないだろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Era probable que no se consiguieran los objetivos del proyecto.</span></span>
+      </div>
+      <div class="q-exp"><b>consiguieran</b>：<span class="mono">conseguir</span> の接続法過去（点過去3複 <span class="mono">consiguieron</span> → <span class="mono">consiguie-</span>）。<span class="mono">Es</span> → <span class="mono">Era</span>。<br>※ <span class="mono">objetivo</span>（男）目標</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Es increíble que nadie se haya dado cuenta del fraude en su experimento.</div>
+      <div class="q-ja">彼の実験の不正に誰も気づかなかったとは信じられない。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Era increíble que nadie se hubiera dado cuenta del fraude en su experimento.</span></span>
+      </div>
+      <div class="q-exp"><b>hubiera dado</b>：もとが<span class="hi">接続法現在完了</span>（<span class="mono">haya dado</span>）なので、対応する<span class="hi-r">接続法過去完了</span>になる。<br>※ <span class="mono">darse cuenta de</span>：〜に気づく ／ <span class="mono">fraude</span>（男）不正・詐欺</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Dicen que la vida ha vuelto a la normalidad, pero dudo que se hayan resuelto todos los problemas.</div>
+      <div class="q-ja">生活は正常に戻ったと言われているが、すべての問題が解決したとは思えない。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Decían que la vida había vuelto a la normalidad, pero dudaba que se hubieran resuelto todos los problemas.</span></span>
+      </div>
+      <div class="q-exp">主節を線過去にすると、<span class="hi2">直説法</span>の従属節（<span class="mono">ha vuelto</span>）は<span class="mono">había vuelto</span>（過去完了）に、<span class="hi-r">接続法</span>の従属節（<span class="mono">se hayan resuelto</span>）は <span class="mono">se hubieran resuelto</span>（接続法過去完了）になる。<br>※ <span class="mono">resolver</span> の過去分詞は不規則 <span class="mono">resuelto</span> ／ <span class="mono">normalidad</span>（女）正常な状態</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">例にならって、1・2 は接続法過去を使う条件文に、3・4 は接続法過去完了を使う条件文に書き換えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">例（Ejemplo）</div>
+  <div class="q-item">
+    <span class="q-badge orange">例</span>
+    <div class="q-content">
+      <div class="q-sentence">Si tengo dinero, compraré una computadora nueva.</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">→ Si <span class="ans-fill">tuviera / hubiera tenido</span> dinero, <span class="ans-fill">compraría / habría comprado</span> una computadora nueva.</span>
+      </div>
+      <div class="q-exp">現実的条件文（Si＋直説法現在／未来）を、②現在の反実（接続法過去＋過去未来）または③過去の反実（接続法過去完了＋過去未来完了）に変換する。</div>
+    </div>
+  </div>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge orange">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Si le <b>ofrecen</b> el puesto a Javier, lo <b>aceptará</b> en el acto.</div>
+      <div class="q-ja">ハビエルにそのポストが提示されれば、彼は即座に受け入れるだろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え（接続法過去）</span>
+        <span class="ans-text">Si le <span class="ans-fill">ofrecieran</span> el puesto a Javier, lo <span class="ans-fill">aceptaría</span> en el acto.</span>
+      </div>
+      <div class="q-exp"><b>ofrecieran</b>：点過去3複 <span class="mono">ofrecieron</span> → <span class="mono">ofrecie-</span>＋<span class="mono">-ran</span>。帰結節は過去未来 <span class="mono">aceptaría</span>。<br>※ <span class="mono">puesto</span>（男）ポスト・職 ／ <span class="mono">en el acto</span>：即座に</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Si <b>vas</b> a la clínica, te <b>recetarán</b> medicamentos y te <b>mejorarás</b> pronto.</div>
+      <div class="q-ja">診療所に行けば、薬を処方してもらえてすぐ良くなるだろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え（接続法過去）</span>
+        <span class="ans-text">Si <span class="ans-fill">fueras</span> a la clínica, te <span class="ans-fill">recetarían</span> medicamentos y te <span class="ans-fill">mejorarías</span> pronto.</span>
+      </div>
+      <div class="q-exp"><b>fueras</b>：<span class="mono">ir</span> の接続法過去（点過去3複 <span class="mono">fueron</span> → <span class="mono">fue-</span>）。帰結節は<span class="hi">2つとも</span>過去未来にする。<br>※ <span class="mono">recetar</span>（動）処方する ／ <span class="mono">mejorarse</span>（再動）良くなる</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Si ellos <b>publican</b> su descubrimiento, <b>tendrá</b> una gran repercusión.</div>
+      <div class="q-ja">彼らが発見を公表すれば、大きな反響を呼ぶだろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え（接続法過去完了）</span>
+        <span class="ans-text">Si ellos <span class="ans-fill">hubieran publicado</span> su descubrimiento, <span class="ans-fill">habría tenido</span> una gran repercusión.</span>
+      </div>
+      <div class="q-exp">過去の事実に反する仮定 → 条件節は接続法過去完了、帰結節は過去未来完了。<br>※ <span class="mono">descubrimiento</span>（男）発見 ／ <span class="mono">repercusión</span>（女）反響</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Si <b>giráis</b> a la izquierda, <b>encontraréis</b> la entrada del metro.</div>
+      <div class="q-ja">左に曲がれば、地下鉄の入口が見つかるよ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え（接続法過去完了）</span>
+        <span class="ans-text">Si <span class="ans-fill">hubierais girado</span> a la izquierda, <span class="ans-fill">habríais encontrado</span> la entrada del metro.</span>
+      </div>
+      <div class="q-exp">vosotros の接続法過去完了は <span class="mono">hubierais ＋ 過去分詞</span>、過去未来完了は <span class="mono">habríais ＋ 過去分詞</span>。<br>※ <span class="mono">girar</span>（動）曲がる ／ <span class="mono">entrada</span>（女）入口</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">カルメンはタケシに、自分といっしょに日本に行くよう兄を説得して（convencer）ほしいと頼んだ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Carmen le pidió a Takeshi que convenciera a su hermano de que la acompañara a Japón.</span></span>
+      </div>
+      <div class="q-exp"><b>convenciera</b>：主節 <span class="mono">pidió</span>（点過去）→ 従属節は接続法過去。<b>acompañara</b>：<span class="mono">convencer a 人 de que ＋ 接続法</span>（〜するよう説得する）。<br>※ 時制の一致が二重にかかる典型例。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">私は、あなたがたが日本を訪れたときに、この国が持つ文化と自然の豊かさを体験し（conocer）味わって（disfrutar）もらいたいと思います（quisiera）。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Quisiera que, cuando visiten Japón, conozcan y disfruten de la riqueza cultural y natural que tiene este país.</span></span>
+      </div>
+      <div class="q-exp"><b>Quisiera</b>：接続法過去の<span class="hi">婉曲用法</span>（⑤の2）。ただし従属節は<span class="hi-r">これからのこと</span>なので接続法<b>現在</b>（<span class="mono">visiten, conozcan, disfruten</span>）でよい。<br>※ <span class="mono">disfrutar de</span>：〜を味わう ／ <span class="mono">riqueza</span>（女）豊かさ</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">私たちは北海道に行きたかったのだが、悪天候のためフライト（el vuelo）がキャンセルされた（cancelarse）ので、行けなかった。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Queríamos ir a Hokkaido, pero no pudimos porque el vuelo se canceló por el mal tiempo.</span></span>
+      </div>
+      <div class="q-exp">ここは<span class="hi2">すべて直説法</span>でよい（実際に起きた事実の叙述）。<span class="mono">Queríamos</span>（線過去＝願望の状態）、<span class="mono">no pudimos</span>・<span class="mono">se canceló</span>（点過去＝完結した出来事）。<br>※ <span class="mono">por el mal tiempo</span>：悪天候のため（原因の por）</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">彼らは訪れる先々で人々が厚くもてなしてくれた（recibir con gran hospitalidad）ことをとても喜んでいた。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Estaban muy contentos de que la gente los recibiera con gran hospitalidad en todos los lugares que visitaban.</span></span>
+      </div>
+      <div class="q-exp"><b>recibiera</b>：<span class="mono">estar contento de que</span>（感情）＋主節が<span class="hi">線過去</span> → 接続法過去。<br>※ 関係節 <span class="mono">que visitaban</span> は事実なので直説法。<span class="mono">hospitalidad</span>（女）もてなし・歓待</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑨ 語彙リスト -->
+<div id="sec9" class="sec-heading">
+  <span class="sec-num">⑨</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">旅行（基本）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">viajar</span><span class="pill-pos">動</span><span class="pill-ja">旅行する</span></span>
+  <span class="pill"><span class="pill-es">viaje</span><span class="pill-pos">男</span><span class="pill-ja">旅</span></span>
+  <span class="pill"><span class="pill-es">turista</span><span class="pill-pos">名</span><span class="pill-ja">観光客</span></span>
+  <span class="pill"><span class="pill-es">agencia de viajes</span><span class="pill-pos">女</span><span class="pill-ja">旅行代理店</span></span>
+  <span class="pill"><span class="pill-es">oficina de turismo</span><span class="pill-pos">女</span><span class="pill-ja">観光案内所</span></span>
+  <span class="pill"><span class="pill-es">guía turístico, -a</span><span class="pill-pos">名</span><span class="pill-ja">観光ガイド</span></span>
+  <span class="pill"><span class="pill-es">guía</span><span class="pill-pos">女</span><span class="pill-ja">ガイドブック</span></span>
+  <span class="pill"><span class="pill-es">horario</span><span class="pill-pos">男</span><span class="pill-ja">時刻表</span></span>
+  <span class="pill"><span class="pill-es">vuelo</span><span class="pill-pos">男</span><span class="pill-ja">フライト</span></span>
+  <span class="pill"><span class="pill-es">excursión</span><span class="pill-pos">女</span><span class="pill-ja">小旅行・遠足</span></span>
+  <span class="pill"><span class="pill-es">viajero, -a</span><span class="pill-pos">名</span><span class="pill-ja">旅人</span></span>
+</div>
+
+<div class="vocab-category">旅行（荷物・準備）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">hacer / deshacer las maletas</span><span class="pill-pos">表現</span><span class="pill-ja">荷物を詰める／出す</span></span>
+  <span class="pill"><span class="pill-es">maleta</span><span class="pill-pos">女</span><span class="pill-ja">スーツケース</span></span>
+  <span class="pill"><span class="pill-es">mochila</span><span class="pill-pos">女</span><span class="pill-ja">リュックサック</span></span>
+  <span class="pill"><span class="pill-es">bolsa</span><span class="pill-pos">女</span><span class="pill-ja">バッグ・袋</span></span>
+  <span class="pill"><span class="pill-es">mirar / consultar un mapa</span><span class="pill-pos">表現</span><span class="pill-ja">地図を見る／参照する</span></span>
+  <span class="pill"><span class="pill-es">plano</span><span class="pill-pos">男</span><span class="pill-ja">市街図</span></span>
+  <span class="pill"><span class="pill-es">contratar un seguro de viaje</span><span class="pill-pos">表現</span><span class="pill-ja">旅行保険に入る</span></span>
+</div>
+
+<div class="vocab-category">旅行（交通）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">viajar en avión / tren / barco / coche / autobús</span><span class="pill-pos">表現</span><span class="pill-ja">飛行機／列車／船／車／バスで旅する</span></span>
+  <span class="pill"><span class="pill-es">alquilar un coche</span><span class="pill-pos">表現</span><span class="pill-ja">車を借りる</span></span>
+  <span class="pill"><span class="pill-es">coger (tomar) un taxi</span><span class="pill-pos">表現</span><span class="pill-ja">タクシーに乗る</span></span>
+  <span class="pill"><span class="pill-es">subir al tren</span><span class="pill-pos">表現</span><span class="pill-ja">列車に乗り込む</span></span>
+  <span class="pill"><span class="pill-es">bajar del tren</span><span class="pill-pos">表現</span><span class="pill-ja">列車から降りる</span></span>
+  <span class="pill"><span class="pill-es">hacer transbordo</span><span class="pill-pos">表現</span><span class="pill-ja">乗り換える</span></span>
+  <span class="pill"><span class="pill-es">andén</span><span class="pill-pos">男</span><span class="pill-ja">（駅の）ホーム</span></span>
+  <span class="pill"><span class="pill-es">tren expreso</span><span class="pill-pos">男</span><span class="pill-ja">急行列車</span></span>
+  <span class="pill"><span class="pill-es">tren bala</span><span class="pill-pos">男</span><span class="pill-ja">超高速列車・新幹線</span></span>
+  <span class="pill"><span class="pill-es">taquilla</span><span class="pill-pos">女</span><span class="pill-ja">切符売り場</span></span>
+  <span class="pill"><span class="pill-es">billete (boleto)</span><span class="pill-pos">男</span><span class="pill-ja">切符</span></span>
+  <span class="pill"><span class="pill-es">billete de ida / de ida y vuelta</span><span class="pill-pos">男</span><span class="pill-ja">片道／往復の切符</span></span>
+  <span class="pill"><span class="pill-es">parada de autobús / de taxi</span><span class="pill-pos">女</span><span class="pill-ja">バス停／タクシー乗り場</span></span>
+  <span class="pill"><span class="pill-es">estación</span><span class="pill-pos">女</span><span class="pill-ja">駅</span></span>
+  <span class="pill"><span class="pill-es">aeropuerto</span><span class="pill-pos">男</span><span class="pill-ja">空港</span></span>
+  <span class="pill"><span class="pill-es">puerto</span><span class="pill-pos">男</span><span class="pill-ja">港</span></span>
+  <span class="pill"><span class="pill-es">tarjeta de embarque</span><span class="pill-pos">女</span><span class="pill-ja">搭乗券</span></span>
+  <span class="pill"><span class="pill-es">pasaporte</span><span class="pill-pos">男</span><span class="pill-ja">パスポート</span></span>
+  <span class="pill"><span class="pill-es">carné de identidad</span><span class="pill-pos">男</span><span class="pill-ja">身分証明書</span></span>
+  <span class="pill"><span class="pill-es">pasajero, -a</span><span class="pill-pos">名</span><span class="pill-ja">乗客</span></span>
+</div>
+
+<div class="vocab-category">宿泊</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">alojamiento</span><span class="pill-pos">男</span><span class="pill-ja">宿泊</span></span>
+  <span class="pill"><span class="pill-es">alojarse</span><span class="pill-pos">再動</span><span class="pill-ja">泊まる</span></span>
+  <span class="pill"><span class="pill-es">reservar</span><span class="pill-pos">動</span><span class="pill-ja">予約する</span></span>
+  <span class="pill"><span class="pill-es">cancelar</span><span class="pill-pos">動</span><span class="pill-ja">キャンセルする</span></span>
+  <span class="pill"><span class="pill-es">hotel</span><span class="pill-pos">男</span><span class="pill-ja">ホテル</span></span>
+  <span class="pill"><span class="pill-es">hostal</span><span class="pill-pos">男</span><span class="pill-ja">オスタル（小ホテル）</span></span>
+  <span class="pill"><span class="pill-es">pensión</span><span class="pill-pos">女</span><span class="pill-ja">ペンシオン・民宿</span></span>
+  <span class="pill"><span class="pill-es">recepción</span><span class="pill-pos">女</span><span class="pill-ja">フロント</span></span>
+  <span class="pill"><span class="pill-es">habitación</span><span class="pill-pos">女</span><span class="pill-ja">部屋</span></span>
+  <span class="pill"><span class="pill-es">habitación doble / individual</span><span class="pill-pos">女</span><span class="pill-ja">ツインルーム／シングルルーム</span></span>
+</div>
+
+<div class="vocab-category">命令・願望・条件の重要語</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">ojalá (que)</span><span class="pill-pos">感嘆</span><span class="pill-ja">〜だといいな</span></span>
+  <span class="pill"><span class="pill-es">quisiera</span><span class="pill-pos">婉曲</span><span class="pill-ja">〜したいのですが</span></span>
+  <span class="pill"><span class="pill-es">aunque</span><span class="pill-pos">接</span><span class="pill-ja">〜だとしても（譲歩）</span></span>
+  <span class="pill"><span class="pill-es">encargarse de</span><span class="pill-pos">再動</span><span class="pill-ja">〜を引き受ける</span></span>
+  <span class="pill"><span class="pill-es">preocuparse</span><span class="pill-pos">再動</span><span class="pill-ja">心配する</span></span>
+  <span class="pill"><span class="pill-es">olvidarse de</span><span class="pill-pos">再動</span><span class="pill-ja">〜を忘れる</span></span>
+  <span class="pill"><span class="pill-es">hablar mal de</span><span class="pill-pos">表現</span><span class="pill-ja">〜の悪口を言う</span></span>
+  <span class="pill"><span class="pill-es">tener miedo</span><span class="pill-pos">表現</span><span class="pill-ja">怖がる</span></span>
+  <span class="pill"><span class="pill-es">darse cuenta de</span><span class="pill-pos">表現</span><span class="pill-ja">〜に気づく</span></span>
+  <span class="pill"><span class="pill-es">estar en contra</span><span class="pill-pos">表現</span><span class="pill-ja">反対している</span></span>
+  <span class="pill"><span class="pill-es">llevar adelante</span><span class="pill-pos">表現</span><span class="pill-ja">推し進める</span></span>
+  <span class="pill"><span class="pill-es">en el acto</span><span class="pill-pos">表現</span><span class="pill-ja">即座に</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">aclarar</span><span class="pill-pos">動</span><span class="pill-ja">明らかにする</span></span>
+  <span class="pill"><span class="pill-es">atender a</span><span class="pill-pos">動</span><span class="pill-ja">〜に気を配る</span></span>
+  <span class="pill"><span class="pill-es">apoyar</span><span class="pill-pos">動</span><span class="pill-ja">支える・支持する</span></span>
+  <span class="pill"><span class="pill-es">suspender</span><span class="pill-pos">動</span><span class="pill-ja">中止する</span></span>
+  <span class="pill"><span class="pill-es">convencer</span><span class="pill-pos">動</span><span class="pill-ja">説得する</span></span>
+  <span class="pill"><span class="pill-es">disfrutar de</span><span class="pill-pos">動</span><span class="pill-ja">〜を味わう・楽しむ</span></span>
+  <span class="pill"><span class="pill-es">disculparse</span><span class="pill-pos">再動</span><span class="pill-ja">謝る</span></span>
+  <span class="pill"><span class="pill-es">recetar</span><span class="pill-pos">動</span><span class="pill-ja">処方する</span></span>
+  <span class="pill"><span class="pill-es">mejorarse</span><span class="pill-pos">再動</span><span class="pill-ja">良くなる・快復する</span></span>
+  <span class="pill"><span class="pill-es">girar</span><span class="pill-pos">動</span><span class="pill-ja">曲がる</span></span>
+  <span class="pill"><span class="pill-es">morder</span><span class="pill-pos">動</span><span class="pill-ja">噛む</span></span>
+  <span class="pill"><span class="pill-es">conferencia</span><span class="pill-pos">女</span><span class="pill-ja">講演会</span></span>
+  <span class="pill"><span class="pill-es">intención</span><span class="pill-pos">女</span><span class="pill-ja">意向</span></span>
+  <span class="pill"><span class="pill-es">jardín botánico</span><span class="pill-pos">男</span><span class="pill-ja">植物園</span></span>
+  <span class="pill"><span class="pill-es">fraude</span><span class="pill-pos">男</span><span class="pill-ja">不正・詐欺</span></span>
+  <span class="pill"><span class="pill-es">objetivo</span><span class="pill-pos">男</span><span class="pill-ja">目標</span></span>
+  <span class="pill"><span class="pill-es">pago</span><span class="pill-pos">男</span><span class="pill-ja">支払い</span></span>
+  <span class="pill"><span class="pill-es">puesto</span><span class="pill-pos">男</span><span class="pill-ja">ポスト・職</span></span>
+  <span class="pill"><span class="pill-es">descubrimiento</span><span class="pill-pos">男</span><span class="pill-ja">発見</span></span>
+  <span class="pill"><span class="pill-es">repercusión</span><span class="pill-pos">女</span><span class="pill-ja">反響</span></span>
+  <span class="pill"><span class="pill-es">riqueza</span><span class="pill-pos">女</span><span class="pill-ja">豊かさ</span></span>
+  <span class="pill"><span class="pill-es">hospitalidad</span><span class="pill-pos">女</span><span class="pill-ja">もてなし・歓待</span></span>
+  <span class="pill"><span class="pill-es">normalidad</span><span class="pill-pos">女</span><span class="pill-ja">正常な状態</span></span>
+</div>
+
+<!-- ⑩ まとめ -->
+<div id="sec10" class="sec-heading">
+  <span class="sec-num">⑩</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">命令形を持つ人称</td><td><b>tú と vosotros のみ</b>。usted / nosotros / ustedes は接続法現在を流用</td></tr>
+    <tr><td class="td-rule">tú の肯定命令</td><td>直説法現在3人称単数と同形。不規則8語：<span class="mono">pon, ten, ven, sal, haz, di, ve, sé</span></td></tr>
+    <tr><td class="td-rule">vosotros の肯定命令</td><td>不定詞の <span class="mono">-r → -d</span>（例外なし）：<span class="mono">hablad, volved, decid</span></td></tr>
+    <tr><td class="td-rule">代名詞の位置</td><td><b>肯定命令＝動詞の後ろに接続</b>（アクセント記号に注意）／ <b>否定命令＝動詞の前</b></td></tr>
+    <tr><td class="td-rule">再帰動詞の命令</td><td>nosotros は <span class="mono">-s</span> を、vosotros は <span class="mono">-d</span> を落とす：<span class="mono">levantémonos, levantaos</span></td></tr>
+    <tr><td class="td-rule">否定命令</td><td><b>全人称</b> <span class="mono">no ＋ 接続法現在</span>（<span class="mono">no hables, no os preocupéis</span>）</td></tr>
+    <tr><td class="td-rule">接続法過去の作り方</td><td><b>点過去3人称複数から -ron を取る</b>＋ <span class="mono">-ra / -ras / -ra / -́ramos / -rais / -ran</span></td></tr>
+    <tr><td class="td-rule">接続法過去のアクセント</td><td>nosotros 形のみ記号（<span class="mono">habláramos, tuviéramos, fuéramos</span>）</td></tr>
+    <tr><td class="td-rule">se 形</td><td><span class="mono">-se, -ses, -se, -semos, -seis, -sen</span>。-ra 形とほぼ同義（婉曲用法は -ra 形のみ）</td></tr>
+    <tr><td class="td-rule">接続法過去完了</td><td class="mono">hubiera / hubieras / hubiera / hubiéramos / hubierais / hubieran ＋ 過去分詞</td></tr>
+    <tr><td class="td-rule">用法①時制の一致</td><td>主節が過去 → 同時・後は<b>接続法過去</b>／それより前は<b>接続法過去完了</b></td></tr>
+    <tr><td class="td-rule">用法②婉曲</td><td><span class="mono">quisiera, me hubiera gustado, debieras</span>（querer / gustar / deber）</td></tr>
+    <tr><td class="td-rule">願望文</td><td><span class="mono">Ojalá (que) / Que ＋</span> 接続法現在（可能性あり）／接続法過去（可能性低）／接続法過去完了（過去の反実）</td></tr>
+    <tr><td class="td-rule">条件文①現実的</td><td><span class="mono">Si ＋ 直説法現在</span>, 直説法現在／未来（<span class="mono">Si llueve, se suspenderá</span>）</td></tr>
+    <tr><td class="td-rule">条件文②現在の反実</td><td><span class="mono">Si ＋ 接続法過去</span>, <b>過去未来</b>（<span class="mono">Si tuviéramos tiempo, visitaríamos</span>）</td></tr>
+    <tr><td class="td-rule">条件文③過去の反実</td><td><span class="mono">Si ＋ 接続法過去完了</span>, <b>過去未来完了</b>（<span class="mono">Si hubiéramos tenido…, habríamos visitado</span>）</td></tr>
+    <tr><td class="td-rule">Si 節の禁止事項</td><td>Si の直後に<b>直説法未来・過去未来・接続法現在は置けない</b></td></tr>
+    <tr><td class="td-rule">譲歩文 aunque</td><td>事実 → 直説法（<span class="mono">Aunque hacía mal tiempo…</span>）／仮定 → 接続法（<span class="mono">Aunque estuviera…</span>）</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 10 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① 肯定の命令文</a>
+    <a class="fn-item" href="#sec2">② 否定の命令文</a>
+    <a class="fn-item" href="#sec3">③ 接続法過去</a>
+    <a class="fn-item" href="#sec4">④ 接続法過去完了</a>
+    <a class="fn-item" href="#sec5">⑤ 接続法過去・過去完了の用法</a>
+    <a class="fn-item" href="#sec6">⑥ 願望文</a>
+    <a class="fn-item" href="#sec7">⑦ 条件文</a>
+    <a class="fn-item" href="#sec8">⑧ 練習問題</a>
+    <a class="fn-item" href="#sec9">⑨ 語彙リスト</a>
+    <a class="fn-item" href="#sec10">⑩ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['命令文','肯定命令','imperativo','命令形'], id: 'sec1', label: '肯定の命令文（①節）' },
+  { terms: ['tú 命令','pon','ten','ven','sal','haz','di','ve','sé','不規則命令'], id: 'tu-meirei', label: 'tú に対する命令形（①節）' },
+  { terms: ['vosotros 命令','hablad','volved','decid'], id: 'vosotros-meirei', label: 'vosotros に対する命令形（①節）' },
+  { terms: ['命令形一覧','hable','hablemos','hablen'], id: 'meirei-hyou', label: '命令形の一覧表（①節）' },
+  { terms: ['命令 代名詞','ayúdanos','dímelo','アクセント 命令'], id: 'meirei-daimeishi', label: '命令文の代名詞の位置（①節）' },
+  { terms: ['再帰動詞 命令','levantémonos','levantaos','levántate'], id: 'saiki-meirei', label: '再帰動詞の命令（①節）' },
+  { terms: ['否定命令','no hables','no os preocupéis','imperativa negativa'], id: 'sec2', label: '否定の命令文（②節）' },
+  { terms: ['否定命令のルール'], id: 'hitei-meirei', label: '否定命令のルール（②節）' },
+  { terms: ['接続法過去','imperfecto de subjuntivo','hablara','tuviera','fuera','dijera'], id: 'sec3', label: '接続法過去（③節）' },
+  { terms: ['接続法過去 作り方','点過去3人称複数','-ron'], id: 'subj-kako-tsukurikata', label: '接続法過去の作り方（③節）' },
+  { terms: ['接続法過去 不規則','durmiera','estuviera','pudiera','quisiera','hubiera','viniera'], id: 'subj-kako-fukisoku', label: '接続法過去の不規則活用（③節）' },
+  { terms: ['se形','hablase','hubiese'], id: 'se-kei', label: '〈se 形〉の活用語尾（③節）' },
+  { terms: ['接続法過去完了','pluscuamperfecto de subjuntivo','hubiera hablado'], id: 'sec4', label: '接続法過去完了（④節）' },
+  { terms: ['接続法 4時制','接続法 時制 一覧'], id: 'subj-4tense', label: '接続法の4時制（④節）' },
+  { terms: ['時制の一致 接続法','esperaba que viniera','temía que hubiera'], id: 'jisei-itchi', label: '時制の一致（⑤節）' },
+  { terms: ['婉曲','quisiera','debieras','me hubiera gustado'], id: 'enkyoku', label: '婉曲的な表現（⑤節）' },
+  { terms: ['願望文','ojalá','que te vaya bien','oraciones desiderativas'], id: 'sec6', label: '願望文（⑥節）' },
+  { terms: ['願望文 比較','ojalá 3段階'], id: 'ganbou-hikaku', label: '願望文の3段階（⑥節）' },
+  { terms: ['条件文','oraciones condicionales','si'], id: 'sec7', label: '条件文（⑦節）' },
+  { terms: ['現実的条件文','si tenemos tiempo'], id: 'joken1', label: '直説法の条件文（⑦節）' },
+  { terms: ['現在の反実','si tuviéramos','過去未来 帰結節'], id: 'joken2', label: '接続法過去の条件文（⑦節）' },
+  { terms: ['過去の反実','si hubiéramos tenido','過去未来完了'], id: 'joken3', label: '接続法過去完了の条件文（⑦節）' },
+  { terms: ['条件文 早見表','条件文 まとめ'], id: 'joken-matome', label: '条件文3パターン早見表（⑦節）' },
+  { terms: ['aunque','譲歩文'], id: 'aunque', label: '譲歩文 aunque（⑦節）' },
+  { terms: ['練習問題','練習'], id: 'sec8', label: '練習問題（⑧節）' },
+  { terms: ['語彙','Vocabulario','旅行','宿泊'], id: 'sec9', label: '語彙リスト（⑨節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec10', label: 'まとめ（⑩節）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語一列①（若林大我）ー2026前期課程Sセメスター</footer>
+
+</body>
+</html>

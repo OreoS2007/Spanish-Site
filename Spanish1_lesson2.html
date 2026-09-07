@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lección 2 文法解説 | スペイン語一列①</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<!-- dict modal -->
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal" role="dialog" aria-modal="true" aria-labelledby="dict-modal-word">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+
+<div id="search-bar">
+  <label for="search-input">検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<!-- top nav -->
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 名詞の性と数・冠詞</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 主語人称代名詞・ser と estar</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ さまざまな前置詞</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ 形容詞と性数変化</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 所有形容詞・haber（hay）</a>
+    <a class="fn-item" href="#sec6" data-tab="grammar" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 文の構造・否定文・疑問詞</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec7" data-tab="renshu" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec8" data-tab="vocab" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ 語彙リスト</a>
+    <a class="fn-item" href="#sec9" data-tab="vocab" onclick="jumpToSection('sec9'); closeToc(); return false;">⑨ まとめ</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 2 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- 表紙 -->
+<div class="cover-title-block">
+
+  <div class="cover-title">Lección 2　文法解説</div>
+  <div class="cover-sub">スペイン語一列①　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br>「私はスペイン語を勉強しています」「先生は日本人ですか？」のような文が作れるようになります。<br><small>まずは『文法解説』タブの①②から読み始め、練習問題→語彙・まとめの順に進みましょう。一度に全部読む必要はありません。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 名詞の性と数・冠詞 <small>（文法解説）</small></a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 主語人称代名詞・ser と estar <small>（文法解説）</small></a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ さまざまな前置詞 <small>（文法解説）</small></a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ 形容詞と性数変化 <small>（文法解説）</small></a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 所有形容詞・haber（hay） <small>（文法解説）</small></a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 文の構造・否定文・疑問詞 <small>（文法解説）</small></a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 練習問題 <small>（練習問題）</small></a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ 語彙リスト <small>（語彙・まとめ）</small></a>
+    <a class="toc-item" href="#sec9" onclick="jumpToSection('sec9'); return false;">⑨ まとめ <small>（語彙・まとめ）</small></a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：estás　／　高い　／　所有形容詞…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<!-- ══ 文法解説タブ ══ -->
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 名詞の性と数・冠詞 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">名詞の性と数・冠詞</span>
+  <span class="sec-es">Género, número y artículos</span>
+</div>
+
+<p>スペイン語の名詞はすべて<span class="hi">男性</span>か<span class="hi2">女性</span>のどちらかの性を持ちます。語尾の形でおおよその性が判断できます。</p>
+
+<div class="sub">名詞の性（ジェンダー）</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th style="background:#dde8f5;color:var(--accent)">男性名詞の特徴</th>
+      <th style="background:#d8eeea;color:var(--accent2)">女性名詞の特徴</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>語尾 <span class="mono hi">-o</span> が多い<br><small>例：<span class="mono">libro</span>（本）、<span class="mono">amigo</span>（友人）</small></td>
+      <td>語尾 <span class="mono hi2">-a</span> が多い<br><small>例：<span class="mono">mesa</span>（机）、<span class="mono">amiga</span>（友人）</small></td>
+    </tr>
+    <tr>
+      <td>語尾 <span class="mono hi">-or, -ón, -és, -aje</span><br><small>例：<span class="mono">color, avión, japonés, viaje</span></small></td>
+      <td>語尾 <span class="mono hi2">-dad, -ión, -sión, -ez</span><br><small>例：<span class="mono">ciudad, nación, pensión, vez</span></small></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ 語尾が <span class="mono">-ma, -pa, -ta</span> の名詞は多くが男性（例：<span class="mono">problema, mapa, idioma</span>）。また <span class="mono">persona</span>（人）は指す相手が男性でも女性名詞です。</p>
+<p class="note">※ <span class="hi2">語尾のルールに当てはまらない例外</span>：語尾 <span class="mono">-o</span> なのに<span class="hi2">女性</span>の名詞 → <span class="mono">mano</span>（手）・<span class="mono">foto</span>（写真、<span class="mono">fotografía</span> の省略形）・<span class="mono">moto</span>（バイク、<span class="mono">motocicleta</span> の省略形）。語尾 <span class="mono">-a</span> なのに<span class="hi">男性</span>の名詞 → <span class="mono">día</span>（日）・<span class="mono">mapa</span>（地図）など。</p>
+<p class="note">※ 人の職業を表す名詞では、男性を指す語と女性を指す語が<span class="hi">同じ形</span>になることがよくある。このような名詞を<span class="hi">「男女同形の名詞」</span>と呼ぶ（例：<span class="mono">estudiante</span> 学生、<span class="mono">periodista</span> 記者）。また、単数形と複数形で形が変わらない名詞は<span class="hi">「単複同形の名詞」</span>と呼ぶ（例：<span class="mono">crisis</span> 危機、<span class="mono">paraguas</span> 傘）。</p>
+
+<div class="sub">複数形の作り方</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>語末の種類</th><th>複数形の作り方</th><th>例</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">母音（a/e/i/o/u）で終わる</td><td class="td-c mono hi">+ s</td><td><span class="mono">libro → libros　　mesa → mesas</span></td></tr>
+    <tr><td class="td-rule">子音で終わる</td><td class="td-c mono hi">+ es</td><td><span class="mono">ciudad → ciudades　　color → colores</span></td></tr>
+    <tr><td class="td-rule"><span class="mono">-z</span> で終わる</td><td class="td-c mono hi">-z → -ces</td><td><span class="mono">lápiz → lápices　　vez → veces</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">-z</span> が複数形で <span class="mono">-c</span> に変わる理由は<b>スペイン語の正書法規則</b>によるものです。スペイン語では <span class="mono">z</span> は明母音（a/o/u）の前にしか使いません——<span class="mono">ze/zi</span> という綴りは現代スペイン語ではほぼ存在しません（ラテン語・外来語の一部を除く）。一方、<span class="mono">ce/ci</span> は /θ/（カスティージャ方言）または /s/（中南米）の音を表し、<span class="mono">z</span>（暗母音の前）と同じ音です。したがって複数語尾 <span class="mono">-es</span> を付けると <span class="mono">ze</span> になってしまうため、自動的に <span class="mono">c</span> に置き換えられます（<span class="mono">vez → veces</span>）。これは第6回の点過去 yo 形（<span class="mono">cruzar → crucé</span>）でも同じ規則が働きます。</span>
+</div>
+
+<div class="sub" id="kanshi-hyou">冠詞</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th rowspan="2">種類</th>
+      <th colspan="2" style="background:#dde8f5;color:var(--accent)">男性</th>
+      <th colspan="2" style="background:#d8eeea;color:var(--accent2)">女性</th>
+    </tr>
+    <tr>
+      <th>単数</th><th>複数</th><th>単数</th><th>複数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">定冠詞<br><small>（特定の「その〜」）</small></td>
+      <td class="td-c mono hi"><b>el</b></td>
+      <td class="td-c mono hi"><b>los</b></td>
+      <td class="td-c mono hi2"><b>la</b></td>
+      <td class="td-c mono hi2"><b>las</b></td>
+    </tr>
+    <tr>
+      <td class="td-rule">不定冠詞<br><small>（不特定の「ある〜」）</small></td>
+      <td class="td-c mono">un</td>
+      <td class="td-c mono">unos</td>
+      <td class="td-c mono">una</td>
+      <td class="td-c mono">unas</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div id="keiyakukei" class="box">
+  <div class="box-title">縮約形：al と del</div>
+  <p>前置詞 <span class="mono hi">a</span> または <span class="mono hi">de</span> が定冠詞 <span class="mono hi">el</span>（男性単数）と続くときは<strong>必ず縮約</strong>します。</p>
+  <div class="tbl-wrap" style="margin-top:8px">
+  <table>
+    <thead><tr><th>前置詞 ＋ el</th><th>縮約形</th><th>例文</th></tr></thead>
+    <tbody>
+      <tr><td class="td-c mono">a + el</td><td class="td-c mono hi"><b>al</b></td><td><span class="mono">Voy <b>al</b> mercado.</span>　<span class="td-ja">市場へ行く。</span></td></tr>
+      <tr><td class="td-c mono">de + el</td><td class="td-c mono hi"><b>del</b></td><td><span class="mono">Es el libro <b>del</b> profesor.</span>　<span class="td-ja">先生の本だ。</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:6px">※ <span class="mono">él</span>（主語代名詞「彼」）とは縮約しません：<span class="mono">de él</span>（彼の）はそのまま。</p>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">agua</span>（水）は女性名詞ですが、単数では <span class="mono hi2">el agua</span> と男性定冠詞を使います。語頭のアクセントのある <span class="mono">a-</span> の前で発音しやすくするための慣習です。複数は通常通り <span class="mono hi2">las aguas</span>。</span>
+</div>
+
+<div class="mini-check" id="L2-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">El</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">libro は男性名詞</span></span> libro está sobre la mesa.</div>
+  <div class="mini-check-ja">その本はテーブルの上にある。</div>
+<div class="srs-rate" data-qid="L2-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：名詞の性と数・冠詞</div>
+
+  <div class="quiz-item" id="L2-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">La</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">-dad で終わる名詞</span></span> ciudad de Kioto es muy antigua.</div>
+    <div class="quiz-ja">京都という都市はとても古い。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>La</b>：ciudad は -dad で終わる名詞なので必ず女性名詞。定冠詞は女性単数の la。</div>
+  <div class="srs-rate" data-qid="L2-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Hay muchas <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">luces</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">luz の複数形</span></span> en esta calle.</div>
+    <div class="quiz-ja">この通りにはたくさんの明かりがある。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>luces</b>：luz は -z で終わる名詞なので、z を c に変えて -es を付ける（luz → luces）。</div>
+  <div class="srs-rate" data-qid="L2-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Voy <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">al</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">a + el の縮約</span></span> mercado con Ana, la hija <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">del</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">de + el の縮約</span></span> profesor.</div>
+    <div class="quiz-ja">私は先生の娘であるアナと市場に行く。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>al</b>：a + el mercado → al mercado（縮約）。<b>del</b>：de + el profesor → del profesor（縮約）。両方とも男性単数の el に限って起こる。</div>
+  <div class="srs-rate" data-qid="L2-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ② 主語人称代名詞・ser と estar -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">主語人称代名詞・ser と estar</span>
+  <span class="sec-es">Pronombres personales, ser y estar</span>
+</div>
+
+<div class="sub">主語人称代名詞</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th colspan="2">単数</th><th colspan="2">複数</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-key td-c mono">yo</td><td class="td-ja">私</td>
+      <td class="td-key td-c mono">nosotros / nosotras</td><td class="td-ja">私たち（男女混合 / 女性のみ）</td>
+    </tr>
+    <tr>
+      <td class="td-key td-c mono">tú</td><td class="td-ja">君（親しい間柄）</td>
+      <td class="td-key td-c mono">vosotros / vosotras <span style="font-weight:400;font-size:11px">※</span></td><td class="td-ja">君たち（スペイン）</td>
+    </tr>
+    <tr>
+      <td class="td-key td-c mono">él / ella</td><td class="td-ja">彼 / 彼女</td>
+      <td class="td-key td-c mono">ellos / ellas</td><td class="td-ja">彼ら / 彼女たち</td>
+    </tr>
+    <tr>
+      <td class="td-key td-c mono">usted</td><td class="td-ja">あなた（丁寧）</td>
+      <td class="td-key td-c mono">ustedes</td><td class="td-ja">あなたがた</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ vosotros/as はスペインのみ使用。中南米では ustedes を使います。動詞の活用形から主語が分かるため、主語代名詞はしばしば省略されます（特に yo / tú / nosotros / vosotros）。</p>
+
+<div class="box box-rule">
+  <div class="box-title">tú と usted の使い分け・訳語の慣習</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li><span class="mono hi">tú</span>：友人・家族など<span class="hi">親しい相手</span>に使う。<span class="mono hi2">usted</span>：初対面の相手・年長者・上司や先生など、<span class="hi2">敬意を持って話しかける相手</span>に使う敬称（文法上は3人称単数扱い）</li>
+    <li><span class="mono hi2">ustedes</span> は usted の複数形（2人称複数の相手を指すが、文法上は3人称複数扱い）</li>
+    <li>本サイトでの訳語の統一：<span class="mono">tú</span>＝君／<span class="mono">vosotros, vosotras</span>＝君たち／<span class="mono">usted</span>＝あなた／<span class="mono">ustedes</span>＝あなた方</li>
+    <li><span class="hi-r">ラテンアメリカでは</span>（一部地域を除き）「君たち」でも「あなた方」でも <span class="mono hi-r">ustedes</span> を使うのが普通で、<span class="mono">vosotros / vosotras</span> は使われない。ただし <span class="mono">tú</span> と <span class="mono">usted</span> の使い分け自体はラテンアメリカにもある</li>
+    <li>略記：<span class="mono">usted → Ud. / Vd.</span>、<span class="mono">ustedes → Uds. / Vds.</span></li>
+  </ul>
+</div>
+
+<div class="sub" id="ser-katsuyo">ser の活用と用法</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">人称</th>
+      <th style="background:#dde8f5;color:var(--accent)">ser（〜である・〜だ）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c mono">yo</td><td class="td-ja">私</td><td class="td-c mono hi"><b>soy</b></td></tr>
+    <tr><td class="td-key td-c mono">tú</td><td class="td-ja">君</td><td class="td-c mono hi"><b>eres</b></td></tr>
+    <tr><td class="td-key td-c mono">él/ella/usted</td><td class="td-ja">彼/彼女/あなた</td><td class="td-c mono hi"><b>es</b></td></tr>
+    <tr><td class="td-key td-c mono">nosotros/as</td><td class="td-ja">私たち</td><td class="td-c mono hi"><b>somos</b></td></tr>
+    <tr><td class="td-key td-c mono">vosotros/as</td><td class="td-ja">君たち</td><td class="td-c mono hi"><b>sois</b></td></tr>
+    <tr><td class="td-key td-c mono">ellos/ellas/uds.</td><td class="td-ja">彼ら/あなたがた</td><td class="td-c mono hi"><b>son</b></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="tbl-wrap" style="margin-top:10px">
+<table>
+  <thead><tr><th>ser の主な用法</th><th>例文と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">出身・国籍</td><td><span class="mono">Soy de Japón. / Soy japonés.</span>　<span class="td-ja">日本出身です。/ 日本人です。</span></td></tr>
+    <tr><td class="td-rule">職業・身分</td><td><span class="mono">Mi madre es médica.</span>　<span class="td-ja">私の母は医者です。</span></td></tr>
+    <tr><td class="td-rule">固有の性質・特徴</td><td><span class="mono">El español es interesante.</span>　<span class="td-ja">スペイン語はおもしろい。</span></td></tr>
+    <tr><td class="td-rule">時刻・日付・曜日</td><td><span class="mono">Son las tres de la tarde.</span>　<span class="td-ja">午後3時です。</span></td></tr>
+    <tr><td class="td-rule">素材・内容</td><td><span class="mono">La mesa es de madera.</span>　<span class="td-ja">その机は木でできている。</span></td></tr>
+    <tr><td class="td-rule">イベントの場所・日時</td><td><span class="mono">La reunión es en la sala.</span>　<span class="td-ja">会議は会議室で行われる。</span><br><small class="td-note">※人・ものの「所在」はestar（Mi padre está en casa.）</small></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="estar-katsuyo">estar の活用と用法</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">人称</th>
+      <th style="background:#d8eeea;color:var(--accent2)">estar（いる・ある・〜の状態だ）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c mono">yo</td><td class="td-ja">私</td><td class="td-c mono hi2"><b>estoy</b></td></tr>
+    <tr><td class="td-key td-c mono">tú</td><td class="td-ja">君</td><td class="td-c mono hi2"><b>estás</b></td></tr>
+    <tr><td class="td-key td-c mono">él/ella/usted</td><td class="td-ja">彼/彼女/あなた</td><td class="td-c mono hi2"><b>está</b></td></tr>
+    <tr><td class="td-key td-c mono">nosotros/as</td><td class="td-ja">私たち</td><td class="td-c mono hi2"><b>estamos</b></td></tr>
+    <tr><td class="td-key td-c mono">vosotros/as</td><td class="td-ja">君たち</td><td class="td-c mono hi2"><b>estáis</b></td></tr>
+    <tr><td class="td-key td-c mono">ellos/ellas/uds.</td><td class="td-ja">彼ら/あなたがた</td><td class="td-c mono hi2"><b>están</b></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="tbl-wrap" style="margin-top:10px">
+<table>
+  <thead><tr><th>estar の主な用法</th><th>例文と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">場所・所在</td><td><span class="mono">Madrid está en España.</span>　<span class="td-ja">マドリードはスペインにある。</span></td></tr>
+    <tr><td class="td-rule">一時的な状態（体調・感情）</td><td><span class="mono">Estoy cansado.</span>　<span class="td-ja">私は疲れている。</span></td></tr>
+    <tr><td class="td-rule">一時的・変化として評価（今日に限り）</td><td><span class="mono">¡Estás muy guapo hoy!</span>　<span class="td-ja">今日はとても素敵だね！</span><br><small class="td-note">cf. <span class="mono">Ana es guapa.</span>（性質・ser）との使い分けに注意</small></td></tr>
+    <tr><td class="td-rule">estar＋副詞（あいさつ表現）</td><td><span class="mono">¿Cómo estás?</span>　<span class="td-ja">元気？（調子はどう？）</span></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ <span class="hi-r">「estar ＋ 名詞」という用法は存在しない</span>（ただし「<span class="mono hi2">estar de ＋ 名詞</span>」という用法はある）。また、動かない物であっても所在を表す場合は <span class="mono">ser</span> ではなく必ず <span class="mono hi">estar</span> を使う。</p>
+
+<div class="box box-warn">
+  <div class="box-title" style="color:var(--warn)">ser vs estar — どちらを使う？</div>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>ser（本質・固有の特性）</th><th>estar（状態・場所・一時的）</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="mono">El cielo es azul.</span><br><span class="td-ja">空は青い。（本質）</span></td>
+        <td><span class="mono">La puerta está abierta.</span><br><span class="td-ja">ドアが開いている。（状態）</span></td>
+      </tr>
+      <tr>
+        <td><span class="mono">Ana es inteligente.</span><br><span class="td-ja">アナは頭がいい。（性格）</span></td>
+        <td><span class="mono">Ana está enferma.</span><br><span class="td-ja">アナは病気だ。（体調）</span></td>
+      </tr>
+      <tr>
+        <td><span class="mono">Mi padre es médico.</span><br><span class="td-ja">父は医者だ。（職業）</span></td>
+        <td><span class="mono">Mi padre está en casa.</span><br><span class="td-ja">父は家にいる。（場所）</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="box box-rule">
+  <div class="box-title">📖 教材の例文（Brújula 2課）</div>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>用法</th><th>スペイン語</th><th>日本語訳</th></tr></thead>
+    <tbody>
+      <tr><td class="td-rule">ser＋職業</td><td><span class="mono">Francisco es ingeniero.</span></td><td class="td-ja">フランシスコはエンジニアだ。</td></tr>
+      <tr><td class="td-rule">ser（主語省略）</td><td><span class="mono">Sois japoneses.</span></td><td class="td-ja">君たちは日本人だ。</td></tr>
+      <tr><td class="td-rule">ser de＋名詞（出身）</td><td><span class="mono">Somos de México.</span></td><td class="td-ja">私たちはメキシコ出身だ。</td></tr>
+      <tr><td class="td-rule">ser de＋名詞（所有）</td><td><span class="mono">El libro es de Ana.</span></td><td class="td-ja">その本はアナのだ。</td></tr>
+      <tr><td class="td-rule">ser de＋名詞（素材）</td><td><span class="mono">La mesa es de madera.</span></td><td class="td-ja">そのテーブルは木でできている。</td></tr>
+      <tr><td class="td-rule">ser＋名詞（首都・補語）</td><td><span class="mono">La capital de Colombia es Bogotá.</span></td><td class="td-ja">コロンビアの首都はボゴタだ。</td></tr>
+      <tr><td class="td-rule">estar＋形容詞（一時的状態）</td><td><span class="mono">Pedro está nervioso ahora.</span></td><td class="td-ja">ペドロは今緊張している。</td></tr>
+      <tr><td class="td-rule">estar＋場所（建物・固有名詞）</td><td><span class="mono">La Alhambra está en Granada.</span></td><td class="td-ja">アルハンブラ宮殿はグラナダにある。</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:6px">※ <span class="mono">Pedro es nervioso.</span>（性格・本質 → ser）と <span class="mono">Pedro está nervioso ahora.</span>（今この瞬間の状態 → estar）の使い分けに注意。</p>
+</div>
+
+<div class="mini-check" id="L2-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Yo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">soy</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ser の1人称単数</span></span> de Japón.</div>
+  <div class="mini-check-ja">私は日本出身です。</div>
+<div class="srs-rate" data-qid="L2-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：主語人称代名詞・ser と estar</div>
+
+  <div class="quiz-item" id="L2-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">María <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">es</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ser：職業</span></span> médica, pero hoy <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">está</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">estar：一時的な状態</span></span> un poco cansada.</div>
+    <div class="quiz-ja">マリアは医者だが、今日は少し疲れている。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>es</b>：職業という固有の属性なのでser。<b>está</b>：「今日は」という一時的な体調なのでestar。同じ人物でも文脈によって使い分ける典型例。</div>
+  <div class="srs-rate" data-qid="L2-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿Dónde <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">está</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">estar：所在</span></span> la biblioteca? — <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Está</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">estar：所在</span></span> cerca de la estación.</div>
+    <div class="quiz-ja">図書館はどこにありますか？ — 駅の近くにあります。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">場所・所在を尋ねる・答えるときは常にestar。動かない建物であっても所在の表現には必ずestarを使う。</div>
+  <div class="srs-rate" data-qid="L2-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">ser を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">soy</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">eres</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">es</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">somos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">sois</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">son</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">serは不規則活用だが非常によく使うので、この6形は丸ごと覚える必要がある。</div>
+  <div class="srs-rate" data-qid="L2-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ③ さまざまな前置詞 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">さまざまな前置詞</span>
+  <span class="sec-es">Preposiciones</span>
+</div>
+
+<div class="sub">前置詞一覧</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:10%">前置詞</th><th style="width:35%">主な意味・用法</th><th>例文と訳</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="td-c mono hi"><b>a</b></td>
+      <td>方向（〜へ）・間接目的語マーカー（→al 縮約）</td>
+      <td><span class="mono">Voy <b>al</b> mercado.</span>　<span class="td-ja">市場へ行く。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>con</b></td>
+      <td>〜と一緒に・〜を持って</td>
+      <td><span class="mono">Vivo <b>con</b> mi familia.</span>　<span class="td-ja">家族と住んでいる。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>de</b></td>
+      <td>所有（〜の）・出身（〜出身）・素材（→del 縮約）</td>
+      <td><span class="mono">Soy <b>de</b> Tokio.</span>　<span class="td-ja">東京出身です。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>en</b></td>
+      <td>場所（〜に・〜で）・時間（〜に）</td>
+      <td><span class="mono">Estoy <b>en</b> casa.</span>　<span class="td-ja">家にいる。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>por</b></td>
+      <td>原因・理由（〜のために・〜のせいで）・通過・交換</td>
+      <td><span class="mono">Gracias <b>por</b> todo.</span>　<span class="td-ja">すべてに感謝します。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>sin</b></td>
+      <td>〜なしに・〜せずに</td>
+      <td><span class="mono">café <b>sin</b> azúcar</span>　<span class="td-ja">砂糖なしのコーヒー</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>para</b></td>
+      <td>目的（〜のために）・受益者（〜向けに）・期限（〜までに）</td>
+      <td><span class="mono">Estudio <b>para</b> el examen.</span>　<span class="td-ja">試験のために勉強する。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>hasta</b></td>
+      <td>〜まで（到達点・終点）</td>
+      <td><span class="mono">Trabajo <b>hasta</b> las seis.</span>　<span class="td-ja">6時まで働く。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>desde</b></td>
+      <td>〜から（起点）</td>
+      <td><span class="mono">Vivo aquí <b>desde</b> 2020.</span>　<span class="td-ja">2020年からここに住んでいる。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>sobre</b></td>
+      <td>〜の上に（接触）・〜について</td>
+      <td><span class="mono">El libro está <b>sobre</b> la mesa.</span>　<span class="td-ja">本はテーブルの上にある。</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <div class="box-title">con の特別形：conmigo / contigo</div>
+  <p>前置詞 <span class="mono hi">con</span> は1・2人称単数の強調代名詞（<span class="mono">mí, ti</span>）と結合して特別な形になります。</p>
+  <div class="tbl-wrap" style="margin-top:8px">
+  <table>
+    <thead><tr><th>組み合わせ</th><th>形</th><th>意味</th><th>例文</th></tr></thead>
+    <tbody>
+      <tr><td class="td-c mono">con + mí</td><td class="td-c mono hi"><b>conmigo</b></td><td class="td-ja">私と一緒に</td><td><span class="mono">¿Vienes conmigo?</span>　<span class="td-ja">私と来る？</span></td></tr>
+      <tr><td class="td-c mono">con + ti</td><td class="td-c mono hi"><b>contigo</b></td><td class="td-ja">君と一緒に</td><td><span class="mono">Quiero estar contigo.</span>　<span class="td-ja">君と一緒にいたい。</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:6px">3人称は通常通り：<span class="mono">con él / con ella / con usted / con ellos</span></p>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono hi">por</span> と <span class="mono hi2">para</span> はどちらも「〜のために」と訳されることがありますが意味が異なります。<span class="mono hi2">para</span> は目的・受益者（前向き）、<span class="mono hi">por</span> は原因・交換・経路（後ろ向き・背景）です。例：<span class="mono">Estudio <b>para</b> el examen.</span>（試験に向けて）vs <span class="mono">Lo hago <b>por</b> amor.</span>（愛のゆえに）。</span>
+</div>
+
+<div class="mini-check" id="L2-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Vivo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">en</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">場所</span></span> Tokio.</div>
+  <div class="mini-check-ja">私は東京に住んでいる。</div>
+<div class="srs-rate" data-qid="L2-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：さまざまな前置詞</div>
+
+  <div class="quiz-item" id="L2-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Este regalo es <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">para</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">目的・受益者</span></span> mi madre.</div>
+    <div class="quiz-ja">このプレゼントは私の母のためのものだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>para</b>：受益者「〜のために」を表す前置詞。porと混同しやすいが、porは原因・理由を表す。</div>
+  <div class="srs-rate" data-qid="L2-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿Vienes <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">conmigo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">con+mí の特別形</span></span>?</div>
+    <div class="quiz-ja">私と一緒に来る？</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>conmigo</b>：con＋mí（私）は特別な形に融合してconmigoになる。con+tiも同様にcontigoになる。</div>
+  <div class="srs-rate" data-qid="L2-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Trabajo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">desde</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">起点</span></span> las nueve <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hasta</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">終点</span></span> las cinco.</div>
+    <div class="quiz-ja">私は9時から5時まで働く。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>desde</b>：時間的な起点（〜から）。<b>hasta</b>：時間的な終点（〜まで）。セットで使われることが多い。</div>
+  <div class="srs-rate" data-qid="L2-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ④ 形容詞と性数変化 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">形容詞と性数変化</span>
+  <span class="sec-es">Adjetivos y concordancia</span>
+</div>
+
+<p>形容詞は修飾する名詞の<span class="hi">性</span>（男性・女性）と<span class="hi">数</span>（単数・複数）に合わせて語尾が変わります（性数一致）。</p>
+
+<div class="sub">基本パターン</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>パターン</th>
+      <th>男性単数</th><th>女性単数</th><th>男性複数</th><th>女性複数</th>
+      <th>例</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">① -o で終わる</td>
+      <td class="td-c mono hi">-o</td><td class="td-c mono hi2">-a</td>
+      <td class="td-c mono hi">-os</td><td class="td-c mono hi2">-as</td>
+      <td><span class="mono">alto / alta / altos / altas</span></td>
+    </tr>
+    <tr>
+      <td class="td-rule">② -o 以外で終わる<br><small>（-e、子音）</small></td>
+      <td class="td-c mono">変化なし</td><td class="td-c mono">変化なし</td>
+      <td class="td-c mono">+s / +es</td><td class="td-c mono">+s / +es</td>
+      <td><span class="mono">inteligente / inteligente / inteligentes</span><br><span class="mono">azul / azul / azules</span></td>
+    </tr>
+    <tr>
+      <td class="td-rule">③ 国籍・地名由来<br>（子音で終わる）</td>
+      <td class="td-c mono hi">そのまま</td><td class="td-c mono hi2">+a</td>
+      <td class="td-c mono hi">+es</td><td class="td-c mono hi2">+as</td>
+      <td><span class="mono">japonés / japonesa / japoneses / japonesas</span><br><span class="mono">español / española / españoles / españolas</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub">注意が必要な形容詞</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>語尾のパターン</th><th>男性単数</th><th>女性単数</th><th>例</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="td-rule"><span class="mono">-dor / -tor / -sor</span></td>
+      <td class="td-c mono">-dor/-tor/-sor</td>
+      <td class="td-c mono hi2">-dora/-tora/-sora</td>
+      <td><span class="mono">trabajador / trabajadora</span>　<span class="td-ja">勤勉な</span></td>
+    </tr>
+    <tr>
+      <td class="td-rule"><span class="mono">-án / -ín / -ón</span></td>
+      <td class="td-c mono">-án/-ín/-ón</td>
+      <td class="td-c mono hi2">-ana/-ina/-ona</td>
+      <td><span class="mono">holgazán / holgazana</span>　<span class="td-ja">怠け者の</span></td>
+    </tr>
+    <tr>
+      <td class="td-rule">国籍語尾 <span class="mono">-í / -ú</span></td>
+      <td class="td-c mono">-í / -ú</td>
+      <td class="td-c mono">同形</td>
+      <td><span class="mono">israelí</span>（イスラエルの）　複数：<span class="mono">israelíes</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="keiyoshi-ichi">形容詞の位置</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>位置</th><th>対象となる形容詞</th><th>例</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">名詞の<span class="hi2">後ろ</span>（後置）<br><small>スペイン語の基本</small></td>
+      <td>性質・色・形・出身を表すほとんどの形容詞</td>
+      <td><span class="mono">un libro <b>interesante</b></span>　<span class="td-ja">おもしろい本</span><br><span class="mono">una chica <b>española</b></span>　<span class="td-ja">スペイン人の女の子</span></td>
+    </tr>
+    <tr>
+      <td class="td-rule">名詞の<span class="hi">前</span>（前置）</td>
+      <td>数量形容詞（<span class="mono">mucho/poco/varios</span>）<br>序数（<span class="mono">primero/último</span>）<br>短縮形（<span class="mono">buen/mal/gran</span>）</td>
+      <td><span class="mono"><b>muchos</b> libros</span>　<span class="td-ja">たくさんの本</span><br><span class="mono">un <b>buen</b> amigo</span>　<span class="td-ja">よい友人</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <div class="box-title">短縮形（男性単数名詞の直前のみ）</div>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>元の形</th><th>男性単数名詞の前</th><th>例</th></tr></thead>
+    <tbody>
+      <tr><td class="td-c mono">bueno</td><td class="td-c mono hi"><b>buen</b></td><td><span class="mono">un <b>buen</b> chico</span>　<span class="td-ja">よい男の子</span></td></tr>
+      <tr><td class="td-c mono">malo</td><td class="td-c mono hi"><b>mal</b></td><td><span class="mono">un <b>mal</b> día</span>　<span class="td-ja">ひどい日</span></td></tr>
+      <tr><td class="td-c mono">grande</td><td class="td-c mono hi"><b>gran</b></td><td><span class="mono">un <b>gran</b> hombre</span>　<span class="td-ja">偉大な人物（名声強調）</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:6px">※ 女性名詞・複数の前では短縮しません：<span class="mono">una buena chica、malos días</span></p>
+</div>
+
+<div class="mini-check" id="L2-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Mi hermana es muy <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">alta</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">alto を女性形に</span></span>.</div>
+  <div class="mini-check-ja">私の姉（妹）はとても背が高い。</div>
+<div class="srs-rate" data-qid="L2-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：形容詞と性数変化</div>
+
+  <div class="quiz-item" id="L2-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Mis amigas son muy <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">simpáticas</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">simpático を女性複数に</span></span>.</div>
+    <div class="quiz-ja">私の友人たち（女性）はとても感じがいい。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>simpáticas</b>：simpático（-o終わり）→女性形simpática→複数形simpáticas。修飾する名詞amigas（女性複数）に完全一致させる。</div>
+  <div class="srs-rate" data-qid="L2-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Hoy hace <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">buen</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">buenoの短縮形</span></span> tiempo.</div>
+    <div class="quiz-ja">今日は天気が良い。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>buen</b>：buenoは男性単数名詞（tiempo）の直前で語尾のoが省略され、buenになる。</div>
+  <div class="srs-rate" data-qid="L2-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Es un <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">gran</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">grandeの短縮形</span></span> hombre, pero vive en una casa muy <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">pequeña</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">pequeñoを女性形に</span></span>.</div>
+    <div class="quiz-ja">彼は偉大な人物だが、とても小さな家に住んでいる。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>gran</b>：grandeは男性・女性どちらの単数名詞の前でも短縮されgranになる（名声・偉大さを強調する意味に）。<b>pequeña</b>：casa（女性名詞）に性一致。</div>
+  <div class="srs-rate" data-qid="L2-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ⑤ 所有形容詞・haber（hay） -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">所有形容詞・haber（hay）</span>
+  <span class="sec-es">Adjetivos posesivos y haber</span>
+</div>
+
+<p>所有形容詞は「〜の」を表し、<span class="hi">前置形</span>（名詞の前）と<span class="hi2">後置形</span>（名詞の後ろ・動詞の後）の2種類があります。</p>
+
+<div class="sub">所有形容詞・前置形</div>
+<p>名詞の前に置いて使います。<span class="mono">nuestro / vuestro</span> のみ被所有物の性に一致し、<span class="mono">mi / tu / su</span> は性変化なし（単複のみ変化）。</p>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>所有者</th>
+      <th>単数（男・女共通）</th>
+      <th>複数（男・女共通）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key">yo</td><td class="td-c mono hi"><b>mi</b></td><td class="td-c mono hi"><b>mis</b></td></tr>
+    <tr><td class="td-key">tú</td><td class="td-c mono hi"><b>tu</b></td><td class="td-c mono hi"><b>tus</b></td></tr>
+    <tr><td class="td-key">él / ella / usted</td><td class="td-c mono hi"><b>su</b></td><td class="td-c mono hi"><b>sus</b></td></tr>
+    <tr><td class="td-key">nosotros/as</td><td class="td-c mono hi">nuestro / <span class="hi2">nuestra</span></td><td class="td-c mono hi">nuestros / <span class="hi2">nuestras</span></td></tr>
+    <tr><td class="td-key">vosotros/as</td><td class="td-c mono hi">vuestro / <span class="hi2">vuestra</span></td><td class="td-c mono hi">vuestros / <span class="hi2">vuestras</span></td></tr>
+    <tr><td class="td-key">ellos / ellas / ustedes</td><td class="td-c mono hi"><b>su</b></td><td class="td-c mono hi"><b>sus</b></td></tr>
+  </tbody>
+</table>
+</div>
+<div class="ex"><span class="ex-sp">mi casa</span><span class="ex-ja">私の家</span></div>
+<div class="ex"><span class="ex-sp">nuestros amigos</span><span class="ex-ja">私たちの友人たち</span></div>
+<div class="ex"><span class="ex-sp">su libro</span><span class="ex-ja">彼/彼女/あなた/彼ら/あなたがたの本</span></div>
+<div class="ex"><span class="ex-sp">mi hermano / mi hermana</span><span class="ex-ja">私の（一人の）兄弟 / 私の（一人の）姉妹</span></div>
+<div class="ex"><span class="ex-sp">mis hermanos / mis hermanas</span><span class="ex-ja">私の（複数の）兄弟 / 私の（複数の）姉妹</span></div>
+<div class="ex"><span class="ex-sp">vuestro hermano / vuestra hermana</span><span class="ex-ja">君たちの（一人の）兄弟 / 君たちの（一人の）姉妹</span></div>
+<div class="ex"><span class="ex-sp">Nuestro padre está en su habitación.</span><span class="ex-ja">私たちの父は自室にいます。</span></div>
+
+<div class="sub" style="margin-top:16px">所有形容詞・後置形</div>
+<p>名詞の後ろに置くか（<span class="mono">El libro <b>mío</b></span>）、または "ser＋後置形" で所有を表します（<span class="mono">Ese libro es <b>mío</b>.</span>）。被所有物の性・数に完全一致します。</p>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>所有者</th><th>男単</th><th>女単</th><th>男複</th><th>女複</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key">yo</td><td class="td-c mono hi2">mío</td><td class="td-c mono hi2">mía</td><td class="td-c mono hi2">míos</td><td class="td-c mono hi2">mías</td></tr>
+    <tr><td class="td-key">tú</td><td class="td-c mono hi2">tuyo</td><td class="td-c mono hi2">tuya</td><td class="td-c mono hi2">tuyos</td><td class="td-c mono hi2">tuyas</td></tr>
+    <tr><td class="td-key">él/ella/usted</td><td class="td-c mono hi2">suyo</td><td class="td-c mono hi2">suya</td><td class="td-c mono hi2">suyos</td><td class="td-c mono hi2">suyas</td></tr>
+    <tr><td class="td-key">nosotros/as</td><td class="td-c mono hi2">nuestro</td><td class="td-c mono hi2">nuestra</td><td class="td-c mono hi2">nuestros</td><td class="td-c mono hi2">nuestras</td></tr>
+    <tr><td class="td-key">vosotros/as</td><td class="td-c mono hi2">vuestro</td><td class="td-c mono hi2">vuestra</td><td class="td-c mono hi2">vuestros</td><td class="td-c mono hi2">vuestras</td></tr>
+    <tr><td class="td-key">ellos/ellas/ustedes</td><td class="td-c mono hi2">suyo</td><td class="td-c mono hi2">suya</td><td class="td-c mono hi2">suyos</td><td class="td-c mono hi2">suyas</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="ex"><span class="ex-sp">Un amigo mío es jugador de tenis.</span><span class="ex-ja">私のある友人はテニスの選手だ。</span></div>
+<div class="ex"><span class="ex-sp">Los bolígrafos son tuyos.</span><span class="ex-ja">そのボールペン（複数）は君のだ。</span></div>
+
+<div class="sub" id="hay-setsumeisec">hay — 存在を表す無人称動詞</div>
+<p><span class="mono hi">hay</span> は動詞 <span class="mono">haber</span> の無人称形で「〜がある・〜がいる」という存在を表します。主語を持たないため、後ろに続く名詞の数に関係なく常に <span class="mono hi">hay</span> の形のままです。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>例文</th><th>訳</th></tr></thead>
+  <tbody>
+    <tr><td><span class="mono">Hay un libro en la mesa.</span></td><td class="td-ja">テーブルの上に本が1冊ある。</td></tr>
+    <tr><td><span class="mono">Hay muchos estudiantes.</span></td><td class="td-ja">学生がたくさんいる。</td></tr>
+    <tr><td><span class="mono">No hay clase hoy.</span></td><td class="td-ja">今日は授業がない。</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box box-warn">
+  <div class="box-title" style="color:var(--warn)">hay vs estar の使い分け</div>
+  <div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>hay（存在そのものを述べる）</th>
+        <th>estar（既知の物・人の場所を述べる）</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <span class="mono">Hay <b>una farmacia</b> cerca.</span><br>
+          <span class="td-ja">近くに薬局が（1軒）ある。</span><br>
+          <small style="color:var(--muted)">不定冠詞・無冠詞と相性がよい</small>
+        </td>
+        <td>
+          <span class="mono"><b>La farmacia</b> está en la esquina.</span><br>
+          <span class="td-ja">その薬局は角にある。</span><br>
+          <small style="color:var(--muted)">定冠詞と相性がよい（「その〜」が前提）</small>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="mini-check" id="L2-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Mi</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">私の（前置形）</span></span> padre está en casa.</div>
+  <div class="mini-check-ja">私の父は家にいる。</div>
+<div class="srs-rate" data-qid="L2-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：所有形容詞・haber（hay）</div>
+
+  <div class="quiz-item" id="L2-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Nuestra</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">私たちの（女性名詞に一致）</span></span> casa es pequeña pero cómoda.</div>
+    <div class="quiz-ja">私たちの家は小さいが快適だ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Nuestra</b>：nuestro/aのみ性変化する所有形容詞前置形。casa（女性名詞）に一致させてnuestra。</div>
+  <div class="srs-rate" data-qid="L2-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Hay</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">存在の無人称動詞</span></span> un gato en el jardín.</div>
+    <div class="quiz-ja">庭に猫が（1匹）いる。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Hay</b>：不特定の存在（un gato＝ある1匹の猫）を表すのでhay。特定の猫（El gato）の所在ならestáを使う。</div>
+  <div class="srs-rate" data-qid="L2-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Este libro no es mío, es <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">tuyo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">君の（後置形）</span></span>.</div>
+    <div class="quiz-ja">この本は私のではなく、君のだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>tuyo</b>：所有形容詞後置形。ser＋後置形の形で「〜のものだ」を表す。libro（男性単数）に一致してtuyo。</div>
+  <div class="srs-rate" data-qid="L2-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ⑥ 文の構造・否定文・疑問詞 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">文の構造・否定文・疑問詞</span>
+  <span class="sec-es">Estructura oracional, negación e interrogativos</span>
+</div>
+
+<div class="sub">文の基本語順</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>文の種類</th><th>語順</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">平叙文</td>
+      <td><span class="mono">主語 ＋ 動詞 ＋ 補語</span><br><small>（語順は比較的自由）</small></td>
+      <td><span class="mono">Ella habla español.</span>　<span class="td-ja">彼女はスペイン語を話す。</span></td>
+    </tr>
+    <tr>
+      <td class="td-rule">否定文</td>
+      <td><span class="mono hi-r">no</span> ＋ 動詞（noを動詞の直前に置く）</td>
+      <td><span class="mono">Ella <span class="hi-r">no</span> habla inglés.</span>　<span class="td-ja">彼女は英語を話さない。</span></td>
+    </tr>
+    <tr>
+      <td class="td-rule">Yes/No 疑問文</td>
+      <td>語順は平叙文と同じ、文頭に ¿ を付ける<br><small>（イントネーションで区別）</small></td>
+      <td><span class="mono">¿Habla usted español?</span>　<span class="td-ja">スペイン語を話しますか。</span></td>
+    </tr>
+    <tr>
+      <td class="td-rule">疑問詞疑問文</td>
+      <td><span class="mono">¿疑問詞 ＋ 動詞 ＋ 主語？</span></td>
+      <td><span class="mono">¿Dónde vives tú?</span>　<span class="td-ja">君はどこに住んでいますか。</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="gimonshi-ichiran">疑問詞一覧</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>分類</th><th>疑問詞</th><th>意味</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="td-rule" rowspan="4">疑問代名詞</td>
+      <td class="td-c mono hi"><b>qué</b></td><td class="td-ja">何</td>
+      <td><span class="mono">¿Qué es esto?</span>　<span class="td-ja">これは何ですか。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>quién / quiénes</b></td><td class="td-ja">誰 / 誰たち</td>
+      <td><span class="mono">¿Quién es ella?</span>　<span class="td-ja">彼女は誰ですか。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>cuál / cuáles</b></td><td class="td-ja">どれ / どれたち</td>
+      <td><span class="mono">¿Cuál es tu número?</span>　<span class="td-ja">番号はどれですか。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>cuánto/a/os/as</b></td><td class="td-ja">いくら・どれほど</td>
+      <td><span class="mono">¿Cuánto cuesta?</span>　<span class="td-ja">いくらですか。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>qué（＋名詞）</b></td><td class="td-ja">どの〜・どんな〜（疑問形容詞）</td>
+      <td><span class="mono">¿Qué hora es?</span>　<span class="td-ja">何時ですか。</span><br><small class="td-note">疑問形容詞のqué は例外的に性数変化しない</small></td>
+    </tr>
+    <tr>
+      <td class="td-rule" rowspan="4">疑問副詞</td>
+      <td class="td-c mono hi"><b>cuándo</b></td><td class="td-ja">いつ</td>
+      <td><span class="mono">¿Cuándo es la fiesta?</span>　<span class="td-ja">パーティーはいつですか。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>cómo</b></td><td class="td-ja">どのように</td>
+      <td><span class="mono">¿Cómo te llamas?</span>　<span class="td-ja">お名前は？</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>dónde</b></td><td class="td-ja">どこ</td>
+      <td><span class="mono">¿Dónde vives?</span>　<span class="td-ja">どこに住んでいますか。</span></td>
+    </tr>
+    <tr>
+      <td class="td-c mono hi"><b>cuánto</b>（副詞）</td><td class="td-ja">どれくらい</td>
+      <td><span class="mono">¿Cuánto tardas?</span>　<span class="td-ja">どれくらいかかりますか。</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub">前置詞 ＋ 疑問詞</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>形</th><th>意味</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr><td class="td-c mono hi"><b>de dónde</b></td><td class="td-ja">どこから（出身）</td><td><span class="mono">¿<b>De dónde</b> eres?</span>　<span class="td-ja">どこの出身ですか。</span></td></tr>
+    <tr><td class="td-c mono hi"><b>a dónde</b></td><td class="td-ja">どこへ</td><td><span class="mono">¿<b>A dónde</b> vas?</span>　<span class="td-ja">どこへ行くの？</span></td></tr>
+    <tr><td class="td-c mono hi"><b>con quién</b></td><td class="td-ja">誰と</td><td><span class="mono">¿<b>Con quién</b> vives?</span>　<span class="td-ja">誰と住んでいますか。</span></td></tr>
+    <tr><td class="td-c mono hi"><b>de quién</b></td><td class="td-ja">誰の</td><td><span class="mono">¿<b>De quién</b> es este libro?</span>　<span class="td-ja">これは誰の本ですか。</span></td></tr>
+    <tr><td class="td-c mono hi"><b>por qué</b></td><td class="td-ja">なぜ（理由を問う）</td><td><span class="mono">¿<b>Por qué</b> estudias español?</span>　<span class="td-ja">なぜスペイン語を勉強するの？</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <div class="box-title">por qué vs porque</div>
+  <div class="ex"><span class="ex-sp">¿<span class="hi-r">Por qué</span> estudias español?</span><span class="ex-ja">なぜスペイン語を勉強するの？（2語・アクセント記号あり・疑問）</span></div>
+  <div class="ex"><span class="ex-sp"><span class="hi2">Porque</span> es interesante.</span><span class="ex-ja">なぜならおもしろいから。（1語・アクセント記号なし・答え）</span></div>
+  <p style="font-size:12.5px;color:var(--muted);margin-top:6px;">疑問詞 <span class="mono hi-r">por qué</span>（2語）で理由を問い、接続詞 <span class="mono hi2">porque</span>（1語）で理由を答えます。表記が異なるので注意。</p>
+</div>
+
+<div class="box box-rule">
+  <div class="box-title">cuál vs dónde — 似ているようで違う</div>
+  <div class="ex"><span class="ex-sp">¿<span class="hi">Cuál</span> es tu dirección? — Calle Princesa, número 20.</span><span class="ex-ja">君の住所はどこ？ — プリンセサ通り20番だよ。</span></div>
+  <div class="ex"><span class="ex-sp">¿<span class="hi2">Dónde</span> está tu dirección?</span><span class="ex-ja">君の住所（を書いたメモ）はどこにあるの？</span></div>
+  <p style="font-size:12.5px;color:var(--muted);margin-top:6px;">「住所」のように<span class="hi">あらかじめ答えの範囲が想定されているもの</span>を尋ねるときは <span class="mono hi">cuál</span> を使う。<span class="mono hi2">dónde</span> を使うと「住所というもの自体」ではなく「住所を書いた紙・メモがどこにあるか」という文字通りの場所を尋ねる意味になってしまう。</p>
+</div>
+
+<div class="mini-check" id="L2-mc-6">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Ella <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">no</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">否定の副詞</span></span> habla inglés.</div>
+  <div class="mini-check-ja">彼女は英語を話さない。</div>
+<div class="srs-rate" data-qid="L2-mc-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-mc-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-mc-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-mc-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：文の構造・否定文・疑問詞</div>
+
+  <div class="quiz-item" id="L2-qz-16">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Dónde</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">場所を尋ねる</span></span> vives?</div>
+    <div class="quiz-ja">どこに住んでいますか。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Dónde</b>：場所を尋ねる疑問副詞。文頭・文末に¿?を必ず付ける。</div>
+  <div class="srs-rate" data-qid="L2-qz-16"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-16', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-16', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-16', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-17">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Quién</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">人物を尋ねる</span></span> es esa chica?</div>
+    <div class="quiz-ja">あの女の子は誰ですか。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Quién</b>：人物を尋ねる疑問代名詞（単数）。複数ならquiénes。</div>
+  <div class="srs-rate" data-qid="L2-qz-17"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-17', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-17', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-17', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L2-qz-18">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Por qué</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">理由を尋ねる（2語）</span></span> estudias español? — <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Porque</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">理由を答える（1語）</span></span> es interesante.</div>
+    <div class="quiz-ja">なぜスペイン語を勉強するの？ — おもしろいからだよ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Por qué</b>：理由を尋ねる疑問詞（2語、アクセント記号あり）。<b>Porque</b>：理由を答える接続詞（1語、アクセント記号なし）。表記の違いに注意。</div>
+  <div class="srs-rate" data-qid="L2-qz-18"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L2-qz-18', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L2-qz-18', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L2-qz-18', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+</div><!-- /tab-grammar -->
+
+<!-- ══ 練習問題タブ ══ -->
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑦ 練習問題 -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">定冠詞（el / la / los / las）を空欄に入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence"><span class="blank">______</span> libro está sobre la mesa.</div>
+      <div class="q-ja">その本はテーブルの上にある。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">El</span> libro está sobre la mesa.</span>
+      </div>
+      <div class="q-exp">libro は男性単数 → <b>el</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence"><span class="blank">______</span> ciudad de Tokio es muy grande.</div>
+      <div class="q-ja">東京という都市はとても大きい。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">La</span> ciudad de Tokio es muy grande.</span>
+      </div>
+      <div class="q-exp">ciudad は -dad 語尾 → 女性単数 → <b>la</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence"><span class="blank">______</span> estudiantes estudian en la biblioteca.</div>
+      <div class="q-ja">その学生たちは図書館で勉強している。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Los</span> estudiantes estudian en la biblioteca.</span>
+      </div>
+      <div class="q-exp">estudiante の複数（男女混合またはグループ全体）→ <b>los</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Me gustan <span class="blank">______</span> flores del jardín.</div>
+      <div class="q-ja">私は庭の花々が好きです。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Me gustan <span class="ans-fill">las</span> flores del jardín.</span>
+      </div>
+      <div class="q-exp">flor は女性名詞、flores は複数 → <b>las</b>。del は de＋el の縮約。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">ser か estar かを選び、正しい活用形を空欄に入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Yo <span class="blank">______</span> de Japón.</div>
+      <div class="q-ja">私は日本出身です。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Yo <span class="ans-fill">soy</span> de Japón.</span>
+      </div>
+      <div class="q-exp">出身を表す → <b>ser</b>。yo の活用形は <b>soy</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">El libro <span class="blank">______</span> en la mesa.</div>
+      <div class="q-ja">本はテーブルの上にある。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">El libro <span class="ans-fill">está</span> en la mesa.</span>
+      </div>
+      <div class="q-exp">場所・所在 → <b>estar</b>。3人称単数は <b>está</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">María <span class="blank">______</span> muy inteligente.</div>
+      <div class="q-ja">マリアはとても頭がよい。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">María <span class="ans-fill">es</span> muy inteligente.</span>
+      </div>
+      <div class="q-exp">固有の性質・特徴 → <b>ser</b>。3人称単数は <b>es</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Cómo <span class="blank">______</span> tú hoy?</div>
+      <div class="q-ja">今日の調子はどうですか。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿Cómo <span class="ans-fill">estás</span> tú hoy?</span>
+      </div>
+      <div class="q-exp">体調・一時的な状態を問う → <b>estar</b>。tú の活用形は <b>estás</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Mi padre <span class="blank">______</span> médico.</div>
+      <div class="q-ja">私の父は医者です。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Mi padre <span class="ans-fill">es</span> médico.</span>
+      </div>
+      <div class="q-exp">職業・身分 → <b>ser</b>。3人称単数は <b>es</b>。スペイン語では職業の前に不定冠詞を付けないのが基本。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">6</span>
+    <div class="q-content">
+      <div class="q-sentence">La reunión <span class="blank">______</span> en la sala de conferencias.</div>
+      <div class="q-ja">会議は会議室で行われます。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">La reunión <span class="ans-fill">es</span> en la sala de conferencias.</span>
+      </div>
+      <div class="q-exp">イベント・行事の開催場所・日時は <b>ser</b> を使う → <b>es</b>。（人・ものの所在を表す estar との区別に注意）</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">適切な疑問詞を選んで空欄に入れなさい。（Cómo / Quién / Dónde / Por qué / Cuántas）</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">¿<span class="blank">______</span> te llamas? — Me llamo Ana.</div>
+      <div class="q-ja">お名前は？ — アナといいます。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿<span class="ans-fill">Cómo</span> te llamas?</span>
+      </div>
+      <div class="q-exp">名前を尋ねる定型表現 → <b>¿Cómo te llamas?</b>。llamarse（〜という名前だ）は再帰動詞。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">¿<span class="blank">______</span> es esa señora? — Es la profesora García.</div>
+      <div class="q-ja">あの女性は誰ですか。— ガルシア先生です。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿<span class="ans-fill">Quién</span> es esa señora?</span>
+      </div>
+      <div class="q-exp">人物を尋ねる → <b>quién</b>（単数）。複数の場合は quiénes。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">¿<span class="blank">______</span> vives? — Vivo en Tokio.</div>
+      <div class="q-ja">どこに住んでいますか。— 東京に住んでいます。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿<span class="ans-fill">Dónde</span> vives?</span>
+      </div>
+      <div class="q-exp">場所を尋ねる → <b>dónde</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¿<span class="blank">______</span> estudias español? — Porque es muy útil.</div>
+      <div class="q-ja">なぜスペイン語を勉強するのですか。— とても役に立つからです。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿<span class="ans-fill">Por qué</span> estudias español?</span>
+      </div>
+      <div class="q-exp">理由を尋ねる → <b>por qué</b>（2語）。答えに接続詞 <b>porque</b>（1語）を使う。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">¿<span class="blank">______</span> personas hay en tu familia? — Hay cuatro.</div>
+      <div class="q-ja">家族は何人いますか。— 4人います。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿<span class="ans-fill">Cuántas</span> personas hay en tu familia?</span>
+      </div>
+      <div class="q-exp">数量を尋ねる形容詞用法 → <b>cuántas</b>（personas は女性複数なので -as）。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<div class="ex-divider"><strong>教科書練習問題（Brújula 2課）</strong></div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">大問1.</span>
+  <span class="daimon-title">ser か estar の正しい活用形を空欄に入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Mi madre <span class="blank">______</span> de Brasil.</div>
+      <div class="q-ja">私の母はブラジル出身だ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Mi madre <span class="ans-fill">es</span> de Brasil.</span>
+      </div>
+      <div class="q-exp">出身 → <b>ser de</b>。mi madre（3人称単数）→ <b>es</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">María y yo <span class="blank">______</span> cansados.</div>
+      <div class="q-ja">マリアと私は疲れている。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">María y yo <span class="ans-fill">estamos</span> cansados.</span>
+      </div>
+      <div class="q-exp">一時的な状態「疲れている」→ <b>estar</b>。María y yo（= nosotros）→ <b>estamos</b>。<br><small>※ cansados は男性複数形。「私（yo）」が男性であることを示します。</small></div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Ahora yo <span class="blank">______</span> en casa.</div>
+      <div class="q-ja">今私は家にいる。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Ahora yo <span class="ans-fill">estoy</span> en casa.</span>
+      </div>
+      <div class="q-exp">場所・所在 → <b>estar</b>。yo → <b>estoy</b>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Vosotros <span class="blank">______</span> periodistas?</div>
+      <div class="q-ja">君たちは新聞記者なの？</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿Vosotros <span class="ans-fill">sois</span> periodistas?</span>
+      </div>
+      <div class="q-exp">職業・身分 → <b>ser</b>。vosotros → <b>sois</b>。<br><small>※ periodista（新聞記者）は男性でも女性でも同形の「男女同形の名詞」。</small></div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">大問2.</span>
+  <span class="daimon-title">ser・estar・hay のうち適切な動詞の活用形を空欄に入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge orange">1</span>
+    <div class="q-content">
+      <div class="q-sentence">En la habitación del hotel <span class="blank">______</span> dos camas, una mesa y tres sillas.</div>
+      <div class="q-ja">ホテルの部屋にはベッドが2つ、机が1つ、椅子が3脚ある。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">En la habitación del hotel <span class="ans-fill">hay</span> dos camas, una mesa y tres sillas.</span>
+      </div>
+      <div class="q-exp">不特定のものの存在を述べる → <b>hay</b>（haber の無人称形）。数に関わらず hay の形は変わらない。<br><small>※ una mesa = 机が「1つ」。una は女性不定冠詞単数。</small></div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">2</span>
+    <div class="q-content">
+      <div class="q-sentence">El museo <span class="blank">______</span> delante de la oficina de correos.</div>
+      <div class="q-ja">博物館は郵便局の前にある。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">El museo <span class="ans-fill">está</span> delante de la oficina de correos.</span>
+      </div>
+      <div class="q-exp">定冠詞 el が付く特定の物の所在 → <b>estar</b>。el museo（3人称単数）→ <b>está</b>。<br><small>※ delante（前に、前方に）は副詞のため性数変化しない。</small></div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">3</span>
+    <div class="q-content">
+      <div class="q-sentence">En Toledo <span class="blank">______</span> muchas iglesias y monumentos históricos.</div>
+      <div class="q-ja">トレドにはたくさんの教会や歴史的建造物がある。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">En Toledo <span class="ans-fill">hay</span> muchas iglesias y monumentos históricos.</span>
+      </div>
+      <div class="q-exp">不特定の複数のものが存在する → <b>hay</b>。muchas（多くの）などの数量表現とも相性がよい。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Los gatos <span class="blank">______</span> al lado de la ventana.</div>
+      <div class="q-ja">猫たちは窓際にいる。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Los gatos <span class="ans-fill">están</span> al lado de la ventana.</span>
+      </div>
+      <div class="q-exp">定冠詞 los が付く特定の猫の所在 → <b>estar</b>。los gatos（3人称複数）→ <b>están</b>。<br><small>※ al lado de 〜：副詞句「〜の脇に、傍に」。</small></div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<!-- ══ 語彙・まとめタブ ══ -->
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑧ 語彙リスト -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">形容詞（性質・状態）</div>
+<div class="vocab-pills">
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">alto/a</span><span class="pill-pos">形</span><span class="pill-ja">高い・背が高い</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">bajo/a</span><span class="pill-pos">形</span><span class="pill-ja">低い・背が低い</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">grande</span><span class="pill-pos">形</span><span class="pill-ja">大きい</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">pequeño/a</span><span class="pill-pos">形</span><span class="pill-ja">小さい</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">bueno/a</span><span class="pill-pos">形</span><span class="pill-ja">良い・善い</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">malo/a</span><span class="pill-pos">形</span><span class="pill-ja">悪い</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">nuevo/a</span><span class="pill-pos">形</span><span class="pill-ja">新しい</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">viejo/a</span><span class="pill-pos">形</span><span class="pill-ja">古い・年老いた</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">joven</span><span class="pill-pos">形</span><span class="pill-ja">若い</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">guapo/a</span><span class="pill-pos">形</span><span class="pill-ja">ハンサムな・きれいな</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">bonito/a</span><span class="pill-pos">形</span><span class="pill-ja">きれいな・かわいい</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">feo/a</span><span class="pill-pos">形</span><span class="pill-ja">醜い</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">inteligente</span><span class="pill-pos">形</span><span class="pill-ja">頭のいい・知的な</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">simpático/a</span><span class="pill-pos">形</span><span class="pill-ja">感じのいい・親しみやすい</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">interesante</span><span class="pill-pos">形</span><span class="pill-ja">面白い・興味深い</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">aburrido/a</span><span class="pill-pos">形</span><span class="pill-ja">退屈な</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">difícil</span><span class="pill-pos">形</span><span class="pill-ja">難しい</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">fácil</span><span class="pill-pos">形</span><span class="pill-ja">簡単な</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">rico/a</span><span class="pill-pos">形</span><span class="pill-ja">おいしい・裕福な</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">caro/a</span><span class="pill-pos">形</span><span class="pill-ja">高価な</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">barato/a</span><span class="pill-pos">形</span><span class="pill-ja">安価な</span></span>
+</div>
+
+<div class="vocab-category">国籍形容詞（男性形／女性形）</div>
+<div class="vocab-pills">
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">español/a</span><span class="pill-pos">形</span><span class="pill-ja">スペインの</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">japonés/a</span><span class="pill-pos">形</span><span class="pill-ja">日本の</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">francés/a</span><span class="pill-pos">形</span><span class="pill-ja">フランスの</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">alemán/a</span><span class="pill-pos">形</span><span class="pill-ja">ドイツの</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">chino/a</span><span class="pill-pos">形</span><span class="pill-ja">中国の</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">americano/a</span><span class="pill-pos">形</span><span class="pill-ja">アメリカの</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">mexicano/a</span><span class="pill-pos">形</span><span class="pill-ja">メキシコの</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">argentino/a</span><span class="pill-pos">形</span><span class="pill-ja">アルゼンチンの</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">inglés/a</span><span class="pill-pos">形</span><span class="pill-ja">イギリスの</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">italiano/a</span><span class="pill-pos">形</span><span class="pill-ja">イタリアの</span></span>
+</div>
+
+<div class="vocab-category">人を表す名詞</div>
+<div class="vocab-pills">
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">amigo</span><span class="pill-pos">m.</span><span class="pill-ja">友人（男）</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">amiga</span><span class="pill-pos">f.</span><span class="pill-ja">友人（女）</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">chico</span><span class="pill-pos">m.</span><span class="pill-ja">男の子・男性</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">chica</span><span class="pill-pos">f.</span><span class="pill-ja">女の子・女性</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">hombre</span><span class="pill-pos">m.</span><span class="pill-ja">男性・人間</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">mujer</span><span class="pill-pos">f.</span><span class="pill-ja">女性・妻</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">estudiante</span><span class="pill-pos">m./f.</span><span class="pill-ja">学生</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">profesor</span><span class="pill-pos">m.</span><span class="pill-ja">先生（男）</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">profesora</span><span class="pill-pos">f.</span><span class="pill-ja">先生（女）</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">señor</span><span class="pill-pos">m.</span><span class="pill-ja">〜さん（男性）</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">señora</span><span class="pill-pos">f.</span><span class="pill-ja">〜さん（女性）</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">hermano</span><span class="pill-pos">m.</span><span class="pill-ja">兄弟</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">hermana</span><span class="pill-pos">f.</span><span class="pill-ja">姉妹</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">padre</span><span class="pill-pos">m.</span><span class="pill-ja">父・父親</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">madre</span><span class="pill-pos">f.</span><span class="pill-ja">母・母親</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">hijo</span><span class="pill-pos">m.</span><span class="pill-ja">息子</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">hija</span><span class="pill-pos">f.</span><span class="pill-ja">娘</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">familia</span><span class="pill-pos">f.</span><span class="pill-ja">家族</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">persona</span><span class="pill-pos">f.</span><span class="pill-ja">人・人物</span></span>
+</div>
+
+<div class="vocab-category">場所・建物・もの</div>
+<div class="vocab-pills">
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">ciudad</span><span class="pill-pos">f.</span><span class="pill-ja">都市</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">país</span><span class="pill-pos">m.</span><span class="pill-ja">国</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">universidad</span><span class="pill-pos">f.</span><span class="pill-ja">大学</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">escuela</span><span class="pill-pos">f.</span><span class="pill-ja">学校</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">casa</span><span class="pill-pos">f.</span><span class="pill-ja">家・住宅</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">calle</span><span class="pill-pos">f.</span><span class="pill-ja">通り・道</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">clase</span><span class="pill-pos">f.</span><span class="pill-ja">授業・クラス</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">libro</span><span class="pill-pos">m.</span><span class="pill-ja">本</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">mesa</span><span class="pill-pos">f.</span><span class="pill-ja">テーブル・机</span></span>
+  <span class="pill" tabindex="0" role="button"><span class="pill-es">silla</span><span class="pill-pos">f.</span><span class="pill-ja">椅子</span></span>
+</div>
+
+<!-- ⑨ まとめ -->
+<div id="sec9" class="sec-heading">
+  <span class="sec-num">⑨</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:30%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">名詞の性</td><td>-o→男性、-a→女性が多い。-dad/-ión/-sión/-ez で終わる語は女性。</td></tr>
+    <tr><td class="td-rule">複数形</td><td>母音末 +s、子音末 +es、-z末 → -ces</td></tr>
+    <tr><td class="td-rule">定冠詞</td><td class="mono">el / la / los / las</td></tr>
+    <tr><td class="td-rule">不定冠詞</td><td class="mono">un / una / unos / unas</td></tr>
+    <tr><td class="td-rule">縮約形</td><td class="mono">a + el = al　　de + el = del</td></tr>
+    <tr><td class="td-rule">ser の活用</td><td class="mono">soy / eres / es / somos / sois / son</td></tr>
+    <tr><td class="td-rule">estar の活用</td><td class="mono">estoy / estás / está / estamos / estáis / están</td></tr>
+    <tr><td class="td-rule">ser vs estar</td><td>本質・固有特性・職業・出身 → ser　　場所・状態・一時的な様子 → estar</td></tr>
+    <tr><td class="td-rule">hay</td><td>存在の無人称動詞。後続する名詞の数に関わらず常に <span class="mono">hay</span>。</td></tr>
+    <tr><td class="td-rule">hay vs estar</td><td>存在（〜がある）→ hay ＋ 不定冠詞　　場所（〜はどこにある）→ estar ＋ 定冠詞</td></tr>
+    <tr><td class="td-rule">形容詞の性数変化</td><td>①-o/-a系、②変化なし（-e・子音）、③国籍語＋子音 → 女性形は +a</td></tr>
+    <tr><td class="td-rule">形容詞の位置</td><td>原則後置。数量形容詞・序数・短縮形（buen/mal/gran）は前置。</td></tr>
+    <tr><td class="td-rule">所有形容詞・前置形</td><td class="mono">mi / tu / su / nuestro/a / vuestro/a / su（+ 複数形）</td></tr>
+    <tr><td class="td-rule">所有形容詞・後置形</td><td class="mono">mío/a / tuyo/a / suyo/a / nuestro/a / vuestro/a（完全性数一致）</td></tr>
+    <tr><td class="td-rule">否定文</td><td>動詞の直前に <span class="mono">no</span> を置く</td></tr>
+    <tr><td class="td-rule">疑問詞</td><td class="mono">qué / quién / cuál / cuándo / cómo / dónde / cuánto</td></tr>
+    <tr><td class="td-rule">por qué vs porque</td><td><span class="mono">por qué</span>（2語・疑問）で理由を問い、<span class="mono">porque</span>（1語・答え）で理由を答える</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 2 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['名詞の性','性と数','冠詞','artículo','定冠詞','不定冠詞','縮約','al','del'], id: 'sec1', label: '名詞の性と数・冠詞（①節）' },
+  { terms: ['主語人称代名詞','人称代名詞','ser','estar','soy','eres','estoy','estás'], id: 'sec2', label: '主語人称代名詞・ser と estar（②節）' },
+  { terms: ['前置詞','preposición','conmigo','contigo','por','para','con','sin','hasta','desde','sobre'], id: 'sec3', label: '前置詞（③節）' },
+  { terms: ['形容詞','性数変化','adjetivo','国籍形容詞','短縮形','buen','mal','gran'], id: 'sec4', label: '形容詞と性数変化（④節）' },
+  { terms: ['所有形容詞','haber','hay','無人称','mío','tuyo','suyo','nuestro'], id: 'sec5', label: '所有形容詞・haber（hay）（⑤節）' },
+  { terms: ['疑問詞','否定文','疑問文','por qué','dónde','cuándo','porque','interrogativo','qué','quién','cuál','cómo'], id: 'sec6', label: '文の構造・否定文・疑問詞（⑥節）' },
+  { terms: ['練習問題','練習'], id: 'sec7', label: '練習問題（⑦節）' },
+  { terms: ['語彙','Vocabulario'], id: 'sec8', label: '語彙リスト（⑧節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec9', label: 'まとめ（⑨節）' },
+];
+</script>
+
+
+<footer class="course-footer">スペイン語一列① 文法解説集（個人用コピー）</footer>
+
+</body>
+</html>

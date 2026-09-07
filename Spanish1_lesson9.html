@@ -1,0 +1,1217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<script src="site.js" defer></script>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 9 文法解説 | スペイン語一列①</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<!-- dict modal -->
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 直説法と接続法</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 接続法現在・規則活用</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 接続法現在・不規則活用</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ 接続法現在の用法</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 接続法現在完了</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec6" data-tab="renshu" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8" data-tab="vocab" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ まとめ</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 9 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 9　文法解説</div>
+  <div class="cover-sub">スペイン語一列①　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br>「〜してほしい」「〜だとは思わない」「〜であるように」といった、<b>話し手が頭の中で想定した内容</b>を表す文が作れるようになります。<br><small>接続法は8課までの直説法と並ぶスペイン語の二本柱。まず②③で形を、④で「どんなとき使うか」を押さえましょう。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 直説法と接続法</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 接続法現在・規則活用</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 接続法現在・不規則活用</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ 接続法現在の用法</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 接続法現在完了</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 練習問題</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 語彙リスト</a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ まとめ</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：hable　／　tenga　／　接続法…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 直説法と接続法 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">「直説法」と「接続法」</span>
+  <span class="sec-es">Indicativo y subjuntivo</span>
+</div>
+
+<p>8課までに学んだ時制（現在・点過去・線過去・現在完了・未来など）はすべて<span class="hi">直説法</span>と呼ばれるグループでした。9課では<span class="hi-r">接続法</span>という新しいグループに入ります。時制ではなく<span class="hi">「法（mode）」</span>——つまり<b>話し手が内容をどう捉えているか</b>の違いです。</p>
+
+<div class="box box-rule" id="ind-vs-subj">
+  <div class="box-title">最重要の対比</div>
+  <div class="tbl-wrap" style="margin:4px 0 0">
+  <table>
+    <thead>
+      <tr>
+        <th style="background:#dde8f5;color:var(--accent)">直説法 Indicativo</th>
+        <th style="background:#f5e8f0;color:#8b2060">接続法 Subjuntivo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-c">話者・主語が<span class="hi">事実とみなした</span>ことを叙述する</td>
+        <td class="td-c">話者・主語が<span class="hi-r">仮想した内容</span>を提示する</td>
+      </tr>
+      <tr>
+        <td class="td-c"><span class="mono">Creo que Miguel <b>habla</b> japonés muy bien.</span><br><span class="td-ja">ミゲルは日本語がとても上手だと思う。</span></td>
+        <td class="td-c"><span class="mono">No creo que Miguel <b>hable</b> japonés muy bien.</span><br><span class="td-ja">ミゲルが日本語をとても上手に話すとは思わない。</span></td>
+      </tr>
+      <tr>
+        <td class="td-c"><span class="mono">Miguel <b>habla</b> japonés muy bien.</span><br><span class="td-ja">（事実として）ミゲルは日本語が上手だ。</span></td>
+        <td class="td-c"><span class="mono">Es posible que Miguel <b>hable</b> japonés muy bien.</span><br><span class="td-ja">ミゲルは日本語が上手かもしれない。</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="box box-warn">
+  <div class="box-title">ここを押さえる</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li>同じ <span class="mono">Miguel habla / hable</span> でも、<span class="hi">主節が何を表しているか</span>で形が決まる</li>
+    <li><span class="mono">Creo que…</span>（事実だと思う）→ <span class="hi">直説法 habla</span>　／　<span class="mono">No creo que…</span>（事実とみなしていない）→ <span class="hi-r">接続法 hable</span></li>
+    <li>接続法は<span class="hi2">主に従属節（名詞節・形容詞節・副詞節）の中</span>で使われる。単独の文で使うのは限られた場合だけ（→④の4）</li>
+    <li>「接続法」という名前は、<span class="mono">que</span> などで<b>接続された節</b>の中に現れることから来ている</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L9-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Creo que Miguel <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">habla</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">直説法：事実だと思う</span></span> español.</div>
+  <div class="mini-check-ja">ミゲルはスペイン語を話すと思う。</div>
+<div class="srs-rate" data-qid="L9-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：直説法と接続法</div>
+
+  <div class="quiz-item" id="L9-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No creo que él <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hable</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">接続法：事実とみなしていない</span></span> japonés.</div>
+    <div class="quiz-ja">彼が日本語を話すとは思わない。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hable</b>：No creo que（〜だと思わない）は事実として捉えていないので接続法。</div>
+  <div class="srs-rate" data-qid="L9-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Es verdad que ella <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">vive</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">直説法：事実として述べる</span></span> en Madrid.</div>
+    <div class="quiz-ja">彼女がマドリードに住んでいるのは本当だ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>vive</b>：Es verdad que（〜は本当だ）は事実の断定なので直説法。</div>
+  <div class="srs-rate" data-qid="L9-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">接続法は主に何節の中で使われるか。</div>
+    <div class="quiz-sentence">主に<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">従属節</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">名詞節・形容詞節・副詞節</span></span>（名詞節・形容詞節・副詞節）の中で使われる。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">接続法という名前は、queなどで接続された節の中に現れることに由来する。単独の文で使うのは限られた場合のみ。</div>
+  <div class="srs-rate" data-qid="L9-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ② 接続法現在・規則活用 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">接続法現在・規則活用</span>
+  <span class="sec-es">Presente de subjuntivo: conjugación regular</span>
+</div>
+
+<p>作り方はきわめてシンプルで、<span class="hi-r">直説法現在の語尾の母音をひっくり返す</span>だけです。-ar 動詞は <span class="mono hi">e</span> 系に、-er / -ir 動詞は <span class="mono hi">a</span> 系になります。</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">人称</th>
+      <th style="background:#dde8f5;color:var(--accent)">hablar（-ar）</th>
+      <th style="background:#d8eeea;color:var(--accent2)">comer（-er）</th>
+      <th style="background:#f0e8dd;color:#8b5020">vivir（-ir）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-ja">私</td><td class="td-c mono hi-r"><b>hable</b></td><td class="td-c mono hi-r"><b>coma</b></td><td class="td-c mono hi-r"><b>viva</b></td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-ja">君</td><td class="td-c mono">habl<b>es</b></td><td class="td-c mono">com<b>as</b></td><td class="td-c mono">viv<b>as</b></td></tr>
+    <tr><td class="td-key td-c">él/ella/usted</td><td class="td-ja">彼/彼女/あなた</td><td class="td-c mono hi-r"><b>hable</b></td><td class="td-c mono hi-r"><b>coma</b></td><td class="td-c mono hi-r"><b>viva</b></td></tr>
+    <tr><td class="td-key td-c">nosotros/as</td><td class="td-ja">私たち</td><td class="td-c mono">habl<b>emos</b></td><td class="td-c mono">com<b>amos</b></td><td class="td-c mono">viv<b>amos</b></td></tr>
+    <tr><td class="td-key td-c">vosotros/as</td><td class="td-ja">君たち</td><td class="td-c mono">habl<b>éis</b></td><td class="td-c mono">com<b>áis</b></td><td class="td-c mono">viv<b>áis</b></td></tr>
+    <tr><td class="td-key td-c">ellos/ellas/uds.</td><td class="td-ja">彼ら/あなたがた</td><td class="td-c mono">habl<b>en</b></td><td class="td-c mono">com<b>an</b></td><td class="td-c mono">viv<b>an</b></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <div class="box-title">覚え方のコツ</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li><span class="hi">-ar 動詞 → e 系</span>：<span class="mono">-e / -es / -e / -emos / -éis / -en</span>（＝-er 動詞の直説法語尾）</li>
+    <li><span class="hi">-er / -ir 動詞 → a 系</span>：<span class="mono">-a / -as / -a / -amos / -áis / -an</span>（＝-ar 動詞の直説法語尾）</li>
+    <li>-er と -ir は接続法現在では<span class="hi2">完全に同じ語尾</span>（直説法では nosotros/vosotros が違った）</li>
+    <li><span class="hi-r">yo 形と él/ella 形が同形</span>（線過去と同じ特徴）。主語代名詞で区別することが多い</li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　この「母音の入れ替え」はラテン語の接続法現在（<span class="mono">amem, amēs…</span> ／ <span class="mono">timeam, timeās…</span>）をほぼそのまま受け継いだものです。ラテン語では第1変化動詞（-are）が <span class="mono">-e-</span>、その他の変化が <span class="mono">-a-</span> を接続法の印としていました。2000年経った現代スペイン語でもこの対立がきれいに残っているわけです。</span>
+</div>
+
+<div class="mini-check" id="L9-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Quiero que tú <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hables</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">hablar：-ar動詞はe系</span></span> conmigo.</div>
+  <div class="mini-check-ja">私は君が私と話すことを望む。</div>
+<div class="srs-rate" data-qid="L9-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：接続法現在の規則活用</div>
+
+  <div class="quiz-item" id="L9-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Espero que vosotros <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">comáis</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">comer：-er動詞はa系</span></span> bien esta noche.</div>
+    <div class="quiz-ja">君たちが今夜たくさん食べられるといいな。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>comáis</b>：comer（-er動詞）の接続法現在はa系語尾。vosotros形はcomáis（アクセント記号付き）。</div>
+  <div class="srs-rate" data-qid="L9-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Es importante que nosotros <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">vivamos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">vivir：-ir動詞もa系</span></span> con honestidad.</div>
+    <div class="quiz-ja">私たちが正直に生きることが大切だ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>vivamos</b>：vivir（-ir動詞）の接続法現在もa系語尾。-erと-irは接続法現在では完全に同じ語尾になる。</div>
+  <div class="srs-rate" data-qid="L9-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>hablar</b> の接続法現在を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hable</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hables</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hable</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablemos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habléis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablen</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">-ar動詞の接続法現在は母音を入れ替えたe系語尾（-e/-es/-e/-emos/-éis/-en）。yo形とél形は同形になる点に注意。</div>
+  <div class="srs-rate" data-qid="L9-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ③ 接続法現在・不規則活用 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">接続法現在・不規則活用</span>
+  <span class="sec-es">Presente de subjuntivo: conjugación irregular</span>
+</div>
+
+<p>活用<span class="hi">語尾は規則活用と同じ</span>で、語根に変化が生じます。パターンは3つです。</p>
+
+<div class="sub" id="subj-gokon">1. 語根母音変化動詞</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>人称</th><th style="background:#dde8f5;color:var(--accent)">pensar（e→ie）</th><th style="background:#dde8f5;color:var(--accent)">volver（o→ue）</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r">p<b>ie</b>nse</td><td class="td-c mono hi-r">v<b>ue</b>lva</td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono hi-r">p<b>ie</b>nses</td><td class="td-c mono hi-r">v<b>ue</b>lvas</td></tr>
+    <tr><td class="td-key td-c">él/ella</td><td class="td-c mono hi-r">p<b>ie</b>nse</td><td class="td-c mono hi-r">v<b>ue</b>lva</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono">pensemos</td><td class="td-c mono">volvamos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono">penséis</td><td class="td-c mono">volváis</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono hi-r">p<b>ie</b>nsen</td><td class="td-c mono hi-r">v<b>ue</b>lvan</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">(1) <span class="hi">-ar 動詞と -er 動詞</span>では、直説法現在と同様に語根母音が変化する（＝4課で学んだ「ブーツ型」。1複・2複は変化しない）。</p>
+
+<div class="tbl-wrap" style="margin-top:10px">
+<table>
+  <thead>
+    <tr><th>人称</th><th style="background:#d8eeea;color:var(--accent2)">sentir（e→ie / i）</th><th style="background:#d8eeea;color:var(--accent2)">dormir（o→ue / u）</th><th style="background:#f0e8dd;color:#8b5020">pedir（e→i）</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r">s<b>ie</b>nta</td><td class="td-c mono hi-r">d<b>ue</b>rma</td><td class="td-c mono hi-r">p<b>i</b>da</td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono hi-r">s<b>ie</b>ntas</td><td class="td-c mono hi-r">d<b>ue</b>rmas</td><td class="td-c mono hi-r">p<b>i</b>das</td></tr>
+    <tr><td class="td-key td-c">él/ella</td><td class="td-c mono hi-r">s<b>ie</b>nta</td><td class="td-c mono hi-r">d<b>ue</b>rma</td><td class="td-c mono hi-r">p<b>i</b>da</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi2">s<b>i</b>ntamos</td><td class="td-c mono hi2">d<b>u</b>rmamos</td><td class="td-c mono hi2">p<b>i</b>damos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono hi2">s<b>i</b>ntáis</td><td class="td-c mono hi2">d<b>u</b>rmáis</td><td class="td-c mono hi2">p<b>i</b>dáis</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono hi-r">s<b>ie</b>ntan</td><td class="td-c mono hi-r">d<b>ue</b>rman</td><td class="td-c mono hi-r">p<b>i</b>dan</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">(2) <span class="hi-r">-ir 動詞</span>では直説法現在と同様の語根母音変化に加え、<span class="hi-r">1人称複数と2人称複数で語根母音 e が i に、o が u に変わる</span>（<span class="mono">sintamos, durmamos</span>）。<span class="mono">pedir</span> 型（e→i）は全人称 i。</p>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　-ir 動詞の nosotros/vosotros だけ <span class="mono">e→i, o→u</span> になるのは、6課の点過去3人称（<span class="mono">sintió, durmió</span>）や5課の現在分詞（<span class="mono">sintiendo, durmiendo</span>）と<b>まったく同じ現象</b>です。-ir 動詞の語根の開母音は、アクセントが当たらない位置では閉母音化するという規則が働いています。「<span class="mono">durmiendo</span> と言えるなら <span class="mono">durmamos</span> も言える」と結びつけて覚えるのが近道です。</span>
+</div>
+
+<div class="sub" id="subj-yo-kei">2. 直説法現在1人称単数形（-o で終わる）をもとに活用をつくる不規則動詞</div>
+
+<p>直説法現在の <span class="hi">yo 形から -o を取った部分</span>がそのまま接続法の語根になります。4課で覚えた <span class="mono">-zco / -go / -uyo</span> 型がすべてここに該当します。</p>
+
+<div class="box box-rule">
+  <div class="box-title">作り方の手順</div>
+  <div style="text-align:center;font-size:14px;font-weight:700;padding:8px 0;">
+    直説法現在 yo 形 → <span class="hi-r">-o を取る</span> → <span class="hi2">接続法の語尾を付ける</span>
+  </div>
+  <div style="font-size:13px;text-align:center;">
+    <span class="mono">conocer → cono<b>zco</b> → conozc- → <b>conozca</b></span>
+  </div>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>不定詞（直説法 yo 形）</th><th>接続法現在の全活用</th></tr></thead>
+  <tbody>
+    <tr><td class="td-key mono">conocer (conozco)</td><td class="mono">conozca, conozcas, conozca, conozcamos, conozcáis, conozcan</td></tr>
+    <tr><td class="td-key mono">tener (tengo)</td><td class="mono">tenga, tengas, tenga, tengamos, tengáis, tengan</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="tbl-wrap" style="margin-top:10px">
+<table>
+  <thead><tr><th>不定詞（yo 形）</th><th>接続法</th><th>不定詞（yo 形）</th><th>接続法</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">venir (vengo)</td><td class="td-c mono hi-r">venga</td><td class="mono">poner (pongo)</td><td class="td-c mono hi-r">ponga</td></tr>
+    <tr><td class="mono">salir (salgo)</td><td class="td-c mono hi-r">salga</td><td class="mono">oír (oigo)</td><td class="td-c mono hi-r">oiga</td></tr>
+    <tr><td class="mono">traer (traigo)</td><td class="td-c mono hi-r">traiga</td><td class="mono">caer (caigo)</td><td class="td-c mono hi-r">caiga</td></tr>
+    <tr><td class="mono">hacer (hago)</td><td class="td-c mono hi-r">haga</td><td class="mono">decir (digo)</td><td class="td-c mono hi-r">diga</td></tr>
+    <tr><td class="mono">construir (construyo)</td><td class="td-c mono hi-r">construya</td><td class="mono">ver (veo)</td><td class="td-c mono hi-r">vea</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ このタイプは<span class="hi">全人称</span>で同じ語根を使う（<span class="mono">tenga, tengas, tenga, tengamos, tengáis, tengan</span>）。語根母音変化型のような「ブーツ型」にはならない。</p>
+
+<div class="sub" id="subj-sonota">3. その他の不規則動詞（直説法現在1人称単数形が -o で終わらない動詞）</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>不定詞（yo 形）</th><th>接続法現在の全活用</th></tr></thead>
+  <tbody>
+    <tr><td class="td-key mono">ser (soy)</td><td class="mono hi-r">sea, seas, sea, seamos, seáis, sean</td></tr>
+    <tr><td class="td-key mono">estar (estoy)</td><td class="mono hi-r">esté, estés, esté, estemos, estéis, estén</td></tr>
+    <tr><td class="td-key mono">haber (he)</td><td class="mono hi-r">haya, hayas, haya, hayamos, hayáis, hayan</td></tr>
+    <tr><td class="td-key mono">saber (sé)</td><td class="mono hi-r">sepa, sepas, sepa, sepamos, sepáis, sepan</td></tr>
+    <tr><td class="td-key mono">ir (voy)</td><td class="mono hi-r">vaya, vayas, vaya, vayamos, vayáis, vayan</td></tr>
+    <tr><td class="td-key mono">dar (doy)</td><td class="mono hi-r">dé, des, dé, demos, deis, den</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box box-warn">
+  <div class="box-title">アクセント記号に注意</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li><span class="mono hi-r">estar</span>：<span class="mono">esté, estés, esté, estéis, estén</span> にアクセント記号（<span class="mono">estemos</span> のみ不要）</li>
+    <li><span class="mono hi-r">dar</span>：<span class="mono">dé</span>（1単・3単）にアクセント記号。前置詞 <span class="mono">de</span> と区別するため。<span class="mono">des, demos, deis, den</span> は記号なし</li>
+    <li><span class="mono hi2">haber</span> の <span class="mono">haya</span> は⑤の接続法現在完了で助動詞として使う</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L9-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Espero que ella <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">venga</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">venir：yo形基準の不規則</span></span> a la fiesta.</div>
+  <div class="mini-check-ja">彼女がパーティーに来るといいな。</div>
+<div class="srs-rate" data-qid="L9-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：接続法現在の不規則活用</div>
+
+  <div class="quiz-item" id="L9-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Ojalá <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">sea</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ser：完全不規則</span></span> verdad.</div>
+    <div class="quiz-ja">それが本当だといいな。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>sea</b>：serの接続法現在は完全に不規則（sea, seas, sea, seamos, seáis, sean）。</div>
+  <div class="srs-rate" data-qid="L9-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Quiero que tú <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">duermas</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">dormir：ブーツ型語根母音変化</span></span> bien esta noche.</div>
+    <div class="quiz-ja">君が今夜よく眠れるといいな。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>duermas</b>：dormirは-ar/-er型と同様ブーツ型（1・2・3単＋3複）でo→ueに変化する。</div>
+  <div class="srs-rate" data-qid="L9-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>tener</b> の接続法現在を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tenga</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tengas</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tenga</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tengamos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tengáis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tengan</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">tenerは直説法のyo形（tengo）を基準に、-oを取ってa系語尾を付ける（tenga, tengas...）。この基準はconocer, salir, poner等多くの不規則動詞に共通する。</div>
+  <div class="srs-rate" data-qid="L9-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ④ 接続法現在の用法 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">接続法現在の用法</span>
+  <span class="sec-es">Usos del presente de subjuntivo</span>
+</div>
+
+<p>接続法は<span class="hi">主に従属節（名詞節・形容詞節・副詞節）の中</span>で使われます。以下の4つの型に分けて整理しましょう。</p>
+
+<div class="sub" id="meishi-setsu">1. 名詞節で使われる接続法</div>
+<p><span class="mono">que</span> 以下がまとまって主節の動詞の<span class="hi">目的語や主語（＝名詞のはたらき）</span>になっている節です。主節が<b>願望・要求・感情・疑い・可能性・価値判断</b>を表すとき、従属節は接続法になります。</p>
+
+<div class="ex"><span class="ex-sp">El profesor nos pide que <span class="hi">preparemos</span> la presentación para la próxima clase.</span><span class="ex-ja">先生は次の授業までに発表の準備をするよう私たちに求めている。</span></div>
+<div class="ex"><span class="ex-sp">No creo que el supermercado <span class="hi">esté</span> abierto a esta hora.</span><span class="ex-ja">この時間にスーパーが開いているとは思わない。</span></div>
+<div class="ex"><span class="ex-sp">Es lógico que Patricia se <span class="hi">enfade</span> contigo y no <span class="hi">responda</span> a tus mensajes.</span><span class="ex-ja">パトリシアが君に腹を立てて、メッセージに返信しないのは当然だ。</span></div>
+<div class="ex"><span class="ex-sp">Temo que ella ya no <span class="hi">quiera</span> colaborar con nosotros.</span><span class="ex-ja">彼女はもう私たちに協力したくないのではないかと心配だ。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説：接続法を呼び込む主節</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi2">pedir que</span>（要求）／ <span class="mono hi2">No creer que</span>（否定・疑い）／ <span class="mono hi2">Es lógico que</span>（価値判断）／ <span class="mono hi2">Temer que</span>（感情）</li>
+    <li><span class="mono">preparemos</span>：-ar 動詞なので e 系語尾。<span class="mono">esté</span>：estar の不規則（アクセント記号）</li>
+    <li><span class="mono">quiera</span>：<span class="mono">querer</span> の e→ie 型（直説法 <span class="mono">quiero</span> と同じ語根）</li>
+    <li><span class="mono">enfadarse (con)</span>（再動）（〜に）腹を立てる ／ <span class="mono">colaborar</span>（動）協力する ／ <span class="mono">temer</span>（動）恐れる・心配する</li>
+  </ul>
+</div>
+
+<div class="box box-rule" id="setsuzokuho-trigger">
+  <div class="box-title">名詞節で接続法を要求する主な表現</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th style="width:24%">タイプ</th><th>主節の例</th></tr></thead>
+    <tbody>
+      <tr><td class="td-rule">願望・要求・命令</td><td class="mono">querer que, pedir que, recomendar que, decir que（〜するように）, esperar que</td></tr>
+      <tr><td class="td-rule">感情</td><td class="mono">temer que, alegrarse de que, sentir que, gustar que, es raro que</td></tr>
+      <tr><td class="td-rule">疑い・否定</td><td class="mono">no creer que, dudar que, no pensar que, negar que</td></tr>
+      <tr><td class="td-rule">可能性・価値判断</td><td class="mono">es posible que, es probable que, es lógico que, es importante que, es increíble que</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:8px;">※ 逆に <span class="mono hi">creo que, pienso que, es verdad que, está claro que</span> のように<span class="hi">事実として断定する</span>主節の後ろは<span class="hi">直説法</span>。<span class="mono">decir</span> は「〜だと言う（伝達）」なら直説法、「〜するように言う（要求）」なら接続法。</p>
+</div>
+
+<div class="sub" id="keiyoshi-setsu">2. 形容詞節で使われる接続法</div>
+<p>先行詞を修飾する関係節（4課）のうち、その先行詞が<span class="hi-r">まだ存在が確かめられていない／存在しない</span>ものであるとき、関係節は接続法になります。</p>
+
+<div class="ex"><span class="ex-sp">Buscamos un apartamento que <span class="hi">dé</span> a una calle tranquila.</span><span class="ex-ja">私たちは静かな通りに面したアパートを探している。</span></div>
+<div class="ex"><span class="ex-sp">No hay nadie que <span class="hi">comprenda</span> una fórmula matemática tan complicada.</span><span class="ex-ja">そんなに複雑な数式を理解できる人は誰もいない。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説：直説法との対比</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi">Buscamos un apartamento que dé…</span>：条件に合う部屋が<span class="hi-r">見つかるかどうかまだ分からない</span>（＝仮想）→ 接続法</li>
+    <li><span class="mono hi2">Conozco un apartamento que da…</span>：<span class="hi2">実在する特定の部屋</span>について述べている → 直説法</li>
+    <li><span class="mono">No hay nadie que…</span>：先行詞が<span class="hi-r">存在しない</span>ので必ず接続法</li>
+    <li><span class="mono">dar a ＋ 場所</span>：〜に面している ／ <span class="mono">fórmula</span>（女）数式・公式</li>
+  </ul>
+</div>
+
+<div class="sub" id="fukushi-setsu">3. 副詞節で使われる接続法</div>
+<p><span class="mono">para que</span>（目的）や、<span class="mono">cuando</span>（時）が<span class="hi-r">まだ実現していない未来</span>を指すときなど、副詞のはたらきをする節でも接続法を使います。</p>
+
+<div class="ex"><span class="ex-sp">Quiero llevaros al Museo Reina Sofía para que <span class="hi">veáis</span> el <i>Guernica</i> de Picasso.</span><span class="ex-ja">ピカソの『ゲルニカ』を君たちに見せたいので、レイナ・ソフィア美術館へ連れて行きたい。</span></div>
+<div class="ex"><span class="ex-sp">Mi hijo dice que quiere ser jugador de fútbol cuando <span class="hi">sea</span> mayor.</span><span class="ex-ja">息子は、大きくなったらサッカー選手になりたいと言っている。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi2">para que ＋ 接続法</span>：「〜するために」。主語が主節と異なる場合に使う（同じなら <span class="mono">para ＋ 不定詞</span>）</li>
+    <li><span class="mono hi">cuando sea mayor</span>：「大人になったら」＝まだ実現していない未来 → 接続法。<span class="hi-r">未来のことに <span class="mono">cuando ＋ 直説法未来</span> は使えない</span></li>
+    <li>一方 <span class="mono">Cuando era niño, jugaba al fútbol.</span>（過去の事実）は直説法</li>
+    <li>同類：<span class="mono">antes de que, hasta que, en cuanto, aunque, sin que, a menos que</span></li>
+  </ul>
+</div>
+
+<div class="sub" id="tanbun-setsu">4. 単文の中で使われる接続法</div>
+<p>従属節ではなく、単独の文で使われる例外的なケースです。</p>
+
+<div class="ex"><span class="ex-sp">¡Ojalá no <span class="hi">nieve</span> mañana!</span><span class="ex-ja">明日雪が降らないといいな！（願望文：第10課参照）</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Siga</span> todo derecho por esta calle.</span><span class="ex-ja">この通りをまっすぐ行ってください。（命令文：第10課参照）</span></div>
+<div class="ex"><span class="ex-sp">Quizá Luis <span class="hi">llegue</span> tarde a la cita.</span><span class="ex-ja">ルイスは約束に遅れるかもしれない。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi2">Ojalá ＋ 接続法</span>：「〜だといいな」。アラビア語由来の感嘆詞（→10課「願望文」）</li>
+    <li><span class="mono hi2">Siga</span>：usted に対する命令形は接続法現在をそのまま使う（→10課「命令文」）</li>
+    <li><span class="mono hi2">quizá / tal vez / probablemente</span>：確信度が低いときは接続法、高いときは直説法も可</li>
+    <li><span class="mono">nevar</span>（動）雪が降る（e→ie型・3単のみ）→ 接続法 <span class="mono">nieve</span> ／ <span class="mono">cita</span>（女）約束・デート</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L9-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Recomiendo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estudies</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">estudiar：勧告の後は接続法</span></span> más.</div>
+  <div class="mini-check-ja">君はもっと勉強することをお勧めする。</div>
+<div class="srs-rate" data-qid="L9-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：接続法現在の用法</div>
+
+  <div class="quiz-item" id="L9-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Busco un amigo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hable</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">形容詞節：不存在の先行詞</span></span> francés.</div>
+    <div class="quiz-ja">私はフランス語を話す友人を探している（そのような人がいるかは分からない）。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hable</b>：先行詞（un amigo）が未確定・不存在の可能性がある形容詞節では接続法を使う。</div>
+  <div class="srs-rate" data-qid="L9-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Cuando <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">sea</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">cuando+未来の内容は接続法</span></span> mayor, quiero ser médico.</div>
+    <div class="quiz-ja">大人になったら、私は医者になりたい。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>sea</b>：cuando＋未来の内容を表す副詞節では接続法を使う（まだ実現していない未来のことだから）。</div>
+  <div class="srs-rate" data-qid="L9-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Siento que tú no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">puedas</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">感情の後は接続法</span></span> venir a mi fiesta.</div>
+    <div class="quiz-ja">君が私のパーティーに来られなくて残念だ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>puedas</b>：感情（sentir＝残念に思う）を表す動詞の後の名詞節は接続法を使う。</div>
+  <div class="srs-rate" data-qid="L9-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ⑤ 接続法現在完了 -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">接続法現在完了</span>
+  <span class="sec-es">Pretérito perfecto compuesto de subjuntivo</span>
+</div>
+
+<div class="box box-rule" id="subj-kanryo">
+  <div class="box-title">接続法現在完了の作り方</div>
+  <div style="text-align:center;font-size:15px;margin:10px 0 8px;font-weight:700;">
+    <span class="hi-r">haber の接続法現在（不規則活用）</span>　＋　<span class="hi2">過去分詞</span>
+  </div>
+  <p class="note" style="text-align:center;margin:0;">過去分詞は<span class="hi">性・数による変化なし</span></p>
+  <div class="tbl-wrap" style="margin-top:8px">
+  <table>
+    <thead><tr><th>人称</th><th style="background:#dde8f5;color:var(--accent)">haber の接続法現在</th><th>hablar の例</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r"><b>haya</b></td><td class="td-c mono">haya hablado</td></tr>
+      <tr><td class="td-key td-c">tú</td><td class="td-c mono hi-r"><b>hayas</b></td><td class="td-c mono">hayas hablado</td></tr>
+      <tr><td class="td-key td-c">él/ella</td><td class="td-c mono hi-r"><b>haya</b></td><td class="td-c mono">haya hablado</td></tr>
+      <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi2"><b>hayamos</b></td><td class="td-c mono">hayamos hablado</td></tr>
+      <tr><td class="td-key td-c">vosotros</td><td class="td-c mono hi-r"><b>hayáis</b></td><td class="td-c mono">hayáis hablado</td></tr>
+      <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono hi-r"><b>hayan</b></td><td class="td-c mono">hayan hablado</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<p>接続法が要求される従属節の中で、<span class="hi">現在完了または未来完了</span>として用いられます。つまり「直説法なら <span class="mono">ha hablado</span> や <span class="mono">habrá hablado</span> を使う場面」で、主節が接続法を要求している場合の形です。</p>
+
+<div class="ex"><span class="ex-sp">Me alegro de que ustedes lo <span class="hi">hayan pasado</span> bien en el viaje.</span><span class="ex-ja">皆さんが旅行を楽しく過ごされたと知って嬉しいです。</span></div>
+<div class="ex"><span class="ex-sp">Necesitas hablar con alguien que <span class="hi">haya tenido</span> el mismo problema.</span><span class="ex-ja">君は同じ問題を経験したことのある人と話す必要がある。</span></div>
+<div class="ex"><span class="ex-sp">Cuando <span class="hi">haya conseguido</span> la información necesaria, te avisaré.</span><span class="ex-ja">必要な情報を手に入れたら、君に知らせるよ。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説：3つの節タイプに対応</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li>1文目＝<span class="hi2">名詞節</span>（感情 <span class="mono">alegrarse de que</span>）。直説法なら <span class="mono">lo han pasado bien</span></li>
+    <li>2文目＝<span class="hi2">形容詞節</span>（そういう人がいるか未確定）。「〜したことがある人」という経験の現在完了</li>
+    <li>3文目＝<span class="hi2">副詞節</span>（<span class="mono">cuando</span> ＋未来）。「手に入れ終えたら」という<span class="hi">未来完了</span>の意味。主節は <span class="mono">te avisaré</span>（未来）</li>
+    <li><span class="mono">pasarlo bien</span>：楽しく過ごす ／ <span class="mono">conseguir</span>（動）手に入れる（e→i型）／ <span class="mono">avisar</span>（動）知らせる</li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　接続法には<b>直説法ほど多くの時制がありません</b>。直説法が現在・点過去・線過去・未来・過去未来…と細かく分かれるのに対し、接続法は現在・現在完了・過去・過去完了の<b>4つだけ</b>（過去と過去完了は10課）。仮想の世界では「いつ」の情報が相対的に重要でなくなるためで、たとえば接続法現在は文脈次第で「現在のこと」も「未来のこと」も表せます（<span class="mono">cuando sea mayor</span>＝未来）。</span>
+</div>
+
+<div class="mini-check" id="L9-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">No creo que él <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">haya llegado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(haya)＋過去分詞</span></span> todavía.</div>
+  <div class="mini-check-ja">彼がもう着いたとは思わない。</div>
+<div class="srs-rate" data-qid="L9-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：接続法現在完了</div>
+
+  <div class="quiz-item" id="L9-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Espero que vosotros <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hayáis pasado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(hayáis)＋過去分詞</span></span> un buen fin de semana.</div>
+    <div class="quiz-ja">君たちが良い週末を過ごせたことを願う。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hayáis pasado</b>：接続法現在完了。espero queという願望・期待の名詞節の中で、すでに完了した事柄を表す。</div>
+  <div class="srs-rate" data-qid="L9-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Es posible que ellos ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hayan terminado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(hayan)＋過去分詞</span></span> el trabajo.</div>
+    <div class="quiz-ja">彼らはもう仕事を終えている可能性がある。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hayan terminado</b>：可能性を表すEs posible queの後は接続法。現在までに完了した可能性なので接続法現在完了。</div>
+  <div class="srs-rate" data-qid="L9-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L9-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">haber の接続法現在を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">haya</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hayas</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">haya</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hayamos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hayáis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hayan</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">haberの接続法現在はyo形（he）基準の不規則活用（haya, hayas...）。接続法現在完了はこれに過去分詞を組み合わせて作る。</div>
+  <div class="srs-rate" data-qid="L9-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L9-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L9-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L9-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑥ 練習問題 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">例にならって、太字の不定詞を直説法現在または接続法現在の適切な形に活用させなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">例（Ejemplo）</div>
+  <div class="q-item">
+    <span class="q-badge blue">例</span>
+    <div class="q-content">
+      <div class="q-sentence"><b>Querer</b> (nosotros) <span class="blank">______</span> que nos <b>ayudar</b> (tú) <span class="blank">______</span>.</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Queremos</span> que nos <span class="ans-fill">ayudes</span>.</span>
+      </div>
+      <div class="q-exp">主節 <span class="mono">querer</span> は<span class="hi">直説法</span>、<span class="mono">que</span> 以下は願望を受けた名詞節なので<span class="hi-r">接続法</span>。<span class="mono">ayudar</span>（-ar）の tú 形は <span class="mono">ayudes</span>。</div>
+    </div>
+  </div>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Os <b>recomendar</b> (yo) <span class="blank">______</span> que no <b>acercarse</b> <span class="blank">______</span> a este barrio cuando <b>visitar</b> <span class="blank">______</span> la ciudad.</div>
+      <div class="q-ja">君たちがこの街を訪れるとき、この地区には近づかないよう勧めます。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Os <span class="ans-fill">recomiendo</span> que no <span class="ans-fill">os acerquéis</span> a este barrio cuando <span class="ans-fill">visitéis</span> la ciudad.</span>
+      </div>
+      <div class="q-exp"><b>recomiendo</b>：主節なので直説法現在1単（e→ie型）。<b>os acerquéis</b>：勧告の名詞節 → 接続法。再帰動詞なので <span class="mono">os</span> を前置。<span class="hi-r">c→qu の綴り変化</span>に注意（<span class="mono">acercar</span> ＋ e 系語尾）。<b>visitéis</b>：<span class="mono">cuando</span> ＋未来のこと → 接続法（用法3）。<br>※ <span class="mono">acercarse a</span>：〜に近づく ／ <span class="mono">barrio</span>（男）地区</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Luisa <b>buscar</b> <span class="blank">______</span> una persona que <b>acompañar</b> <span class="blank">______</span> a su abuela al hospital una vez por semana.</div>
+      <div class="q-ja">ルイサは、週に一度おばあさんに付き添って病院へ行ってくれる人を探している。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Luisa <span class="ans-fill">busca</span> una persona que <span class="ans-fill">acompañe</span> a su abuela al hospital una vez por semana.</span>
+      </div>
+      <div class="q-exp"><b>busca</b>：主節は直説法。<b>acompañe</b>：<span class="hi">形容詞節</span>（用法2）。そういう人がまだ見つかっていない＝存在未確定なので接続法。<br>※ <span class="mono">acompañar</span>（動）付き添う ／ <span class="mono">una vez por semana</span>：週に一度</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence"><b>Sentir</b> (yo) <span class="blank">______</span> que no <b>encontrarse</b> (tú) <span class="blank">______</span> bien. Espero que <b>verse</b> (nosotros) <span class="blank">______</span> cuando <b>sentirse</b> (tú) <span class="blank">______</span> mejor.</div>
+      <div class="q-ja">君の具合が良くないと聞いて残念だ。気分が良くなったら会えるといいね。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Siento</span> que no <span class="ans-fill">te encuentres</span> bien. Espero que <span class="ans-fill">nos veamos</span> cuando <span class="ans-fill">te sientas</span> mejor.</span>
+      </div>
+      <div class="q-exp"><b>Siento</b>：主節・直説法（e→ie型）。<b>te encuentres</b>：感情 <span class="mono">sentir que</span> を受けた名詞節 → 接続法（o→ue型）。<b>nos veamos</b>：<span class="mono">esperar que</span> → 接続法。<span class="mono">ver</span> は yo 形 <span class="mono">veo</span> から <span class="mono">vea</span> 型。<b>te sientas</b>：<span class="mono">cuando</span>＋未来 → 接続法。<br>※ <span class="mono">encontrarse bien</span>：体調が良い ／ <span class="mono">sentir que</span>：〜を残念に思う</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">A Julio no le <b>gustar</b> <span class="blank">______</span> que Laura <b>sacar</b> <span class="blank">______</span> mejores notas que él.</div>
+      <div class="q-ja">フリオは、ラウラが自分より良い成績を取るのが気に入らない。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">A Julio no le <span class="ans-fill">gusta</span> que Laura <span class="ans-fill">saque</span> mejores notas que él.</span>
+      </div>
+      <div class="q-exp"><b>gusta</b>：gustar型動詞（3課）。主語は <span class="mono">que…</span> の節全体なので<span class="hi">単数</span>扱い。<b>saque</b>：感情を受けた名詞節 → 接続法。<span class="hi-r">c→qu の綴り変化</span>（<span class="mono">sacar</span>＋e系）。<br>※ <span class="mono">sacar notas</span>：成績を取る ／ <span class="mono">mejor que</span>：〜より良い（4課・不規則比較級）</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">（　）内の不定詞を接続法現在の適切な形に活用させ、次の質問に答えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Qué le has dicho?　（pasar por la farmacia y comprarme aspirinas）</div>
+      <div class="q-ja">彼に何と言ったの？（薬局に寄って私にアスピリンを買ってくる）</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Le he dicho que pase por la farmacia y me compre aspirinas.</span></span>
+      </div>
+      <div class="q-exp"><span class="mono">decir</span> が<span class="hi">「〜するように言う」（要求）</span>の意味なので従属節は接続法。<span class="mono">pase / compre</span>（ともに3単・-ar 動詞 → e 系）。<br>※ 単に事実を伝える <span class="mono">Le he dicho que estoy enfermo.</span>（直説法）との違いに注意。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Qué te ha aconsejado el médico?　（no salir de casa hasta que me baje la fiebre）</div>
+      <div class="q-ja">医者は君に何と忠告したの？（熱が下がるまで家から出ない）</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Me ha aconsejado que no salga de casa hasta que me baje la fiebre.</span></span>
+      </div>
+      <div class="q-exp"><b>salga</b>：<span class="mono">aconsejar que</span>（助言）→ 接続法。<span class="mono">salir</span> は yo 形 <span class="mono">salgo</span> から <span class="mono">salga</span>。<b>baje</b>：<span class="mono">hasta que</span>＋未実現 → 接続法（副詞節）。<br>※ <span class="mono">bajar la fiebre</span>：熱が下がる ／ <span class="mono">aconsejar</span>（動）忠告する</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Qué les han pedido ustedes?　（traernos unas botellas de vino tinto）</div>
+      <div class="q-ja">あなたがたは彼らに何を頼んだのですか。（赤ワインを何本か持ってきてくれる）</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Les hemos pedido que nos traigan unas botellas de vino tinto.</span></span>
+      </div>
+      <div class="q-exp"><b>traigan</b>：<span class="mono">pedir que</span>（依頼）→ 接続法3複。<span class="mono">traer</span> は yo 形 <span class="mono">traigo</span> から <span class="mono">traiga</span> 型。目的格代名詞 <span class="mono">nos</span> は活用動詞の前に置く。<br>※ <span class="mono">vino tinto</span>：赤ワイン</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Qué te han sugerido para cuando vayas al extranjero?　（tener cuidado con mis pertenencias）</div>
+      <div class="q-ja">外国へ行くときのために、君は何を助言されたの？（持ち物に気をつける）</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Me han sugerido que tenga cuidado con mis pertenencias.</span></span>
+      </div>
+      <div class="q-exp"><b>tenga</b>：<span class="mono">sugerir que</span>（提案）→ 接続法1単。<span class="mono">tener</span> は yo 形 <span class="mono">tengo</span> から <span class="mono">tenga</span> 型。<br>※ 設問文中の <span class="mono">cuando vayas</span> も <span class="mono">ir</span> の接続法（未来のこと）。<span class="mono">tener cuidado con</span>：〜に気をつける ／ <span class="mono">pertenencias</span>（女複）持ち物</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">太字の不定詞を接続法現在完了の適切な形に活用させなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge orange">1</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Hay alguien que <b>ver</b> <span class="blank">______</span> la nueva película de ese director?</div>
+      <div class="q-ja">あの監督の新作映画を見た人はいますか。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿Hay alguien que <span class="ans-fill">haya visto</span> la nueva película de ese director?</span>
+      </div>
+      <div class="q-exp"><b>haya visto</b>：形容詞節で、そういう人がいるか<span class="hi">未確定</span> → 接続法。すでに「見た」ことなので完了形。<span class="mono">ver</span> の過去分詞は不規則 <span class="mono">visto</span>。<br>※ <span class="mono">director, -a</span>（名）監督</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">2</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Me prestas la novela cuando la <b>leer</b> <span class="blank">______</span>?</div>
+      <div class="q-ja">その小説を読み終わったら私に貸してくれる？</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿Me prestas la novela cuando la <span class="ans-fill">hayas leído</span>?</span>
+      </div>
+      <div class="q-exp"><b>hayas leído</b>：<span class="mono">cuando</span>＋未来 → 接続法。しかも「読み<span class="hi">終えたら</span>」＝<span class="hi-r">未来完了</span>の意味なので接続法現在完了。<br>※ 過去分詞 <span class="mono">leído</span> は語根が母音終わりなのでアクセント記号が必要（5課）。<span class="mono">prestar</span>（動）貸す</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Temo que nosotros <b>subir</b> <span class="blank">______</span> a un autobús equivocado.</div>
+      <div class="q-ja">私たちは間違ったバスに乗ってしまったのではないかと心配だ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Temo que nosotros <span class="ans-fill">hayamos subido</span> a un autobús equivocado.</span>
+      </div>
+      <div class="q-exp"><b>hayamos subido</b>：<span class="mono">temer que</span>（感情）→ 接続法。乗ったのは<span class="hi">すでに済んだ</span>ことなので完了形。<br>※ <span class="mono">subir a</span>：〜に乗る ／ <span class="mono">equivocado/da</span>（形）間違った</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Es raro que ellos no <b>volver</b> <span class="blank">______</span> del trabajo todavía.</div>
+      <div class="q-ja">彼らがまだ仕事から帰ってきていないのは変だ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Es raro que ellos no <span class="ans-fill">hayan vuelto</span> del trabajo todavía.</span>
+      </div>
+      <div class="q-exp"><b>hayan vuelto</b>：<span class="mono">Es raro que</span>（価値判断）→ 接続法。<span class="mono">todavía no</span> は現在完了と相性がよい。<span class="mono">volver</span> の過去分詞は不規則 <span class="mono">vuelto</span>。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">部屋が3室で大きな庭のある家を私は探している。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Busco una casa que tenga tres habitaciones y un jardín grande.</span></span>
+      </div>
+      <div class="q-exp"><b>tenga</b>：形容詞節（用法2）。まだ見つかっていない家なので接続法。<span class="mono">Busco la casa que tiene…</span> だと「（実在する）その家を探している」の意味になる。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">去年私たちが買った靴は息子にはもう小さくなっているかもしれない。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Es posible que a nuestro hijo ya le queden pequeños los zapatos que compramos el año pasado.</span></span>
+      </div>
+      <div class="q-exp"><b>queden</b>：<span class="mono">Es posible que</span>（可能性）→ 接続法。<span class="mono">quedar</span> は gustar型で「（衣類が）〜のサイズである」。主語は <span class="mono">los zapatos</span>（複数）。<br>※ 関係節の <span class="mono">compramos</span> は<span class="hi">実際に買った</span>事実なので直説法（点過去）のまま。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">1ヶ月前に書店で君の注文した本がまだ届かないというのは変だ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Es raro que todavía no haya llegado el libro que encargaste en la librería hace un mes.</span></span>
+      </div>
+      <div class="q-exp"><b>haya llegado</b>：<span class="mono">Es raro que</span>（価値判断）＋「まだ届いていない」（完了）→ 接続法現在完了。<br>※ <span class="mono">encargar</span>（動）注文する ／ <span class="mono">librería</span>（女）書店 ／ <span class="mono">hace un mes</span>：1ヶ月前に</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">デザインが少し大胆なので、ベアトリスはそのブランドの服をユリコが気に入るとは思わない。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Como los diseños son un poco atrevidos, Beatriz no cree que a Yuriko le guste la ropa de esa marca.</span></span>
+      </div>
+      <div class="q-exp"><b>guste</b>：<span class="mono">no creer que</span>（否定・疑い）→ 接続法。主語は <span class="mono">la ropa</span>（単数）なので <span class="mono">guste</span>。<br>※ 理由を表す <span class="mono">Como…</span> の節は事実なので直説法 <span class="mono">son</span>。<span class="mono">atrevido/da</span>（形）大胆な ／ <span class="mono">marca</span>（女）ブランド</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑦ 語彙リスト -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">ビジネス</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">comercio</span><span class="pill-pos">男</span><span class="pill-ja">商売</span></span>
+  <span class="pill"><span class="pill-es">negocio</span><span class="pill-pos">男</span><span class="pill-ja">ビジネス</span></span>
+  <span class="pill"><span class="pill-es">publicidad</span><span class="pill-pos">女</span><span class="pill-ja">宣伝</span></span>
+  <span class="pill"><span class="pill-es">anuncio</span><span class="pill-pos">男</span><span class="pill-ja">広告・コマーシャル</span></span>
+  <span class="pill"><span class="pill-es">mercadotecnia (mercadeo)</span><span class="pill-pos">女</span><span class="pill-ja">マーケティング</span></span>
+  <span class="pill"><span class="pill-es">empresa</span><span class="pill-pos">女</span><span class="pill-ja">企業</span></span>
+  <span class="pill"><span class="pill-es">compañía</span><span class="pill-pos">女</span><span class="pill-ja">会社</span></span>
+  <span class="pill"><span class="pill-es">oficina</span><span class="pill-pos">女</span><span class="pill-ja">オフィス</span></span>
+  <span class="pill"><span class="pill-es">fábrica</span><span class="pill-pos">女</span><span class="pill-ja">工場</span></span>
+  <span class="pill"><span class="pill-es">presidente, -a</span><span class="pill-pos">名</span><span class="pill-ja">社長</span></span>
+  <span class="pill"><span class="pill-es">gerente</span><span class="pill-pos">名</span><span class="pill-ja">管理職</span></span>
+  <span class="pill"><span class="pill-es">empleado, -a</span><span class="pill-pos">名</span><span class="pill-ja">従業員</span></span>
+</div>
+
+<div class="vocab-category">買い物</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">comprar</span><span class="pill-pos">動</span><span class="pill-ja">買う</span></span>
+  <span class="pill"><span class="pill-es">vender</span><span class="pill-pos">動</span><span class="pill-ja">売る</span></span>
+  <span class="pill"><span class="pill-es">pagar en efectivo / con tarjeta</span><span class="pill-pos">表現</span><span class="pill-ja">現金で／カードで支払う</span></span>
+  <span class="pill"><span class="pill-es">tienda</span><span class="pill-pos">女</span><span class="pill-ja">店</span></span>
+  <span class="pill"><span class="pill-es">mercado</span><span class="pill-pos">男</span><span class="pill-ja">市場</span></span>
+  <span class="pill"><span class="pill-es">supermercado</span><span class="pill-pos">男</span><span class="pill-ja">スーパーマーケット</span></span>
+  <span class="pill"><span class="pill-es">grandes almacenes</span><span class="pill-pos">男複</span><span class="pill-ja">デパート</span></span>
+  <span class="pill"><span class="pill-es">quiosco</span><span class="pill-pos">男</span><span class="pill-ja">（駅や広場の）売店</span></span>
+  <span class="pill"><span class="pill-es">dependiente, -a</span><span class="pill-pos">名</span><span class="pill-ja">店員</span></span>
+  <span class="pill"><span class="pill-es">cliente, -a</span><span class="pill-pos">名</span><span class="pill-ja">客</span></span>
+  <span class="pill"><span class="pill-es">dinero</span><span class="pill-pos">男</span><span class="pill-ja">お金</span></span>
+  <span class="pill"><span class="pill-es">moneda</span><span class="pill-pos">女</span><span class="pill-ja">硬貨</span></span>
+  <span class="pill"><span class="pill-es">billete</span><span class="pill-pos">男</span><span class="pill-ja">紙幣</span></span>
+  <span class="pill"><span class="pill-es">tarjeta de crédito</span><span class="pill-pos">女</span><span class="pill-ja">クレジットカード</span></span>
+  <span class="pill"><span class="pill-es">precio</span><span class="pill-pos">男</span><span class="pill-ja">値段</span></span>
+  <span class="pill"><span class="pill-es">impuesto de consumo</span><span class="pill-pos">男</span><span class="pill-ja">消費税</span></span>
+  <span class="pill"><span class="pill-es">dólar</span><span class="pill-pos">男</span><span class="pill-ja">ドル</span></span>
+  <span class="pill"><span class="pill-es">euro</span><span class="pill-pos">男</span><span class="pill-ja">ユーロ</span></span>
+  <span class="pill"><span class="pill-es">libra</span><span class="pill-pos">女</span><span class="pill-ja">ポンド</span></span>
+  <span class="pill"><span class="pill-es">peso</span><span class="pill-pos">男</span><span class="pill-ja">ペソ</span></span>
+  <span class="pill"><span class="pill-es">yen</span><span class="pill-pos">男</span><span class="pill-ja">円</span></span>
+</div>
+
+<div class="vocab-category">衣服</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">pantalones</span><span class="pill-pos">男複</span><span class="pill-ja">ズボン</span></span>
+  <span class="pill"><span class="pill-es">vaqueros (jeans)</span><span class="pill-pos">男複</span><span class="pill-ja">ジーンズ</span></span>
+  <span class="pill"><span class="pill-es">falda</span><span class="pill-pos">女</span><span class="pill-ja">スカート</span></span>
+  <span class="pill"><span class="pill-es">camiseta</span><span class="pill-pos">女</span><span class="pill-ja">Tシャツ</span></span>
+  <span class="pill"><span class="pill-es">camisa</span><span class="pill-pos">女</span><span class="pill-ja">シャツ</span></span>
+  <span class="pill"><span class="pill-es">jersey</span><span class="pill-pos">男</span><span class="pill-ja">セーター</span></span>
+  <span class="pill"><span class="pill-es">traje</span><span class="pill-pos">男</span><span class="pill-ja">服・スーツ</span></span>
+  <span class="pill"><span class="pill-es">vestido</span><span class="pill-pos">男</span><span class="pill-ja">ワンピース・ドレス</span></span>
+  <span class="pill"><span class="pill-es">chaqueta</span><span class="pill-pos">女</span><span class="pill-ja">ジャケット</span></span>
+  <span class="pill"><span class="pill-es">abrigo</span><span class="pill-pos">男</span><span class="pill-ja">コート</span></span>
+  <span class="pill"><span class="pill-es">gorra</span><span class="pill-pos">女</span><span class="pill-ja">（ひさしの付いた）帽子</span></span>
+  <span class="pill"><span class="pill-es">sombrero</span><span class="pill-pos">男</span><span class="pill-ja">（つばのある）帽子</span></span>
+  <span class="pill"><span class="pill-es">guantes</span><span class="pill-pos">男複</span><span class="pill-ja">手袋</span></span>
+  <span class="pill"><span class="pill-es">bufanda</span><span class="pill-pos">女</span><span class="pill-ja">マフラー</span></span>
+  <span class="pill"><span class="pill-es">calcetines</span><span class="pill-pos">男複</span><span class="pill-ja">靴下</span></span>
+  <span class="pill"><span class="pill-es">zapatos</span><span class="pill-pos">男複</span><span class="pill-ja">靴</span></span>
+  <span class="pill"><span class="pill-es">talla</span><span class="pill-pos">女</span><span class="pill-ja">サイズ（衣類）</span></span>
+  <span class="pill"><span class="pill-es">número (de zapatos)</span><span class="pill-pos">男</span><span class="pill-ja">（靴の）サイズ</span></span>
+  <span class="pill"><span class="pill-es">tamaño</span><span class="pill-pos">男</span><span class="pill-ja">大きさ</span></span>
+  <span class="pill"><span class="pill-es">diseño</span><span class="pill-pos">男</span><span class="pill-ja">デザイン</span></span>
+  <span class="pill"><span class="pill-es">cómodo</span><span class="pill-pos">形</span><span class="pill-ja">心地よい</span></span>
+  <span class="pill"><span class="pill-es">incómodo</span><span class="pill-pos">形</span><span class="pill-ja">心地よくない</span></span>
+  <span class="pill"><span class="pill-es">elegante</span><span class="pill-pos">形</span><span class="pill-ja">おしゃれな</span></span>
+  <span class="pill"><span class="pill-es">vulgar</span><span class="pill-pos">形</span><span class="pill-ja">趣味が悪い</span></span>
+  <span class="pill"><span class="pill-es">precioso</span><span class="pill-pos">形</span><span class="pill-ja">すてきな</span></span>
+  <span class="pill"><span class="pill-es">caro / barato</span><span class="pill-pos">形</span><span class="pill-ja">高い／安い</span></span>
+  <span class="pill"><span class="pill-es">tienda de ropa</span><span class="pill-pos">女</span><span class="pill-ja">衣料品店</span></span>
+  <span class="pill"><span class="pill-es">zapatería</span><span class="pill-pos">女</span><span class="pill-ja">靴屋</span></span>
+  <span class="pill"><span class="pill-es">ponerse</span><span class="pill-pos">再動</span><span class="pill-ja">着る</span></span>
+  <span class="pill"><span class="pill-es">quitarse</span><span class="pill-pos">再動</span><span class="pill-ja">脱ぐ・取る・外す</span></span>
+</div>
+
+<div class="vocab-category">持ち物</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">llave</span><span class="pill-pos">女</span><span class="pill-ja">鍵</span></span>
+  <span class="pill"><span class="pill-es">cartera</span><span class="pill-pos">女</span><span class="pill-ja">財布</span></span>
+  <span class="pill"><span class="pill-es">reloj</span><span class="pill-pos">男</span><span class="pill-ja">時計</span></span>
+  <span class="pill"><span class="pill-es">gafas</span><span class="pill-pos">女複</span><span class="pill-ja">メガネ</span></span>
+  <span class="pill"><span class="pill-es">paraguas</span><span class="pill-pos">男</span><span class="pill-ja">傘（単複同形）</span></span>
+  <span class="pill"><span class="pill-es">agenda</span><span class="pill-pos">女</span><span class="pill-ja">手帳</span></span>
+  <span class="pill"><span class="pill-es">pañuelo</span><span class="pill-pos">男</span><span class="pill-ja">ハンカチ</span></span>
+</div>
+
+<div class="vocab-category">接続法を要求する主な動詞・表現</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">querer que</span><span class="pill-pos">願望</span><span class="pill-ja">〜してほしい</span></span>
+  <span class="pill"><span class="pill-es">pedir que</span><span class="pill-pos">依頼</span><span class="pill-ja">〜するよう頼む</span></span>
+  <span class="pill"><span class="pill-es">recomendar que</span><span class="pill-pos">勧告</span><span class="pill-ja">〜するよう勧める</span></span>
+  <span class="pill"><span class="pill-es">aconsejar que</span><span class="pill-pos">助言</span><span class="pill-ja">〜するよう忠告する</span></span>
+  <span class="pill"><span class="pill-es">sugerir que</span><span class="pill-pos">提案</span><span class="pill-ja">〜するよう提案する</span></span>
+  <span class="pill"><span class="pill-es">esperar que</span><span class="pill-pos">期待</span><span class="pill-ja">〜であることを願う</span></span>
+  <span class="pill"><span class="pill-es">temer que</span><span class="pill-pos">感情</span><span class="pill-ja">〜ではないかと心配する</span></span>
+  <span class="pill"><span class="pill-es">alegrarse de que</span><span class="pill-pos">感情</span><span class="pill-ja">〜を喜ぶ</span></span>
+  <span class="pill"><span class="pill-es">sentir que</span><span class="pill-pos">感情</span><span class="pill-ja">〜を残念に思う</span></span>
+  <span class="pill"><span class="pill-es">no creer que</span><span class="pill-pos">疑い</span><span class="pill-ja">〜とは思わない</span></span>
+  <span class="pill"><span class="pill-es">dudar que</span><span class="pill-pos">疑い</span><span class="pill-ja">〜を疑う</span></span>
+  <span class="pill"><span class="pill-es">es posible / probable que</span><span class="pill-pos">可能性</span><span class="pill-ja">〜かもしれない</span></span>
+  <span class="pill"><span class="pill-es">es lógico que</span><span class="pill-pos">判断</span><span class="pill-ja">〜は当然だ</span></span>
+  <span class="pill"><span class="pill-es">es raro que</span><span class="pill-pos">判断</span><span class="pill-ja">〜は変だ</span></span>
+  <span class="pill"><span class="pill-es">para que</span><span class="pill-pos">目的</span><span class="pill-ja">〜するために</span></span>
+  <span class="pill"><span class="pill-es">hasta que</span><span class="pill-pos">時</span><span class="pill-ja">〜するまで</span></span>
+  <span class="pill"><span class="pill-es">antes de que</span><span class="pill-pos">時</span><span class="pill-ja">〜する前に</span></span>
+  <span class="pill"><span class="pill-es">ojalá (que)</span><span class="pill-pos">願望</span><span class="pill-ja">〜だといいな</span></span>
+  <span class="pill"><span class="pill-es">quizá / tal vez</span><span class="pill-pos">推量</span><span class="pill-ja">おそらく</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">enfadarse (con)</span><span class="pill-pos">再動</span><span class="pill-ja">（〜に）腹を立てる</span></span>
+  <span class="pill"><span class="pill-es">colaborar</span><span class="pill-pos">動</span><span class="pill-ja">協力する</span></span>
+  <span class="pill"><span class="pill-es">acercarse a</span><span class="pill-pos">再動</span><span class="pill-ja">〜に近づく</span></span>
+  <span class="pill"><span class="pill-es">acompañar</span><span class="pill-pos">動</span><span class="pill-ja">付き添う</span></span>
+  <span class="pill"><span class="pill-es">encontrarse bien</span><span class="pill-pos">表現</span><span class="pill-ja">体調が良い</span></span>
+  <span class="pill"><span class="pill-es">sacar notas</span><span class="pill-pos">表現</span><span class="pill-ja">成績を取る</span></span>
+  <span class="pill"><span class="pill-es">conseguir</span><span class="pill-pos">動</span><span class="pill-ja">手に入れる</span></span>
+  <span class="pill"><span class="pill-es">avisar</span><span class="pill-pos">動</span><span class="pill-ja">知らせる</span></span>
+  <span class="pill"><span class="pill-es">prestar</span><span class="pill-pos">動</span><span class="pill-ja">貸す</span></span>
+  <span class="pill"><span class="pill-es">encargar</span><span class="pill-pos">動</span><span class="pill-ja">注文する</span></span>
+  <span class="pill"><span class="pill-es">quedar</span><span class="pill-pos">動</span><span class="pill-ja">（衣類が）サイズが合う</span></span>
+  <span class="pill"><span class="pill-es">farmacia</span><span class="pill-pos">女</span><span class="pill-ja">薬局</span></span>
+  <span class="pill"><span class="pill-es">fiebre</span><span class="pill-pos">女</span><span class="pill-ja">熱</span></span>
+  <span class="pill"><span class="pill-es">pertenencias</span><span class="pill-pos">女複</span><span class="pill-ja">持ち物</span></span>
+  <span class="pill"><span class="pill-es">fórmula</span><span class="pill-pos">女</span><span class="pill-ja">数式・公式</span></span>
+  <span class="pill"><span class="pill-es">atrevido/da</span><span class="pill-pos">形</span><span class="pill-ja">大胆な</span></span>
+  <span class="pill"><span class="pill-es">equivocado/da</span><span class="pill-pos">形</span><span class="pill-ja">間違った</span></span>
+  <span class="pill"><span class="pill-es">marca</span><span class="pill-pos">女</span><span class="pill-ja">ブランド</span></span>
+  <span class="pill"><span class="pill-es">librería</span><span class="pill-pos">女</span><span class="pill-ja">書店</span></span>
+</div>
+
+<!-- ⑧ まとめ -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">直説法 vs 接続法</td><td>直説法＝話者が<b>事実とみなす</b>／接続法＝話者が<b>仮想した内容</b>を提示する</td></tr>
+    <tr><td class="td-rule">接続法現在（-ar）</td><td class="mono">-e / -es / -e / -emos / -éis / -en（hable, hables…）</td></tr>
+    <tr><td class="td-rule">接続法現在（-er/-ir）</td><td class="mono">-a / -as / -a / -amos / -áis / -an（coma / viva…、-er と -ir は同形）</td></tr>
+    <tr><td class="td-rule">形の特徴</td><td>直説法現在と母音が逆になる。yo 形と él/ella 形が同形</td></tr>
+    <tr><td class="td-rule">不規則①語根母音変化</td><td>-ar/-er は直説法と同じブーツ型（<span class="mono">piense, vuelva</span>）／ -ir は<b>1複・2複でも e→i, o→u</b>（<span class="mono">sintamos, durmamos, pidamos</span>）</td></tr>
+    <tr><td class="td-rule">不規則②yo 形基準</td><td>直説法 yo 形から -o を取る：<span class="mono">conozca, tenga, venga, salga, traiga, haga, ponga, oiga, caiga, diga, construya, vea</span></td></tr>
+    <tr><td class="td-rule">不規則③その他</td><td class="mono">ser→sea / estar→esté / haber→haya / saber→sepa / ir→vaya / dar→dé</td></tr>
+    <tr><td class="td-rule">綴りの変化</td><td><span class="mono">-car → -que</span>（saque）／ <span class="mono">-gar → -gue</span>（llegue）／ <span class="mono">-zar → -ce</span>（empiece）</td></tr>
+    <tr><td class="td-rule">用法①名詞節</td><td>願望・要求・感情・疑い・可能性・価値判断の後（<span class="mono">pedir que, temer que, no creer que, es posible que</span>）</td></tr>
+    <tr><td class="td-rule">用法②形容詞節</td><td>先行詞が<b>未確定・不存在</b>のとき（<span class="mono">Busco una casa que tenga…／No hay nadie que…</span>）</td></tr>
+    <tr><td class="td-rule">用法③副詞節</td><td><span class="mono">para que</span>（目的）／ <span class="mono">cuando, hasta que</span>＋<b>未実現の未来</b>（<span class="mono">cuando sea mayor</span>）</td></tr>
+    <tr><td class="td-rule">用法④単文</td><td><span class="mono">Ojalá ＋ 接続法</span>（願望）／ usted への命令（<span class="mono">Siga</span>）／ <span class="mono">quizá ＋ 接続法</span></td></tr>
+    <tr><td class="td-rule">接続法現在完了の形</td><td class="mono">haya / hayas / haya / hayamos / hayáis / hayan ＋ 過去分詞</td></tr>
+    <tr><td class="td-rule">接続法現在完了の用法</td><td>接続法が要求される節の中で、<b>現在完了または未来完了</b>として使う</td></tr>
+    <tr><td class="td-rule">直説法のままにする節</td><td><span class="mono">creo que, es verdad que</span> の後／実在する先行詞の関係節／過去の事実を述べる <span class="mono">cuando</span> 節</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 9 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① 直説法と接続法</a>
+    <a class="fn-item" href="#sec2">② 接続法現在・規則活用</a>
+    <a class="fn-item" href="#sec3">③ 接続法現在・不規則活用</a>
+    <a class="fn-item" href="#sec4">④ 接続法現在の用法</a>
+    <a class="fn-item" href="#sec5">⑤ 接続法現在完了</a>
+    <a class="fn-item" href="#sec6">⑥ 練習問題</a>
+    <a class="fn-item" href="#sec7">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8">⑧ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['直説法','接続法','indicativo','subjuntivo','法'], id: 'sec1', label: '直説法と接続法（①節）' },
+  { terms: ['直説法 接続法 違い','事実 仮想'], id: 'ind-vs-subj', label: '直説法と接続法の対比（①節）' },
+  { terms: ['接続法現在','presente de subjuntivo','hable','coma','viva','規則活用'], id: 'sec2', label: '接続法現在・規則活用（②節）' },
+  { terms: ['接続法 不規則','piense','vuelva','sienta','duerma','pida'], id: 'subj-gokon', label: '語根母音変化動詞（③節）' },
+  { terms: ['conozca','tenga','venga','salga','traiga','haga','ponga','oiga','caiga','diga','construya','vea','yo形'], id: 'subj-yo-kei', label: 'yo 形基準の不規則（③節）' },
+  { terms: ['sea','esté','haya','sepa','vaya','dé','その他の不規則'], id: 'subj-sonota', label: 'その他の不規則動詞（③節）' },
+  { terms: ['接続法の用法','usos del subjuntivo'], id: 'sec4', label: '接続法現在の用法（④節）' },
+  { terms: ['名詞節','pedir que','no creer que','temer que','es posible que'], id: 'meishi-setsu', label: '名詞節の接続法（④節）' },
+  { terms: ['接続法 トリガー','要求 感情 疑い 判断'], id: 'setsuzokuho-trigger', label: '接続法を要求する表現（④節）' },
+  { terms: ['形容詞節','関係節 接続法','buscar una casa que'], id: 'keiyoshi-setsu', label: '形容詞節の接続法（④節）' },
+  { terms: ['副詞節','para que','cuando sea','hasta que'], id: 'fukushi-setsu', label: '副詞節の接続法（④節）' },
+  { terms: ['単文 接続法','ojalá','quizá','命令'], id: 'tanbun-setsu', label: '単文の接続法（④節）' },
+  { terms: ['接続法現在完了','haya hablado','pretérito perfecto de subjuntivo'], id: 'sec5', label: '接続法現在完了（⑤節）' },
+  { terms: ['接続法現在完了の作り方','haber 接続法'], id: 'subj-kanryo', label: '接続法現在完了の作り方（⑤節）' },
+  { terms: ['練習問題','練習'], id: 'sec6', label: '練習問題（⑥節）' },
+  { terms: ['語彙','Vocabulario','ビジネス','買い物','衣服','持ち物'], id: 'sec7', label: '語彙リスト（⑦節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec8', label: 'まとめ（⑧節）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語一列①（若林大我）ー2026前期課程Sセメスター</footer>
+
+</body>
+</html>

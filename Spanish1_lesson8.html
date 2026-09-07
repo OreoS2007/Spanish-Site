@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<script src="site.js" defer></script>
+<meta charset="UTF-8">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 8 文法解説 | スペイン語一列①</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<!-- dict modal -->
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 未来</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 未来完了</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 過去未来</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ 過去未来完了</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec5" data-tab="renshu" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec6" data-tab="vocab" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 語彙リスト</a>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ まとめ</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 8 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 8　文法解説</div>
+  <div class="cover-sub">スペイン語一列①　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+</div>
+
+<div class="cover">
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 未来</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 未来完了</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 過去未来</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ 過去未来完了</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 練習問題</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 語彙リスト</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ まとめ</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：hablaré　／　tendría　／　未来完了…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 未来 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">未来</span>
+  <span class="sec-es">Futuro simple de indicativo</span>
+</div>
+
+<p>未来形は<span class="hi">不定詞（原形）そのものに語尾を付ける</span>という、スペイン語の中でも特殊な作り方をします。語尾は <span class="mono hi-r">-é / -ás / -á / -emos / -éis / -án</span> の1種類のみで、-ar・-er・-ir の区別がありません。</p>
+
+<div class="sub">規則活用</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">人称</th>
+      <th style="background:#dde8f5;color:var(--accent)">語尾</th>
+      <th style="background:#dde8f5;color:var(--accent)">hablar</th>
+      <th style="background:#d8eeea;color:var(--accent2)">comer</th>
+      <th style="background:#f0e8dd;color:#8b5020">vivir</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-ja">私</td><td class="td-c mono hi-r"><b>-é</b></td><td class="td-c mono">hablar<b>é</b></td><td class="td-c mono">comer<b>é</b></td><td class="td-c mono">vivir<b>é</b></td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-ja">君</td><td class="td-c mono hi-r"><b>-ás</b></td><td class="td-c mono">hablar<b>ás</b></td><td class="td-c mono">comer<b>ás</b></td><td class="td-c mono">vivir<b>ás</b></td></tr>
+    <tr><td class="td-key td-c">él/ella/usted</td><td class="td-ja">彼/彼女/あなた</td><td class="td-c mono hi-r"><b>-á</b></td><td class="td-c mono">hablar<b>á</b></td><td class="td-c mono">comer<b>á</b></td><td class="td-c mono">vivir<b>á</b></td></tr>
+    <tr><td class="td-key td-c">nosotros/as</td><td class="td-ja">私たち</td><td class="td-c mono hi2"><b>-emos</b></td><td class="td-c mono">hablar<b>emos</b></td><td class="td-c mono">comer<b>emos</b></td><td class="td-c mono">vivir<b>emos</b></td></tr>
+    <tr><td class="td-key td-c">vosotros/as</td><td class="td-ja">君たち</td><td class="td-c mono hi-r"><b>-éis</b></td><td class="td-c mono">hablar<b>éis</b></td><td class="td-c mono">comer<b>éis</b></td><td class="td-c mono">vivir<b>éis</b></td></tr>
+    <tr><td class="td-key td-c">ellos/ellas/uds.</td><td class="td-ja">彼ら/あなたがた</td><td class="td-c mono hi-r"><b>-án</b></td><td class="td-c mono">hablar<b>án</b></td><td class="td-c mono">comer<b>án</b></td><td class="td-c mono">vivir<b>án</b></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box">
+  <div class="box-title">未来形の重要ポイント</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li>語尾は<span class="hi">全動詞共通</span>。-ar / -er / -ir の区別がない唯一の時制</li>
+    <li>語根ではなく<span class="hi2">不定詞そのもの</span>に語尾を付ける（habl<u>ar</u>＋é → hablaré）</li>
+    <li><span class="hi-r">nosotros 形（-emos）以外はすべてアクセント記号付き</span></li>
+    <li>点過去・線過去で起きた語根母音変化は、未来では一切起きない</li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　なぜ不定詞にそのまま語尾を付けるのか？　スペイン語の未来形はラテン語の未来形（<span class="mono">amabo</span> など）を受け継いだものではなく、俗ラテン語の<b>「不定詞 ＋ haber の現在形」</b>という迂言表現に由来します。<span class="mono">hablar he</span>（＝「話すことを持っている」→「話すつもりだ」）が1語に融合して <span class="mono">hablaré</span> になりました。語尾 <span class="mono">-é, -ás, -á, -emos, -éis, -án</span> が haber の現在形 <span class="mono">he, has, ha, hemos, habéis, han</span> にそっくりなのはこのためです。</span>
+</div>
+
+<div class="sub" id="mirai-fukisoku">不規則活用</div>
+
+<p>活用<span class="hi">語尾は規則活用と全く同じ</span>で、<span class="hi-r">語根（不定詞部分）だけ</span>が変化します。変化のパターンは3種類です。</p>
+
+<div class="sub2">① 不定詞の語尾の e が脱落</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>人称</th><th style="background:#dde8f5;color:var(--accent)">saber（知る）</th><th>同類の動詞</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r"><b>sabré</b></td><td rowspan="6" style="font-size:13px;line-height:2">
+      <span class="mono">caber → cabré</span>（入り得る）<br>
+      <span class="mono">poder → podré</span>（できる）<br>
+      <span class="mono">querer → querré</span>（欲する）<br>
+      <span class="mono">haber → habré</span>（→②の未来完了で使用）
+    </td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono">sabrás</td></tr>
+    <tr><td class="td-key td-c">él/ella</td><td class="td-c mono">sabrá</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono">sabremos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono">sabréis</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono">sabrán</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ <span class="mono">querer</span> は <span class="mono">quer-</span>＋<span class="mono">-ré</span> で <span class="mono">querré</span> と r が2つ重なる点に注意。</p>
+
+<div class="sub2">② 不定詞の語尾の e, i が d に変化</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>人称</th><th style="background:#d8eeea;color:var(--accent2)">poner（置く）</th><th>同類の動詞</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r"><b>pondré</b></td><td rowspan="6" style="font-size:13px;line-height:2">
+      <span class="mono">salir → saldré</span>（出る）<br>
+      <span class="mono">tener → tendré</span>（持つ）<br>
+      <span class="mono">venir → vendré</span>（来る）
+    </td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono">pondrás</td></tr>
+    <tr><td class="td-key td-c">él/ella</td><td class="td-c mono">pondrá</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono">pondremos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono">pondréis</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono">pondrán</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub2">③ 不定詞の語根が短縮</div>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr><th>人称</th><th style="background:#f0e8dd;color:#8b5020">hacer（する）</th><th style="background:#f0e8dd;color:#8b5020">decir（言う）</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r"><b>haré</b></td><td class="td-c mono hi-r"><b>diré</b></td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono">harás</td><td class="td-c mono">dirás</td></tr>
+    <tr><td class="td-key td-c">él/ella</td><td class="td-c mono">hará</td><td class="td-c mono">dirá</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono">haremos</td><td class="td-c mono">diremos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono">haréis</td><td class="td-c mono">diréis</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono">harán</td><td class="td-c mono">dirán</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　②で <span class="mono">d</span> が現れるのは<b>発音しやすさ</b>のためです。<span class="mono">poner＋é</span> はまず母音 <span class="mono">e</span> が落ちて <span class="mono">ponré</span> となりますが、<span class="mono">n＋r</span> という子音連続はスペイン語で発音しにくいため、間に渡り子音 <span class="mono">d</span> が挿入されて <span class="mono">pondré</span> となりました（<span class="mono">salir → salré → saldré</span> も同様）。一方 <span class="mono">quer＋ré</span> は <span class="mono">r＋r</span> なのでそのまま重なり、<span class="mono">querré</span> になっています。ここで覚えた12語の語根は、③の<b>過去未来でもそのまま使い回せます</b>。</span>
+</div>
+
+<div class="sub" id="mirai-yoho">用法</div>
+
+<div class="sub2">用法 1：未来の行為や状態、意思を表す</div>
+<div class="ex"><span class="ex-sp">Como no hay nubes, mañana <span class="hi">hará</span> buen tiempo.</span><span class="ex-ja">雲がないので、明日は良い天気になるだろう。</span></div>
+<div class="ex"><span class="ex-sp">Te juro que no <span class="hi">volveré</span> a cometer el mismo error.</span><span class="ex-ja">同じ過ちは二度と繰り返さないと誓うよ。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi">hará</span>：<span class="mono">hacer</span> の未来3単（語根短縮型）。天候の無主語文（4課参照）</li>
+    <li><span class="mono hi">volveré</span>：話者の<span class="hi">意思</span>を表す未来。<span class="mono">volver a ＋ 不定詞</span>「再び〜する」</li>
+    <li><span class="mono">nube</span>（女）雲 ／ <span class="mono">jurar</span>（動）誓う ／ <span class="mono">cometer un error</span>：過ちを犯す</li>
+  </ul>
+</div>
+
+<div class="sub2">用法 2：現在の行為や状態についての推量を表す</div>
+<p>「今〜だろう」という<span class="hi-r">現在についての推量</span>にも未来形を使います。日本語の「〜でしょう」に近い使い方です。</p>
+<div class="ex"><span class="ex-sp">A estas horas el metro <span class="hi">estará</span> muy lleno.</span><span class="ex-ja">この時間、地下鉄はとても混んでいるだろう。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Sabréis</span> mejor que nosotros cómo manejar la situación.</span><span class="ex-ja">その状況にどう対処すべきかは、君たちの方が私たちより分かっているだろう。</span></div>
+
+<div class="box box-warn">
+  <div class="box-title">未来形＝「未来」だけではない</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi">estará</span> は「これから混むだろう」ではなく<span class="hi-r">「今まさに混んでいるだろう」</span>という現在の推量</li>
+    <li>推量か未来かは <span class="mono">a estas horas</span>（今この時間）／ <span class="mono">mañana</span>（明日）などの<span class="hi">時の副詞</span>で判断する</li>
+    <li><span class="mono">lleno/na</span>（形）満員の ／ <span class="mono">manejar</span>（動）扱う・操作する</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L8-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Mañana yo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hablaré</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">hablar：規則未来形</span></span> con el profesor.</div>
+  <div class="mini-check-ja">明日私は先生と話すつもりだ。</div>
+<div class="srs-rate" data-qid="L8-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：未来</div>
+
+  <div class="quiz-item" id="L8-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Ellos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">tendrán</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">tener：e脱落型不規則未来</span></span> que estudiar mucho para el examen.</div>
+    <div class="quiz-ja">彼らは試験に向けてたくさん勉強しなければならないだろう。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>tendrán</b>：tenerはe→dの不規則未来語根tendr-を持つ。語尾は規則通り-án。</div>
+  <div class="srs-rate" data-qid="L8-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L8-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿Dónde <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estará</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">estar：現在についての推量</span></span> mi hermano ahora?</div>
+    <div class="quiz-ja">私の兄（弟）は今どこにいるのだろう。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>estará</b>：未来形は未来の出来事だけでなく、現在についての推量「〜だろう」も表す。</div>
+  <div class="srs-rate" data-qid="L8-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L8-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>hacer</b> の未来形を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">haré</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">harás</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hará</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">haremos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">haréis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">harán</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">hacerは語根短縮型の不規則未来（har-）。語尾は規則の-é/-ás/-á/-emos/-éis/-ánのまま。</div>
+  <div class="srs-rate" data-qid="L8-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ② 未来完了 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">未来完了</span>
+  <span class="sec-es">Futuro compuesto de indicativo</span>
+</div>
+
+<div class="box box-rule" id="mirai-kanryo-tsukurikata">
+  <div class="box-title">未来完了の作り方</div>
+  <div style="text-align:center;font-size:15px;margin:10px 0 8px;font-weight:700;">
+    <span class="hi-r">haber の未来（不規則活用）</span>　＋　<span class="hi2">過去分詞</span>
+  </div>
+  <p class="note" style="text-align:center;margin:0;">過去分詞は<span class="hi">性・数による変化なし</span>（常に -o 形）</p>
+  <div class="tbl-wrap" style="margin-top:8px">
+  <table>
+    <thead><tr><th>人称</th><th style="background:#dde8f5;color:var(--accent)">haber の未来</th><th>hablar の例</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r"><b>habré</b></td><td class="td-c mono">habré hablado</td></tr>
+      <tr><td class="td-key td-c">tú</td><td class="td-c mono hi-r"><b>habrás</b></td><td class="td-c mono">habrás hablado</td></tr>
+      <tr><td class="td-key td-c">él/ella</td><td class="td-c mono hi-r"><b>habrá</b></td><td class="td-c mono">habrá hablado</td></tr>
+      <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi2"><b>habremos</b></td><td class="td-c mono">habremos hablado</td></tr>
+      <tr><td class="td-key td-c">vosotros</td><td class="td-c mono hi-r"><b>habréis</b></td><td class="td-c mono">habréis hablado</td></tr>
+      <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono hi-r"><b>habrán</b></td><td class="td-c mono">habrán hablado</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="sub2">用法 1：未来のある時点までに完了している行為や状態、意思を表す</div>
+<div class="ex"><span class="ex-sp">Los clientes <span class="hi">habrán llegado</span> al hotel antes de anochecer.</span><span class="ex-ja">お客たちは日が暮れる前にホテルに着いているだろう。</span></div>
+<div class="ex"><span class="ex-sp">Para el próximo miércoles <span class="hi">habremos terminado</span> toda la tarea.</span><span class="ex-ja">来週の水曜日までに、私たちは課題を全部終えているだろう。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi2">antes de ＋ 不定詞</span>／<span class="mono hi2">para ＋ 時点</span>：未来の「締め切り」を示す表現とセットで使われることが多い</li>
+    <li><span class="mono">anochecer</span>（動）日が暮れる（不定詞のまま名詞的に使用）</li>
+    <li><span class="mono">cliente, -a</span>（名）客 ／ <span class="mono">tarea</span>（女）課題・宿題</li>
+  </ul>
+</div>
+
+<div class="sub2">用法 2：現時点で完了している行為や状態についての推量を表す</div>
+<div class="ex"><span class="ex-sp">Son las doce de la noche. El último tren ya <span class="hi">habrá salido</span>.</span><span class="ex-ja">夜の12時だ。終電はもう出てしまっているだろう。</span></div>
+
+<div class="box box-rule">
+  <div class="box-title">推量の対応関係（重要）</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th>推量する内容</th><th>使う時制</th><th>例</th></tr></thead>
+    <tbody>
+      <tr><td class="td-rule">現在の状態</td><td class="td-c mono hi">未来</td><td><span class="mono">estará lleno</span>　<span class="td-ja">混んでいるだろう</span></td></tr>
+      <tr><td class="td-rule">現在までに完了したこと</td><td class="td-c mono hi">未来完了</td><td><span class="mono">habrá salido</span>　<span class="td-ja">出てしまっただろう</span></td></tr>
+      <tr><td class="td-rule">過去の状態</td><td class="td-c mono hi2">過去未来</td><td><span class="mono">estaría durmiendo</span>　<span class="td-ja">寝ていたのだろう</span></td></tr>
+      <tr><td class="td-rule">過去のある時点までに完了したこと</td><td class="td-c mono hi2">過去未来完了</td><td><span class="mono">habría dicho</span>　<span class="td-ja">言ってしまっていたのだろう</span></td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="mini-check" id="L8-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">A estas horas ella ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">habrá llegado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(habrá)＋過去分詞</span></span> a casa.</div>
+  <div class="mini-check-ja">この時間、彼女はもう家に着いているだろう。</div>
+<div class="srs-rate" data-qid="L8-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：未来完了</div>
+
+  <div class="quiz-item" id="L8-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Para el año que viene, nosotros ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">habremos terminado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(habremos)＋過去分詞</span></span> el proyecto.</div>
+    <div class="quiz-ja">来年までには、私たちはもうそのプロジェクトを終えているだろう。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>habremos terminado</b>：未来完了「未来のある時点までに完了しているだろう」。haberの未来形＋過去分詞。</div>
+  <div class="srs-rate" data-qid="L8-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L8-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Habrá salido</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(habrá)＋salirの過去分詞</span></span> ya el tren?</div>
+    <div class="quiz-ja">電車はもう出てしまっただろうか。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Habrá salido</b>：現在までに完了したことへの推量。未来完了のもう一つの重要な用法。</div>
+  <div class="srs-rate" data-qid="L8-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L8-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">haber の未来形を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habré</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habrás</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habrá</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habremos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habréis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habrán</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">haberの未来形は不規則語根habr-（e脱落型）。未来完了はこれに過去分詞（性数変化なし）を組み合わせて作る。</div>
+  <div class="srs-rate" data-qid="L8-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ③ 過去未来 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">過去未来</span>
+  <span class="sec-es">Condicional simple</span>
+</div>
+
+<p>過去未来（条件法）は<span class="hi">「過去のある時点から見た未来」</span>を表す時制です。作り方は未来形と同じく<span class="hi">不定詞に語尾を付ける</span>形で、語尾は <span class="mono hi-r">-ía / -ías / -ía / -íamos / -íais / -ían</span>（線過去の -er/-ir 語尾と同じ）です。</p>
+
+<div class="sub">規則活用</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">人称</th>
+      <th style="background:#dde8f5;color:var(--accent)">語尾</th>
+      <th style="background:#dde8f5;color:var(--accent)">hablar</th>
+      <th style="background:#d8eeea;color:var(--accent2)">comer</th>
+      <th style="background:#f0e8dd;color:#8b5020">vivir</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-ja">私</td><td class="td-c mono hi-r"><b>-ía</b></td><td class="td-c mono">hablar<b>ía</b></td><td class="td-c mono">comer<b>ía</b></td><td class="td-c mono">vivir<b>ía</b></td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-ja">君</td><td class="td-c mono hi-r"><b>-ías</b></td><td class="td-c mono">hablar<b>ías</b></td><td class="td-c mono">comer<b>ías</b></td><td class="td-c mono">vivir<b>ías</b></td></tr>
+    <tr><td class="td-key td-c">él/ella/usted</td><td class="td-ja">彼/彼女/あなた</td><td class="td-c mono hi-r"><b>-ía</b></td><td class="td-c mono">hablar<b>ía</b></td><td class="td-c mono">comer<b>ía</b></td><td class="td-c mono">vivir<b>ía</b></td></tr>
+    <tr><td class="td-key td-c">nosotros/as</td><td class="td-ja">私たち</td><td class="td-c mono hi2"><b>-íamos</b></td><td class="td-c mono">hablar<b>íamos</b></td><td class="td-c mono">comer<b>íamos</b></td><td class="td-c mono">vivir<b>íamos</b></td></tr>
+    <tr><td class="td-key td-c">vosotros/as</td><td class="td-ja">君たち</td><td class="td-c mono hi-r"><b>-íais</b></td><td class="td-c mono">hablar<b>íais</b></td><td class="td-c mono">comer<b>íais</b></td><td class="td-c mono">vivir<b>íais</b></td></tr>
+    <tr><td class="td-key td-c">ellos/ellas/uds.</td><td class="td-ja">彼ら/あなたがた</td><td class="td-c mono hi-r"><b>-ían</b></td><td class="td-c mono">hablar<b>ían</b></td><td class="td-c mono">comer<b>ían</b></td><td class="td-c mono">vivir<b>ían</b></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ 全人称アクセント記号付き。線過去の -er/-ir 動詞の語尾と同じ形だが、<span class="hi">語根ではなく不定詞に付く</span>点が決定的に異なる（<span class="mono">comía</span>＝線過去 ／ <span class="mono">comería</span>＝過去未来）。</p>
+
+<div class="sub" id="kakomirai-fukisoku">不規則活用</div>
+<p>活用語尾は規則活用と同じで、<span class="hi-r">語根は未来時制の語根とまったく同じ</span>です。つまり①で覚えた12語をそのまま流用できます。</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>変化のタイプ</th>
+      <th style="background:#dde8f5;color:var(--accent)">未来</th>
+      <th style="background:#d8eeea;color:var(--accent2)">過去未来</th>
+      <th>同類</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">e が脱落<br><small>saber</small></td>
+      <td class="td-c mono">sabré</td><td class="td-c mono hi-r">sabría</td>
+      <td class="mono" style="font-size:12.5px">caber → cabría<br>poder → podría<br>querer → querría</td>
+    </tr>
+    <tr>
+      <td class="td-rule">e, i が d に<br><small>poner</small></td>
+      <td class="td-c mono">pondré</td><td class="td-c mono hi-r">pondría</td>
+      <td class="mono" style="font-size:12.5px">salir → saldría<br>tener → tendría<br>venir → vendría</td>
+    </tr>
+    <tr>
+      <td class="td-rule">語根が短縮<br><small>hacer / decir</small></td>
+      <td class="td-c mono">haré / diré</td><td class="td-c mono hi-r">haría / diría</td>
+      <td class="mono" style="font-size:12.5px">haber → habría<br>（→④で使用）</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="tbl-wrap" style="margin-top:10px">
+<table>
+  <thead><tr><th>人称</th><th>saber</th><th>poner</th><th>hacer</th><th>decir</th></tr></thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r">sabría</td><td class="td-c mono hi-r">pondría</td><td class="td-c mono hi-r">haría</td><td class="td-c mono hi-r">diría</td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-c mono">sabrías</td><td class="td-c mono">pondrías</td><td class="td-c mono">harías</td><td class="td-c mono">dirías</td></tr>
+    <tr><td class="td-key td-c">él/ella</td><td class="td-c mono">sabría</td><td class="td-c mono">pondría</td><td class="td-c mono">haría</td><td class="td-c mono">diría</td></tr>
+    <tr><td class="td-key td-c">nosotros</td><td class="td-c mono">sabríamos</td><td class="td-c mono">pondríamos</td><td class="td-c mono">haríamos</td><td class="td-c mono">diríamos</td></tr>
+    <tr><td class="td-key td-c">vosotros</td><td class="td-c mono">sabríais</td><td class="td-c mono">pondríais</td><td class="td-c mono">haríais</td><td class="td-c mono">diríais</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono">sabrían</td><td class="td-c mono">pondrían</td><td class="td-c mono">harían</td><td class="td-c mono">dirían</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="kakomirai-yoho">用法</div>
+
+<div class="sub2">用法 1：過去から見た未来の行為や状態、意思を表す</div>
+<div class="ex"><span class="ex-sp">Toño me dijo que <span class="hi">vendría</span> a las ocho, pero no ha llegado todavía.</span><span class="ex-ja">トーニョは8時に来ると私に言ったが、まだ着いていない。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説：時制の一致（7課の続き）</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li>直接話法：<span class="mono">Toño me dijo, "Vendré a las ocho."</span>（未来）</li>
+    <li>間接話法：<span class="mono">Toño me dijo que <span class="hi">vendría</span> a las ocho.</span>（主節が過去 → 従属節は<span class="hi">過去未来</span>）</li>
+    <li>7課では「主節が過去＋<span class="hi2">同時</span> → 線過去」を学んだ。ここでは「主節が過去＋<span class="hi-r">それより後</span> → 過去未来」になる</li>
+  </ul>
+</div>
+
+<div class="box box-rule">
+  <div class="box-title">時制の一致まとめ（7課＋8課）</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th>主節が過去のとき、従属節の内容が…</th><th>従属節の時制</th><th>例</th></tr></thead>
+    <tbody>
+      <tr><td class="td-rule">主節より<span class="hi-r">前</span></td><td class="td-c mono hi-r">過去完了</td><td class="mono">Dijo que había salido.</td></tr>
+      <tr><td class="td-rule">主節と<span class="hi2">同時</span></td><td class="td-c mono hi2">線過去</td><td class="mono">Dijo que estaba en casa.</td></tr>
+      <tr><td class="td-rule">主節より<span class="hi">後</span></td><td class="td-c mono hi">過去未来</td><td class="mono">Dijo que vendría.</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="sub2">用法 2：過去の行為や状態についての推量を表す</div>
+<div class="ex"><span class="ex-sp">Él <span class="hi">estaría</span> durmiendo cuando lo llamaste. Por eso no atendió el teléfono.</span><span class="ex-ja">君が電話した時、彼は寝ていたのだろう。だから電話に出なかったのだ。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi">estaría durmiendo</span>：過去未来進行形。「（確証はないが）寝ていたのだろう」という<span class="hi">過去の推量</span></li>
+    <li>事実として述べるなら <span class="mono">estaba durmiendo</span>（線過去進行形）。<span class="hi-r">推量なら過去未来</span></li>
+    <li><span class="mono">atender el teléfono</span>：電話に出る ／ <span class="mono">por eso</span>：だから</li>
+  </ul>
+</div>
+
+<div class="sub2">用法 3：婉曲的な表現や条件文の帰結節で使う</div>
+<div class="ex"><span class="ex-sp">¿Estás libre este fin de semana? Nos <span class="hi">gustaría</span> invitarte a casa.</span><span class="ex-ja">今週末は空いている？家に招待したいのだけど。</span></div>
+<div class="ex"><span class="ex-sp">De ser elegido presidente, ¿qué <span class="hi">haría</span> usted? — <span class="hi">Prohibiría</span> trabajar los domingos.</span><span class="ex-ja">もし大統領に選ばれたら、あなたは何をしますか？ — 日曜日に働くことを禁止します。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi">Nos gustaría</span>：<span class="mono">Nos gusta</span> より<span class="hi">丁寧で控えめ</span>な言い方。英語の "would like" と同じ発想</li>
+    <li><span class="mono hi2">De ＋ 不定詞</span>：「もし〜ならば」という条件を表す（<span class="mono">Si ＋ 接続法過去</span> の代用。→ 10課「条件文」）</li>
+    <li>条件文の<span class="hi">帰結節（結果を述べる部分）</span>は過去未来になる。詳しくは10課で扱う</li>
+    <li><span class="mono">elegir</span>（動）選ぶ ／ <span class="mono">prohibir</span>（動）禁止する</li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　過去未来も未来と同じく<b>「不定詞 ＋ haber」</b>由来ですが、こちらは haber の<b>線過去</b>（<span class="mono">había, habías…</span>）と結合しました。<span class="mono">hablar había</span> → <span class="mono">hablaría</span>。だから語尾が線過去の <span class="mono">-ía</span> 系とそっくりなのです。「未来＝現在から見た先」「過去未来＝過去から見た先」という関係が、そのまま「haber の現在形／線過去」の対比に対応しています。日本語では「過去未来」と呼びますが、スペイン語の名称 <span class="mono">condicional</span>（条件法）は用法3の条件文用法に由来しています。</span>
+</div>
+
+<div class="mini-check" id="L8-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Yo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hablaría</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">hablar：規則過去未来</span></span> con ella si pudiera.</div>
+  <div class="mini-check-ja">できることなら私は彼女と話すだろう。</div>
+<div class="srs-rate" data-qid="L8-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：過去未来</div>
+
+  <div class="quiz-item" id="L8-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Me <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">gustaría</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">gustar：丁寧・控えめな表現</span></span> visitar España algún día.</div>
+    <div class="quiz-ja">いつかスペインを訪れたいものだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>gustaría</b>：gustaより丁寧で控えめな表現。「〜したいものだ」という婉曲的な願望を表す。</div>
+  <div class="srs-rate" data-qid="L8-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L8-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Él dijo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">vendría</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">venir：不規則過去未来、時制の一致</span></span> mañana.</div>
+    <div class="quiz-ja">彼は明日来るだろうと言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>vendría</b>：venirの不規則語根vendr-＋過去未来語尾。主節が過去（dijo）で、直接話法の未来（vendré）が過去未来に対応する時制の一致。</div>
+  <div class="srs-rate" data-qid="L8-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L8-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>poder</b> の過去未来を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">podría</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">podrías</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">podría</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">podríamos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">podríais</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">podrían</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">過去未来の不規則語根は未来形と全く同じ（poder→podr-）。語尾だけが未来形の-é系ではなく-ía系になる。</div>
+  <div class="srs-rate" data-qid="L8-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ④ 過去未来完了 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">過去未来完了</span>
+  <span class="sec-es">Condicional compuesto</span>
+</div>
+
+<div class="box box-rule" id="kakomirai-kanryo">
+  <div class="box-title">過去未来完了の作り方</div>
+  <div style="text-align:center;font-size:15px;margin:10px 0 8px;font-weight:700;">
+    <span class="hi-r">haber の過去未来（不規則活用）</span>　＋　<span class="hi2">過去分詞</span>
+  </div>
+  <p class="note" style="text-align:center;margin:0;">過去分詞は<span class="hi">性・数による変化なし</span></p>
+  <div class="tbl-wrap" style="margin-top:8px">
+  <table>
+    <thead><tr><th>人称</th><th style="background:#dde8f5;color:var(--accent)">haber の過去未来</th><th>hablar の例</th></tr></thead>
+    <tbody>
+      <tr><td class="td-key td-c">yo</td><td class="td-c mono hi-r"><b>habría</b></td><td class="td-c mono">habría hablado</td></tr>
+      <tr><td class="td-key td-c">tú</td><td class="td-c mono hi-r"><b>habrías</b></td><td class="td-c mono">habrías hablado</td></tr>
+      <tr><td class="td-key td-c">él/ella</td><td class="td-c mono hi-r"><b>habría</b></td><td class="td-c mono">habría hablado</td></tr>
+      <tr><td class="td-key td-c">nosotros</td><td class="td-c mono hi2"><b>habríamos</b></td><td class="td-c mono">habríamos hablado</td></tr>
+      <tr><td class="td-key td-c">vosotros</td><td class="td-c mono hi-r"><b>habríais</b></td><td class="td-c mono">habríais hablado</td></tr>
+      <tr><td class="td-key td-c">ellos/ellas</td><td class="td-c mono hi-r"><b>habrían</b></td><td class="td-c mono">habrían hablado</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="sub2">用法 1：過去から見て未来のある時点には完了している行為や状態、意思を表す</div>
+<div class="ex"><span class="ex-sp">Los alumnos le prometieron a la profesora que <span class="hi">habrían presentado</span> sus reportes antes del comienzo de las vacaciones.</span><span class="ex-ja">生徒たちは休暇が始まる前にレポートを提出しておくと先生に約束した。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li>直接話法なら <span class="mono">"Habremos presentado…"</span>（未来完了）→ 主節が過去なので<span class="hi">過去未来完了</span>へ</li>
+    <li><span class="mono">prometer</span>（動）約束する ／ <span class="mono">reporte</span>（男）レポート ／ <span class="mono">comienzo</span>（男）開始</li>
+  </ul>
+</div>
+
+<div class="sub2">用法 2：過去のある時点で完了している行為や状態についての推量を表す</div>
+<div class="ex"><span class="ex-sp">Ellos sabían el secreto. Seguramente alguien se lo <span class="hi">habría dicho</span>.</span><span class="ex-ja">彼らは秘密を知っていた。きっと誰かが彼らにそれを言ったのだろう。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi">se lo habría dicho</span>：「知っていた」時点より前に完了していた出来事についての推量</li>
+    <li><span class="mono">se lo</span>：<span class="mono">le＋lo → se lo</span>（3課ルール③）。「彼らに（se）それを（lo）」</li>
+    <li><span class="mono">seguramente</span>（副）きっと・おそらく ／ <span class="mono">secreto</span>（男）秘密</li>
+  </ul>
+</div>
+
+<div class="sub2">用法 3：条件文の帰結節に使われる（→ 10課参照）</div>
+<div class="ex"><span class="ex-sp">Tus niños, de haber crecido en la provincia, no <span class="hi">habrían padecido</span> la enfermedad.</span><span class="ex-ja">君の子供たちは、地方で育っていたら、その病気にかからなかっただろうに。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono hi2">de haber ＋ 過去分詞</span>：「もし〜していたら」という<span class="hi">過去の事実に反する</span>条件（<span class="mono">Si hubieran crecido…</span> と同義）</li>
+    <li>過去の事実に反する仮定の帰結は<span class="hi-r">過去未来完了</span>で表す。10課の条件文で詳しく扱う</li>
+    <li><span class="mono">crecer</span>（動）育つ ／ <span class="mono">provincia</span>（女）地方・県 ／ <span class="mono">padecer</span>（動）（病気などを）患う</li>
+  </ul>
+</div>
+
+<div class="box box-rule" id="yontenshiki">
+  <div class="box-title">4時制の関係を1枚で整理</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead>
+      <tr><th></th><th style="background:#dde8f5;color:var(--accent)">単純形</th><th style="background:#d8eeea;color:var(--accent2)">完了形（haber ＋ 過去分詞）</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-rule">現在から見た先</td>
+        <td class="td-c"><b>未来</b><br><span class="mono">hablaré</span></td>
+        <td class="td-c"><b>未来完了</b><br><span class="mono">habré hablado</span></td>
+      </tr>
+      <tr>
+        <td class="td-rule">過去から見た先</td>
+        <td class="td-c"><b>過去未来</b><br><span class="mono">hablaría</span></td>
+        <td class="td-c"><b>過去未来完了</b><br><span class="mono">habría hablado</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:8px;">4つとも語根は共通（不定詞または不規則語根）。違いは<span class="hi">語尾が -é 系か -ía 系か</span>、<span class="hi2">haber を伴うか否か</span>だけ。</p>
+</div>
+
+<div class="mini-check" id="L8-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Yo ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">habría terminado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(habría)＋過去分詞</span></span> el trabajo si hubiera tenido tiempo.</div>
+  <div class="mini-check-ja">時間があれば、私はもう仕事を終えていただろう。</div>
+<div class="srs-rate" data-qid="L8-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：過去未来完了</div>
+
+  <div class="quiz-item" id="L8-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Él me dijo que ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">habría hablado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(habría)＋hablarの過去分詞</span></span> con el jefe antes de las tres.</div>
+    <div class="quiz-ja">彼は3時前にはもう上司と話しているだろうと私に言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>habría hablado</b>：過去のある時点までに完了しているだろうという推量（過去未来完了）。</div>
+  <div class="srs-rate" data-qid="L8-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L8-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Si hubiera sabido la verdad, yo no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">habría dicho</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">haber(habría)＋decirの過去分詞</span></span> eso.</div>
+    <div class="quiz-ja">真実を知っていたら、私はあんなことは言わなかっただろう。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>habría dicho</b>：条件文の帰結節（過去の反実仮想）で使われる過去未来完了。10課でさらに詳しく学ぶ。</div>
+  <div class="srs-rate" data-qid="L8-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L8-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">haber の過去未来を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habría</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habrías</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habría</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habríamos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habríais</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habrían</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">haberの過去未来は不規則語根habr-（未来形と同じ）＋過去未来語尾-ía系。過去未来完了はこれに過去分詞を組み合わせる。</div>
+  <div class="srs-rate" data-qid="L8-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L8-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L8-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L8-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑤ 練習問題 -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">太字の不定詞を未来または未来完了の適切な形に活用させなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">En esa sala <b>caber</b> <span class="blank">______</span> hasta cincuenta personas.</div>
+      <div class="q-ja">その広間には50人まで入ることができるだろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">En esa sala <span class="ans-fill">cabrán</span> hasta cincuenta personas.</span>
+      </div>
+      <div class="q-exp"><b>cabrán</b>：<span class="mono">caber</span> の未来3複。「e が脱落」型で語根は <span class="mono">cabr-</span>。主語は <span class="mono">cincuenta personas</span>（3人称複数）。<br>※ <span class="mono">caber</span>（動）入り得る・収容できる ／ <span class="mono">sala</span>（女）広間・ホール</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Dada la caída del precio de petróleo, algunos países <b>sufrir</b> <span class="blank">______</span> otra crisis económica.</div>
+      <div class="q-ja">石油価格の下落を考えると、いくつかの国はまた経済危機に見舞われるだろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">… algunos países <span class="ans-fill">sufrirán</span> otra crisis económica.</span>
+      </div>
+      <div class="q-exp"><b>sufrirán</b>：<span class="mono">sufrir</span> の未来3複（規則活用：不定詞＋<span class="mono">-án</span>）。これから起こることの予測なので未来形。<br>※ <span class="mono">dado/da ＋ 名詞</span>：〜を考慮すると ／ <span class="mono">caída</span>（女）下落 ／ <span class="mono">petróleo</span>（男）石油</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">A juzgar por su piel bronceada, ellos <b>pasar</b> <span class="blank">______</span> las vacaciones en alguna isla tropical.</div>
+      <div class="q-ja">日焼けした肌から判断するに、彼らはどこか南の島で休暇を過ごしてきたのだろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">… ellos <span class="ans-fill">habrán pasado</span> las vacaciones en alguna isla tropical.</span>
+      </div>
+      <div class="q-exp"><b>habrán pasado</b>：未来完了3複。「休暇を過ごす」のは<span class="hi">すでに完了した</span>出来事で、それを現時点で推量している（用法2）。単なる未来 <span class="mono">pasarán</span> だと「これから過ごすだろう」になり、日焼けの根拠と合わない。<br>※ <span class="mono">a juzgar por 〜</span>：〜から判断すると ／ <span class="mono">bronceado/da</span>（形）日焼けした</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Este partido de béisbol no <b>terminar</b> <span class="blank">______</span> antes de las diez de la noche.</div>
+      <div class="q-ja">この野球の試合は夜10時前には終わらないだろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Este partido de béisbol no <span class="ans-fill">terminará</span> antes de las diez de la noche.</span>
+      </div>
+      <div class="q-exp"><b>terminará</b>：<span class="mono">terminar</span> の未来3単。試合が「終わる」のはこれからの出来事なので未来形。<br>※ <span class="mono">habrá terminado</span> とすると「10時前には終わってしまっているだろう」となり、否定文の意味が変わる。<br>※ <span class="mono">partido</span>（男）試合</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">太字の不定詞を過去未来または過去未来完了の適切な形に活用させなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Su esposa le preguntó si <b>poder</b> <span class="blank">______</span> recogerla en el aeropuerto.</div>
+      <div class="q-ja">彼の妻は、空港まで迎えに来られるかと彼に尋ねた。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">… le preguntó si <span class="ans-fill">podría</span> recogerla en el aeropuerto.</span>
+      </div>
+      <div class="q-exp"><b>podría</b>：<span class="mono">poder</span> の過去未来3単（語根 <span class="mono">podr-</span>）。主節 <span class="mono">preguntó</span>（点過去）に対し、従属節の内容はそれより<span class="hi">後</span>のこと → 時制の一致で過去未来。直接話法なら <span class="mono">"¿Podrás recogerme…?"</span><br>※ <span class="mono">recoger</span>（動）迎えに行く・拾う</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence"><b>Ser</b> <span class="blank">______</span> las siete de la mañana cuando nació nuestro primer nieto.</div>
+      <div class="q-ja">私たちの初孫が生まれたのは、朝の7時頃だっただろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Serían</span> las siete de la mañana cuando nació nuestro primer nieto.</span>
+      </div>
+      <div class="q-exp"><b>Serían</b>：<span class="mono">ser</span> の過去未来3複（規則活用）。<span class="hi">過去の推量</span>（用法2）。事実として断定するなら <span class="mono">Eran las siete</span>（線過去・7課）だが、「〜頃だっただろう」とぼかすので過去未来。時刻なので複数形。<br>※ <span class="mono">nieto, -a</span>（名）孫</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Sospeché que esos hombres tan simpáticos me <b>engañar</b> <span class="blank">______</span>.</div>
+      <div class="q-ja">あんなに感じのいい男たちが私を騙したのではないかと疑った。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">… me <span class="ans-fill">habrían engañado</span>.</span>
+      </div>
+      <div class="q-exp"><b>habrían engañado</b>：過去未来完了3複。「疑った」（点過去）時点より<span class="hi-r">前</span>にすでに完了していた出来事についての推量（用法2）。<br>※ <span class="mono">sospechar</span>（動）疑う ／ <span class="mono">engañar</span>（動）騙す ／ <span class="mono">simpático/ca</span>（形）感じのいい</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Yo en tu lugar, no <b>aceptar</b> <span class="blank">______</span> tal proposición.</div>
+      <div class="q-ja">私が君の立場だったら、そんな申し出は受け入れないだろう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Yo en tu lugar, no <span class="ans-fill">aceptaría</span> tal proposición.</span>
+      </div>
+      <div class="q-exp"><b>aceptaría</b>：<span class="mono">aceptar</span> の過去未来1単。<span class="mono">Yo en tu lugar</span>（＝<span class="mono">Si yo estuviera en tu lugar</span>）という<span class="hi">事実に反する仮定</span>を受けた帰結節なので過去未来（用法3）。<br>※ <span class="mono">en tu lugar</span>：君の立場なら ／ <span class="mono">tal</span>（形）そのような ／ <span class="mono">proposición</span>（女）提案・申し出</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">この課の Lectura（El spanglish: ¿idioma del futuro?）の内容に関連した質問にスペイン語で答えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge orange">1</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Cuándo se creó el <i>spanglish</i>?</div>
+      <div class="q-ja">スパングリッシュはいつ生まれましたか。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Se creó en la segunda mitad del siglo XX, con la llegada de inmigrantes hispanohablantes a Estados Unidos.</span></span>
+      </div>
+      <div class="q-exp">本文2段落目より。<span class="mono">se creó</span>＝再帰受身の点過去（5課・6課）。<span class="mono">mitad</span>（女）半分 ／ <span class="mono">llegada</span>（女）到来 ／ <span class="mono">hispanohablante</span>（形・名）スペイン語を話す（人）</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Aproximadamente, ¿cuántas personas lo conocen en Estados Unidos?</div>
+      <div class="q-ja">アメリカでおよそ何人がそれを知っていますか。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Lo conocen unos cincuenta millones de hispanos.</span></span>
+      </div>
+      <div class="q-exp">本文3段落目より。<span class="mono">unos ＋ 数詞</span>：およそ〜。<span class="mono">en mayor o menor medida</span>「程度の差はあれ」という限定が付いている点にも注意。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">3</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Crees que en el futuro el <i>spanglish</i> desaparecerá o se mantendrá vivo?</div>
+      <div class="q-ja">将来スパングリッシュは消滅すると思いますか、それとも生き残ると思いますか。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Creo que se mantendrá vivo, porque cada vez se usa más en la publicidad y en la literatura.</span></span>
+      </div>
+      <div class="q-exp">自由記述。<span class="hi">未来形の練習</span>を兼ねた設問なので <span class="mono">desaparecerá / se mantendrá / seguirá</span> などを使って答えるとよい。<span class="mono">mantenerse</span>（再動）保たれる（<span class="mono">tener</span> 型 → 未来 <span class="mono">se mantendrá</span>）</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge orange">4</span>
+    <div class="q-content">
+      <div class="q-sentence">En el caso del japonés, ¿se ha mezclado con el inglés tanto como el <i>spanglish</i>?</div>
+      <div class="q-ja">日本語の場合、スパングリッシュと同じくらい英語と混ざっていますか。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">No tanto, pero el japonés tiene muchos préstamos del inglés que se escriben en katakana.</span></span>
+      </div>
+      <div class="q-exp">自由記述。<span class="mono">tanto como 〜</span>「〜と同じくらい」（4課・同等比較）。<span class="mono">préstamo</span>（男）借用語 ／ <span class="mono">mezclarse</span>（再動）混ざる</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">私はラテンアメリカを知りたいのです。来年8月に南米を旅行するつもりです。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Quiero conocer Latinoamérica. Viajaré por Sudamérica en agosto del año que viene.</span></span>
+      </div>
+      <div class="q-exp"><b>Viajaré</b>：未来形で「〜するつもりだ」という意思を表す（用法1）。<span class="mono">Voy a viajar</span> でも可。<br>※「〜を旅行する」は <span class="mono">viajar por ＋ 地域</span>。<span class="mono">el año que viene / el próximo año</span>：来年</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">そのときまでに、旅行用のお金を貯めて（ahorrar dinero）いることでしょう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Para entonces habré ahorrado el dinero para el viaje.</span></span>
+      </div>
+      <div class="q-exp"><b>habré ahorrado</b>：未来完了。<span class="mono">para entonces</span>（そのときまでに）という<span class="hi">未来の期限</span>があるので、単純未来ではなく未来完了を使う（用法1）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">だったら、中米に行ったらどうですか？　もっと安いでしょう。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Entonces, ¿por qué no vas a Centroamérica? Será más barato.</span></span>
+      </div>
+      <div class="q-exp"><b>Será</b>：<span class="hi">現在についての推量</span>の未来（用法2）。「今の相場として安いだろう」という意味なので <span class="mono">es</span> でも <span class="mono">sería</span> でもなく <span class="mono">será</span> が自然。<br>※ <span class="mono">¿por qué no ＋ 直説法現在?</span>：〜したらどう？（提案）</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">でも、メキシコやコスタリカよりはアルゼンチンやペルーを訪れたいのです（preferir の過去未来を使う）。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Pero preferiría visitar Argentina o Perú antes que México o Costa Rica.</span></span>
+      </div>
+      <div class="q-exp"><b>preferiría</b>：<span class="mono">preferir</span> の過去未来1単（規則活用）。<span class="hi">婉曲用法</span>（用法3）で「〜したいのですが」と控えめに希望を述べる。<br>※ <span class="mono">A antes que B</span>：BよりAを（優先して）。<span class="mono">más que</span> でも可</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑥ 語彙リスト -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">科学と技術</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">ciencia</span><span class="pill-pos">女</span><span class="pill-ja">科学</span></span>
+  <span class="pill"><span class="pill-es">científico, -a</span><span class="pill-pos">名</span><span class="pill-ja">科学者</span></span>
+  <span class="pill"><span class="pill-es">desarrollo</span><span class="pill-pos">男</span><span class="pill-ja">開発・発展</span></span>
+  <span class="pill"><span class="pill-es">energía nuclear (atómica)</span><span class="pill-pos">女</span><span class="pill-ja">原子力</span></span>
+  <span class="pill"><span class="pill-es">energía renovable</span><span class="pill-pos">女</span><span class="pill-ja">再生可能エネルギー</span></span>
+  <span class="pill"><span class="pill-es">futuro</span><span class="pill-pos">男</span><span class="pill-ja">未来</span></span>
+  <span class="pill"><span class="pill-es">innovación</span><span class="pill-pos">女</span><span class="pill-ja">革新</span></span>
+  <span class="pill"><span class="pill-es">investigación</span><span class="pill-pos">女</span><span class="pill-ja">研究</span></span>
+  <span class="pill"><span class="pill-es">tecnología avanzada / de punta</span><span class="pill-pos">女</span><span class="pill-ja">先進技術・先端技術</span></span>
+</div>
+
+<div class="vocab-category">環境</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">ahorrar</span><span class="pill-pos">動</span><span class="pill-ja">節約する・貯める</span></span>
+  <span class="pill"><span class="pill-es">proteger</span><span class="pill-pos">動</span><span class="pill-ja">保護する</span></span>
+  <span class="pill"><span class="pill-es">reciclar</span><span class="pill-pos">動</span><span class="pill-ja">再利用する</span></span>
+  <span class="pill"><span class="pill-es">basura</span><span class="pill-pos">女</span><span class="pill-ja">ごみ</span></span>
+  <span class="pill"><span class="pill-es">calentamiento global</span><span class="pill-pos">男</span><span class="pill-ja">地球温暖化</span></span>
+  <span class="pill"><span class="pill-es">contaminación</span><span class="pill-pos">女</span><span class="pill-ja">汚染</span></span>
+  <span class="pill"><span class="pill-es">ecología</span><span class="pill-pos">女</span><span class="pill-ja">エコロジー・生態学</span></span>
+  <span class="pill"><span class="pill-es">medio ambiente</span><span class="pill-pos">男</span><span class="pill-ja">環境</span></span>
+  <span class="pill"><span class="pill-es">naturaleza</span><span class="pill-pos">女</span><span class="pill-ja">自然</span></span>
+</div>
+
+<div class="vocab-category">政治</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">corrupción</span><span class="pill-pos">女</span><span class="pill-ja">汚職</span></span>
+  <span class="pill"><span class="pill-es">democracia</span><span class="pill-pos">女</span><span class="pill-ja">民主主義</span></span>
+  <span class="pill"><span class="pill-es">dictadura</span><span class="pill-pos">女</span><span class="pill-ja">独裁</span></span>
+  <span class="pill"><span class="pill-es">república</span><span class="pill-pos">女</span><span class="pill-ja">共和国</span></span>
+  <span class="pill"><span class="pill-es">ejército</span><span class="pill-pos">男</span><span class="pill-ja">軍</span></span>
+  <span class="pill"><span class="pill-es">elección</span><span class="pill-pos">女</span><span class="pill-ja">選挙</span></span>
+  <span class="pill"><span class="pill-es">voto</span><span class="pill-pos">男</span><span class="pill-ja">投票</span></span>
+  <span class="pill"><span class="pill-es">gobierno</span><span class="pill-pos">男</span><span class="pill-ja">政府</span></span>
+  <span class="pill"><span class="pill-es">guerra</span><span class="pill-pos">女</span><span class="pill-ja">戦争</span></span>
+  <span class="pill"><span class="pill-es">paz</span><span class="pill-pos">女</span><span class="pill-ja">平和</span></span>
+  <span class="pill"><span class="pill-es">partido político</span><span class="pill-pos">男</span><span class="pill-ja">政党</span></span>
+  <span class="pill"><span class="pill-es">poder</span><span class="pill-pos">男</span><span class="pill-ja">権力</span></span>
+  <span class="pill"><span class="pill-es">política</span><span class="pill-pos">女</span><span class="pill-ja">政治</span></span>
+  <span class="pill"><span class="pill-es">político, -a</span><span class="pill-pos">名</span><span class="pill-ja">政治家</span></span>
+  <span class="pill"><span class="pill-es">diplomático, -a</span><span class="pill-pos">名</span><span class="pill-ja">外交官</span></span>
+  <span class="pill"><span class="pill-es">presidente, -a</span><span class="pill-pos">名</span><span class="pill-ja">大統領</span></span>
+  <span class="pill"><span class="pill-es">primer, -a ministro, -a</span><span class="pill-pos">名</span><span class="pill-ja">首相</span></span>
+  <span class="pill"><span class="pill-es">diputado, -a</span><span class="pill-pos">名</span><span class="pill-ja">下院議員</span></span>
+  <span class="pill"><span class="pill-es">reina</span><span class="pill-pos">女</span><span class="pill-ja">女王</span></span>
+  <span class="pill"><span class="pill-es">rey</span><span class="pill-pos">男</span><span class="pill-ja">王</span></span>
+  <span class="pill"><span class="pill-es">emperador</span><span class="pill-pos">男</span><span class="pill-ja">皇帝・天皇</span></span>
+  <span class="pill"><span class="pill-es">emperatriz</span><span class="pill-pos">女</span><span class="pill-ja">女帝・皇后</span></span>
+</div>
+
+<div class="vocab-category">教育（動詞・表現）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">aprender</span><span class="pill-pos">動</span><span class="pill-ja">学ぶ</span></span>
+  <span class="pill"><span class="pill-es">aprobar</span><span class="pill-pos">動</span><span class="pill-ja">合格する</span></span>
+  <span class="pill"><span class="pill-es">suspender</span><span class="pill-pos">動</span><span class="pill-ja">落第する</span></span>
+  <span class="pill"><span class="pill-es">estudiar</span><span class="pill-pos">動</span><span class="pill-ja">勉強する</span></span>
+  <span class="pill"><span class="pill-es">asistir a una clase</span><span class="pill-pos">表現</span><span class="pill-ja">授業に出席する</span></span>
+  <span class="pill"><span class="pill-es">dar / tener clases</span><span class="pill-pos">表現</span><span class="pill-ja">授業を受け持つ／がある</span></span>
+  <span class="pill"><span class="pill-es">practicar</span><span class="pill-pos">動</span><span class="pill-ja">練習する</span></span>
+  <span class="pill"><span class="pill-es">preparar</span><span class="pill-pos">動</span><span class="pill-ja">予習する</span></span>
+  <span class="pill"><span class="pill-es">repasar</span><span class="pill-pos">動</span><span class="pill-ja">復習する</span></span>
+  <span class="pill"><span class="pill-es">repetir</span><span class="pill-pos">動</span><span class="pill-ja">反復する</span></span>
+</div>
+
+<div class="vocab-category">教育（施設・制度）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">aula</span><span class="pill-pos">女</span><span class="pill-ja">教室</span></span>
+  <span class="pill"><span class="pill-es">biblioteca</span><span class="pill-pos">女</span><span class="pill-ja">図書館</span></span>
+  <span class="pill"><span class="pill-es">cooperativa</span><span class="pill-pos">女</span><span class="pill-ja">生協</span></span>
+  <span class="pill"><span class="pill-es">colegio</span><span class="pill-pos">男</span><span class="pill-ja">カレッジ</span></span>
+  <span class="pill"><span class="pill-es">curso</span><span class="pill-pos">男</span><span class="pill-ja">講座・学年</span></span>
+  <span class="pill"><span class="pill-es">diploma</span><span class="pill-pos">男</span><span class="pill-ja">証書</span></span>
+  <span class="pill"><span class="pill-es">educación</span><span class="pill-pos">女</span><span class="pill-ja">教育</span></span>
+  <span class="pill"><span class="pill-es">escuela de idiomas</span><span class="pill-pos">女</span><span class="pill-ja">語学学校</span></span>
+  <span class="pill"><span class="pill-es">examen</span><span class="pill-pos">男</span><span class="pill-ja">試験</span></span>
+  <span class="pill"><span class="pill-es">horario</span><span class="pill-pos">男</span><span class="pill-ja">時間割</span></span>
+  <span class="pill"><span class="pill-es">instituto</span><span class="pill-pos">男</span><span class="pill-ja">研究所</span></span>
+  <span class="pill"><span class="pill-es">matrícula</span><span class="pill-pos">女</span><span class="pill-ja">登録</span></span>
+  <span class="pill"><span class="pill-es">crédito</span><span class="pill-pos">男</span><span class="pill-ja">単位</span></span>
+  <span class="pill"><span class="pill-es">universidad</span><span class="pill-pos">女</span><span class="pill-ja">大学</span></span>
+  <span class="pill"><span class="pill-es">administración</span><span class="pill-pos">女</span><span class="pill-ja">事務部</span></span>
+  <span class="pill"><span class="pill-es">actividades del club</span><span class="pill-pos">女複</span><span class="pill-ja">クラブ活動</span></span>
+</div>
+
+<div class="vocab-category">教育（学問分野）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">artes liberales</span><span class="pill-pos">女複</span><span class="pill-ja">教養科目</span></span>
+  <span class="pill"><span class="pill-es">bellas artes</span><span class="pill-pos">女複</span><span class="pill-ja">美術</span></span>
+  <span class="pill"><span class="pill-es">biología</span><span class="pill-pos">女</span><span class="pill-ja">生物学</span></span>
+  <span class="pill"><span class="pill-es">derecho</span><span class="pill-pos">男</span><span class="pill-ja">法学</span></span>
+  <span class="pill"><span class="pill-es">economía</span><span class="pill-pos">女</span><span class="pill-ja">経済学</span></span>
+  <span class="pill"><span class="pill-es">filosofía</span><span class="pill-pos">女</span><span class="pill-ja">哲学</span></span>
+  <span class="pill"><span class="pill-es">física</span><span class="pill-pos">女</span><span class="pill-ja">物理学</span></span>
+  <span class="pill"><span class="pill-es">historia</span><span class="pill-pos">女</span><span class="pill-ja">歴史学</span></span>
+  <span class="pill"><span class="pill-es">ciencias naturales</span><span class="pill-pos">女複</span><span class="pill-ja">自然科学</span></span>
+  <span class="pill"><span class="pill-es">humanidades</span><span class="pill-pos">女複</span><span class="pill-ja">人文科学</span></span>
+  <span class="pill"><span class="pill-es">matemáticas</span><span class="pill-pos">女複</span><span class="pill-ja">数学</span></span>
+  <span class="pill"><span class="pill-es">medicina</span><span class="pill-pos">女</span><span class="pill-ja">医学</span></span>
+  <span class="pill"><span class="pill-es">música</span><span class="pill-pos">女</span><span class="pill-ja">音楽</span></span>
+  <span class="pill"><span class="pill-es">química</span><span class="pill-pos">女</span><span class="pill-ja">化学</span></span>
+</div>
+
+<div class="vocab-category">本課の例文・練習に登場する語</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">caber</span><span class="pill-pos">動</span><span class="pill-ja">入り得る・収容できる</span></span>
+  <span class="pill"><span class="pill-es">jurar</span><span class="pill-pos">動</span><span class="pill-ja">誓う</span></span>
+  <span class="pill"><span class="pill-es">manejar</span><span class="pill-pos">動</span><span class="pill-ja">扱う・操作する</span></span>
+  <span class="pill"><span class="pill-es">anochecer</span><span class="pill-pos">動</span><span class="pill-ja">日が暮れる</span></span>
+  <span class="pill"><span class="pill-es">prohibir</span><span class="pill-pos">動</span><span class="pill-ja">禁止する</span></span>
+  <span class="pill"><span class="pill-es">elegir</span><span class="pill-pos">動</span><span class="pill-ja">選ぶ</span></span>
+  <span class="pill"><span class="pill-es">padecer</span><span class="pill-pos">動</span><span class="pill-ja">（病を）患う</span></span>
+  <span class="pill"><span class="pill-es">crecer</span><span class="pill-pos">動</span><span class="pill-ja">育つ・成長する</span></span>
+  <span class="pill"><span class="pill-es">engañar</span><span class="pill-pos">動</span><span class="pill-ja">騙す</span></span>
+  <span class="pill"><span class="pill-es">sospechar</span><span class="pill-pos">動</span><span class="pill-ja">疑う</span></span>
+  <span class="pill"><span class="pill-es">recoger</span><span class="pill-pos">動</span><span class="pill-ja">迎えに行く・拾う</span></span>
+  <span class="pill"><span class="pill-es">prometer</span><span class="pill-pos">動</span><span class="pill-ja">約束する</span></span>
+  <span class="pill"><span class="pill-es">nube</span><span class="pill-pos">女</span><span class="pill-ja">雲</span></span>
+  <span class="pill"><span class="pill-es">petróleo</span><span class="pill-pos">男</span><span class="pill-ja">石油</span></span>
+  <span class="pill"><span class="pill-es">caída</span><span class="pill-pos">女</span><span class="pill-ja">下落・落下</span></span>
+  <span class="pill"><span class="pill-es">crisis</span><span class="pill-pos">女</span><span class="pill-ja">危機（単複同形）</span></span>
+  <span class="pill"><span class="pill-es">nieto, -a</span><span class="pill-pos">名</span><span class="pill-ja">孫</span></span>
+  <span class="pill"><span class="pill-es">proposición</span><span class="pill-pos">女</span><span class="pill-ja">提案・申し出</span></span>
+  <span class="pill"><span class="pill-es">secreto</span><span class="pill-pos">男</span><span class="pill-ja">秘密</span></span>
+  <span class="pill"><span class="pill-es">provincia</span><span class="pill-pos">女</span><span class="pill-ja">地方・県</span></span>
+  <span class="pill"><span class="pill-es">bronceado/da</span><span class="pill-pos">形</span><span class="pill-ja">日焼けした</span></span>
+  <span class="pill"><span class="pill-es">seguramente</span><span class="pill-pos">副</span><span class="pill-ja">きっと・おそらく</span></span>
+  <span class="pill"><span class="pill-es">a juzgar por</span><span class="pill-pos">表現</span><span class="pill-ja">〜から判断すると</span></span>
+  <span class="pill"><span class="pill-es">en tu lugar</span><span class="pill-pos">表現</span><span class="pill-ja">君の立場なら</span></span>
+</div>
+
+<div class="vocab-category">Lectura（spanglish）の語</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">idioma</span><span class="pill-pos">男</span><span class="pill-ja">言語</span></span>
+  <span class="pill"><span class="pill-es">lenguaje</span><span class="pill-pos">男</span><span class="pill-ja">言語・言葉づかい</span></span>
+  <span class="pill"><span class="pill-es">inmigrante</span><span class="pill-pos">名</span><span class="pill-ja">移民</span></span>
+  <span class="pill"><span class="pill-es">hispanohablante</span><span class="pill-pos">形・名</span><span class="pill-ja">スペイン語を話す（人）</span></span>
+  <span class="pill"><span class="pill-es">bilingüismo</span><span class="pill-pos">男</span><span class="pill-ja">バイリンガル状況</span></span>
+  <span class="pill"><span class="pill-es">mezcla</span><span class="pill-pos">女</span><span class="pill-ja">混合</span></span>
+  <span class="pill"><span class="pill-es">dar lugar a</span><span class="pill-pos">表現</span><span class="pill-ja">〜を生み出す</span></span>
+  <span class="pill"><span class="pill-es">empobrecido/da</span><span class="pill-pos">形</span><span class="pill-ja">貧弱化した</span></span>
+  <span class="pill"><span class="pill-es">desaparecer</span><span class="pill-pos">動</span><span class="pill-ja">消滅する</span></span>
+  <span class="pill"><span class="pill-es">mantenerse</span><span class="pill-pos">再動</span><span class="pill-ja">保たれる・存続する</span></span>
+  <span class="pill"><span class="pill-es">publicidad</span><span class="pill-pos">女</span><span class="pill-ja">広告・宣伝</span></span>
+  <span class="pill"><span class="pill-es">obra literaria</span><span class="pill-pos">女</span><span class="pill-ja">文学作品</span></span>
+</div>
+
+<!-- ⑦ まとめ -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">未来の作り方</td><td><span class="hi">不定詞そのもの</span>＋ <span class="mono">-é / -ás / -á / -emos / -éis / -án</span>（-ar/-er/-ir 共通）</td></tr>
+    <tr><td class="td-rule">未来のアクセント</td><td>nosotros 形（-emos）以外はすべてアクセント記号付き</td></tr>
+    <tr><td class="td-rule">未来の不規則①</td><td>e が脱落：<span class="mono">saber→sabré, caber→cabré, poder→podré, querer→querré, haber→habré</span></td></tr>
+    <tr><td class="td-rule">未来の不規則②</td><td>e, i が d に：<span class="mono">poner→pondré, salir→saldré, tener→tendré, venir→vendré</span></td></tr>
+    <tr><td class="td-rule">未来の不規則③</td><td>語根が短縮：<span class="mono">hacer→haré, decir→diré</span></td></tr>
+    <tr><td class="td-rule">未来の用法</td><td>①未来の行為・状態・意思　②<b>現在</b>についての推量（<span class="mono">estará lleno</span>「今混んでいるだろう」）</td></tr>
+    <tr><td class="td-rule">未来完了の作り方</td><td><span class="mono">habré / habrás / habrá / habremos / habréis / habrán</span> ＋ 過去分詞（性数変化なし）</td></tr>
+    <tr><td class="td-rule">未来完了の用法</td><td>①未来のある時点までに完了　②<b>現時点</b>で完了していることの推量</td></tr>
+    <tr><td class="td-rule">過去未来の作り方</td><td><span class="hi">不定詞そのもの</span>＋ <span class="mono">-ía / -ías / -ía / -íamos / -íais / -ían</span>（全人称アクセント記号付き）</td></tr>
+    <tr><td class="td-rule">過去未来の不規則</td><td>語根は<b>未来と全く同じ</b>（<span class="mono">sabría, pondría, haría, diría, habría</span>…）</td></tr>
+    <tr><td class="td-rule">線過去との区別</td><td><span class="mono">comía</span>＝線過去（語根＋-ía）／ <span class="mono">comería</span>＝過去未来（<b>不定詞</b>＋-ía）</td></tr>
+    <tr><td class="td-rule">過去未来の用法</td><td>①過去から見た未来（時制の一致）　②<b>過去</b>の推量　③婉曲・条件文の帰結節</td></tr>
+    <tr><td class="td-rule">過去未来完了の作り方</td><td><span class="mono">habría / habrías / habría / habríamos / habríais / habrían</span> ＋ 過去分詞</td></tr>
+    <tr><td class="td-rule">過去未来完了の用法</td><td>①過去から見た未来の時点で完了　②<b>過去の時点</b>で完了していたことの推量　③条件文の帰結節（10課）</td></tr>
+    <tr><td class="td-rule">時制の一致（総合）</td><td>主節が過去 → 従属節は、前＝過去完了／同時＝線過去／<b>後＝過去未来</b></td></tr>
+    <tr><td class="td-rule">推量の対応表</td><td>現在→未来 ／ 現在完了→未来完了 ／ 過去→過去未来 ／ 過去完了→過去未来完了</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 8 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① 未来</a>
+    <a class="fn-item" href="#sec2">② 未来完了</a>
+    <a class="fn-item" href="#sec3">③ 過去未来</a>
+    <a class="fn-item" href="#sec4">④ 過去未来完了</a>
+    <a class="fn-item" href="#sec5">⑤ 練習問題</a>
+    <a class="fn-item" href="#sec6">⑥ 語彙リスト</a>
+    <a class="fn-item" href="#sec7">⑦ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['未来','futuro','futuro simple','未来形','hablaré','viviré'], id: 'sec1', label: '未来（①節）' },
+  { terms: ['未来 不規則','sabré','pondré','haré','diré','tendré','vendré','saldré','podré','querré','cabré'], id: 'mirai-fukisoku', label: '未来の不規則活用（①節）' },
+  { terms: ['未来の用法','推量','現在の推量'], id: 'mirai-yoho', label: '未来の用法（①節）' },
+  { terms: ['未来完了','futuro compuesto','habré','habrán'], id: 'sec2', label: '未来完了（②節）' },
+  { terms: ['未来完了の作り方','haber 未来'], id: 'mirai-kanryo-tsukurikata', label: '未来完了の作り方（②節）' },
+  { terms: ['過去未来','condicional','condicional simple','hablaría','gustaría'], id: 'sec3', label: '過去未来（③節）' },
+  { terms: ['過去未来 不規則','sabría','pondría','haría','diría','tendría','vendría'], id: 'kakomirai-fukisoku', label: '過去未来の不規則活用（③節）' },
+  { terms: ['過去未来の用法','時制の一致','婉曲','条件文 帰結節'], id: 'kakomirai-yoho', label: '過去未来の用法（③節）' },
+  { terms: ['過去未来完了','condicional compuesto','habría','habrían'], id: 'sec4', label: '過去未来完了（④節）' },
+  { terms: ['4時制','時制の整理','単純形 完了形'], id: 'yontenshiki', label: '4時制の関係（④節）' },
+  { terms: ['練習問題','練習'], id: 'sec5', label: '練習問題（⑤節）' },
+  { terms: ['語彙','Vocabulario','科学','環境','政治','教育'], id: 'sec6', label: '語彙リスト（⑥節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec7', label: 'まとめ（⑦節）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語一列①（若林大我）ー2026前期課程Sセメスター</footer>
+
+</body>
+</html>

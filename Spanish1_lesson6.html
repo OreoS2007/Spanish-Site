@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Lección 6 文法解説 | スペイン語一列①</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 点過去形・規則活用</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 不規則①：語根母音変化動詞</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 不規則②：3人称のみ語尾が変化する動詞</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ 不規則③④⑤：強変化動詞・その他</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec5" data-tab="renshu" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec6" data-tab="vocab" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 語彙リスト</a>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ まとめ</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 6 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 6　文法解説</div>
+  <div class="cover-sub">スペイン語一列①　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+</div>
+
+<div class="cover">
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 点過去形・規則活用</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 不規則①：語根母音変化動詞</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 不規則②：3人称のみ語尾が変化する動詞</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ 不規則③④⑤：強変化動詞・その他</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 練習問題</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 語彙リスト</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ まとめ</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：hablé　／　sintió　／　再帰受身…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 点過去形・規則活用 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">点過去形・規則活用</span>
+  <span class="sec-es">Pretérito perfecto simple: conjugación regular</span>
+</div>
+
+<p>点過去形は、過去の行為や状態をひとまとまりの<span class="hi">「完結したもの」</span>として表します。</p>
+
+<div class="box box-rule" style="margin-bottom:14px;">
+  <div class="box-title">活用語尾まとめ（まずここを覚える！）</div>
+  <div class="tbl-wrap" style="margin:6px 0 0;">
+  <table>
+    <thead>
+      <tr>
+        <th></th>
+        <th>yo<br><small style="font-weight:400;color:var(--muted)">私</small></th>
+        <th>tú<br><small style="font-weight:400;color:var(--muted)">君</small></th>
+        <th>él/ella<br><small style="font-weight:400;color:var(--muted)">彼/彼女</small></th>
+        <th>nosotros<br><small style="font-weight:400;color:var(--muted)">私たち</small></th>
+        <th>vosotros<br><small style="font-weight:400;color:var(--muted)">君たち</small></th>
+        <th>ellos<br><small style="font-weight:400;color:var(--muted)">彼ら</small></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-rule" style="background:#dde8f5;color:var(--accent);font-weight:700">-ar 動詞</td>
+        <td class="td-c mono hi"><b>-é</b></td>
+        <td class="td-c mono"><b>-aste</b></td>
+        <td class="td-c mono hi"><b>-ó</b></td>
+        <td class="td-c mono"><b>-amos</b></td>
+        <td class="td-c mono"><b>-asteis</b></td>
+        <td class="td-c mono hi"><b>-aron</b></td>
+      </tr>
+      <tr>
+        <td class="td-rule" style="background:#d8eeea;color:var(--accent2);font-weight:700">-er/-ir 動詞</td>
+        <td class="td-c mono hi2"><b>-í</b></td>
+        <td class="td-c mono"><b>-iste</b></td>
+        <td class="td-c mono hi2"><b>-ió</b></td>
+        <td class="td-c mono"><b>-imos</b></td>
+        <td class="td-c mono"><b>-isteis</b></td>
+        <td class="td-c mono hi2"><b>-ieron</b></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p style="font-size:12px;color:var(--muted);margin:6px 0 0;padding-left:2px;">色付き（<span style="color:var(--accent)">青</span>/<span style="color:var(--accent2)">緑</span>）はアクセント記号あり（yo形・él形）。nosotros形・vosotros形にはアクセント記号なし。</p>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>動詞</th>
+      <th>yo<br><small style="font-weight:400;color:var(--muted)">私</small></th>
+      <th>tú<br><small style="font-weight:400;color:var(--muted)">君</small></th>
+      <th>él/ella<br><small style="font-weight:400;color:var(--muted)">彼/彼女</small></th>
+      <th>nosotros<br><small style="font-weight:400;color:var(--muted)">私たち</small></th>
+      <th>vosotros<br><small style="font-weight:400;color:var(--muted)">君たち</small></th>
+      <th>ellos<br><small style="font-weight:400;color:var(--muted)">彼ら</small></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-rule" style="background:#dde8f5;color:var(--accent)">hablar（-ar）</td>
+      <td class="td-c mono hi">hablé</td>
+      <td class="td-c mono">hablaste</td>
+      <td class="td-c mono hi">habló</td>
+      <td class="td-c mono">hablamos</td>
+      <td class="td-c mono">hablasteis</td>
+      <td class="td-c mono hi">hablaron</td>
+    </tr>
+    <tr>
+      <td class="td-rule" style="background:#d8eeea;color:var(--accent2)">comer（-er）</td>
+      <td class="td-c mono hi2">comí</td>
+      <td class="td-c mono">comiste</td>
+      <td class="td-c mono hi2">comió</td>
+      <td class="td-c mono">comimos</td>
+      <td class="td-c mono">comisteis</td>
+      <td class="td-c mono hi2">comieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule" style="background:#f0e8dd;color:#8b5020">vivir（-ir）</td>
+      <td class="td-c mono" style="color:#8b5020;font-weight:700">viví</td>
+      <td class="td-c mono">viviste</td>
+      <td class="td-c mono" style="color:#8b5020;font-weight:700">vivió</td>
+      <td class="td-c mono">vivimos</td>
+      <td class="td-c mono">vivisteis</td>
+      <td class="td-c mono" style="color:#8b5020;font-weight:700">vivieron</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div id="pret-reg-points" class="box">
+  <div class="box-title">規則活用のポイント</div>
+  <ul style="margin:0;padding-left:18px;line-height:1.9;font-size:13.5px;">
+    <li>-ar 動詞：yo形 <span class="mono hi">-é</span>、él形 <span class="mono hi">-ó</span>（アクセント記号つき）</li>
+    <li>-er/-ir 動詞：yo形 <span class="mono hi2">-í</span>、él形 <span class="mono hi2">-ió</span>（アクセント記号つき）</li>
+    <li>nosotros 形は現在形と<span class="hi">同じ形</span>（-ar/-ir 動詞）：<span class="mono">hablamos, vivimos</span></li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　yo 形（<span class="mono">hablé, comí</span>）と él 形（<span class="mono">habló, comió</span>）にアクセント記号が付く理由は、これらが<b>語末にアクセントを持つ</b>形だからです。スペイン語では原則として最後から2番目の音節にアクセントがあり（<span class="mono">hablo, hablas</span>）、それ以外はアクセント記号で明示する必要があります。記号がないと <span class="mono">hablo</span>（現在形1単）と <span class="mono">habló</span>（点過去3単）、<span class="mono">habla</span>（現在形3単）と <span class="mono">habla</span>（命令形）が区別できなくなります。</span>
+</div>
+
+<div class="ex">
+  <span class="ex-sp">Ayer unos amigos peruanos me <span class="hi2">invitaron</span> a comer ceviche.</span>
+  <span class="ex-ja">昨日何人かのペルー人の友人たちが、セビチェを食べようと誘ってくれた。</span>
+</div>
+<div class="box" style="margin-top:4px;font-size:13px;">
+  <ul style="margin:0;padding-left:18px;line-height:1.9;">
+    <li><span class="mono">invitar a 不定詞</span>：〜するように誘う</li>
+    <li><span class="mono">ceviche</span>（男）：セビチェ（魚介を味付けしたレモン汁でマリネした料理）</li>
+  </ul>
+</div>
+
+<div class="ex" style="margin-top:12px;">
+  <span class="ex-sp">Al verme, el señor se <span class="hi2">quitó</span> el sombrero y me <span class="hi2">saludó</span>.</span>
+  <span class="ex-ja">（その）紳士は私に会うと、帽子を脱いで私に挨拶した。</span>
+</div>
+<div class="box" style="margin-top:4px;font-size:13px;">
+  <ul style="margin:0;padding-left:18px;line-height:1.9;">
+    <li><span class="mono hi">al ＋ 不定詞</span>：「〜する時、〜した時、〜すると」</li>
+    <li><span class="mono">quitarse</span>（再）：（身に付けているものを）脱ぐ、外す（間接再帰用法）</li>
+    <li><span class="mono">saludar</span>（動）：挨拶する</li>
+  </ul>
+</div>
+
+<div class="ex" style="margin-top:12px;">
+  <span class="ex-sp"><span class="hi2">Viví</span> varios años en el extranjero.</span>
+  <span class="ex-ja">私は何年も外国に住んだ。</span>
+</div>
+<div class="box" style="margin-top:4px;font-size:13px;">
+  <ul style="margin:0;padding-left:18px;line-height:1.9;">
+    <li><span class="mono">vario/ria</span>（形）：（主に複数で）いくつかの、いくつもの</li>
+    <li><span class="mono">extranjero</span>（男）：外国</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L6-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Ayer yo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hablé</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">hablar：yo形は-é</span></span> con mi profesor.</div>
+  <div class="mini-check-ja">昨日私は先生と話した。</div>
+<div class="srs-rate" data-qid="L6-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：点過去形・規則活用</div>
+
+  <div class="quiz-item" id="L6-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Nosotros <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">comimos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">comer：1複はnosotros形と同形</span></span> en un restaurante muy famoso.</div>
+    <div class="quiz-ja">私たちはとても有名なレストランで食事をした。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>comimos</b>：comer（-er動詞）の点過去1人称複数。-er/-ir動詞のnosotros形は現在形と同形。</div>
+  <div class="srs-rate" data-qid="L6-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L6-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Ella <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">vivió</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">vivir：él形は-ió</span></span> en México durante diez años.</div>
+    <div class="quiz-ja">彼女は10年間メキシコに住んだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>vivió</b>：vivir（-ir動詞）の点過去3人称単数。アクセント記号付きの-ió。</div>
+  <div class="srs-rate" data-qid="L6-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L6-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>hablar</b> の点過去を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablé</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablaste</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">habló</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablamos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablasteis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">hablaron</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">-ar動詞の点過去語尾：-é/-aste/-ó/-amos/-asteis/-aron。yo形とél形にアクセント記号が必要（語末にアクセントがあるため）。</div>
+  <div class="srs-rate" data-qid="L6-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ② 不規則①：語根母音変化動詞 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">不規則①　語根母音変化動詞</span>
+  <span class="sec-es">Irregulares tipo 1: cambio vocálico en la raíz</span>
+</div>
+
+<p><span class="hi-r">-ir 動詞のみ</span>に現れる不規則です。<span class="hi">3人称（3単・3複）で語根に含まれる開母音が閉母音化</span>します（e→i、o→u）。活用語尾は規則 -ir 動詞と変わりません。</p>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　なぜ <span class="hi">-ir 動詞のみ</span>、かつ<span class="hi">3人称のみ</span>変化するのか？　これは<b>母音の同化（asimilación vocálica）</b>によるものです。点過去の3単・3複の語尾（<span class="mono">-ió / -ieron</span>）は閉母音 <span class="mono">i</span> を含みます。この <span class="mono">i</span> が歴史的に語根の開母音（e・o）を自分に近い閉母音へ引き寄せました（e→i, o→u）。<span class="hi">-ar/-er 動詞</span>の3複語尾（<span class="mono">-aron, -ieron</span>）でこの同化が起きなかったのは、異なる音韻環境だったためとされています。<span class="hi">nosotros 形</span>（<span class="mono">-imos</span>）の <span class="mono">i</span> は直接語根に接しないため同化が起きず、語根母音は変化しません。</span>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>動詞・現在形の変化型</th>
+      <th>yo</th><th>tú</th>
+      <th style="background:#fff3f3;color:var(--hi-r,#c0392b)">él/ella</th>
+      <th>nosotros</th><th>vosotros</th>
+      <th style="background:#fff3f3;color:var(--hi-r,#c0392b)">ellos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">sentir（感じる）<br><span style="font-size:11px;color:var(--muted)">現在：e→ie型</span></td>
+      <td class="td-c mono">sentí</td><td class="td-c mono">sentiste</td>
+      <td class="td-c mono hi-r">sintió</td>
+      <td class="td-c mono">sentimos</td><td class="td-c mono">sentisteis</td>
+      <td class="td-c mono hi-r">sintieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">dormir（眠る）<br><span style="font-size:11px;color:var(--muted)">現在：o→ue型</span></td>
+      <td class="td-c mono">dormí</td><td class="td-c mono">dormiste</td>
+      <td class="td-c mono hi-r">durmió</td>
+      <td class="td-c mono">dormimos</td><td class="td-c mono">dormisteis</td>
+      <td class="td-c mono hi-r">durmieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">pedir（頼む）<br><span style="font-size:11px;color:var(--muted)">現在：e→i型</span></td>
+      <td class="td-c mono">pedí</td><td class="td-c mono">pediste</td>
+      <td class="td-c mono hi-r">pidió</td>
+      <td class="td-c mono">pedimos</td><td class="td-c mono">pedisteis</td>
+      <td class="td-c mono hi-r">pidieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">seguir（続く・従う）<br><span style="font-size:11px;color:var(--muted)">現在：e→i型</span></td>
+      <td class="td-c mono">seguí</td><td class="td-c mono">seguiste</td>
+      <td class="td-c mono hi-r">siguió</td>
+      <td class="td-c mono">seguimos</td><td class="td-c mono">seguisteis</td>
+      <td class="td-c mono hi-r">siguieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">morir（死ぬ）<br><span style="font-size:11px;color:var(--muted)">現在：o→ue型</span></td>
+      <td class="td-c mono">morí</td><td class="td-c mono">moriste</td>
+      <td class="td-c mono hi-r">murió</td>
+      <td class="td-c mono">morimos</td><td class="td-c mono">moristeis</td>
+      <td class="td-c mono hi-r">murieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">servir（役立つ）<br><span style="font-size:11px;color:var(--muted)">現在：e→i型</span></td>
+      <td class="td-c mono">serví</td><td class="td-c mono">serviste</td>
+      <td class="td-c mono hi-r">sirvió</td>
+      <td class="td-c mono">servimos</td><td class="td-c mono">servisteis</td>
+      <td class="td-c mono hi-r">sirvieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">vestir（着せる）<br><span style="font-size:11px;color:var(--muted)">現在：e→i型</span></td>
+      <td class="td-c mono">vestí</td><td class="td-c mono">vestiste</td>
+      <td class="td-c mono hi-r">vistió</td>
+      <td class="td-c mono">vestimos</td><td class="td-c mono">vestisteis</td>
+      <td class="td-c mono hi-r">vistieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">repetir（繰り返す）<br><span style="font-size:11px;color:var(--muted)">現在：e→i型</span></td>
+      <td class="td-c mono">repetí</td><td class="td-c mono">repetiste</td>
+      <td class="td-c mono hi-r">repitió</td>
+      <td class="td-c mono">repetimos</td><td class="td-c mono">repetisteis</td>
+      <td class="td-c mono hi-r">repitieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">elegir（選ぶ）<br><span style="font-size:11px;color:var(--muted)">現在：e→i型</span></td>
+      <td class="td-c mono">elegí</td><td class="td-c mono">elegiste</td>
+      <td class="td-c mono hi-r">eligió</td>
+      <td class="td-c mono">elegimos</td><td class="td-c mono">elegisteis</td>
+      <td class="td-c mono hi-r">eligieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">herir（傷付ける）<br><span style="font-size:11px;color:var(--muted)">現在：e→ie型</span></td>
+      <td class="td-c mono">herí</td><td class="td-c mono">heriste</td>
+      <td class="td-c mono hi-r">hirió</td>
+      <td class="td-c mono">herimos</td><td class="td-c mono">heristeis</td>
+      <td class="td-c mono hi-r">hirieron</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div id="reir-note" class="box">
+  <div class="box-title">reír・sonreír・freír（特殊な綴り）</div>
+  <p style="margin:4px 0 8px;font-size:13px;">語根が <span class="mono">re-</span> で終わるこれらの動詞は、3単・3複で e→i の語根母音変化が起こり <span class="hi-r">ri-ó / ri-eron</span> となります。また、1・複・2・単・2・複では二重母音を防ぐため<span class="hi-r">アクセント記号が必要</span>です。</p>
+  <div class="tbl-wrap" style="margin:0;">
+  <table>
+    <thead>
+      <tr><th>動詞</th><th>yo</th><th style="background:#fff3f3">tú</th><th style="background:#fff3f3;color:var(--hi-r)">él</th><th style="background:#fff3f3">nosotros</th><th style="background:#fff3f3">vosotros</th><th style="background:#fff3f3;color:var(--hi-r)">ellos</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-rule">reír（笑う）</td>
+        <td class="td-c mono">reí</td>
+        <td class="td-c mono hi-r">reíste</td>
+        <td class="td-c mono hi-r">rió</td>
+        <td class="td-c mono hi-r">reímos</td>
+        <td class="td-c mono hi-r">reísteis</td>
+        <td class="td-c mono hi-r">rieron</td>
+      </tr>
+      <tr>
+        <td class="td-rule">sonreír（微笑む）</td>
+        <td class="td-c mono">sonreí</td>
+        <td class="td-c mono hi-r">sonreíste</td>
+        <td class="td-c mono hi-r">sonrió</td>
+        <td class="td-c mono hi-r">sonreímos</td>
+        <td class="td-c mono hi-r">sonreísteis</td>
+        <td class="td-c mono hi-r">sonrieron</td>
+      </tr>
+      <tr>
+        <td class="td-rule">freír（揚げる・炒める）</td>
+        <td class="td-c mono">freí</td>
+        <td class="td-c mono hi-r">freíste</td>
+        <td class="td-c mono hi-r">frió</td>
+        <td class="td-c mono hi-r">freímos</td>
+        <td class="td-c mono hi-r">freísteis</td>
+        <td class="td-c mono hi-r">frieron</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">reír</span> 系動詞で多くの人称にアクセント記号が必要な理由：語根末の <span class="mono">e</span>（→i 変化後は <span class="mono">i</span>）と、語尾の母音が隣接すると<b>二重母音</b>に読まれてしまいます。たとえば <span class="mono">reíste</span> は <span class="mono">re-ís-te</span>（3音節）ですが、記号がないと <span class="mono">reis-te</span>（2音節の二重母音 ei）と読まれます。アクセント記号を <span class="mono">í</span> に付けることで「ここで音節が分かれる（ヒアトゥス）」と明示します。3単 <span class="mono">rió</span>・3複 <span class="mono">rieron</span> では語根が <span class="mono">ri-</span>（子音＋母音の組み合わせ）となるため、この問題が生じず記号は不要です。</span>
+</div>
+
+<div class="mini-check" id="L6-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Ella <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">durmió</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">dormir：3単でo→u</span></span> muy bien anoche.</div>
+  <div class="mini-check-ja">彼女は昨夜とてもよく眠った。</div>
+<div class="srs-rate" data-qid="L6-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：語根母音変化動詞（点過去）</div>
+
+  <div class="quiz-item" id="L6-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Ellos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">pidieron</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">pedir：3複でe→i</span></span> la cuenta al camarero.</div>
+    <div class="quiz-ja">彼らはウェイターに会計を頼んだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>pidieron</b>：pedir（-ir動詞）の点過去3人称複数。3単・3複のみe→iに閉母音化する。</div>
+  <div class="srs-rate" data-qid="L6-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L6-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Nosotros <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">dormimos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">dormir：1複は語根母音変化なし</span></span> bien anoche.</div>
+    <div class="quiz-ja">私たちは昨夜よく眠った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>dormimos</b>：nosotros形は語根母音変化しないので規則通りdormimos（1・2人称は全て変化なし）。</div>
+  <div class="srs-rate" data-qid="L6-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L6-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>sentir</b> の点過去を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">sentí</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">sentiste</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">sintió</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">sentimos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">sentisteis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">sintieron</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">sentirは-ir動詞の語根母音変化動詞。3単・3複のみe→iに閉母音化（sintió, sintieron）、それ以外は規則活用。</div>
+  <div class="srs-rate" data-qid="L6-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ③ 不規則②：3人称のみ語尾が変化する動詞 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">不規則②　3人称のみ語尾が変化する動詞</span>
+  <span class="sec-es">Irregulares tipo 2: -ió → -yó, -ieron → -yeron</span>
+</div>
+
+<p>3人称（3単・3複）で、語尾の <span class="mono hi-r">-ió が -yó に、-ieron が -yeron に変化</span>します。<span class="hi">語根が母音で終わる -er/-ir 動詞</span>が対象です（ただし <span class="mono">-guir</span>・<span class="mono">-quir</span> で終わる動詞は除く）。</p>
+
+<div class="box" style="font-size:13px;margin-bottom:12px;">
+  <div class="box-title">アクセント記号について</div>
+  <ul style="margin:0;padding-left:18px;line-height:1.9;">
+    <li><span class="hi">語根が開母音（a, e, o）で終わる動詞</span>（oír, caer, creer, leer など）：<br>1・複・2・単・2・複で二重母音を防ぐためアクセント記号が必要（例：<span class="mono hi-r">leíste, leímos, leísteis</span>）</li>
+    <li><span class="hi">語根が閉母音（i, u）で終わる動詞</span>（huir, construir など）：<br>アクセント記号は yo 形のみ（例：<span class="mono">huí</span>）</li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　3単が <span class="mono">-yó</span>、3複が <span class="mono">-yeron</span> になる理由は<b>母音衝突（ヒアトゥス）の回避</b>です。語根が母音で終わる動詞（<span class="mono">le-, ca-, cre-</span> など）に点過去3人称語尾 <span class="mono">-ió/-ieron</span> をそのまま付けると母音が連続します（<span class="mono">le＋ió = leió</span>）。スペイン語はこの連続を嫌い、語頭の <span class="mono">i</span> を半子音 <span class="mono">y</span> に変化させて解消します（<span class="mono">leyó, leyeron</span>）。現在分詞（<span class="mono">leyendo</span>）や現在形（<span class="mono">construyo</span>）で <span class="mono">y</span> が挿入されるのも同じ原理です。</span>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>動詞</th>
+      <th>yo</th><th>tú</th>
+      <th style="background:#fff3f3;color:var(--hi-r,#c0392b)">él/ella</th>
+      <th>nosotros</th><th>vosotros</th>
+      <th style="background:#fff3f3;color:var(--hi-r,#c0392b)">ellos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">huir（逃げる）</td>
+      <td class="td-c mono">huí</td><td class="td-c mono">huiste</td>
+      <td class="td-c mono hi-r">huyó</td>
+      <td class="td-c mono">huimos</td><td class="td-c mono">huisteis</td>
+      <td class="td-c mono hi-r">huyeron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">construir（建設する）</td>
+      <td class="td-c mono">construí</td><td class="td-c mono">construiste</td>
+      <td class="td-c mono hi-r">construyó</td>
+      <td class="td-c mono">construimos</td><td class="td-c mono">construisteis</td>
+      <td class="td-c mono hi-r">construyeron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">incluir（含む）</td>
+      <td class="td-c mono">incluí</td><td class="td-c mono">incluiste</td>
+      <td class="td-c mono hi-r">incluyó</td>
+      <td class="td-c mono">incluimos</td><td class="td-c mono">incluisteis</td>
+      <td class="td-c mono hi-r">incluyeron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">oír（聞こえる）</td>
+      <td class="td-c mono">oí</td><td class="td-c mono hi-r">oíste</td>
+      <td class="td-c mono hi-r">oyó</td>
+      <td class="td-c mono hi-r">oímos</td><td class="td-c mono hi-r">oísteis</td>
+      <td class="td-c mono hi-r">oyeron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">caer（落ちる）</td>
+      <td class="td-c mono">caí</td><td class="td-c mono hi-r">caíste</td>
+      <td class="td-c mono hi-r">cayó</td>
+      <td class="td-c mono hi-r">caímos</td><td class="td-c mono hi-r">caísteis</td>
+      <td class="td-c mono hi-r">cayeron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">creer（信じる）</td>
+      <td class="td-c mono">creí</td><td class="td-c mono hi-r">creíste</td>
+      <td class="td-c mono hi-r">creyó</td>
+      <td class="td-c mono hi-r">creímos</td><td class="td-c mono hi-r">creísteis</td>
+      <td class="td-c mono hi-r">creyeron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">leer（読む）</td>
+      <td class="td-c mono">leí</td><td class="td-c mono hi-r">leíste</td>
+      <td class="td-c mono hi-r">leyó</td>
+      <td class="td-c mono hi-r">leímos</td><td class="td-c mono hi-r">leísteis</td>
+      <td class="td-c mono hi-r">leyeron</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="mini-check" id="L6-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Ella <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">leyó</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">leer：語根が母音終わり→-ió→-yó</span></span> el periódico esta mañana.</div>
+  <div class="mini-check-ja">彼女は今朝新聞を読んだ。</div>
+<div class="srs-rate" data-qid="L6-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：3人称のみ語尾が変化する動詞</div>
+
+  <div class="quiz-item" id="L6-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Los niños <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">oyeron</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">oír：3複で-ieron→-yeron</span></span> un ruido extraño.</div>
+    <div class="quiz-ja">子供たちは奇妙な物音を聞いた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>oyeron</b>：oírは語根が母音で終わる動詞なので、3複の語尾は-ieronではなく-yeronになる。</div>
+  <div class="srs-rate" data-qid="L6-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L6-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Yo no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">creí</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">creer：1単はアクセント記号のみ、y化なし</span></span> esa historia al principio.</div>
+    <div class="quiz-ja">私は最初その話を信じなかった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>creí</b>：creerの1人称単数はcreí（y化するのは3単・3複のみ）。</div>
+  <div class="srs-rate" data-qid="L6-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L6-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>construir</b> の点過去を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">construí</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">construiste</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">construyó</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">construimos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">construisteis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">construyeron</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">construirは語根が母音（i）で終わる-ir動詞。3単・3複のみ-ió→-yó、-ieron→-yeronに変化する。</div>
+  <div class="srs-rate" data-qid="L6-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ④ 不規則③④⑤：強変化動詞・その他 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">不規則③④⑤　強変化動詞・その他</span>
+  <span class="sec-es">Irregulares tipo 3-5: verbos fuertes y otros</span>
+</div>
+
+<div class="sub">不規則③ 強変化動詞（Verbos fuertes）</div>
+<p><span class="hi">全ての人称で語根が変化すると同時に語尾も変化</span>します。語尾は共通して <span class="mono hi">-e / -iste / -o / -imos / -isteis / -ieron</span> です。また1・単と3・単では<span class="hi-r">アクセント記号がつきません</span>。代表して各動詞の<span class="hi">1・単（yo 形）だけ覚えれば</span>、他の人称は語末の -e を取って共通語尾をつけるだけです。</p>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　強変化動詞の yo 形・él 形にアクセント記号がない理由：スペイン語では最後から2番目の音節（penúltima）にアクセントがある場合、記号を書く必要がありません。強変化動詞の yo 形（<span class="mono">su-pe, hi-ce, vi-ne, pu-se</span>）は最後から2番目の音節にアクセントがあるため記号不要です。一方、規則活用の yo/él 形（<span class="mono">hablé, habló</span>）は語末にアクセントがある例外的なパターンなので記号が必要です。<b>強変化動詞は語根にアクセントを保つ</b>ことで、自然に記号なしで書けるようになっています。</span>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>動詞</th>
+      <th style="background:#dde8f5;color:var(--accent)">yo（1・単）</th>
+      <th>tú</th>
+      <th>él/ella</th>
+      <th>nosotros</th>
+      <th>vosotros</th>
+      <th>ellos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">saber（知る）</td>
+      <td class="td-c mono hi">supe</td><td class="td-c mono">supiste</td><td class="td-c mono">supo</td>
+      <td class="td-c mono">supimos</td><td class="td-c mono">supisteis</td><td class="td-c mono">supieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">andar（歩く）</td>
+      <td class="td-c mono hi">anduve</td><td class="td-c mono">anduviste</td><td class="td-c mono">anduvo</td>
+      <td class="td-c mono">anduvimos</td><td class="td-c mono">anduvisteis</td><td class="td-c mono">anduvieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">estar（いる）</td>
+      <td class="td-c mono hi">estuve</td><td class="td-c mono">estuviste</td><td class="td-c mono">estuvo</td>
+      <td class="td-c mono">estuvimos</td><td class="td-c mono">estuvisteis</td><td class="td-c mono">estuvieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">haber（ある・いる）</td>
+      <td class="td-c mono hi">hube</td><td class="td-c mono">hubiste</td><td class="td-c mono">hubo</td>
+      <td class="td-c mono">hubimos</td><td class="td-c mono">hubisteis</td><td class="td-c mono">hubieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">poder（できる）</td>
+      <td class="td-c mono hi">pude</td><td class="td-c mono">pudiste</td><td class="td-c mono">pudo</td>
+      <td class="td-c mono">pudimos</td><td class="td-c mono">pudisteis</td><td class="td-c mono">pudieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">poner（置く）</td>
+      <td class="td-c mono hi">puse</td><td class="td-c mono">pusiste</td><td class="td-c mono">puso</td>
+      <td class="td-c mono">pusimos</td><td class="td-c mono">pusisteis</td><td class="td-c mono">pusieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">tener（持つ）</td>
+      <td class="td-c mono hi">tuve</td><td class="td-c mono">tuviste</td><td class="td-c mono">tuvo</td>
+      <td class="td-c mono">tuvimos</td><td class="td-c mono">tuvisteis</td><td class="td-c mono">tuvieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">hacer（する）<br><span style="font-size:11px;color:var(--muted)">3・単の綴りに注意</span></td>
+      <td class="td-c mono hi">hice</td><td class="td-c mono">hiciste</td><td class="td-c mono hi-r">hizo</td>
+      <td class="td-c mono">hicimos</td><td class="td-c mono">hicisteis</td><td class="td-c mono">hicieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">querer（欲する）</td>
+      <td class="td-c mono hi">quise</td><td class="td-c mono">quisiste</td><td class="td-c mono">quiso</td>
+      <td class="td-c mono">quisimos</td><td class="td-c mono">quisisteis</td><td class="td-c mono">quisieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">venir（来る）</td>
+      <td class="td-c mono hi">vine</td><td class="td-c mono">viniste</td><td class="td-c mono">vino</td>
+      <td class="td-c mono">vinimos</td><td class="td-c mono">vinisteis</td><td class="td-c mono">vinieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">caber（入り得る）</td>
+      <td class="td-c mono hi">cupe</td><td class="td-c mono">cupiste</td><td class="td-c mono">cupo</td>
+      <td class="td-c mono">cupimos</td><td class="td-c mono">cupisteis</td><td class="td-c mono">cupieron</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div id="j-root" class="box">
+  <div class="box-title">j語根の強変化動詞（3・複の語尾が -eron）</div>
+  <p style="margin:4px 0 8px;font-size:13px;">yo 形が <span class="mono hi-r">j</span> で終わる強変化動詞は、3・複の語尾が <span class="mono hi-r">-eron</span>（-ieron ではない）になります。</p>
+  <div class="tbl-wrap" style="margin:0;">
+  <table>
+    <thead>
+      <tr>
+        <th>動詞</th>
+        <th>yo</th><th>tú</th><th>él</th><th>nosotros</th><th>vosotros</th>
+        <th style="color:var(--hi-r)">ellos</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="td-rule">decir（言う）</td>
+        <td class="td-c mono">dije</td><td class="td-c mono">dijiste</td><td class="td-c mono">dijo</td>
+        <td class="td-c mono">dijimos</td><td class="td-c mono">dijisteis</td>
+        <td class="td-c mono hi-r">dijeron</td>
+      </tr>
+      <tr>
+        <td class="td-rule">conducir（運転する）</td>
+        <td class="td-c mono">conduje</td><td class="td-c mono">condujiste</td><td class="td-c mono">condujo</td>
+        <td class="td-c mono">condujimos</td><td class="td-c mono">condujisteis</td>
+        <td class="td-c mono hi-r">condujeron</td>
+      </tr>
+      <tr>
+        <td class="td-rule">traer（持ってくる）</td>
+        <td class="td-c mono">traje</td><td class="td-c mono">trajiste</td><td class="td-c mono">trajo</td>
+        <td class="td-c mono">trajimos</td><td class="td-c mono">trajisteis</td>
+        <td class="td-c mono hi-r">trajeron</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　j 語根の強変化動詞（<span class="mono">dije, conduje, traje</span>）の3複が <span class="mono">-ieron</span> ではなく <span class="mono">-eron</span> になる理由：標準的な3複語尾 <span class="mono">-ieron</span> の語頭 <span class="mono">i</span> は、歴史的に口蓋化した音（半子音 y）に由来します。ところが <span class="mono">j</span>（発音 /x/）はすでに口蓋系の子音であるため、その後ろにさらに <span class="mono">i</span> を重ねることは音声的に冗長です。そのため <span class="mono">j</span> の直後では語尾の <span class="mono">i</span> が脱落し、<span class="mono">dijeron, condujeron, trajeron</span> のように <span class="mono">-eron</span> となりました。</span>
+</div>
+
+<div id="haber-note" class="box">
+  <div class="box-title">haber の点過去（hubo のみ）</div>
+  <p style="margin:4px 0;font-size:13px;"><span class="mono hi">haber</span> の点過去は、今日では<span class="hi-r">3人称単数形（hubo）のみ</span>用いられ、「（不特定の）何々がいた・あった」という意味を表します。</p>
+  <div class="ex" style="margin-top:8px;">
+    <span class="ex-sp">Anoche <span class="hi-r">hubo</span> un apagón en esa zona de la ciudad.</span>
+    <span class="ex-ja">昨夜、市内のその地区では停電があった。</span>
+  </div>
+  <div style="font-size:12px;margin-top:6px;padding-left:4px;">
+    <span class="mono">anoche</span>（副）昨夜　／　<span class="mono">apagón</span>（男）停電
+  </div>
+</div>
+
+<div class="sub" style="margin-top:16px;">不規則④ 1人称単数のみ綴りに要注意の動詞</div>
+<p>スペイン語の綴りの規則に合わせるため、<span class="hi">yo 形のみ</span>綴りが変わります。活用語尾は規則 -ar 動詞と同じです。教科書では不規則扱いされないことが多いですが、試験頻出です。</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>動詞</th>
+      <th style="background:#fff3f3;color:var(--hi-r)">yo（変化あり）</th>
+      <th>tú</th><th>él</th><th>nosotros</th><th>vosotros</th><th>ellos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">jugar（遊ぶ）<br><span style="font-size:11px;color:var(--muted)">g → gu</span></td>
+      <td class="td-c mono hi-r">jugué</td><td class="td-c mono">jugaste</td><td class="td-c mono">jugó</td>
+      <td class="td-c mono">jugamos</td><td class="td-c mono">jugasteis</td><td class="td-c mono">jugaron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">llegar（到着する）<br><span style="font-size:11px;color:var(--muted)">g → gu</span></td>
+      <td class="td-c mono hi-r">llegué</td><td class="td-c mono">llegaste</td><td class="td-c mono">llegó</td>
+      <td class="td-c mono">llegamos</td><td class="td-c mono">llegasteis</td><td class="td-c mono">llegaron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">pagar（払う）<br><span style="font-size:11px;color:var(--muted)">g → gu</span></td>
+      <td class="td-c mono hi-r">pagué</td><td class="td-c mono">pagaste</td><td class="td-c mono">pagó</td>
+      <td class="td-c mono">pagamos</td><td class="td-c mono">pagasteis</td><td class="td-c mono">pagaron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">buscar（探す）<br><span style="font-size:11px;color:var(--muted)">c → qu</span></td>
+      <td class="td-c mono hi-r">busqué</td><td class="td-c mono">buscaste</td><td class="td-c mono">buscó</td>
+      <td class="td-c mono">buscamos</td><td class="td-c mono">buscasteis</td><td class="td-c mono">buscaron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">cruzar（横切る）<br><span style="font-size:11px;color:var(--muted)">z → c</span></td>
+      <td class="td-c mono hi-r">crucé</td><td class="td-c mono">cruzaste</td><td class="td-c mono">cruzó</td>
+      <td class="td-c mono">cruzamos</td><td class="td-c mono">cruzasteis</td><td class="td-c mono">cruzaron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">cargar（荷を積む・担ぐ）<br><span style="font-size:11px;color:var(--muted)">g → gu</span></td>
+      <td class="td-c mono hi-r">cargué</td><td class="td-c mono">cargaste</td><td class="td-c mono">cargó</td>
+      <td class="td-c mono">cargamos</td><td class="td-c mono">cargasteis</td><td class="td-c mono">cargaron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">averiguar（調査する）<br><span style="font-size:11px;color:var(--muted)">gu → gü（分音符が必要）</span></td>
+      <td class="td-c mono hi-r">averigüé</td><td class="td-c mono">averiguaste</td><td class="td-c mono">averiguó</td>
+      <td class="td-c mono">averiguamos</td><td class="td-c mono">averiguasteis</td><td class="td-c mono">averiguaron</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　これらの綴りの変化は<b>音の変化ではなく、正書法（スペリングの規則）</b>によるものです。スペイン語では同じ音でも後続する母音によって綴りが変わります：<br>
+  ① <b>/g/（硬い g）</b>：a/o/u の前は <span class="mono">g</span>（pago）、e/i の前は <span class="mono">gu</span>（pagué）。<span class="mono">ge/gi</span> と書くと /xe/xi/（「ヘ/ヒ」に近い音）になるためです。<br>
+  ② <b>/k/（硬い k）</b>：a/o/u の前は <span class="mono">c</span>（busco）、e/i の前は <span class="mono">qu</span>（busqué）。<span class="mono">ce/ci</span> と書くと /θe/θi/（「セ/シ」の音）になるためです。<br>
+  ③ <b>/θ/（中南米では /s/）</b>：a/o/u の前は <span class="mono">z</span>（cruzo）、e/i の前は <span class="mono">c</span>（crucé）。現代スペイン語正書法では <span class="mono">ze/zi</span> の綴りはほぼ使われません。<br>
+  ④ <b>averiguar の /gw/</b>：<span class="mono">gu</span> の <span class="mono">u</span> は通常発音されませんが（guerra の ue のように）、averiguar の <span class="mono">u</span> は /w/ として発音されます。<span class="mono">e</span> の前で <span class="mono">u</span> の発音を保持するためには分音符（¨）が必要です（<span class="mono">averigüé</span>）。<br>
+  つまり <b>yo 形に語尾 -é が付くと後続母音が e</b> になるため、それぞれ規則に従って綴りの変換が必要になります。</span>
+</div>
+
+<div class="sub" style="margin-top:16px;">不規則⑤ その他の例外的な動詞（dar・ser・ir・ver）</div>
+<p><span class="mono hi">dar</span>・<span class="mono hi">ser</span>・<span class="mono hi">ir</span> はいずれのタイプにも属さない特殊な活用をします。個別に覚えましょう。</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>動詞</th>
+      <th style="background:#dde8f5;color:var(--accent)">yo</th>
+      <th style="background:#dde8f5;color:var(--accent)">tú</th>
+      <th style="background:#dde8f5;color:var(--accent)">él/ella</th>
+      <th style="background:#dde8f5;color:var(--accent)">nosotros</th>
+      <th style="background:#dde8f5;color:var(--accent)">vosotros</th>
+      <th style="background:#dde8f5;color:var(--accent)">ellos</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-rule">dar（与える）</td>
+      <td class="td-c mono hi2">di</td><td class="td-c mono hi2">diste</td><td class="td-c mono hi2">dio</td>
+      <td class="td-c mono hi2">dimos</td><td class="td-c mono hi2">disteis</td><td class="td-c mono hi2">dieron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">ser / ir（〜だ／行く）</td>
+      <td class="td-c mono hi">fui</td><td class="td-c mono hi">fuiste</td><td class="td-c mono hi">fue</td>
+      <td class="td-c mono hi">fuimos</td><td class="td-c mono hi">fuisteis</td><td class="td-c mono hi">fueron</td>
+    </tr>
+    <tr>
+      <td class="td-rule">ver（見る）<br><span style="font-size:11px;color:var(--muted)">1・単・3・単はアクセント記号なし</span></td>
+      <td class="td-c mono hi2">vi</td><td class="td-c mono hi2">viste</td><td class="td-c mono hi2">vio</td>
+      <td class="td-c mono hi2">vimos</td><td class="td-c mono hi2">visteis</td><td class="td-c mono hi2">vieron</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　ser と ir の点過去形は全く同形です。どちらなのかは文脈で判断します。<br>
+  <span class="mono">¿Fuiste al médico?</span>「病院へは行ったのかい？」（ir） vs <span class="mono">Él fue mi profesor de español el año pasado.</span>「彼は去年私のスペイン語の先生だった。」（ser）</span>
+</div>
+
+<div class="ex" style="margin-top:12px;">
+  <span class="ex-sp">Él <span class="hi">fue</span> mi profesor de español el año pasado.</span>
+  <span class="ex-ja">彼は去年私のスペイン語の先生だった。</span>
+</div>
+<div class="box" style="margin-top:4px;font-size:13px;">
+  <ul style="margin:0;padding-left:18px;line-height:1.9;">
+    <li>ここでの <span class="mono">fue</span> は <span class="mono">ser</span>（〜である）の点過去3単。<span class="mono">mi profesor</span>（私の先生）という役割・属性を表すため <span class="mono">ser</span> と判断できる。</li>
+    <li><span class="mono">el año pasado</span>：去年</li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">dar</span> の yo 形 <span class="mono">di</span> と él 形 <span class="mono">dio</span>、および <span class="mono">ver</span> の <span class="mono">vi, vio</span> にアクセント記号がないのは、これらが<b>単音節（1音節）語</b>だからです。スペイン語の正書法では単音節語には原則アクセント記号を付けません（同音異義語の区別が必要な場合を除く：<span class="mono">mi/mí, se/sé</span> など）。また <span class="mono">dar</span> が本来 -ar 動詞であるにもかかわらず -er/-ir 型の語尾（<span class="mono">di, diste, dio</span>）を使うのは、元のラテン語形 <span class="mono">dare</span> が非常に短い語根（d-）を持つため、-ar 型語尾を付けると <span class="mono">*dé</span> のような極端に短い形になってしまい、-er/-ir 型語尾の方が早い段階で定着したためです。</span>
+</div>
+
+<div class="ex">
+  <span class="ex-sp">Recién ayer <span class="hi2">supe</span> la verdad.</span>
+  <span class="ex-ja">私はほんの昨日真実を知った。</span>
+</div>
+<div class="ex">
+  <span class="ex-sp">Pilar se <span class="hi2">puso</span> pálida cuando <span class="hi2">oyó</span> la noticia.</span>
+  <span class="ex-ja">ピラルは（その）知らせを聞くと青ざめた。</span>
+</div>
+<div class="box" style="margin-top:4px;font-size:13px;">
+  <ul style="margin:0;padding-left:18px;line-height:1.9;">
+    <li><span class="mono">pálido/da</span>（形）：（顔色が）青白い、（色が）薄い</li>
+    <li><span class="mono">ponerse + 形容詞</span>：（状態が）〜になる（状態変化を表す再帰動詞の自動詞化用法）→ 5課「再帰動詞の基本用法」の「自動詞化」参照</li>
+  </ul>
+</div>
+<div class="ex" style="margin-top:12px;">
+  <span class="ex-sp">Anoche me <span class="hi2">dio</span> un fuerte dolor de cabeza. — ¿<span class="hi2">Fuiste</span> al médico?</span>
+  <span class="ex-ja">昨夜僕はすごく頭が痛くなったんだ。 — 病院へは行ったのかい？</span>
+</div>
+<div class="box" style="margin-top:4px;font-size:13px;">
+  <ul style="margin:0;padding-left:18px;line-height:1.9;">
+    <li>動詞 <span class="mono">dar</span> は他動詞「（〜を）与える」の他に、自動詞として<span class="hi">「（人に）起こる、感じられる」</span>という意味も持ちます。この文では <span class="mono">me dio</span> の主語は <span class="mono">un fuerte dolor de cabeza</span>（ひどい頭痛）で、<span class="mono">me</span> は間接目的語です。</li>
+    <li>応答の <span class="mono">¿Fuiste al médico?</span> では <span class="mono">fuiste</span> が <span class="mono">ir</span>（行く）の点過去2単。方向を示す <span class="mono">al médico</span> があるため <span class="mono">ser</span> ではなく <span class="mono">ir</span> と判断できる。</li>
+    <li><span class="mono">médico</span>（男）：医者；<span class="mono">ir al médico</span>：医者に行く・病院に行く</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L6-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Yo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estuve</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">estar：強変化動詞</span></span> en Madrid el año pasado.</div>
+  <div class="mini-check-ja">私は去年マドリードにいた。</div>
+<div class="srs-rate" data-qid="L6-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：強変化動詞・その他の不規則点過去</div>
+
+  <div class="quiz-item" id="L6-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Ellos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">dijeron</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">decir：j語根、3複は-eron</span></span> la verdad.</div>
+    <div class="quiz-ja">彼らは真実を言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>dijeron</b>：decirはj語根の強変化動詞なので3複の語尾は-ieronではなく-eron（dijeron）。</div>
+  <div class="srs-rate" data-qid="L6-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L6-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Nosotros <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">fuimos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ir/ser：点過去は同形</span></span> al cine ayer.</div>
+    <div class="quiz-ja">私たちは昨日映画に行った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>fuimos</b>：irの点過去1人称複数（serと同形）。「al cine（映画へ）」という方向があるのでirと判断できる。</div>
+  <div class="srs-rate" data-qid="L6-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L6-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>tener</b> の点過去を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tuve</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tuviste</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tuvo</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tuvimos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tuvisteis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">tuvieron</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">tenerは強変化動詞。語根tuv-は全人称共通で、語尾は-e/-iste/-o/-imos/-isteis/-ieron。yo形・él形にアクセント記号は不要（語根にアクセントがあるため）。</div>
+  <div class="srs-rate" data-qid="L6-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L6-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L6-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L6-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑤ 練習問題 -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">太字の不定詞を点過去の適切な形に活用させなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Parece que usted no <span class="blank">______</span> (<b>cerrar</b>) bien la puerta cuando <span class="blank">______</span> (<b>salir</b>) de la casa.</div>
+      <div class="q-ja">あなたが家を出たとき、ドアをきちんと閉めなかったようだ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">… no <span class="ans-fill">cerró</span> … cuando <span class="ans-fill">salió</span> de la casa.</span>
+      </div>
+      <div class="q-exp"><span class="mono">cerrar</span>（-ar動詞）と <span class="mono">salir</span>（-ir動詞）の3人称単数点過去。主語が <span class="mono">usted</span> = 3人称単数扱い。<span class="mono">cerró</span>・<span class="mono">salió</span>（アクセント記号あり）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Cuánto te <span class="blank">______</span> (<b>costar</b>) el billete a Londres? —No lo recuerdo bien, pero creo que <span class="blank">______</span> (<b>pagar</b>) unos mil euros.</div>
+      <div class="q-ja">ロンドン行きの切符はいくらかかりましたか？—よく覚えていないけど、1000ユーロくらい払ったと思う。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿Cuánto te <span class="ans-fill">costó</span> … ? — … <span class="ans-fill">pagué</span> unos mil euros.</span>
+      </div>
+      <div class="q-exp"><span class="mono">costar</span>：主語は <span class="mono">el billete</span>（3人称単数）→ <span class="mono">costó</span>。<span class="mono">pagar</span>：主語は <span class="mono">yo</span>（1人称単数）→ <span class="mono">pagué</span>（1人称綴り変化：g→gu。<span class="mono">pagé</span> では g が [x] に読まれてしまうため）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Después de la independencia, los países latinoamericanos <span class="blank">______</span> (<b>convertirse</b>) en exportadores de materias primas.</div>
+      <div class="q-ja">独立後、ラテンアメリカの国々は一次産品の輸出国になった。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">… <span class="ans-fill">se convirtieron</span> en exportadores de materias primas.</span>
+      </div>
+      <div class="q-exp"><span class="mono">convertirse</span>（e→i 語根母音変化動詞 -ir）の3人称複数点過去。主語 <span class="mono">los países</span>（複数）→ <span class="mono">se convirtieron</span>（アクセント記号なし）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Qué te <span class="blank">______</span> (<b>decir</b>) ellos de mí? ¿Y por qué los <span class="blank">______</span> (<b>creer</b>)?</div>
+      <div class="q-ja">彼らは私についてあなたに何を言ったの？それでなぜ彼らを信じたの？</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿Qué te <span class="ans-fill">dijeron</span> ellos de mí? ¿Y por qué los <span class="ans-fill">creíste</span>?</span>
+      </div>
+      <div class="q-exp"><span class="mono">decir</span>：j語根の強変化動詞、主語 <span class="mono">ellos</span>（3人称複数）→ <span class="mono">dijeron</span>（-eron、アクセント記号なし）。<span class="mono">creer</span>：3人称のみ語尾変化する動詞（i→y）、主語 <span class="mono">tú</span>（2人称単数）→ <span class="mono">creíste</span>（アクセント記号あり）。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">次の質問に（　）内の表現を用いて答えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Hablaste anoche con Elena sobre el asunto?　（sí）</div>
+      <div class="q-ja">昨夜エレナとその件について話しましたか？（はい）</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Sí, hablé anoche con ella.</span></span>
+      </div>
+      <div class="q-exp">-ar 動詞 <span class="mono">hablar</span> の点過去1人称単数：<span class="mono">hablé</span>（アクセント記号あり）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Dónde cenasteis el viernes?　（el restaurante italiano de la esquina）</div>
+      <div class="q-ja">あなたたちは金曜日にどこで夕食をとりましたか？（角のイタリアンレストラン）</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Cenamos en el restaurante italiano de la esquina.</span></span>
+      </div>
+      <div class="q-exp">-ar 動詞 <span class="mono">cenar</span> の点過去1人称複数：<span class="mono">cenamos</span>（現在形と同形）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Cómo se sintieron ustedes por los comentarios negativos que les hicieron?　（ofendidos）</div>
+      <div class="q-ja">彼らのネガティブなコメントに、あなたたちはどう感じましたか？（傷ついた）</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Nos sentimos ofendidos.</span></span>
+      </div>
+      <div class="q-exp"><span class="mono">sentirse</span>（e→i 語根母音変化動詞）の点過去1人称複数。1・2人称は語根母音変化なし：<span class="mono">nos sentimos</span>（現在形と同形）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Dónde estuviste anoche?　（el cine）</div>
+      <div class="q-ja">昨夜どこにいましたか？（映画館）</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Estuve en el cine.</span></span>
+      </div>
+      <div class="q-exp"><span class="mono">estar</span> の強変化点過去1人称単数：<span class="mono">estuve</span>（アクセント記号なし）。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑥ 語彙リスト -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">余暇・趣味</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">vacaciones</span><span class="pill-pos">名f.pl.</span><span class="pill-ja">休暇</span></span>
+  <span class="pill"><span class="pill-es">leer el periódico</span><span class="pill-pos">表現</span><span class="pill-ja">新聞を読む</span></span>
+  <span class="pill"><span class="pill-es">leer una revista</span><span class="pill-pos">表現</span><span class="pill-ja">雑誌を読む</span></span>
+  <span class="pill"><span class="pill-es">ver la televisión</span><span class="pill-pos">表現</span><span class="pill-ja">テレビを見る</span></span>
+  <span class="pill"><span class="pill-es">escuchar música</span><span class="pill-pos">表現</span><span class="pill-ja">音楽を聴く</span></span>
+  <span class="pill"><span class="pill-es">escuchar la radio</span><span class="pill-pos">表現</span><span class="pill-ja">ラジオを聴く</span></span>
+  <span class="pill"><span class="pill-es">ir a una discoteca</span><span class="pill-pos">表現</span><span class="pill-ja">ディスコ（クラブ）に行く</span></span>
+  <span class="pill"><span class="pill-es">ir a un museo</span><span class="pill-pos">表現</span><span class="pill-ja">美術館に行く</span></span>
+  <span class="pill"><span class="pill-es">siesta</span><span class="pill-pos">名f.</span><span class="pill-ja">昼寝</span></span>
+  <span class="pill"><span class="pill-es">cantar</span><span class="pill-pos">動</span><span class="pill-ja">歌う</span></span>
+  <span class="pill"><span class="pill-es">bailar</span><span class="pill-pos">動</span><span class="pill-ja">踊る</span></span>
+  <span class="pill"><span class="pill-es">afición</span><span class="pill-pos">名f.</span><span class="pill-ja">趣味（hobby）</span></span>
+  <span class="pill"><span class="pill-es">parque de atracciones</span><span class="pill-pos">名m.</span><span class="pill-ja">遊園地</span></span>
+  <span class="pill"><span class="pill-es">zoo</span><span class="pill-pos">名m.</span><span class="pill-ja">動物園</span></span>
+  <span class="pill"><span class="pill-es">invitar</span><span class="pill-pos">動</span><span class="pill-ja">招待する</span></span>
+  <span class="pill"><span class="pill-es">ir de paseo</span><span class="pill-pos">表現</span><span class="pill-ja">散歩に行く</span></span>
+  <span class="pill"><span class="pill-es">ir de compras</span><span class="pill-pos">表現</span><span class="pill-ja">ショッピングに行く</span></span>
+  <span class="pill"><span class="pill-es">quedar con amigos</span><span class="pill-pos">表現</span><span class="pill-ja">友達と出かける</span></span>
+  <span class="pill"><span class="pill-es">tener una cita</span><span class="pill-pos">表現</span><span class="pill-ja">デートする</span></span>
+  <span class="pill"><span class="pill-es">tener planes</span><span class="pill-pos">表現</span><span class="pill-ja">予定がある</span></span>
+</div>
+
+<div class="vocab-category">公演・ショー</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">ir al teatro</span><span class="pill-pos">表現</span><span class="pill-ja">劇場に行く</span></span>
+  <span class="pill"><span class="pill-es">ir al cine</span><span class="pill-pos">表現</span><span class="pill-ja">映画に行く</span></span>
+  <span class="pill"><span class="pill-es">ir a un concierto</span><span class="pill-pos">表現</span><span class="pill-ja">コンサートに行く</span></span>
+  <span class="pill"><span class="pill-es">invitación</span><span class="pill-pos">名f.</span><span class="pill-ja">招待</span></span>
+  <span class="pill"><span class="pill-es">programa</span><span class="pill-pos">名m.</span><span class="pill-ja">プログラム</span></span>
+  <span class="pill"><span class="pill-es">exposición</span><span class="pill-pos">名f.</span><span class="pill-ja">展覧会</span></span>
+  <span class="pill"><span class="pill-es">película</span><span class="pill-pos">名f.</span><span class="pill-ja">映画</span></span>
+  <span class="pill"><span class="pill-es">obra de teatro</span><span class="pill-pos">名f.</span><span class="pill-ja">劇</span></span>
+  <span class="pill"><span class="pill-es">ópera</span><span class="pill-pos">名f.</span><span class="pill-ja">オペラ</span></span>
+  <span class="pill"><span class="pill-es">musical</span><span class="pill-pos">名m.</span><span class="pill-ja">ミュージカル</span></span>
+  <span class="pill"><span class="pill-es">comprar una entrada</span><span class="pill-pos">表現</span><span class="pill-ja">チケットを買う</span></span>
+  <span class="pill"><span class="pill-es">reservar una entrada</span><span class="pill-pos">表現</span><span class="pill-ja">チケットを予約する</span></span>
+</div>
+
+<div class="vocab-category">時代区分</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">Edad de Piedra</span><span class="pill-pos">名f.</span><span class="pill-ja">石器時代</span></span>
+  <span class="pill"><span class="pill-es">Edad Antigua</span><span class="pill-pos">名f.</span><span class="pill-ja">古代</span></span>
+  <span class="pill"><span class="pill-es">Edad Media</span><span class="pill-pos">名f.</span><span class="pill-ja">中世</span></span>
+  <span class="pill"><span class="pill-es">Edad Moderna</span><span class="pill-pos">名f.</span><span class="pill-ja">近代</span></span>
+  <span class="pill"><span class="pill-es">Edad Contemporánea</span><span class="pill-pos">名f.</span><span class="pill-ja">現代</span></span>
+  <span class="pill"><span class="pill-es">siglo</span><span class="pill-pos">名m.</span><span class="pill-ja">世紀</span></span>
+</div>
+
+<div class="vocab-category">人の一生</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">nacer</span><span class="pill-pos">動</span><span class="pill-ja">生まれる</span></span>
+  <span class="pill"><span class="pill-es">crecer</span><span class="pill-pos">動</span><span class="pill-ja">成長する</span></span>
+  <span class="pill"><span class="pill-es">tener un hijo</span><span class="pill-pos">表現</span><span class="pill-ja">子供ができる</span></span>
+  <span class="pill"><span class="pill-es">casarse</span><span class="pill-pos">動</span><span class="pill-ja">結婚する</span></span>
+  <span class="pill"><span class="pill-es">divorciarse</span><span class="pill-pos">動</span><span class="pill-ja">離婚する</span></span>
+  <span class="pill"><span class="pill-es">separarse</span><span class="pill-pos">動</span><span class="pill-ja">別れる</span></span>
+  <span class="pill"><span class="pill-es">vivir</span><span class="pill-pos">動</span><span class="pill-ja">生きる・住む</span></span>
+  <span class="pill"><span class="pill-es">morir</span><span class="pill-pos">動</span><span class="pill-ja">死ぬ</span></span>
+  <span class="pill"><span class="pill-es">hijo/hija</span><span class="pill-pos">名m/f.</span><span class="pill-ja">息子・娘・子供</span></span>
+</div>
+
+<div class="vocab-category">よく使う動詞・場所</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">escuchar</span><span class="pill-pos">動</span><span class="pill-ja">聴く・耳を傾ける</span></span>
+  <span class="pill"><span class="pill-es">comprar</span><span class="pill-pos">動</span><span class="pill-ja">買う</span></span>
+  <span class="pill"><span class="pill-es">quedar</span><span class="pill-pos">動</span><span class="pill-ja">残る・（約束して）会う</span></span>
+  <span class="pill"><span class="pill-es">cine</span><span class="pill-pos">名m.</span><span class="pill-ja">映画館</span></span>
+  <span class="pill"><span class="pill-es">teatro</span><span class="pill-pos">名m.</span><span class="pill-ja">劇場</span></span>
+  <span class="pill"><span class="pill-es">museo</span><span class="pill-pos">名m.</span><span class="pill-ja">美術館・博物館</span></span>
+  <span class="pill"><span class="pill-es">concierto</span><span class="pill-pos">名m.</span><span class="pill-ja">コンサート</span></span>
+  <span class="pill"><span class="pill-es">discoteca</span><span class="pill-pos">名f.</span><span class="pill-ja">ナイトクラブ・ディスコ</span></span>
+  <span class="pill"><span class="pill-es">periódico</span><span class="pill-pos">名m.</span><span class="pill-ja">新聞</span></span>
+  <span class="pill"><span class="pill-es">revista</span><span class="pill-pos">名f.</span><span class="pill-ja">雑誌</span></span>
+  <span class="pill"><span class="pill-es">radio</span><span class="pill-pos">名f.</span><span class="pill-ja">ラジオ</span></span>
+  <span class="pill"><span class="pill-es">entrada</span><span class="pill-pos">名f.</span><span class="pill-ja">（公演の）入場券・チケット</span></span>
+  <span class="pill"><span class="pill-es">cita</span><span class="pill-pos">名f.</span><span class="pill-ja">約束・デート・面会</span></span>
+  <span class="pill"><span class="pill-es">plan</span><span class="pill-pos">名m.</span><span class="pill-ja">計画（複数：planes）</span></span>
+  <span class="pill"><span class="pill-es">paseo</span><span class="pill-pos">名m.</span><span class="pill-ja">散歩・遊歩道</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">vario/ria</span><span class="pill-pos">形</span><span class="pill-ja">いくつかの・さまざまな</span></span>
+  <span class="pill"><span class="pill-es">ponerse ＋ adj.</span><span class="pill-pos">表現</span><span class="pill-ja">〜になる（状態変化）</span></span>
+  <span class="pill"><span class="pill-es">verdad</span><span class="pill-pos">名f.</span><span class="pill-ja">真実・本当のこと</span></span>
+  <span class="pill"><span class="pill-es">noticia</span><span class="pill-pos">名f.</span><span class="pill-ja">知らせ・ニュース</span></span>
+  <span class="pill"><span class="pill-es">dolor de cabeza</span><span class="pill-pos">名m.</span><span class="pill-ja">頭痛</span></span>
+  <span class="pill"><span class="pill-es">asunto</span><span class="pill-pos">名m.</span><span class="pill-ja">案件・件・問題</span></span>
+  <span class="pill"><span class="pill-es">ofendido/da</span><span class="pill-pos">形</span><span class="pill-ja">傷ついた・気分を害した</span></span>
+  <span class="pill"><span class="pill-es">exportador</span><span class="pill-pos">名m.</span><span class="pill-ja">輸出業者・輸出国</span></span>
+  <span class="pill"><span class="pill-es">billete</span><span class="pill-pos">名m.</span><span class="pill-ja">切符・チケット・紙幣</span></span>
+  <span class="pill"><span class="pill-es">esquina</span><span class="pill-pos">名f.</span><span class="pill-ja">角・街角</span></span>
+  <span class="pill"><span class="pill-es">elegir</span><span class="pill-pos">動</span><span class="pill-ja">選ぶ</span></span>
+  <span class="pill"><span class="pill-es">herir</span><span class="pill-pos">動</span><span class="pill-ja">傷付ける</span></span>
+  <span class="pill"><span class="pill-es">freír</span><span class="pill-pos">動</span><span class="pill-ja">揚げる・炒める</span></span>
+  <span class="pill"><span class="pill-es">cargar</span><span class="pill-pos">動</span><span class="pill-ja">荷を積む・担ぐ</span></span>
+  <span class="pill"><span class="pill-es">averiguar</span><span class="pill-pos">動</span><span class="pill-ja">調査する・確認する</span></span>
+  <span class="pill"><span class="pill-es">médico</span><span class="pill-pos">名m.</span><span class="pill-ja">医者</span></span>
+</div>
+
+<!-- ⑦ まとめ -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">総まとめ：不規則点過去5分類</span>
+  <span class="sec-es">Resumen: 5 tipos de irregularidades en el pretérito</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:38%">分類</th><th>特徴・覚え方</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">①語根母音変化（-ir のみ）</td><td>3単・3複のみ e→i / o→u（<span class="mono">sintió, durmió, pidió</span>）</td></tr>
+    <tr><td class="td-rule">②3人称語尾変化（母音語根）</td><td>3単・3複 -ió→-yó / -ieron→-yeron（<span class="mono">leyó, oyó, creyó</span>）<br>開母音語根は 1・複・2人称にアクセント記号必要</td></tr>
+    <tr><td class="td-rule">③強変化動詞</td><td>yo形の語根変化を覚える。語尾は -e/-iste/-o/-imos/-isteis/-ieron<br>アクセント記号なし（<span class="mono">supe, estuve, tuve, hice, vine</span>等）</td></tr>
+    <tr><td class="td-rule">　└ j語根</td><td>3複語尾が -eron（<span class="mono">dijeron, trajeron, condujeron</span>）</td></tr>
+    <tr><td class="td-rule">　└ hubo</td><td>haber の点過去は3単 hubo のみ（「〜があった」）</td></tr>
+    <tr><td class="td-rule">④1人称綴り変化</td><td>語尾は規則通り。yo 形のみ綴りが変わる<br>g→gu（<span class="mono">jugué, llegué, pagué, cargué</span>）/ c→qu（<span class="mono">busqué</span>）/ z→c（<span class="mono">crucé</span>）/ gu→gü（<span class="mono">averigüé</span>）</td></tr>
+    <tr><td class="td-rule">⑤その他の例外</td><td><span class="mono">dar</span>（di, diste, dio…）、<span class="mono">ser/ir</span>（fui, fuiste, fue…）、<span class="mono">ver</span>（vi, viste, vio…）</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 6 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['点過去','pretérito perfecto simple','規則活用'], id: 'sec1', label: '点過去形・規則活用（①節）' },
+  { terms: ['al+不定詞','al verme','invitar a'], id: 'pret-reg-points', label: '規則活用ポイント（①節）' },
+  { terms: ['語根母音変化','e→i','o→u','sentir sintió','dormir durmió','pedir pidió','seguir','servir','vestir','repetir','elegir eligió','herir hirió'], id: 'sec2', label: '語根母音変化動詞（②節）' },
+  { terms: ['reír rió','sonreír','freír frió'], id: 'reir-note', label: 'reír等の特殊綴り（②節）' },
+  { terms: ['3人称語尾変化','i→y','leer leyó','oír oyó','creer creyó','caer cayó','huir','construir'], id: 'sec3', label: '3人称のみ語尾変化（③節）' },
+  { terms: ['強変化動詞','supe','anduve','estuve','pude','puse','tuve','hice','quise','vine','cupe'], id: 'sec4', label: '強変化動詞（④節）' },
+  { terms: ['j語根','dijeron','trajeron','condujeron'], id: 'j-root', label: 'j語根動詞（④節）' },
+  { terms: ['hubo','haber点過去','apagón'], id: 'haber-note', label: 'hubo（④節）' },
+  { terms: ['1人称綴り','jugué','llegué','pagué','busqué','crucé','cargué','averigüé','cargar','averiguar'], id: 'sec4', label: '1人称綴り変化（④節）' },
+  { terms: ['dar di','ser fui','ir fui','ver vi','例外動詞'], id: 'sec4', label: 'dar・ser/ir・ver（④節）' },
+  { terms: ['練習問題','練習'], id: 'sec5', label: '練習問題（⑤節）' },
+  { terms: ['語彙','Vocabulario','余暇','vacaciones'], id: 'sec6', label: '語彙リスト（⑥節）' },
+  { terms: ['まとめ','Resumen','5分類'], id: 'sec7', label: 'まとめ（⑦節）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語一列① 文法解説集（個人用コピー）</footer>
+
+</body>
+</html>

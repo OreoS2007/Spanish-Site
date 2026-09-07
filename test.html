@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>実力診断テスト | スペイン語学習ポータル</title>
+<link rel="stylesheet" href="common.css">
+<link rel="stylesheet" href="spanish1-common.css">
+<script src="question-bank.js" defer></script>
+<style>
+  #test-app { max-width: 100%; }
+  .test-intro {
+    background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--accent);
+    border-radius: 6px; padding: 22px 24px; margin-bottom: 20px;
+  }
+  .test-intro h2 { font-family: var(--serif); font-size: 17px; color: var(--accent); margin-bottom: 10px; }
+  .test-intro p { font-size: 13.5px; line-height: 1.8; margin-bottom: 8px; }
+  .test-start-btn {
+    display: inline-block; margin-top: 10px; background: var(--accent); color: #fff;
+    padding: 10px 26px; border-radius: 4px; border: none; font-size: 14px; font-weight: 700;
+    cursor: pointer; font-family: var(--sans);
+  }
+  .test-start-btn:hover { background: #1d3e72; }
+  #accent-toolbar {
+    position: sticky; top: 0; z-index: 500; background: var(--surface);
+    border: 1px solid var(--rule); border-radius: 4px; padding: 6px 8px;
+    display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 16px; align-items: center;
+  }
+  #accent-toolbar span { font-size: 11px; color: var(--muted); margin-right: 4px; }
+  .accent-btn {
+    width: 28px; height: 28px; border: 1px solid var(--rule); background: var(--alt-bg);
+    border-radius: 3px; cursor: pointer; font-size: 13px; font-family: var(--mono);
+  }
+  .accent-btn:hover { background: var(--sub-bg); }
+  .test-q {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 5px;
+    padding: 14px 16px; margin-bottom: 14px;
+  }
+  .test-q-meta { font-size: 10.5px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+  .test-q-sentence { font-family: var(--mono); font-size: 14px; line-height: 2.1; color: var(--ink); }
+  .test-q-ja { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+  .test-input {
+    display: inline-block; width: 110px; border: none; border-bottom: 2px solid var(--accent2);
+    background: #f4f9f7; padding: 2px 6px; font-family: var(--mono); font-size: 13.5px;
+    text-align: center; margin: 0 2px;
+  }
+  .test-input:focus { outline: none; background: #e4f0ec; }
+  .test-input.correct { border-bottom-color: var(--accent2); background: #d8eee5; color: var(--accent2); font-weight: 700; }
+  .test-input.incorrect { border-bottom-color: var(--warn); background: #fbe4e4; color: var(--warn); font-weight: 700; }
+  .test-correct-answer { font-size: 11.5px; color: var(--warn); margin-top: 4px; }
+  #submit-test-btn {
+    display: block; width: 100%; margin: 24px 0; background: var(--accent2); color: #fff;
+    padding: 14px; border: none; border-radius: 5px; font-size: 15px; font-weight: 700;
+    cursor: pointer; font-family: var(--sans);
+  }
+  #submit-test-btn:hover { background: #155f50; }
+  #report {
+    background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--accent2);
+    border-radius: 6px; padding: 24px; margin-top: 20px;
+  }
+  .report-cefr {
+    text-align: center; padding: 20px; background: var(--head-bg); border-radius: 6px; margin-bottom: 20px;
+  }
+  .report-cefr-level { font-family: var(--serif); font-size: 36px; font-weight: 700; color: var(--accent); }
+  .report-cefr-note { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .report-section-title { font-size: 13.5px; font-weight: 700; color: var(--accent); margin: 20px 0 10px; border-bottom: 1px solid var(--rule); padding-bottom: 5px; }
+  .report-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+  .report-bar-label { width: 130px; font-size: 12.5px; flex-shrink: 0; }
+  .report-bar-track { flex: 1; height: 16px; background: var(--alt-bg); border-radius: 8px; overflow: hidden; }
+  .report-bar-fill { height: 100%; background: var(--accent2); }
+  .report-bar-pct { width: 44px; text-align: right; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  .weak-item { background: var(--warn-bg); border-left: 3px solid var(--warn); padding: 10px 14px; margin-bottom: 8px; border-radius: 0 4px 4px 0; }
+  .weak-item a { color: var(--accent); font-weight: 700; text-decoration: none; }
+  .weak-item a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<div id="top-nav">
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">実力診断テスト</span>
+</div>
+
+<div class="cover-title-block">
+  <div class="cover-title">実力診断テスト</div>
+  <div class="cover-sub">スペイン語一列①（Lección 2〜10） — 実力測定</div>
+</div>
+
+<div id="test-app">
+  <div class="test-intro" id="test-intro">
+    <h2>このテストについて</h2>
+    <p>Lección 2〜10の文法項目からバランスよく問題を出題します。空欄にスペイン語を直接入力してください（<span class="hi">アクセント記号も正確に</span>入力してください。é や ñ の入力が難しい場合は、テスト画面上部のボタンから挿入できます）。</p>
+    <p>採点後、CEFR目安レベル・得意分野・不得意分野・復習すべきLecciónを表示します。問題は毎回ランダムに選ばれるため、繰り返し受けても新鮮な内容になります。</p>
+    <button class="test-start-btn" onclick="window.__startTest()">テストを始める（約20問）</button>
+  </div>
+</div>
+
+<footer class="course-footer">スペイン語一列① 文法解説集（個人用コピー）</footer>
+
+<script>
+/* ══════════════════════════════════════════════
+   テスト専用の追加バリエーション問題（案B：テンプレート型）
+   同じ文法項目でも複数の実例を用意し、毎回ランダムに選ぶ
+   ══════════════════════════════════════════════ */
+const TEST_TEMPLATES = [
+  // Lección2: ser/estar
+  { lesson: 2, sentence: 'María __BLANK__ profesora.', answers: ['es'], ja: 'マリアは先生だ。' },
+  { lesson: 2, sentence: 'Los libros __BLANK__ en la mesa.', answers: ['están'], ja: '本はテーブルの上にある。' },
+  { lesson: 2, sentence: 'Nosotros __BLANK__ de Japón.', answers: ['somos'], ja: '私たちは日本出身だ。' },
+  { lesson: 2, sentence: 'Yo __BLANK__ muy cansado hoy.', answers: ['estoy'], ja: '私は今日とても疲れている。' },
+  // Lección3: 現在形規則活用
+  { lesson: 3, sentence: 'Yo __BLANK__ (cocinar) todos los días.', answers: ['cocino'], ja: '私は毎日料理をする。' },
+  { lesson: 3, sentence: 'Nosotros __BLANK__ (comer) mucho.', answers: ['comemos'], ja: '私たちはたくさん食べる。' },
+  { lesson: 3, sentence: 'Ellos __BLANK__ (vivir) en Barcelona.', answers: ['viven'], ja: '彼らはバルセロナに住んでいる。' },
+  { lesson: 3, sentence: '¿Tienes mi libro? — Sí, __BLANK__ tengo.', answers: ['lo'], ja: '私の本を持ってる？ — うん、それを持ってるよ。' },
+  // Lección4: 比較表現
+  { lesson: 4, sentence: 'Mi hermano es __BLANK__ (年上) que yo.', answers: ['mayor'], ja: '私の兄は私より年上だ。' },
+  { lesson: 4, sentence: 'Esta película es __BLANK__ (良い、不規則) que la otra.', answers: ['mejor'], ja: 'この映画はもう一方より良い。' },
+  { lesson: 4, sentence: 'Ana es __BLANK__ alta __BLANK__ María.', answers: ['tan', 'como'], ja: 'アナはマリアと同じくらい背が高い。' },
+  // Lección5: 現在完了
+  { lesson: 5, sentence: 'Yo ya __BLANK__ (comer) todo.', answers: ['he comido'], ja: '私はもう全部食べてしまった。' },
+  { lesson: 5, sentence: '¿__BLANK__ (estar) alguna vez en Perú?', answers: ['Has estado'], ja: '君は今までにペルーへ行ったことがある？' },
+  { lesson: 5, sentence: 'Yo __BLANK__ (levantarse) a las siete.', answers: ['me levanto'], ja: '私は7時に起床する。' },
+  // Lección6: 点過去
+  { lesson: 6, sentence: 'Ayer yo __BLANK__ (hablar) con mi jefe.', answers: ['hablé'], ja: '昨日私は上司と話した。' },
+  { lesson: 6, sentence: 'Ella __BLANK__ (comer) mucho anoche.', answers: ['comió'], ja: '彼女は昨夜たくさん食べた。' },
+  { lesson: 6, sentence: 'Yo __BLANK__ (tener) mucho trabajo ayer.', answers: ['tuve'], ja: '私は昨日仕事がたくさんあった。' },
+  { lesson: 6, sentence: 'Ellos __BLANK__ (ir) al cine.', answers: ['fueron'], ja: '彼らは映画に行った。' },
+  // Lección7: 線過去
+  { lesson: 7, sentence: 'Cuando era niño, yo __BLANK__ (vivir) en Kioto.', answers: ['vivía'], ja: '子供の頃、私は京都に住んでいた。' },
+  { lesson: 7, sentence: 'Nosotros __BLANK__ (ser) muy felices.', answers: ['éramos'], ja: '私たちはとても幸せだった。' },
+  { lesson: 7, sentence: 'Cuando yo llegué, ella ya __BLANK__ (salir).', answers: ['había salido'], ja: '私が着いたとき、彼女はもう出かけていた。' },
+  // Lección8: 未来・過去未来
+  { lesson: 8, sentence: 'Mañana yo __BLANK__ (llamar) a mi madre.', answers: ['llamaré'], ja: '明日私は母に電話するつもりだ。' },
+  { lesson: 8, sentence: 'Ellos __BLANK__ (tener) que estudiar mucho.', answers: ['tendrán'], ja: '彼らはたくさん勉強しなければならないだろう。' },
+  { lesson: 8, sentence: 'Me __BLANK__ (gustar、婉曲) visitar España.', answers: ['gustaría'], ja: 'スペインを訪れたいものだ。' },
+  // Lección9: 接続法現在
+  { lesson: 9, sentence: 'Espero que tú __BLANK__ (venir) a la fiesta.', answers: ['vengas'], ja: '君がパーティーに来るといいな。' },
+  { lesson: 9, sentence: 'Quiero que ella __BLANK__ (ser) feliz.', answers: ['sea'], ja: '私は彼女が幸せであることを望む。' },
+  { lesson: 9, sentence: 'No creo que él __BLANK__ (hablar) japonés.', answers: ['hable'], ja: '彼が日本語を話すとは思わない。' },
+  // Lección10: 命令文・接続法過去・条件文
+  { lesson: 10, sentence: '__BLANK__ (hablar、túへの肯定命令) más despacio, por favor.', answers: ['Habla'], ja: 'もっとゆっくり話して。' },
+  { lesson: 10, sentence: 'No __BLANK__ (hablar、túへの否定命令) tan alto.', answers: ['hables'], ja: 'そんなに大きな声で話さないで。' },
+  { lesson: 10, sentence: 'Si yo __BLANK__ (tener) más dinero, viajaría por el mundo.', answers: ['tuviera'], ja: 'もしもっとお金があれば、私は世界中を旅するだろう。' },
+  { lesson: 10, sentence: 'Si tú __BLANK__ (estudiar、過去完了) más, habrías aprobado.', answers: ['hubieras estudiado'], ja: '君がもっと勉強していたら、合格していただろう。' },
+];
+
+const LESSON_LABELS = {
+  2: 'Lección 2（名詞・冠詞・ser/estar・前置詞）',
+  3: 'Lección 3（現在形・目的格代名詞・gustar型）',
+  4: 'Lección 4（不規則活用・関係詞・比較・無主語文）',
+  5: 'Lección 5（不定詞・分詞・現在完了・再帰動詞）',
+  6: 'Lección 6（点過去）',
+  7: 'Lección 7（線過去・過去完了・序数）',
+  8: 'Lección 8（未来・過去未来）',
+  9: 'Lección 9（接続法現在）',
+  10: 'Lección 10（命令文・接続法過去・条件文）',
+};
+
+const CEFR_GROUPS = {
+  A2: [2, 3, 4],
+  B1: [5, 6, 7],
+  B2: [8, 9, 10],
+};
+
+var selectedQuestions = [];
+
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+
+function normalizeItem(item) {
+  // convert bank item or template item into a common shape:
+  // { lesson, sentence_html (with __BLANK__ markers or fillblank spans), answers, ja }
+  if (item.sentence !== undefined) {
+    // template style
+    return { lesson: item.lesson, raw: item.sentence, answers: item.answers, ja: item.ja, isTemplate: true };
+  }
+  return { lesson: item.lesson, sentence_html: item.sentence_html, answers: item.answers, ja: item.ja, isTemplate: false, type: item.type, table_html: item.table_html, table_answers: item.table_answers };
+}
+
+function buildTestSet() {
+  var pool = [];
+  QUESTION_BANK.forEach(function (q) {
+    if (q.answers && q.answers.length > 0) pool.push(normalizeItem(q));
+  });
+  TEST_TEMPLATES.forEach(function (t) { pool.push(normalizeItem(t)); });
+
+  // group by lesson
+  var byLesson = {};
+  pool.forEach(function (item) {
+    if (!byLesson[item.lesson]) byLesson[item.lesson] = [];
+    byLesson[item.lesson].push(item);
+  });
+
+  var picked = [];
+  for (var lesson = 2; lesson <= 10; lesson++) {
+    var items = shuffle(byLesson[lesson] || []);
+    picked = picked.concat(items.slice(0, 2));
+  }
+  return shuffle(picked);
+}
+
+function renderInputsFromHtml(html, qIndex) {
+  var wrapper = document.createElement('div');
+  wrapper.innerHTML = html;
+  wrapper.querySelectorAll('.hintchip').forEach(function (h) { h.remove(); });
+  var blanks = wrapper.querySelectorAll('.fillblank');
+  var n = 0;
+  blanks.forEach(function (b) {
+    var input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'test-input';
+    input.setAttribute('data-qindex', qIndex);
+    input.setAttribute('data-bindex', n);
+    input.autocomplete = 'off';
+    input.setAttribute('autocapitalize', 'off');
+    input.spellcheck = false;
+    b.replaceWith(input);
+    n++;
+  });
+  return { html: wrapper.innerHTML, blankCount: n };
+}
+
+window.__startTest = function () {
+  selectedQuestions = buildTestSet();
+  renderTestForm();
+};
+
+function renderTestForm() {
+  var app = document.getElementById('test-app');
+  var html = '';
+
+  html += '<div id="accent-toolbar"><span>アクセント入力：</span>';
+  ['á', 'é', 'í', 'ó', 'ú', 'ñ', '¿', '¡'].forEach(function (ch) {
+    html += '<button type="button" class="accent-btn" onclick="window.__insertChar(\'' + ch + '\')">' + ch + '</button>';
+  });
+  html += '</div>';
+
+  html += '<form id="test-form">';
+
+  selectedQuestions.forEach(function (q, idx) {
+    html += '<div class="test-q" id="test-q-' + idx + '">';
+    html += '<div class="test-q-meta">' + (LESSON_LABELS[q.lesson] || ('Lección ' + q.lesson)) + '</div>';
+
+    if (q.isTemplate) {
+      var parts = q.raw.split('__BLANK__');
+      var sentHtml = '';
+      for (var i = 0; i < parts.length; i++) {
+        sentHtml += parts[i];
+        if (i < parts.length - 1) {
+          sentHtml += '<input type="text" class="test-input" data-qindex="' + idx + '" data-bindex="' + i + '" autocomplete="off" autocapitalize="off" spellcheck="false">';
+        }
+      }
+      html += '<div class="test-q-sentence">' + sentHtml + '</div>';
+    } else {
+      var res = renderInputsFromHtml(q.sentence_html, idx);
+      html += '<div class="test-q-sentence">' + res.html + '</div>';
+      if (q.type === 'table' && q.table_html) {
+        var tres = renderInputsFromHtml(q.table_html, idx);
+        html += '<div class="quiz-table-wrap"><div class="tbl-wrap">' + tres.html + '</div></div>';
+      }
+    }
+    if (q.ja) html += '<div class="test-q-ja">' + q.ja + '</div>';
+    html += '<div class="test-correct-answer" id="test-ans-' + idx + '"></div>';
+    html += '</div>';
+  });
+
+  html += '<button type="button" id="submit-test-btn" onclick="window.__gradeTest()">採点する</button>';
+  html += '</form>';
+  html += '<div id="report"></div>';
+
+  app.innerHTML = html;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+var lastFocusedInput = null;
+document.addEventListener('focusin', function (e) {
+  if (e.target && e.target.classList && e.target.classList.contains('test-input')) {
+    lastFocusedInput = e.target;
+  }
+});
+
+window.__insertChar = function (ch) {
+  if (!lastFocusedInput) return;
+  var start = lastFocusedInput.selectionStart || lastFocusedInput.value.length;
+  var end = lastFocusedInput.selectionEnd || lastFocusedInput.value.length;
+  var val = lastFocusedInput.value;
+  lastFocusedInput.value = val.slice(0, start) + ch + val.slice(end);
+  lastFocusedInput.selectionStart = lastFocusedInput.selectionEnd = start + ch.length;
+  lastFocusedInput.focus();
+};
+
+function normalizeAnswer(s) {
+  return s.trim().toLowerCase().replace(/\s+/g, ' ');
+}
+
+window.__gradeTest = function () {
+  var lessonStats = {};
+  for (var l = 2; l <= 10; l++) lessonStats[l] = { correct: 0, total: 0 };
+
+  selectedQuestions.forEach(function (q, idx) {
+    var allAnswers = q.answers.slice();
+    if (q.type === 'table' && q.table_answers) allAnswers = allAnswers.concat(q.table_answers);
+
+    var inputs = document.querySelectorAll('input.test-input[data-qindex="' + idx + '"]');
+    var wrongList = [];
+    inputs.forEach(function (inp) {
+      var bIdx = parseInt(inp.getAttribute('data-bindex'), 10);
+      var expected = allAnswers[bIdx];
+      if (expected === undefined) return;
+      var given = normalizeAnswer(inp.value);
+      var correct = given === normalizeAnswer(expected);
+      inp.classList.remove('correct', 'incorrect');
+      inp.classList.add(correct ? 'correct' : 'incorrect');
+      lessonStats[q.lesson].total++;
+      if (correct) {
+        lessonStats[q.lesson].correct++;
+      } else {
+        wrongList.push(expected);
+      }
+    });
+    var ansDiv = document.getElementById('test-ans-' + idx);
+    if (ansDiv && wrongList.length > 0) {
+      ansDiv.textContent = '正解：' + wrongList.join(' / ');
+    }
+  });
+
+  renderReport(lessonStats);
+  var report = document.getElementById('report');
+  if (report) report.scrollIntoView({ behavior: 'smooth' });
+};
+
+function pct(correct, total) {
+  return total > 0 ? Math.round((correct / total) * 100) : 0;
+}
+
+function renderReport(lessonStats) {
+  var groupAcc = {};
+  Object.keys(CEFR_GROUPS).forEach(function (g) {
+    var c = 0, t = 0;
+    CEFR_GROUPS[g].forEach(function (l) {
+      c += lessonStats[l].correct;
+      t += lessonStats[l].total;
+    });
+    groupAcc[g] = { correct: c, total: t, pct: pct(c, t) };
+  });
+
+  var cefr = 'A1相当';
+  if (groupAcc.B2.pct >= 65 && groupAcc.B1.pct >= 70 && groupAcc.A2.pct >= 75) {
+    cefr = 'B2相当';
+  } else if (groupAcc.B1.pct >= 65 && groupAcc.A2.pct >= 75) {
+    cefr = 'B1相当';
+  } else if (groupAcc.A2.pct >= 65) {
+    cefr = 'A2相当';
+  }
+
+  var overallCorrect = 0, overallTotal = 0;
+  for (var l = 2; l <= 10; l++) { overallCorrect += lessonStats[l].correct; overallTotal += lessonStats[l].total; }
+  var overallPct = pct(overallCorrect, overallTotal);
+
+  var html = '';
+  html += '<div class="report-cefr">';
+  html += '<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">文法習得度からみた目安レベル</div>';
+  html += '<div class="report-cefr-level">' + cefr + '</div>';
+  html += '<div class="report-cefr-note">全体正答率：' + overallPct + '%（' + overallCorrect + '/' + overallTotal + '問）</div>';
+  html += '<div class="report-cefr-note">※ これはLección2〜10の文法カバー率に基づく目安です。実際のCEFR判定はリスニング・スピーキング等も含めて総合的に行われます。</div>';
+  html += '</div>';
+
+  html += '<div class="report-section-title">レベル帯ごとの正答率</div>';
+  var groupLabels = { A2: 'A2相当の文法（Lec.2-4）', B1: 'B1相当の文法（Lec.5-7）', B2: 'B2相当の文法（Lec.8-10）' };
+  ['A2', 'B1', 'B2'].forEach(function (g) {
+    html += '<div class="report-bar-row">';
+    html += '<div class="report-bar-label">' + groupLabels[g] + '</div>';
+    html += '<div class="report-bar-track"><div class="report-bar-fill" style="width:' + groupAcc[g].pct + '%"></div></div>';
+    html += '<div class="report-bar-pct">' + groupAcc[g].pct + '%</div>';
+    html += '</div>';
+  });
+
+  html += '<div class="report-section-title">Lecciónごとの正答率</div>';
+  for (var lesson = 2; lesson <= 10; lesson++) {
+    var st = lessonStats[lesson];
+    var p = pct(st.correct, st.total);
+    html += '<div class="report-bar-row">';
+    html += '<div class="report-bar-label">Lección ' + lesson + '</div>';
+    html += '<div class="report-bar-track"><div class="report-bar-fill" style="width:' + p + '%; background:' + (p < 60 ? 'var(--warn)' : 'var(--accent2)') + '"></div></div>';
+    html += '<div class="report-bar-pct">' + p + '%</div>';
+    html += '</div>';
+  }
+
+  var weakLessons = [];
+  for (var lesson2 = 2; lesson2 <= 10; lesson2++) {
+    var st2 = lessonStats[lesson2];
+    if (st2.total > 0 && pct(st2.correct, st2.total) < 70) {
+      weakLessons.push({ lesson: lesson2, pct: pct(st2.correct, st2.total) });
+    }
+  }
+  weakLessons.sort(function (a, b) { return a.pct - b.pct; });
+
+  html += '<div class="report-section-title">復習をおすすめするLección</div>';
+  if (weakLessons.length === 0) {
+    html += '<p style="font-size:13px;color:var(--muted);">目立った弱点は見つかりませんでした。よくできています！</p>';
+  } else {
+    weakLessons.forEach(function (w) {
+      html += '<div class="weak-item">';
+      html += '<a href="Spanish1_lesson' + w.lesson + '.html">' + (LESSON_LABELS[w.lesson] || ('Lección ' + w.lesson)) + '</a>';
+      html += '　— 正答率 ' + w.pct + '%';
+      html += '</div>';
+    });
+  }
+
+  html += '<button class="test-start-btn" style="margin-top:16px;" onclick="window.__startTest()">もう一度テストを受ける（別の問題）</button>';
+
+  document.getElementById('report').innerHTML = html;
+}
+</script>
+
+</body>
+</html>

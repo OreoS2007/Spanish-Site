@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>今日の復習 | スペイン語学習ポータル</title>
+<link rel="stylesheet" href="common.css">
+<link rel="stylesheet" href="spanish1-common.css">
+<script src="question-bank.js" defer></script>
+<script src="site.js" defer></script>
+<style>
+  #review-app { max-width: 100%; }
+  #review-header {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--accent);
+  }
+  #review-title { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--accent); }
+  #review-progress { font-size: 13px; color: var(--muted); font-weight: 700; }
+  #review-progress-bar-wrap {
+    width: 100%; height: 6px; background: var(--alt-bg); border-radius: 3px;
+    overflow: hidden; margin-bottom: 24px;
+  }
+  #review-progress-bar { height: 100%; background: var(--accent2); transition: width .25s; width: 0%; }
+  .review-card {
+    background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--accent);
+    border-radius: 6px; padding: 20px 22px; margin-bottom: 20px;
+  }
+  .review-card-meta {
+    font-size: 11px; color: var(--muted); font-weight: 700; margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 1px solid var(--rule);
+  }
+  .review-sentence {
+    font-family: var(--mono); font-size: 15px; line-height: 2; color: var(--ink); margin-bottom: 8px;
+  }
+  .review-ja { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .review-empty {
+    text-align: center; padding: 60px 20px; color: var(--muted);
+  }
+  .review-empty-icon { font-size: 48px; margin-bottom: 16px; }
+  .review-empty-title { font-family: var(--serif); font-size: 18px; color: var(--accent); margin-bottom: 8px; }
+  .review-done {
+    text-align: center; padding: 60px 20px;
+  }
+  .review-done-icon { font-size: 48px; margin-bottom: 16px; }
+  .review-done-title { font-family: var(--serif); font-size: 20px; color: var(--accent2); margin-bottom: 10px; }
+  .review-nav-link {
+    display: inline-block; margin-top: 18px; background: var(--accent); color: #fff;
+    padding: 8px 20px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: 700;
+  }
+  .review-nav-link:hover { background: #1d3e72; }
+</style>
+</head>
+<body>
+
+<div id="top-nav">
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">今日の復習</span>
+</div>
+
+<div class="cover-title-block">
+  <div class="cover-title">今日の復習</div>
+  <div class="cover-sub">間隔反復システム — Repaso espaciado</div>
+</div>
+
+<div id="review-app">
+  <div id="review-loading" style="text-align:center;padding:60px 20px;color:var(--muted);">読み込み中…</div>
+</div>
+
+<footer class="course-footer">スペイン語一列① 文法解説集（個人用コピー）</footer>
+
+<script>
+(function () {
+  var queue = [];
+  var totalCount = 0;
+
+  function bankById(id) {
+    return QUESTION_BANK.find(function (q) { return q.id === id; });
+  }
+
+  function renderApp() {
+    var app = document.getElementById('review-app');
+    var progress = srsLoadProgress();
+    var dueIds = srsGetDueIds(progress);
+
+    if (dueIds.length === 0) {
+      var hasAnyProgress = Object.keys(progress).length > 0;
+      app.innerHTML =
+        '<div class="review-empty">' +
+        '<div class="review-empty-icon">🎉</div>' +
+        '<div class="review-empty-title">今日復習する問題はありません</div>' +
+        '<div>' + (hasAnyProgress
+          ? '素晴らしい！ 今日の分はすべて終わっています。'
+          : 'まだ評価済みの問題がありません。各Lecciónのミニ確認・まとめクイズで「○／△／×」を記録すると、ここに復習リストが作られます。') +
+        '</div>' +
+        '<a class="review-nav-link" href="index.html">ホームへ戻る</a>' +
+        '</div>';
+      return;
+    }
+
+    queue = dueIds.map(bankById).filter(Boolean);
+    totalCount = queue.length;
+    renderCard();
+  }
+
+  function updateProgressBar() {
+    var done = totalCount - queue.length;
+    var pct = totalCount > 0 ? Math.round((done / totalCount) * 100) : 0;
+    document.getElementById('review-progress').textContent = done + ' / ' + totalCount + ' 問';
+    document.getElementById('review-progress-bar').style.width = pct + '%';
+  }
+
+  function renderCard() {
+    var app = document.getElementById('review-app');
+
+    if (queue.length === 0) {
+      app.innerHTML =
+        '<div id="review-header">' +
+        '<span id="review-title">今日の復習</span>' +
+        '<span id="review-progress"></span>' +
+        '</div>' +
+        '<div id="review-progress-bar-wrap"><div id="review-progress-bar"></div></div>' +
+        '<div class="review-done">' +
+        '<div class="review-done-icon">✅</div>' +
+        '<div class="review-done-title">今日の復習はすべて完了しました！</div>' +
+        '<div style="color:var(--muted)">お疲れさまでした。また明日以降、間隔を空けて出題されます。</div>' +
+        '<a class="review-nav-link" href="index.html">ホームへ戻る</a>' +
+        '</div>';
+      updateProgressBar();
+      return;
+    }
+
+    var q = queue[0];
+    var isTable = q.type === 'table';
+    var sectionLabel = 'Lección ' + q.lesson + (q.section_num ? '　' + q.section_num + ' ' + q.section_title : '');
+
+    var bodyHtml = '<div class="review-sentence">' + q.sentence_html + '</div>';
+    if (q.ja) bodyHtml += '<div class="review-ja">' + q.ja + '</div>';
+    if (isTable && q.table_html) {
+      bodyHtml += '<div class="quiz-table-wrap"><div class="tbl-wrap">' + q.table_html + '</div></div>';
+    }
+
+    var expHtml = '';
+    if (q.explanation_html) {
+      expHtml =
+        '<button class="quiz-exp-btn" id="review-exp-btn" onclick="document.getElementById(\'review-exp\').classList.toggle(\'visible\'); this.classList.toggle(\'revealed\');">解説を見る ▾</button>' +
+        '<div class="quiz-exp" id="review-exp">' + q.explanation_html + '</div>';
+    }
+
+    app.innerHTML =
+      '<div id="review-header">' +
+      '<span id="review-title">今日の復習</span>' +
+      '<span id="review-progress"></span>' +
+      '</div>' +
+      '<div id="review-progress-bar-wrap"><div id="review-progress-bar"></div></div>' +
+      '<div class="review-card">' +
+      '<div class="review-card-meta">' + sectionLabel + '</div>' +
+      bodyHtml +
+      expHtml +
+      '<div class="srs-rate" data-qid="' + q.id + '" style="margin-top:16px;">' +
+      '<span class="srs-rate-label">この問題の理解度：</span>' +
+      '<button class="srs-btn srs-x" onclick="window.__reviewRate(\'' + q.id + '\', 0)">×</button>' +
+      '<button class="srs-btn srs-tri" onclick="window.__reviewRate(\'' + q.id + '\', 1)">△</button>' +
+      '<button class="srs-btn srs-o" onclick="window.__reviewRate(\'' + q.id + '\', 2)">○</button>' +
+      '</div>' +
+      '</div>';
+
+    updateProgressBar();
+  }
+
+  window.__reviewRate = function (qid, rating) {
+    srsRate(qid, rating);
+    queue.shift();
+    renderCard();
+  };
+
+  document.addEventListener('DOMContentLoaded', function () {
+    renderApp();
+  });
+})();
+</script>
+
+</body>
+</html>

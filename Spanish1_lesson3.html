@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Lección 3 文法解説 | スペイン語一列①</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<!-- dict modal -->
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 現在形の規則活用</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 目的語と目的格代名詞</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ gustar型動詞</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ 指示詞</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec5" data-tab="renshu" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec6" data-tab="vocab" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 語彙リスト</a>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ まとめ</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 3 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+
+  <div class="cover-title">Lección 3　文法解説
+  </div>
+  <div class="cover-sub">スペイン語一列①　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+</div>
+
+<div class="cover">
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 現在形の規則活用</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 目的語と目的格代名詞</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ gustar型動詞</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ 指示詞</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 練習問題</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 語彙リスト</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ まとめ</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：hablas　／　食べる　／　直接目的語…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 現在形の規則活用 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">現在形の規則活用</span>
+  <span class="sec-es">Presente de indicativo: conjugación regular</span>
+</div>
+
+<p>動詞の原形（不定詞）は <span class="hi">語根</span>＋<span class="hi2">語尾</span> で成り立ちます。語尾は必ず <span class="mono hi2">-ar / -er / -ir</span> のどれかです。現在形では語尾だけを人称に合わせて変化させます。</p>
+
+<div class="sub">活用表（語尾別）</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">人称</th>
+      <th style="background:#dde8f5;color:var(--accent)">-ar 動詞<br><small>hablar（話す）</small></th>
+      <th style="background:#dde8f5;color:var(--accent)">-ar 語尾</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-ja">私</td><td class="td-c mono">hablo</td><td class="td-c td-rule">-o</td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-ja">君</td><td class="td-c mono">hablas</td><td class="td-c td-rule">-as</td></tr>
+    <tr><td class="td-key td-c">él/ella/usted</td><td class="td-ja">彼/彼女/あなた</td><td class="td-c mono">habla</td><td class="td-c td-rule">-a</td></tr>
+    <tr><td class="td-key td-c">nosotros/as</td><td class="td-ja">私たち</td><td class="td-c mono">habl<b>amos</b></td><td class="td-c td-rule">-amos</td></tr>
+    <tr><td class="td-key td-c">vosotros/as <span style="font-weight:400;font-size:11px">※</span></td><td class="td-ja">君たち（スペイン）</td><td class="td-c mono">habl<b>áis</b></td><td class="td-c td-rule">-áis</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas/uds.</td><td class="td-ja">彼ら/あなたがた</td><td class="td-c mono">hablan</td><td class="td-c td-rule">-an</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="tbl-wrap" style="margin-top:10px">
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">人称</th>
+      <th style="background:#d8eeea;color:var(--accent2)">-er 動詞<br><small>comer（食べる）</small></th>
+      <th style="background:#d8eeea;color:var(--accent2)">-er 語尾</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-ja">私</td><td class="td-c mono">como</td><td class="td-c td-rule">-o</td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-ja">君</td><td class="td-c mono">comes</td><td class="td-c td-rule">-es</td></tr>
+    <tr><td class="td-key td-c">él/ella/usted</td><td class="td-ja">彼/彼女/あなた</td><td class="td-c mono">come</td><td class="td-c td-rule">-e</td></tr>
+    <tr><td class="td-key td-c">nosotros/as</td><td class="td-ja">私たち</td><td class="td-c mono">com<b>emos</b></td><td class="td-c td-rule">-emos</td></tr>
+    <tr><td class="td-key td-c">vosotros/as</td><td class="td-ja">君たち（スペイン）</td><td class="td-c mono">com<b>éis</b></td><td class="td-c td-rule">-éis</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas/uds.</td><td class="td-ja">彼ら/あなたがた</td><td class="td-c mono">comen</td><td class="td-c td-rule">-en</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="tbl-wrap" style="margin-top:10px">
+<table>
+  <thead>
+    <tr>
+      <th colspan="2">人称</th>
+      <th style="background:#f0e8dd;color:#8b5020">-ir 動詞<br><small>vivir（住む）</small></th>
+      <th style="background:#f0e8dd;color:#8b5020">-ir 語尾</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-key td-c">yo</td><td class="td-ja">私</td><td class="td-c mono">vivo</td><td class="td-c td-rule">-o</td></tr>
+    <tr><td class="td-key td-c">tú</td><td class="td-ja">君</td><td class="td-c mono">vives</td><td class="td-c td-rule">-es</td></tr>
+    <tr><td class="td-key td-c">él/ella/usted</td><td class="td-ja">彼/彼女/あなた</td><td class="td-c mono">vive</td><td class="td-c td-rule">-e</td></tr>
+    <tr><td class="td-key td-c">nosotros/as</td><td class="td-ja">私たち</td><td class="td-c mono">viv<b>imos</b></td><td class="td-c td-rule">-imos</td></tr>
+    <tr><td class="td-key td-c">vosotros/as</td><td class="td-ja">君たち（スペイン）</td><td class="td-c mono">viv<b>ís</b></td><td class="td-c td-rule">-ís</td></tr>
+    <tr><td class="td-key td-c">ellos/ellas/uds.</td><td class="td-ja">彼ら/あなたがた</td><td class="td-c mono">viven</td><td class="td-c td-rule">-en</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ vosotros/as はスペインのみ使用。中南米では ustedes を使います。なお -er と -ir の語尾は nosotros/vosotros 形のみ異なり（-emos/-emos → -emos；-imos/-ís）、それ以外は共通です。</p>
+
+<div id="accent-rule" class="box">
+  <div class="box-title">アクセントのルール</div>
+  <div class="accent-rule-grid">
+    <div class="accent-rule-item">
+      <strong>nosotros・vosotros 形</strong>
+      語尾にアクセント<br>例：habl<b>A</b>mos, habl<b>Á</b>IS
+    </div>
+    <div class="accent-rule-item">
+      <strong>その他の人称</strong>
+      語根にアクセント<br>例：<b>HA</b>blo, <b>HA</b>blas
+    </div>
+  </div>
+</div>
+
+<div class="sub">現在形が表す意味</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>用法</th><th>例文と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">現在の行為・状態</td><td><span class="mono">Abro la ventana de mi cuarto.</span>　<span class="td-ja">私は部屋の窓を開ける。</span></td></tr>
+    <tr><td class="td-rule">習慣・繰り返し</td><td><span class="mono">Los sábados no trabajamos.</span>　<span class="td-ja">毎週土曜日は休みです。</span></td></tr>
+    <tr><td class="td-rule">確実な近い未来</td><td><span class="mono">Mañana viajo a Madrid.</span>　<span class="td-ja">明日マドリードへ旅立ちます。</span></td></tr>
+    <tr><td class="td-rule">一般的事実</td><td><span class="mono">En Cataluña aprenden catalán.</span>　<span class="td-ja">カタルーニャでは人々がカタルーニャ語を学んでいます。</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">Los sábados</span> のように曜日名を複数＋<span class="mono">los</span> にすると「毎週〜曜日に」の意味になります。月〜金（lunes〜viernes）は単複同形です。</span>
+</div>
+
+<div class="sub">規則活用動詞一覧</div>
+<div class="verb-grid-wrap">
+  <div class="verb-col verb-col-ar">
+    <div class="verb-col-head badge-ar">-ar 動詞</div>
+    <div class="verb-card-list">
+      <div class="vcard"><span class="vc-es">comprar</span><span class="vc-ja">買う</span></div>
+      <div class="vcard"><span class="vc-es">escuchar</span><span class="vc-ja">聴く</span></div>
+      <div class="vcard"><span class="vc-es">esperar</span><span class="vc-ja">待つ</span></div>
+      <div class="vcard"><span class="vc-es">estudiar</span><span class="vc-ja">勉強する</span></div>
+      <div class="vcard"><span class="vc-es">llamar</span><span class="vc-ja">呼ぶ</span></div>
+      <div class="vcard"><span class="vc-es">llegar</span><span class="vc-ja">到着する</span></div>
+      <div class="vcard"><span class="vc-es">mandar</span><span class="vc-ja">命じる・送る</span></div>
+      <div class="vcard"><span class="vc-es">preguntar</span><span class="vc-ja">質問する</span></div>
+      <div class="vcard"><span class="vc-es">quedar</span><span class="vc-ja">残る</span></div>
+      <div class="vcard"><span class="vc-es">tomar</span><span class="vc-ja">取る</span></div>
+      <div class="vcard"><span class="vc-es">trabajar</span><span class="vc-ja">働く</span></div>
+      <div class="vcard"><span class="vc-es">viajar</span><span class="vc-ja">旅行する</span></div>
+    </div>
+  </div>
+  <div class="verb-col verb-col-er">
+    <div class="verb-col-head badge-er">-er 動詞</div>
+    <div class="verb-card-list">
+      <div class="vcard"><span class="vc-es">aprender</span><span class="vc-ja">学ぶ</span></div>
+      <div class="vcard"><span class="vc-es">beber</span><span class="vc-ja">飲む</span></div>
+      <div class="vcard"><span class="vc-es">comprender</span><span class="vc-ja">理解する</span></div>
+      <div class="vcard"><span class="vc-es">correr</span><span class="vc-ja">走る</span></div>
+      <div class="vcard"><span class="vc-es">deber</span><span class="vc-ja">〜しなければならない</span></div>
+      <div class="vcard"><span class="vc-es">temer</span><span class="vc-ja">恐れる</span></div>
+      <div class="vcard"><span class="vc-es">vender</span><span class="vc-ja">売る</span></div>
+    </div>
+  </div>
+  <div class="verb-col verb-col-ir">
+    <div class="verb-col-head badge-ir">-ir 動詞</div>
+    <div class="verb-card-list">
+      <div class="vcard"><span class="vc-es">abrir</span><span class="vc-ja">開く</span></div>
+      <div class="vcard"><span class="vc-es">cubrir</span><span class="vc-ja">覆う</span></div>
+      <div class="vcard"><span class="vc-es">dividir</span><span class="vc-ja">分ける</span></div>
+      <div class="vcard"><span class="vc-es">escribir</span><span class="vc-ja">書く</span></div>
+      <div class="vcard"><span class="vc-es">partir</span><span class="vc-ja">出発する</span></div>
+      <div class="vcard"><span class="vc-es">recibir</span><span class="vc-ja">受け取る</span></div>
+      <div class="vcard"><span class="vc-es">subir</span><span class="vc-ja">上る</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="mini-check" id="L3-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Yo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hablo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">hablar</span></span> español todos los días.</div>
+  <div class="mini-check-ja">私は毎日スペイン語を話す。</div>
+<div class="srs-rate" data-qid="L3-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：現在形の規則活用</div>
+
+  <div class="quiz-item" id="L3-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Nosotros <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">comemos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">comer</span></span> arroz y <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">vivimos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">vivir</span></span> en Madrid.</div>
+    <div class="quiz-ja">私たちはご飯を食べて、マドリードに住んでいる。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>comemos</b>：comer（-er動詞）1人称複数。<b>vivimos</b>：vivir（-ir動詞）1人称複数。-er動詞と-ir動詞はnosotros/vosotros形以外は同じ語尾パターン。</div>
+  <div class="srs-rate" data-qid="L3-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L3-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿Tú <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">trabajas</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">trabajar</span></span> los sábados?</div>
+    <div class="quiz-ja">君は土曜日に働くの？</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>trabajas</b>：trabajar（-ar動詞）2人称単数。語尾は-as。</div>
+  <div class="srs-rate" data-qid="L3-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L3-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">動詞 <b>estudiar</b> を全人称で活用させなさい。</div>
+    <div class="quiz-table-wrap">
+    <div class="tbl-wrap">
+    <table>
+      <thead><tr><th>yo</th><th>tú</th><th>él/ella</th><th>nosotros</th><th>vosotros</th><th>ellos</th></tr></thead>
+      <tbody>
+        <tr>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">estudio</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">estudias</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">estudia</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">estudiamos</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">estudiáis</span></span></td>
+          <td class="td-c"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">___</span><span class="fb-answer">estudian</span></span></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+    </div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">estudiarは規則の-ar動詞。語根estudi-に-o/-as/-a/-amos/-áis/-anを付ける。vosotros形にアクセント記号（-áis）が必要な点に注意。</div>
+  <div class="srs-rate" data-qid="L3-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ② 目的語と目的格代名詞 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">目的語と目的格代名詞</span>
+  <span class="sec-es">Pronombres de objeto directo e indirecto</span>
+</div>
+
+<div class="sub" id="direct-indirect-obj">目的語の種類と前置詞 a</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>種類</th><th>助詞</th><th>前置詞 a のルール</th><th>例</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="td-rule" id="chokusetsu-mokutek">直接目的語</td><td class="td-c">〜を</td>
+      <td>特定の<strong>人</strong>のとき <span class="hi-r">必要</span>、物・不特定の人は不要</td>
+      <td><span class="mono">Busco <span class="hi-r">a</span> María.</span>　<span class="td-ja">マリアを探す。</span></td>
+    </tr>
+    <tr>
+      <td class="td-rule" id="kansetsu-mokutek">間接目的語</td><td class="td-c">〜に</td>
+      <td><strong>常に</strong> <span class="hi-r">必要</span></td>
+      <td><span class="mono">Regalo un libro <span class="hi-r">a</span> David.</span>　<span class="td-ja">ダビドに本をあげる。</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box box-warn">
+  <div class="box-title" style="color:var(--warn)">a の使い分け — よくある間違い</div>
+  <div class="ex"><span class="ex-sp">Busco una secretaria.</span><span class="ex-ja">不特定の人 → a なし（誰でもいい秘書を雇う）</span></div>
+  <div class="ex"><span class="ex-sp">Busco <span class="hi-r">a</span> una chica.</span><span class="ex-ja">特定の人 → a あり（不定冠詞でも特定なら必要）</span></div>
+</div>
+
+<div class="box" style="border-left-color:var(--accent2); background:#edf6f4; margin-top:8px;">
+  <div class="box-title">【おまけ】直接目的語が人称代名詞のときは a をつけない</div>
+  <p style="font-size:13px; margin-bottom:6px;">直接目的語が特定の人であっても、それが <span class="mono hi">me / te / lo / la / nos / os / los / las</span> のような<b>人称代名詞</b>の場合には前置詞 <span class="hi-r">a</span> を加えません。</p>
+  <div class="ex"><span class="ex-sp">Te veo. <span class="hi2">（○）</span></span><span class="ex-ja">（私は）君を見る。 ← a なし</span></div>
+  <div class="ex"><span class="ex-sp"><span class="hi-r">✗</span> A te veo.</span><span class="ex-ja">← 誤り。a＋目的格代名詞は不可</span></div>
+  <p style="font-size:12.5px; color:var(--muted); margin-top:6px;"><b>理由：</b>前置詞 a の役割は「直接目的語が（特定の）人だ」と文中でマークすることです。しかし <span class="mono">me / te / lo</span> などの目的格代名詞は<b>もともと目的語専用の形</b>なので、それ自体が「これは（間接）目的語です」という情報を持っています。a を重ねてマークする必要がないのです。また語順的にも、前置詞の後ろには主格・強調形（<span class="mono">mí / ti / él</span>）が来るため、目的格代名詞（<span class="mono">me / te / lo</span>）と組み合わせることができません。</p>
+</div>
+
+<div class="box" style="border-left-color:var(--accent2); background:#edf6f4; margin-top:8px;">
+  <div class="box-title">【おまけ】間接目的語が人称代名詞のときも a はつけない</div>
+  <p style="font-size:13px; margin-bottom:6px;">間接目的語には名詞のときは常に <span class="hi-r">a</span> が必要ですが、それが <span class="mono hi2">me / te / le / nos / os / les</span> のような<b>間接目的格代名詞</b>の場合も同様に a をつけません。</p>
+  <div class="ex"><span class="ex-sp">Me da un libro. <span class="hi2">（○）</span></span><span class="ex-ja">彼/彼女は私に本をくれる。 ← a なし</span></div>
+  <div class="ex"><span class="ex-sp"><span class="hi-r">✗</span> Da un libro a me.</span><span class="ex-ja">← 誤り。a＋目的格代名詞は不可</span></div>
+  <p style="font-size:12.5px; color:var(--muted); margin-top:6px;"><b>理由：</b>直接目的語の場合と同じです。間接目的格代名詞はそれ自体が「間接目的語である」ことを示す専用の形であり、前置詞 a で改めてマークする必要がありません。「a＋強調形（mí/ti）」という形はありますが（例：<span class="mono">A mí me da...</span>）、これはあくまでも<b>強調・明示</b>のための追加であり、代名詞 <span class="mono">me</span> の代替ではありません（両方使う）。</p>
+</div>
+
+<div id="mokutekikaku" class="sub">目的格代名詞の一覧</div>
+<div class="two-col">
+  <div>
+    <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th colspan="5" style="background:#dde8f5;color:var(--accent)">直接目的格代名詞（〜を）</th></tr>
+        <tr><th>人称</th><th>単数</th><th>意味</th><th>複数</th><th>意味</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-c">1</td><td class="mono td-c hi">me</td><td class="td-ja">私を</td><td class="mono td-c hi">nos</td><td class="td-ja">私たちを</td></tr>
+        <tr><td class="td-c">2</td><td class="mono td-c hi">te</td><td class="td-ja">君を</td><td class="mono td-c hi">os</td><td class="td-ja">君たちを</td></tr>
+        <tr><td class="td-c">3男</td><td class="mono td-c hi">lo</td><td class="td-ja">彼を/それ(男)を</td><td class="mono td-c hi">los</td><td class="td-ja">彼らを/それら(男)を</td></tr>
+        <tr><td class="td-c">3女</td><td class="mono td-c hi">la</td><td class="td-ja">彼女を/それ(女)を</td><td class="mono td-c hi">las</td><td class="td-ja">彼女らを/それら(女)を</td></tr>
+        <tr><td class="td-c">3中</td><td class="mono td-c hi">lo ★</td><td class="td-ja">それを（性不明）</td><td class="td-c" colspan="2">—</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">★ 中性の lo：発話内容など性を特定できない事柄。</p>
+  </div>
+  <div>
+    <div class="tbl-wrap">
+    <table>
+      <thead>
+        <tr><th colspan="5" style="background:#d8eeea;color:var(--accent2)">間接目的格代名詞（〜に）</th></tr>
+        <tr><th>人称</th><th>単数</th><th>意味</th><th>複数</th><th>意味</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="td-c">1</td><td class="mono td-c hi2">me</td><td class="td-ja">私に</td><td class="mono td-c hi2">nos</td><td class="td-ja">私たちに</td></tr>
+        <tr><td class="td-c">2</td><td class="mono td-c hi2">te</td><td class="td-ja">君に</td><td class="mono td-c hi2">os</td><td class="td-ja">君たちに</td></tr>
+        <tr><td class="td-c">3</td><td class="mono td-c hi2">le</td><td class="td-ja">彼/彼女/あなたに</td><td class="mono td-c hi2">les</td><td class="td-ja">彼ら/彼女らに</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="note">3人称は男女の区別なし（le/les のみ）。</p>
+  </div>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　1・2人称は直接も間接も同じ形（me, te, nos, os）。3人称だけ直接と間接で形が変わります。</span>
+</div>
+
+<div id="zenchishi-daimeishi" class="sub">前置詞の後ろに来る人称代名詞</div>
+<p>前置詞（<span class="mono">a, de, para, con</span> など）の後ろでは「私・君」が特別な形になります。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>人称</th><th>通常形</th><th>前置詞後の形</th><th>例</th><th>注意点</th></tr></thead>
+  <tbody>
+    <tr><td>1人称単数</td><td class="mono td-c">yo</td><td class="mono td-c hi-r">mí（アクセント記号！）</td><td class="mono">para mí / a mí <span class="td-ja">（私のために／私に）</span></td><td class="td-note">mi（所有形容詞）と区別するため</td></tr>
+    <tr><td>2人称単数</td><td class="mono td-c">tú</td><td class="mono td-c hi">ti</td><td class="mono">para ti / a ti <span class="td-ja">（君のために／君に）</span></td><td class="td-note">アクセント記号なし</td></tr>
+    <tr><td>3人称・その他</td><td class="mono td-c">él, ella…</td><td class="td-c td-rule">主格と同じ形</td><td class="mono">para él <span class="td-ja">（彼のために）</span></td><td class="td-note">変化なし</td></tr>
+    <tr><td>con ＋ 1人称</td><td class="mono td-c">con mí</td><td class="mono td-c hi-r">conmigo（特別形！）</td><td class="mono">¿Bailas conmigo? <span class="td-ja">（私と踊る？）</span></td><td class="td-note">con+mí が1語に融合</td></tr>
+    <tr><td>con ＋ 2人称</td><td class="mono td-c">con ti</td><td class="mono td-c hi-r">contigo（特別形！）</td><td class="mono">¿Viven contigo? <span class="td-ja">（君と一緒に住んでいる？）</span></td><td class="td-note">con+ti が1語に融合</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<b>conmigo/contigo</b> はラテン語の「私と＝mēcum、君と＝tēcum」（前置詞が後置される形）が語源。スペイン語に変化する過程でくっついて1語になりました。</span>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<b>なぜ1・2人称単数（mí, ti）だけ通常形（yo, tú）と違うのか？</b><br>
+  3人称（él, ella, ellos…）はもともと主語代名詞と前置詞格代名詞が<b>同じ形</b>を使っています。一方、1・2人称は古ラテン語から引き継いだ<b>強調・独立形</b>（mē, tē）が前置詞の後で使われ、時代を経て <span class="mono">mí, ti</span> に変化しました。<span class="mono">yo, tú</span> は主語として動詞の前に置かれるのが本来の用法であり、前置詞の後ろには置きにくかったのです。英語でも主語 "I" の代わりに前置詞後では "me" を使う（with me / for me）のと似た現象です。</span>
+</div>
+
+<div id="daimeishi-rules" class="sub">目的格代名詞の使い方 — 5つのルール</div>
+
+<div class="box box-rule">
+  <div class="box-title">ルール① 基本の置き場所：活用した動詞のすぐ前</div>
+  <div class="point">否定文では：<span class="mono">no → 代名詞 → 動詞</span> の順。</div>
+  <div class="ex"><span class="ex-sp">Juan no <span class="hi">te</span> enseña español.</span><span class="ex-ja">フアンは君にスペイン語を教えない。</span></div>
+</div>
+
+<div class="box box-rule">
+  <div class="box-title">ルール② 直接と間接が両方あるとき → 間接 → 直接 の順</div>
+  <div class="ex">
+    <span class="ex-sp">Alejandra no <span class="hi2">me</span> regala su bicicleta.</span>
+    <span class="ex-ja" style="display:block;margin-left:0">アレハンドラは私に自分の自転車をくれない。</span>
+    <span class="ex-arrow">→</span>
+    <span class="ex-sp"><span class="hi2">Me</span> <span class="hi">la</span> vende.</span>
+    <span class="ex-ja">彼女は私にそれを売る。（me = 間接「私に」 ／ la = 直接「それを」）</span>
+  </div>
+</div>
+
+<div class="box box-rule">
+  <div class="box-title">ルール③ le/les は lo/la/los/las の前で <span class="hi-r">se</span> に変わる</div>
+  <div class="caution">間接（le/les）と直接（lo/la/los/las）が共に3人称のとき → le/les は se に変化！</div>
+  <div class="ex"><span class="ex-sp">Te dejo las llaves.</span><span class="ex-ja">君に鍵を残しておく。</span><span class="ex-arrow">→</span><span class="ex-sp"><span class="hi2">Te</span> <span class="hi">las</span> dejo.</span><span class="ex-ja">君にそれらを残しておく。（te = 2人称 → そのまま）</span></div>
+  <div class="ex"><span class="ex-sp">Le dejo las llaves.</span><span class="ex-ja">彼/彼女に鍵を残しておく。</span><span class="ex-arrow">→</span><span class="ex-sp"><span class="hi-r">Se</span> <span class="hi">las</span> dejo.</span><span class="ex-ja">彼/彼女にそれらを残しておく。（le → se に変化！）</span></div>
+</div>
+
+<div class="box box-rule">
+  <div class="box-title">ルール④ 強調・明示 — 「a ＋ 人称代名詞/名詞」を追加</div>
+  <div class="point">代名詞（me/te/le など）は必ず残したまま「a＋名詞/代名詞」を加えます。</div>
+  <div class="ex"><span class="ex-sp">Les entregamos el premio <span class="hi">a Ramón y a José</span>.</span><span class="ex-ja">ラモンとホセに賞を手渡す。（les = a Ramón y a José）</span></div>
+</div>
+
+<div class="box box-rule">
+  <div class="box-title">ルール⑤ 不定詞の後ろにつけることもできる（任意）</div>
+  <div class="ex">
+    <span class="ex-sp"><span class="hi">Lo</span> debo terminar.</span>
+    <span class="ex-arrow">＝</span>
+    <span class="ex-sp">Debo terminar<span class="hi">lo</span>.</span>
+    <span class="ex-ja">それを終わらせなければならない。</span>
+  </div>
+  <div class="caution" style="margin-top:8px; color:var(--warn)">
+    <span><b>アクセント記号に注意：</b>代名詞をつけると音節が増えるため、元のアクセント位置を保つためにアクセント記号（´）を追加しなければならないことがあります。<br>
+    例：<span class="mono">compra</span>（彼は買う）→ <span class="mono">cómpralo</span>（それを買え／買う）、<span class="mono">deja</span> → <span class="mono">déjame</span>（私を放っておけ）。<br>
+    現在形の活用語は不定詞ではないので注意が必要です。命令形でよく使いますが、構造は同じです。</span>
+  </div>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">注意</span>　不定詞に代名詞を後置するとき、3音節以上になる場合は元のアクセント（強く読む音節）がずれないようアクセント記号が必要になります。例：<span class="mono">hablar</span>（2音節） + <span class="mono">lo</span> → <span class="mono">hablarlo</span>（アクセントは <b>blar</b> のまま、記号なし）。ただし <span class="mono">comer</span> + <span class="mono">los</span> + <span class="mono">me</span>（二つ付く場合）→ <span class="mono">comér<b>me</b>los</span> のようにアクセント記号が必要な場合もあります。スペルチェッカーを活用しましょう。</span>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　スペイン中部では「人」が直接目的語のとき lo の代わりに le を使う習慣があります（leísmo）。中南米では lo が標準です。</span>
+</div>
+
+<div class="box box-rule">
+  <div class="box-title">📖 教材の例文（Brújula 3課）</div>
+  <div class="tbl-wrap">
+  <table>
+    <thead><tr><th>ポイント</th><th>スペイン語</th><th>日本語訳</th></tr></thead>
+    <tbody>
+      <tr><td class="td-rule">直接目的語 → 代名詞に置換</td><td><span class="mono">Joaquín prepara un gazpacho delicioso.<br>→ Joaquín <span class="hi">lo</span> prepara.</span></td><td class="td-ja">ホアキンは美味しいガスパチョを作る。<br>→ ホアキンはそれを作る。</td></tr>
+      <tr><td class="td-rule">no + 代名詞 + 動詞</td><td><span class="mono">Mis padres no <span class="hi2">me</span> comprenden.</span></td><td class="td-ja">私の両親は私のことを分かってくれない。</td></tr>
+      <tr><td class="td-rule">強調（a＋代名詞を追加）</td><td><span class="mono">A <span class="hi-r">ti</span> <span class="hi2">te</span> invitan al concierto.</span></td><td class="td-ja">彼らは（他でもない）君をコンサートへ招待する。</td></tr>
+      <tr><td class="td-rule">不定詞後置（任意）</td><td><span class="mono">Debo terminar<span class="hi">lo</span> mañana. / <span class="hi">Lo</span> debo terminar mañana.</span></td><td class="td-ja">私は明日それを終わらせなければならない。</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="mini-check" id="L3-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Juan <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">me</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">私を（直接目的格代名詞）</span></span> invita a cenar.</div>
+  <div class="mini-check-ja">フアンは私を夕食に招待する。</div>
+<div class="srs-rate" data-qid="L3-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：目的語と目的格代名詞</div>
+
+  <div class="quiz-item" id="L3-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿Me prestas tus apuntes? — Sí, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">te</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">君に（間接）</span></span><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">los</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">それらを（直接・男性複数）</span></span> presto mañana.</div>
+    <div class="quiz-ja">私に君のノートを貸してくれる？ — うん、明日君にそれを貸してあげるよ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>te los</b>：間接目的格代名詞（te）と直接目的格代名詞（los＝apuntes）が両方ある場合、「間接→直接」の順で動詞の前に置く。</div>
+  <div class="srs-rate" data-qid="L3-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L3-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Le regalo un anillo a mi novia. → <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Se</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">leがloの前でseに変化</span></span><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">lo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">それを（男性単数）</span></span> regalo.</div>
+    <div class="quiz-ja">恋人に指輪をプレゼントする。→ 彼女にそれをプレゼントする。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Se lo</b>：3人称の間接目的格代名詞（le）が、同じく3人称の直接目的格代名詞（lo）の前に来るとseに変化する（ややこしいルール③）。</div>
+  <div class="srs-rate" data-qid="L3-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L3-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Busco <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">a</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">特定の人が直接目的語のとき</span></span> Juan, pero no encuentro <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">la</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">それを（女性単数・直接）</span></span> llave de mi casa.</div>
+    <div class="quiz-ja">私はフアンを探しているが、家の鍵は見つからない。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>a</b>：直接目的語が特定の人（Juan）のときは前置詞aが必要。<b>la</b>：llave（女性名詞）を受ける直接目的格代名詞。</div>
+  <div class="srs-rate" data-qid="L3-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ③ gustar型動詞 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">gustar型動詞</span>
+  <span class="sec-es">Verbos del tipo gustar</span>
+</div>
+
+<div class="box box-center">
+  <div style="font-size:14px; font-weight:700; color:var(--ink); margin-bottom:5px;">
+    間接目的格代名詞　＋　動詞（gustar など）　＋　主語（物・人・事柄）
+  </div>
+  <div style="font-size:12.5px; color:var(--muted);">→ 主語が「代名詞の人」に好かれる ＝ 日本語訳：「（その人）は〜が好きだ」</div>
+</div>
+
+<p>日本語・英語の「<span class="hi-r">私が</span>音楽を好む」とは逆で、スペイン語では「<span class="hi">音楽が</span>私に好かれる」という発想です。英語の <span class="mono">It pleases me.</span> と同じ構造です。</p>
+
+<div id="gustar-katsuyo" class="sub">動詞 gustar の活用：「好かれる主語」に合わせる</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>主語（好かれるもの）</th><th>動詞の形</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>単数名詞・不定詞（1つのこと）</td>
+      <td class="td-red">gusta</td>
+      <td><span class="mono">Me gusta la música cubana.</span>　<span class="td-ja">私はキューバ音楽が好きだ。</span></td>
+    </tr>
+    <tr>
+      <td>複数名詞</td>
+      <td class="td-red">gustan</td>
+      <td><span class="mono">Me gustan las manzanas.</span>　<span class="td-ja">私はリンゴが好きだ。</span></td>
+    </tr>
+    <tr>
+      <td>不定詞が2つ以上</td>
+      <td class="td-red">gusta（単数！）</td>
+      <td><span class="mono">Me gusta cantar y bailar.</span>　<span class="td-ja">歌ったり踊ったりするのが好きだ。</span></td>
+    </tr>
+    <tr>
+      <td><span class="mono">tú</span>（君）が主語のとき</td>
+      <td class="td-red">gustas</td>
+      <td><span class="mono">Me gustas mucho.</span>　<span class="td-ja">私は君のことがとても好きだ。</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　gustar の語源はラテン語 <b>gustare</b>（味わう）。「物が人の口に合う」という受動的な意味が定着して現在の構造になりました。</span>
+</div>
+
+<div id="gustar-kyocho" class="sub">強調・明示と応答パターン</div>
+<div class="box">
+  <div class="box-title">「a ＋ 人称代名詞/名詞」で誰の好みかを明示・強調</div>
+  <p style="font-size:13px; margin-bottom:8px;">gustar型では <span class="mono hi">me / te / le</span> などの間接目的格代名詞だけでも文は成立しますが、<b>「誰が」を強調・明示したいとき</b>に <span class="mono hi-r">a mí / a ti / a él / a Pedro</span> などを文頭や文中に加えます。この「a＋名詞・代名詞」はあくまで<b>補足的な強調</b>であり、間接目的格代名詞（<span class="mono">me / te / le</span>など）は省略できません（両方使う）。</p>
+  <div class="ex"><span class="ex-sp"><span class="hi">A mí</span> me gusta leer novelas. ¿<span class="hi">A ti</span> también te gusta?</span><span class="ex-ja">私は小説を読むのが好きだ。君も好きかい？</span></div>
+  <div class="ex"><span class="ex-sp"><span class="hi">A Pedro</span> no le gustan las obras de Picasso.</span><span class="ex-ja">ペドロはピカソの作品が好きではない。</span></div>
+  <div class="point" style="margin-top:8px;">「a mí」は単独では文を作れません。必ず <span class="mono">me</span> もセットで使います：<span class="mono">A mí <b>me</b> gusta ✓</span>　／　<span class="mono">A mí gusta ✗</span></div>
+  <div class="point">「A mí」「A ti」の代わりに名前や固有名詞を使うこともできます：<span class="mono">A Pedro le gusta...</span>（ペドロは〜が好きだ）</div>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　「A mí me gusta...」と「Me gusta...」は意味は基本的に同じですが、<b>A mí</b> を付けると「（他の人はともかく）<b>私は</b>〜が好きだ」というニュアンスが出て、対比・強調になります。会話の中で「私は〜」「じゃあ君は？」という流れで自然に使われます。</span>
+</div>
+
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>相手の発言</th><th>同意の返答</th><th>不同意の返答</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>肯定（〜が好き）</td>
+      <td class="mono hi2">A mí también.（私も）</td>
+      <td class="mono hi-r">A mí no.（私は違う）</td>
+    </tr>
+    <tr>
+      <td>否定（〜が好きでない）</td>
+      <td class="mono hi2">A mí tampoco.（私も〜ない）</td>
+      <td class="mono hi-r">A mí sí.（私は好き）</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box box-rule" style="margin-bottom:0">
+  <div class="box-title">📖 教材の例文（Brújula 3課）</div>
+  <div class="ex"><span class="ex-sp">Me gusta tu chaqueta.</span><span class="ex-ja">私は君の上着が好きだ。（chaqueta（女）= 上着・ジャケット）</span></div>
+  <div class="ex"><span class="ex-sp">Nos gusta recorrer la ciudad.</span><span class="ex-ja">私たちは市内を巡り歩くのが好きだ。（recorrer = 歩き回る）</span></div>
+  <div class="ex"><span class="ex-sp">A mí me gusta leer novelas. ¿A ti también te gusta?</span><span class="ex-ja">私は小説を読むのが好きだ。君も好きかい？</span></div>
+  <div class="ex"><span class="ex-sp">A Pedro no le gustan las obras de Picasso.</span><span class="ex-ja">ペドロはピカソの作品が好きではない。</span></div>
+  <div class="ex"><span class="ex-sp">Me apetece la tortilla española.</span><span class="ex-ja">私はスペイン風のトルティリャを食べたい。</span></div>
+  <div class="ex"><span class="ex-sp">A mi hijo no le interesa la política.</span><span class="ex-ja">私の息子は政治には興味がない。（política（女）= 政治・政治学）</span></div>
+</div>
+
+<div id="gustar-nakama" class="sub">gustar型動詞の仲間</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th>動詞</th><th>スペイン語本来の意味</th><th>自然な日本語訳</th><th>例</th></tr></thead>
+  <tbody>
+    <tr><td class="td-key">gustar</td><td class="td-ja">〜に好かれる</td><td class="td-rule">〜が好きだ</td><td class="td-note mono">Me gusta el café. <span class="td-ja">（私はコーヒーが好きだ。）</span></td></tr>
+    <tr><td class="td-key">encantar</td><td class="td-ja">〜を強く惹きつける</td><td class="td-rule">大好きだ（gustarより強い）</td><td class="td-note mono">Me encanta la carne. <span class="td-ja">（私は肉が大好きだ。）</span></td></tr>
+    <tr><td class="td-key">interesar</td><td class="td-ja">〜に興味を抱かせる</td><td class="td-rule">〜に興味がある</td><td class="td-note mono">Le interesan los videojuegos. <span class="td-ja">（彼/彼女はテレビゲームに興味がある。）</span></td></tr>
+    <tr><td class="td-key">apetecer</td><td class="td-ja">食欲・欲望をそそらせる</td><td class="td-rule">〜が食べたい/したい気分</td><td class="td-note mono">¿Te apetecen los tacos? <span class="td-ja">（タコスを食べたい気分？）</span></td></tr>
+    <tr><td class="td-key">importar</td><td class="td-ja">〜に重要である</td><td class="td-rule">〜が大事だ / 気になる</td><td class="td-note mono">No me importa. <span class="td-ja">（私には関係ない。）</span></td></tr>
+    <tr><td class="td-key">parecer</td><td class="td-ja">〜にと思わせる</td><td class="td-rule">〜と思う</td><td class="td-note mono">¿Qué te parece? <span class="td-ja">（どう思う？）</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="mini-check" id="L3-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Me <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">gusta</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">主語が単数のときの活用</span></span> el café.</div>
+  <div class="mini-check-ja">私はコーヒーが好きだ。</div>
+<div class="srs-rate" data-qid="L3-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：gustar型動詞</div>
+
+  <div class="quiz-item" id="L3-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">A mis padres les <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">gustan</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">主語gatosが複数</span></span> mucho los gatos.</div>
+    <div class="quiz-ja">私の両親は猫がとても好きだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>gustan</b>：主語はlos gatos（複数）なのでgustarも複数形gustanになる。「les」はa mis padresを指す間接目的格代名詞。</div>
+  <div class="srs-rate" data-qid="L3-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L3-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">A <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">mí</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">前置詞の後の「私」</span></span> me interesa mucho la historia.</div>
+    <div class="quiz-ja">私は歴史にとても興味がある。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>mí</b>：前置詞aの後の「私」はmí（アクセント記号あり、所有形容詞miと区別）。interesarはgustar型動詞で「〜に興味を抱かせる」の意。</div>
+  <div class="srs-rate" data-qid="L3-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L3-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Me gusta cantar y bailar. → gustar の活用は必ず <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">単数</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">不定詞が2つ以上でも</span></span>形になる。</div>
+    <div class="quiz-ja">歌ったり踊ったりするのが好きだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp">不定詞が2つ以上（cantar y bailar）でも、常に単数扱いなのでgustaのまま。gustanにはならない。</div>
+  <div class="srs-rate" data-qid="L3-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+<!-- ④ 指示詞 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">指示詞</span>
+  <span class="sec-es">Demostrativos</span>
+</div>
+
+<p>指示詞は3段階の距離感で使い分けます。指示形容詞は名詞の前に置き（冠詞不要）、名詞の性・数に一致させます。</p>
+
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th style="background:#d8eeea;color:var(--accent2)">近称（この/これ）</th>
+      <th style="background:#dde8f5;color:var(--accent)">中称（その/それ）</th>
+      <th>遠称（あの/あれ）</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td class="td-rule">誰の近く？</td><td>話し手の近く</td><td>聞き手の近く</td><td>どちらからも遠い</td></tr>
+    <tr><td class="td-rule">男性単数</td><td class="mono td-c hi2">este</td><td class="mono td-c hi">ese</td><td class="mono td-c">aquel</td></tr>
+    <tr><td class="td-rule">男性複数</td><td class="mono td-c hi2">estos</td><td class="mono td-c hi">esos</td><td class="mono td-c">aquellos</td></tr>
+    <tr><td class="td-rule">女性単数</td><td class="mono td-c hi2">esta</td><td class="mono td-c hi">esa</td><td class="mono td-c">aquella</td></tr>
+    <tr><td class="td-rule">女性複数</td><td class="mono td-c hi2">estas</td><td class="mono td-c hi">esas</td><td class="mono td-c">aquellas</td></tr>
+    <tr><td class="td-rule">中性（代名詞のみ）</td><td class="mono td-c hi2">esto</td><td class="mono td-c hi">eso</td><td class="mono td-c">aquello</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">中性形（esto/eso/aquello）は性別不明・抽象的事柄に使います。指示形容詞としては使えません。</p>
+
+<div class="box">
+  <div class="box-title">例文</div>
+  <div class="ex"><span class="ex-sp">este árbol / esta planta / esos árboles / aquella ciudad</span><span class="ex-ja">この木 / この植物 / それらの木 / あの街</span></div>
+  <div class="ex"><span class="ex-sp">¿Quién es ese hombre? — Es mi tío.</span><span class="ex-ja">そちらの男性は誰ですか？ — 私のおじです。</span></div>
+  <div class="ex"><span class="ex-sp">Este es mi paraguas. ¿Cuál es el tuyo? — Es aquel.</span><span class="ex-ja">これは私の傘だ。君のはどれ？ — あれだよ。</span></div>
+  <div class="ex"><span class="ex-sp">Esto es todo.</span><span class="ex-ja">これで全部です。（以上です。）</span></div>
+  <div class="ex"><span class="ex-sp">¿Qué es aquello? — Es un templo budista.</span><span class="ex-ja">あれは何ですか？ — 仏教の寺院です。（templo（男）= 寺院 / budista（形）= 仏教の）</span></div>
+  <div class="ex"><span class="ex-sp">Esta caja es para ti y esa es para tu hermano.</span><span class="ex-ja">この箱は君のため、そっちは君のお兄さん（弟）のためだ。（caja（女）= 箱）</span></div>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　日本語の「その」は話し手の近くでも使いますが、スペイン語の <b>ese/esa</b> は「聞き手の近くにあるもの」を指します。相手が持っているバッグ → <span class="mono">esa bolsa</span>、自分の手元にあるなら → <span class="mono">esta bolsa</span>。</span>
+</div>
+
+<div class="mini-check" id="L3-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Este</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">近称・男性単数</span></span> libro es muy interesante.</div>
+  <div class="mini-check-ja">この本はとても面白い。</div>
+<div class="srs-rate" data-qid="L3-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：指示詞</div>
+
+  <div class="quiz-item" id="L3-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿Quién es <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">ese</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">中称・男性単数</span></span> hombre?</div>
+    <div class="quiz-ja">そちらの男性は誰ですか？</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>ese</b>：中称（聞き手の近く）の男性単数指示形容詞。hombreは男性名詞なのでeseを使う。</div>
+  <div class="srs-rate" data-qid="L3-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L3-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Aquellas</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">遠称・女性複数</span></span> montañas son muy altas.</div>
+    <div class="quiz-ja">あれらの山々はとても高い。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Aquellas</b>：遠称（話し手からも聞き手からも遠い）の女性複数。montañasが女性複数名詞なのでaquellas。</div>
+  <div class="srs-rate" data-qid="L3-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+  <div class="quiz-item" id="L3-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿Qué es <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">esto</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">性別不明の近称（中性）</span></span>? — Es todo.</div>
+    <div class="quiz-ja">これは何ですか？ — 以上です。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>esto</b>：性別不明・抽象的な事柄を指す中性形の指示代名詞。近称esto／中称eso／遠称aquelloの3種類がある。</div>
+  <div class="srs-rate" data-qid="L3-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L3-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L3-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L3-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑤ 練習問題 -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">下線部に適切な目的語人称代名詞を入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Mi esposo siempre <span class="blank">______</span> envía un mensaje antes de regresar a casa.</div>
+      <div class="q-ja">私の夫は帰宅前にいつも私にメッセージを送ります。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Mi esposo siempre <span class="ans-fill">me</span> envía un mensaje antes de regresar a casa.</span>
+      </div>
+      <div class="q-exp">「私に」送る → 間接目的格代名詞 <b>me</b>。動詞 enviar は i にアクセントが移るため envía（アクセント記号必要）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Tus amigos <span class="blank">______</span> reciben en la estación.</div>
+      <div class="q-ja">君の友人たちは駅で君を出迎えます。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Tus amigos <span class="ans-fill">te</span> reciben en la estación.</span>
+      </div>
+      <div class="q-exp">「君を」迎える → 直接目的格代名詞 <b>te</b>。recibir（-ir動詞）3人称複数 reciben。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence"><span class="blank">______</span> regalo a mi padre una corbata para su cumpleaños.</div>
+      <div class="q-ja">私は父の誕生日にネクタイをプレゼントします。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Le</span> regalo a mi padre una corbata para su cumpleaños.</span>
+      </div>
+      <div class="q-exp">「父に」あげる → 間接目的格代名詞 <b>le</b>。「a mi padre」で誰なのかを明示（二重表記）。間接目的語の前には常に a。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¿<span class="blank">______</span> ayudas a preparar el guacamole para la cena?</div>
+      <div class="q-ja">夕食のために私がワカモレを作る手伝いをしてくれませんか？</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿<span class="ans-fill">Me</span> ayudas a preparar el guacamole para la cena?</span>
+      </div>
+      <div class="q-exp">「私を」手伝う → 直接目的格代名詞 <b>me</b>。ayudar a＋不定詞「〜するのを手伝う」。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">下線部に適切な人称代名詞を入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">A <span class="blank">____________</span> <span class="blank">______</span> gusta cantar en el karaoke.</div>
+      <div class="q-ja">私たちはカラオケで歌うのが好きです。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">A <span class="ans-fill">nosotros</span> <span class="ans-fill">nos</span> gusta cantar en el karaoke.</span>
+      </div>
+      <div class="q-exp">「私たちは」→ A nosotros nos。cantar（不定詞）が主語 → gusta（単数）。<br><small>※「私たち」が女性のみのグループなら nosotros ではなく <b>nosotras</b> になります。</small></div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">A Julieta no <span class="blank">______</span> gustan las zapatillas deportivas.</div>
+      <div class="q-ja">フリエタはスポーツシューズが好きではありません。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">A Julieta no <span class="ans-fill">le</span> gustan las zapatillas deportivas.</span>
+      </div>
+      <div class="q-exp">Julieta（3人称）→ 間接目的格代名詞 <b>le</b>。zapatillas（複数）→ gustan。<br><small>※ 靴一般を <b>zapato</b>（男）、スニーカーを <b>zapatilla</b>（女）と言います。左右で1足なので、「1足のスニーカー」は <b>zapatillas</b>（複数形）になります。</small></div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">A <span class="blank">______</span> no <span class="blank">______</span> gustan las verduras. <span class="blank">______</span> encanta la carne.</div>
+      <div class="q-ja">私は野菜が好きではありません。肉が大好きです。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">A <span class="ans-fill">mí</span> no <span class="ans-fill">me</span> gustan las verduras. <span class="ans-fill">Me</span> encanta la carne.</span>
+      </div>
+      <div class="q-exp">「私は」→ A mí me（強調形＋代名詞）。verduras（複数）→ gustan。la carne（単数）→ encanta。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¿A <span class="blank">______</span> <span class="blank">______</span> apetecen unos tacos?</div>
+      <div class="q-ja">君はタコスを食べたいですか？</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¿A <span class="ans-fill">ti</span> <span class="ans-fill">te</span> apetecen unos tacos?</span>
+      </div>
+      <div class="q-exp">「君は」→ A ti te。tacos（複数）→ apetecen（複数形）。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑥ 語彙リスト -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">食事・食事の場面</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">desayuno</span><span class="pill-pos">m.</span><span class="pill-ja">朝食</span></span>
+  <span class="pill"><span class="pill-es">comida</span><span class="pill-pos">f.</span><span class="pill-ja">昼食（スペイン）、食事一般</span></span>
+  <span class="pill"><span class="pill-es">almuerzo</span><span class="pill-pos">m.</span><span class="pill-ja">昼食（ラテンアメリカ）</span></span>
+  <span class="pill"><span class="pill-es">cena</span><span class="pill-pos">f.</span><span class="pill-ja">夕食</span></span>
+  <span class="pill"><span class="pill-es">desayunar</span><span class="pill-pos">動</span><span class="pill-ja">朝食を取る</span></span>
+  <span class="pill"><span class="pill-es">almorzar</span><span class="pill-pos">動</span><span class="pill-ja">昼食を取る</span></span>
+  <span class="pill"><span class="pill-es">cenar</span><span class="pill-pos">動</span><span class="pill-ja">夕食を取る</span></span>
+</div>
+
+<div class="vocab-category">飲み物</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">bebida</span><span class="pill-pos">f.</span><span class="pill-ja">飲み物</span></span>
+  <span class="pill"><span class="pill-es">agua</span><span class="pill-pos">f.</span><span class="pill-ja">水</span></span>
+  <span class="pill"><span class="pill-es">agua mineral</span><span class="pill-pos">f.</span><span class="pill-ja">ミネラルウォーター</span></span>
+  <span class="pill"><span class="pill-es">agua con gas</span><span class="pill-pos">f.</span><span class="pill-ja">炭酸水</span></span>
+  <span class="pill"><span class="pill-es">agua sin gas</span><span class="pill-pos">f.</span><span class="pill-ja">炭酸なしの水</span></span>
+  <span class="pill"><span class="pill-es">té</span><span class="pill-pos">m.</span><span class="pill-ja">茶</span></span>
+  <span class="pill"><span class="pill-es">café</span><span class="pill-pos">m.</span><span class="pill-ja">コーヒー</span></span>
+  <span class="pill"><span class="pill-es">café solo (negro)</span><span class="pill-pos">m.</span><span class="pill-ja">ブラックコーヒー</span></span>
+  <span class="pill"><span class="pill-es">café con leche</span><span class="pill-pos">m.</span><span class="pill-ja">ミルクコーヒー</span></span>
+  <span class="pill"><span class="pill-es">cerveza</span><span class="pill-pos">f.</span><span class="pill-ja">ビール</span></span>
+  <span class="pill"><span class="pill-es">vino</span><span class="pill-pos">m.</span><span class="pill-ja">ワイン</span></span>
+  <span class="pill"><span class="pill-es">hielo</span><span class="pill-pos">m.</span><span class="pill-ja">氷</span></span>
+  <span class="pill"><span class="pill-es">zumo (jugo)</span><span class="pill-pos">m.</span><span class="pill-ja">ジュース</span></span>
+</div>
+
+<div class="vocab-category">食べ物・食材・調味料</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">alimento</span><span class="pill-pos">m.</span><span class="pill-ja">食品</span></span>
+  <span class="pill"><span class="pill-es">carne</span><span class="pill-pos">f.</span><span class="pill-ja">肉、牛肉</span></span>
+  <span class="pill"><span class="pill-es">ternera (res)</span><span class="pill-pos">f.</span><span class="pill-ja">牛</span></span>
+  <span class="pill"><span class="pill-es">cerdo</span><span class="pill-pos">m.</span><span class="pill-ja">豚</span></span>
+  <span class="pill"><span class="pill-es">pollo</span><span class="pill-pos">m.</span><span class="pill-ja">鶏</span></span>
+  <span class="pill"><span class="pill-es">jamón</span><span class="pill-pos">m.</span><span class="pill-ja">ハム</span></span>
+  <span class="pill"><span class="pill-es">pescado</span><span class="pill-pos">m.</span><span class="pill-ja">魚</span></span>
+  <span class="pill"><span class="pill-es">salmón</span><span class="pill-pos">m.</span><span class="pill-ja">サケ</span></span>
+  <span class="pill"><span class="pill-es">sardina</span><span class="pill-pos">f.</span><span class="pill-ja">イワシ</span></span>
+  <span class="pill"><span class="pill-es">atún</span><span class="pill-pos">m.</span><span class="pill-ja">マグロ</span></span>
+  <span class="pill"><span class="pill-es">marisco</span><span class="pill-pos">m.</span><span class="pill-ja">（魚以外の）海産物</span></span>
+  <span class="pill"><span class="pill-es">gamba (camarón)</span><span class="pill-pos">f.</span><span class="pill-ja">エビ</span></span>
+  <span class="pill"><span class="pill-es">pulpo</span><span class="pill-pos">m.</span><span class="pill-ja">タコ</span></span>
+  <span class="pill"><span class="pill-es">almeja</span><span class="pill-pos">f.</span><span class="pill-ja">アサリ、ハマグリ</span></span>
+  <span class="pill"><span class="pill-es">huevo</span><span class="pill-pos">m.</span><span class="pill-ja">卵</span></span>
+  <span class="pill"><span class="pill-es">pan</span><span class="pill-pos">m.</span><span class="pill-ja">パン</span></span>
+  <span class="pill"><span class="pill-es">bocadillo</span><span class="pill-pos">m.</span><span class="pill-ja">バゲットのサンドイッチ</span></span>
+  <span class="pill"><span class="pill-es">sandwich</span><span class="pill-pos">m.</span><span class="pill-ja">食パンのサンドイッチ</span></span>
+  <span class="pill"><span class="pill-es">hamburguesa</span><span class="pill-pos">f.</span><span class="pill-ja">ハンバーグ、ハンバーガー</span></span>
+  <span class="pill"><span class="pill-es">verdura</span><span class="pill-pos">f.</span><span class="pill-ja">野菜</span></span>
+  <span class="pill"><span class="pill-es">lechuga</span><span class="pill-pos">f.</span><span class="pill-ja">レタス</span></span>
+  <span class="pill"><span class="pill-es">patata (papa)</span><span class="pill-pos">f.</span><span class="pill-ja">ジャガイモ</span></span>
+  <span class="pill"><span class="pill-es">tomate</span><span class="pill-pos">m.</span><span class="pill-ja">トマト</span></span>
+  <span class="pill"><span class="pill-es">zanahoria</span><span class="pill-pos">f.</span><span class="pill-ja">ニンジン</span></span>
+  <span class="pill"><span class="pill-es">fruta</span><span class="pill-pos">f.</span><span class="pill-ja">果物</span></span>
+  <span class="pill"><span class="pill-es">manzana</span><span class="pill-pos">f.</span><span class="pill-ja">リンゴ</span></span>
+  <span class="pill"><span class="pill-es">naranja</span><span class="pill-pos">f.</span><span class="pill-ja">オレンジ</span></span>
+  <span class="pill"><span class="pill-es">plátano</span><span class="pill-pos">m.</span><span class="pill-ja">バナナ</span></span>
+  <span class="pill"><span class="pill-es">queso</span><span class="pill-pos">m.</span><span class="pill-ja">チーズ</span></span>
+  <span class="pill"><span class="pill-es">yogur</span><span class="pill-pos">m.</span><span class="pill-ja">ヨーグルト</span></span>
+  <span class="pill"><span class="pill-es">mantequilla</span><span class="pill-pos">f.</span><span class="pill-ja">バター</span></span>
+  <span class="pill"><span class="pill-es">mayonesa</span><span class="pill-pos">f.</span><span class="pill-ja">マヨネーズ</span></span>
+  <span class="pill"><span class="pill-es">salsa</span><span class="pill-pos">f.</span><span class="pill-ja">ソース</span></span>
+  <span class="pill"><span class="pill-es">pasta</span><span class="pill-pos">f.</span><span class="pill-ja">パスタ</span></span>
+  <span class="pill"><span class="pill-es">arroz</span><span class="pill-pos">m.</span><span class="pill-ja">米、ごはん</span></span>
+  <span class="pill"><span class="pill-es">chocolate</span><span class="pill-pos">m.</span><span class="pill-ja">チョコレート</span></span>
+  <span class="pill"><span class="pill-es">azúcar</span><span class="pill-pos">m.f.</span><span class="pill-ja">砂糖</span></span>
+  <span class="pill"><span class="pill-es">sal</span><span class="pill-pos">f.</span><span class="pill-ja">塩</span></span>
+  <span class="pill"><span class="pill-es">pimienta</span><span class="pill-pos">f.</span><span class="pill-ja">胡椒</span></span>
+  <span class="pill"><span class="pill-es">aceite</span><span class="pill-pos">m.</span><span class="pill-ja">油</span></span>
+  <span class="pill"><span class="pill-es">vinagre</span><span class="pill-pos">m.</span><span class="pill-ja">酢</span></span>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　スペインで「タコ」は <b>pulpo</b>（タコ）です。メキシコ料理の「タコス（tacos）」とは全く別の単語。同じ日本語でもスペイン語は違うので注意！</span>
+</div>
+
+<!-- ⑦ まとめ -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:28%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">現在形活用（-ar）</td><td class="mono">-o / -as / -a / -amos / -áis / -an</td></tr>
+    <tr><td class="td-rule">現在形活用（-er）</td><td class="mono">-o / -es / -e / -emos / -éis / -en</td></tr>
+    <tr><td class="td-rule">現在形活用（-ir）</td><td class="mono">-o / -es / -e / -imos / -ís / -en</td></tr>
+    <tr><td class="td-rule">直接目的格代名詞</td><td>me, te, lo/la（中性 lo）, nos, os, los/las — 3人称のみ男女区別あり</td></tr>
+    <tr><td class="td-rule">間接目的格代名詞</td><td>me, te, le, nos, os, les — 3人称は男女区別なし</td></tr>
+    <tr><td class="td-rule">代名詞の語順</td><td>間接 → 直接 → 動詞（否定文：no → 間接 → 直接 → 動詞）</td></tr>
+    <tr><td class="td-rule">le/les → se</td><td>間接（le/les）と直接（lo/la等）が共に3人称 → le/les は se に変化</td></tr>
+    <tr><td class="td-rule">前置詞後の代名詞</td><td>1人称＝mí、2人称＝ti　／　con+mí → conmigo、con+ti → contigo</td></tr>
+    <tr><td class="td-rule">gustar型の構造</td><td>間接目的格代名詞 ＋ gustar ＋ 主語 → 主語の数に合わせて gusta / gustan</td></tr>
+    <tr><td class="td-rule">gustar型の仲間</td><td>encantar, interesar, apetecer, importar, parecer など</td></tr>
+    <tr><td class="td-rule">指示形容詞</td><td>近称: este/esta — 中称: ese/esa — 遠称: aquel/aquella（各複数形あり）</td></tr>
+    <tr><td class="td-rule">指示代名詞（中性）</td><td>esto / eso / aquello — 性数変化なし、性別不明・抽象的事柄に使用</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 3 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['直接目的語','直接目的格','chokusetsu'], id: 'chokusetsu-mokutek', label: '直接目的語（②節）' },
+  { terms: ['間接目的語','間接目的格','kansetsu'], id: 'kansetsu-mokutek', label: '間接目的語（②節）' },
+  { terms: ['目的格代名詞','代名詞一覧','mokutekikaku'], id: 'mokutekikaku', label: '目的格代名詞一覧（②節）' },
+  { terms: ['前置詞','conmigo','contigo'], id: 'zenchishi-daimeishi', label: '前置詞格代名詞（②節）' },
+  { terms: ['アクセント','acento'], id: 'accent-rule', label: 'アクセントのルール（①節）' },
+  { terms: ['規則活用','活用表'], id: 'sec1', label: '規則活用（①節）' },
+  { terms: ['gustar','gustar型','グスタル'], id: 'sec3', label: 'gustar型動詞（③節）' },
+  { terms: ['指示詞','este','ese','aquel'], id: 'sec4', label: '指示詞（④節）' },
+  { terms: ['練習問題','練習'], id: 'sec5', label: '練習問題（⑤節）' },
+  { terms: ['語彙','Vocabulario'], id: 'sec6', label: '語彙リスト（⑥節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec7', label: 'まとめ（⑦節）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語一列① 文法解説集（個人用コピー）</footer>
+
+</body>
+</html>
