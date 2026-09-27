@@ -13,44 +13,46 @@
     background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--accent);
     border-radius: 6px; padding: 22px 24px; margin-bottom: 20px;
   }
-  .test-intro h2 { font-family: var(--serif); font-size: 17px; color: var(--accent); margin-bottom: 10px; }
-  .test-intro p { font-size: 13.5px; line-height: 1.8; margin-bottom: 8px; }
+  .test-intro h2 { font-family: var(--serif); font-size: 19px; color: var(--accent); margin-bottom: 10px; }
+  .test-intro p { font-size: 15px; line-height: 1.85; margin-bottom: 10px; }
   .test-start-btn {
     display: inline-block; margin-top: 10px; background: var(--accent); color: #fff;
-    padding: 10px 26px; border-radius: 4px; border: none; font-size: 14px; font-weight: 700;
+    padding: 12px 28px; border-radius: 6px; border: none; font-size: 15px; font-weight: 700;
     cursor: pointer; font-family: var(--sans);
   }
   .test-start-btn:hover { background: #1d3e72; }
+  /* 上部ナビ（sticky）の下に止まるようにずらす */
   #accent-toolbar {
-    position: sticky; top: 0; z-index: 500; background: var(--surface);
-    border: 1px solid var(--rule); border-radius: 4px; padding: 6px 8px;
-    display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 16px; align-items: center;
+    position: sticky; top: 56px; z-index: 500; background: var(--surface);
+    border: 1px solid var(--rule); border-radius: 6px; padding: 6px 8px;
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; align-items: center;
   }
-  #accent-toolbar span { font-size: 11px; color: var(--muted); margin-right: 4px; }
+  #accent-toolbar span { font-size: 12.5px; color: var(--muted); margin-right: 4px; }
   .accent-btn {
-    width: 28px; height: 28px; border: 1px solid var(--rule); background: var(--alt-bg);
-    border-radius: 3px; cursor: pointer; font-size: 13px; font-family: var(--mono);
+    width: 34px; height: 34px; border: 1px solid var(--rule); background: var(--alt-bg);
+    border-radius: 6px; cursor: pointer; font-size: 15px; font-family: var(--mono);
   }
   .accent-btn:hover { background: var(--sub-bg); }
   .test-q {
-    background: var(--surface); border: 1px solid var(--rule); border-radius: 5px;
-    padding: 14px 16px; margin-bottom: 14px;
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 16px 18px; margin-bottom: 14px;
   }
-  .test-q-meta { font-size: 10.5px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
-  .test-q-sentence { font-family: var(--mono); font-size: 14px; line-height: 2.1; color: var(--ink); }
-  .test-q-ja { font-size: 12.5px; color: var(--muted); margin-top: 4px; }
+  .test-q-meta { font-size: 12px; color: var(--muted); font-weight: 700; margin-bottom: 8px; }
+  .test-q-sentence { font-family: var(--mono); font-size: 15px; line-height: 2.1; color: var(--ink); }
+  .test-q-ja { font-size: 13.5px; color: var(--muted); margin-top: 4px; }
+  /* 16px 未満だと iPhone で入力時に画面が自動ズームされるため 16px にする */
   .test-input {
-    display: inline-block; width: 110px; border: none; border-bottom: 2px solid var(--accent2);
-    background: #f4f9f7; padding: 2px 6px; font-family: var(--mono); font-size: 13.5px;
-    text-align: center; margin: 0 2px;
+    display: inline-block; width: 120px; border: none; border-bottom: 2px solid var(--accent2);
+    background: #f4f9f7; padding: 2px 6px; font-family: var(--mono); font-size: 16px;
+    text-align: center; margin: 0 2px; border-radius: 3px 3px 0 0;
   }
   .test-input:focus { outline: none; background: #e4f0ec; }
   .test-input.correct { border-bottom-color: var(--accent2); background: #d8eee5; color: var(--accent2); font-weight: 700; }
   .test-input.incorrect { border-bottom-color: var(--warn); background: #fbe4e4; color: var(--warn); font-weight: 700; }
-  .test-correct-answer { font-size: 11.5px; color: var(--warn); margin-top: 4px; }
+  .test-correct-answer { font-size: 13px; color: var(--warn); margin-top: 4px; }
   #submit-test-btn {
     display: block; width: 100%; margin: 24px 0; background: var(--accent2); color: #fff;
-    padding: 14px; border: none; border-radius: 5px; font-size: 15px; font-weight: 700;
+    padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: 700;
     cursor: pointer; font-family: var(--sans);
   }
   #submit-test-btn:hover { background: #155f50; }
@@ -62,13 +64,18 @@
     text-align: center; padding: 20px; background: var(--head-bg); border-radius: 6px; margin-bottom: 20px;
   }
   .report-cefr-level { font-family: var(--serif); font-size: 36px; font-weight: 700; color: var(--accent); }
-  .report-cefr-note { font-size: 12px; color: var(--muted); margin-top: 6px; }
-  .report-section-title { font-size: 13.5px; font-weight: 700; color: var(--accent); margin: 20px 0 10px; border-bottom: 1px solid var(--rule); padding-bottom: 5px; }
+  .report-cefr-note { font-size: 13px; color: var(--muted); margin-top: 6px; }
+  .report-section-title { font-size: 15px; font-weight: 700; color: var(--accent); margin: 22px 0 10px; border-bottom: 1px solid var(--rule); padding-bottom: 5px; }
   .report-bar-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
-  .report-bar-label { width: 130px; font-size: 12.5px; flex-shrink: 0; }
+  .report-bar-label { width: 130px; font-size: 13.5px; flex-shrink: 0; }
   .report-bar-track { flex: 1; height: 16px; background: var(--alt-bg); border-radius: 8px; overflow: hidden; }
   .report-bar-fill { height: 100%; background: var(--accent2); }
-  .report-bar-pct { width: 44px; text-align: right; font-size: 12px; font-weight: 700; flex-shrink: 0; }
+  .report-bar-pct { width: 48px; text-align: right; font-size: 13px; font-weight: 700; flex-shrink: 0; }
+  @media (max-width: 580px) {
+    .test-intro { padding: 18px 16px; }
+    #accent-toolbar { top: 52px; }
+    .report-bar-label { width: 100px; }
+  }
   .weak-item { background: var(--warn-bg); border-left: 3px solid var(--warn); padding: 10px 14px; margin-bottom: 8px; border-radius: 0 4px 4px 0; }
   .weak-item a { color: var(--accent); font-weight: 700; text-decoration: none; }
   .weak-item a:hover { text-decoration: underline; }

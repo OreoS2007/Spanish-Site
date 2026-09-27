@@ -14,8 +14,8 @@
     display: flex; justify-content: space-between; align-items: center;
     margin-bottom: 20px; padding-bottom: 14px; border-bottom: 2px solid var(--accent);
   }
-  #review-title { font-family: var(--serif); font-size: 20px; font-weight: 700; color: var(--accent); }
-  #review-progress { font-size: 13px; color: var(--muted); font-weight: 700; }
+  #review-title { font-family: var(--serif); font-size: 21px; font-weight: 700; color: var(--accent); }
+  #review-progress { font-size: 14px; color: var(--muted); font-weight: 700; }
   #review-progress-bar-wrap {
     width: 100%; height: 6px; background: var(--alt-bg); border-radius: 3px;
     overflow: hidden; margin-bottom: 24px;
@@ -23,16 +23,17 @@
   #review-progress-bar { height: 100%; background: var(--accent2); transition: width .25s; width: 0%; }
   .review-card {
     background: var(--surface); border: 1px solid var(--rule); border-left: 4px solid var(--accent);
-    border-radius: 6px; padding: 20px 22px; margin-bottom: 20px;
+    border-radius: 8px; padding: 20px 22px; margin-bottom: 20px;
   }
   .review-card-meta {
-    font-size: 11px; color: var(--muted); font-weight: 700; margin-bottom: 12px;
+    font-size: 12.5px; color: var(--muted); font-weight: 700; margin-bottom: 12px;
     padding-bottom: 8px; border-bottom: 1px solid var(--rule);
   }
   .review-sentence {
-    font-family: var(--mono); font-size: 15px; line-height: 2; color: var(--ink); margin-bottom: 8px;
+    font-family: var(--mono); font-size: 16px; line-height: 2; color: var(--ink); margin-bottom: 8px;
   }
-  .review-ja { font-size: 13px; color: var(--muted); margin-bottom: 14px; }
+  .review-ja { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+  @media (max-width: 580px) { .review-card { padding: 16px 16px; } }
   .review-empty {
     text-align: center; padding: 60px 20px; color: var(--muted);
   }
@@ -45,7 +46,7 @@
   .review-done-title { font-family: var(--serif); font-size: 20px; color: var(--accent2); margin-bottom: 10px; }
   .review-nav-link {
     display: inline-block; margin-top: 18px; background: var(--accent); color: #fff;
-    padding: 8px 20px; border-radius: 4px; text-decoration: none; font-size: 13px; font-weight: 700;
+    padding: 10px 22px; border-radius: 6px; text-decoration: none; font-size: 14px; font-weight: 700;
   }
   .review-nav-link:hover { background: #1d3e72; }
 </style>
