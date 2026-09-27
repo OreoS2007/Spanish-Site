@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 
+<script src="tanren-bank.js" defer></script>
 <script src="site.js" defer></script>
 <meta charset="UTF-8">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -42,6 +43,8 @@
     <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
     <a class="fn-item" href="#sec6" data-tab="vocab" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 語彙リスト</a>
     <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ まとめ</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">💪 鍛錬タブ</span>
+    <a class="fn-item" href="#sec-tanren" data-tab="tanren" onclick="jumpToSection('sec-tanren'); closeToc(); return false;">💪 鍛錬（100問）</a>
   </div>
   <a id="home-btn" href="index.html">🏠 ホーム</a>
   <span id="top-nav-title">Lección 8 文法解説</span>
@@ -60,6 +63,7 @@
   <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
   <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
   <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬</button>
 </div>
 
 <div class="cover">
@@ -71,6 +75,7 @@
     <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 練習問題</a>
     <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 語彙リスト</a>
     <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ まとめ</a>
+    <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
   </div>
   <div class="cover-search">
     <div class="cover-search-label">単語・活用形・文法用語を検索</div>
@@ -1228,6 +1233,21 @@
 
 </div><!-- /tab-vocab -->
 
+<!-- ══ 鍛錬タブ（問題は tanren-bank.js から表示） ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div id="sec-tanren" class="sec-heading">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-intro">Lección 8 の内容を総合的に使う問題が <b>100問</b> あります。まとめクイズと同じか、少し難しいレベルです。<br>「内容ごと」は文法項目の順、「ランダム」は全範囲を混ぜた順に並びます。○△× を付けた問題は「今日の復習」に出ます。</div>
+
+<div id="tanren-app" data-lesson="8"></div>
+
+</div><!-- /tab-tanren -->
+
 <div id="float-nav">
   <div id="float-nav-menu">
     <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
@@ -1257,6 +1277,7 @@ const GRAMMAR_TERMS = [
   { terms: ['練習問題','練習'], id: 'sec5', label: '練習問題（⑤節）' },
   { terms: ['語彙','Vocabulario','科学','環境','政治','教育'], id: 'sec6', label: '語彙リスト（⑥節）' },
   { terms: ['まとめ','Resumen'], id: 'sec7', label: 'まとめ（⑦節）' },
+  { terms: ['鍛錬','Entrenamiento'], id: 'sec-tanren', label: '鍛錬（100問）' },
 ];
 </script>
 
