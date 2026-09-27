@@ -91,7 +91,7 @@
         '<div class="review-empty-title">今日復習する問題はありません</div>' +
         '<div>' + (hasAnyProgress
           ? '素晴らしい！ 今日の分はすべて終わっています。'
-          : 'まだ評価済みの問題がありません。各Lecciónのミニ確認・まとめクイズで「○／△／×」を記録すると、ここに復習リストが作られます。') +
+          : 'まだ評価済みの問題がありません。各Lecciónのミニ確認・まとめクイズで「○／△／×」を記録すると、ここに復習リストが作られます（×は翌日、△は3日後に出題。○は出題しません）。') +
         '</div>' +
         '<a class="review-nav-link" href="index.html">ホームへ戻る</a>' +
         '</div>';
@@ -123,7 +123,7 @@
         '<div class="review-done">' +
         '<div class="review-done-icon">✅</div>' +
         '<div class="review-done-title">今日の復習はすべて完了しました！</div>' +
-        '<div style="color:var(--muted)">お疲れさまでした。また明日以降、間隔を空けて出題されます。</div>' +
+        '<div style="color:var(--muted)">お疲れさまでした。×の問題は明日、△の問題は3日後にまた出題されます。</div>' +
         '<a class="review-nav-link" href="index.html">ホームへ戻る</a>' +
         '</div>';
       updateProgressBar();
@@ -165,6 +165,7 @@
       '</div>' +
       '</div>';
 
+    srsAddButtonTitles(app);
     updateProgressBar();
   }
 
