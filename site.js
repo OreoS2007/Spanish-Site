@@ -14,7 +14,7 @@ function switchTab(key, btnEl) {
   if (target) target.classList.add('active');
 
   document.querySelectorAll('.tab-btn').forEach(function (b) {
-    b.classList.remove('active-grammar', 'active-renshu', 'active-vocab');
+    b.classList.remove('active-grammar', 'active-renshu', 'active-vocab', 'active-tanren');
   });
   var activeClass = 'active-' + key;
   if (btnEl) {
@@ -180,6 +180,138 @@ function toggleQuizExp(btn) {
 }
 
 /* ══════════════════════════════════════════════════════════
+   鍛錬タブ
+   <div id="tanren-app" data-lesson="2"></div> に、tanren-bank.js の問題を
+   まとめクイズと同じ形式で並べる。「内容ごと」と「ランダム」を切り替えられる。
+   ══════════════════════════════════════════════════════════ */
+
+var tanrenState = { lesson: null, order: 'topic', shuffled: null };
+
+function tanrenLoadOrder() {
+  try { return localStorage.getItem('tanren_order') === 'random' ? 'random' : 'topic'; }
+  catch (e) { return 'topic'; }
+}
+function tanrenSaveOrder(order) {
+  try { localStorage.setItem('tanren_order', order); } catch (e) {}
+}
+
+function tanrenShuffle(list) {
+  var a = list.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+
+function tanrenItemHtml(q, num, showGroup) {
+  var exp = (showGroup ? '<span class="tanren-exp-group">' + q.group_num + ' ' + q.group_title + '</span>' : '') +
+    q.explanation_html;
+  return '<div class="quiz-item" id="' + q.id + '">' +
+    '<div class="quiz-item-head">' +
+      '<span class="quiz-num tanren-num">' + num + '</span>' +
+      '<button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>' +
+    '</div>' +
+    '<div class="quiz-sentence">' + q.sentence_html + '</div>' +
+    '<div class="quiz-ja">' + q.ja + '</div>' +
+    '<button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>' +
+    '<div class="quiz-exp">' + exp + '</div>' +
+    '<div class="srs-rate" data-qid="' + q.id + '"><span class="srs-rate-label">この問題の理解度：</span>' +
+      '<button class="srs-btn srs-x" onclick="rateQuestion(\'' + q.id + '\', 0, this)">×</button>' +
+      '<button class="srs-btn srs-tri" onclick="rateQuestion(\'' + q.id + '\', 1, this)">△</button>' +
+      '<button class="srs-btn srs-o" onclick="rateQuestion(\'' + q.id + '\', 2, this)">○</button>' +
+      '<span class="srs-rated-msg"></span></div>' +
+  '</div>';
+}
+
+/* ○△× の記録数を数えて表示する */
+function tanrenUpdateSummary(questions) {
+  var el = document.getElementById('tanren-summary');
+  if (!el) return;
+  var progress = srsLoadProgress();
+  var counts = [0, 0, 0];
+  questions.forEach(function (q) {
+    var p = progress[q.id];
+    if (p && typeof p.lastRating === 'number') counts[p.lastRating] += 1;
+  });
+  var done = counts[0] + counts[1] + counts[2];
+  el.innerHTML = '記録済み <b>' + done + '</b> / ' + questions.length + ' 問　' +
+    '<span class="tanren-count-o">○ ' + counts[2] + '</span>　' +
+    '<span class="tanren-count-tri">△ ' + counts[1] + '</span>　' +
+    '<span class="tanren-count-x">× ' + counts[0] + '</span>';
+}
+
+function renderTanren() {
+  var app = document.getElementById('tanren-app');
+  if (!app || typeof TANREN_BANK === 'undefined') return;
+  var lesson = Number(app.getAttribute('data-lesson'));
+  var questions = TANREN_BANK.filter(function (q) { return q.lesson === lesson; });
+  if (tanrenState.lesson !== lesson) {
+    tanrenState = { lesson: lesson, order: tanrenLoadOrder(), shuffled: null };
+  }
+  if (tanrenState.order === 'random' && !tanrenState.shuffled) {
+    tanrenState.shuffled = tanrenShuffle(questions);
+  }
+
+  var isRandom = tanrenState.order === 'random';
+  var html =
+    '<div class="tanren-controls">' +
+      '<span class="tanren-controls-label">並び順：</span>' +
+      '<div class="tanren-seg" role="group" aria-label="並び順">' +
+        '<button class="tanren-seg-btn' + (isRandom ? '' : ' active') + '" aria-pressed="' + !isRandom + '" onclick="tanrenSetOrder(\'topic\')">内容ごと</button>' +
+        '<button class="tanren-seg-btn' + (isRandom ? ' active' : '') + '" aria-pressed="' + isRandom + '" onclick="tanrenSetOrder(\'random\')">ランダム</button>' +
+      '</div>' +
+      (isRandom ? '<button class="tanren-reshuffle-btn" onclick="tanrenReshuffle()">🔀 並べ直す</button>' : '') +
+    '</div>' +
+    '<div class="tanren-summary" id="tanren-summary"></div>';
+
+  if (isRandom) {
+    html += '<div class="quiz-block tanren-block"><div class="quiz-block-title">💪 鍛錬：ランダム（' + questions.length + '問）</div>';
+    tanrenState.shuffled.forEach(function (q, i) { html += tanrenItemHtml(q, i + 1, true); });
+    html += '</div>';
+  } else {
+    var num = 0;
+    var groups = [];
+    questions.forEach(function (q) {
+      var last = groups[groups.length - 1];
+      if (!last || last.num !== q.group_num) groups.push(last = { num: q.group_num, title: q.group_title, items: [] });
+      last.items.push(q);
+    });
+    groups.forEach(function (g) {
+      html += '<div class="quiz-block tanren-block"><div class="quiz-block-title">💪 鍛錬：' + g.num + ' ' + g.title +
+        '<span class="tanren-block-count">' + g.items.length + '問</span></div>';
+      g.items.forEach(function (q) { num += 1; html += tanrenItemHtml(q, num, false); });
+      html += '</div>';
+    });
+  }
+
+  app.innerHTML = html;
+  srsRestoreRatingButtons();
+  srsAddButtonTitles(app);
+  tanrenUpdateSummary(questions);
+  if (!app.getAttribute('data-listening')) {
+    app.setAttribute('data-listening', '1');
+    app.addEventListener('click', function (e) {
+      if (e.target.closest('.srs-btn')) tanrenUpdateSummary(questions);
+    });
+  }
+}
+
+function tanrenSetOrder(order) {
+  if (tanrenState.order === order) return;
+  tanrenState.order = order;
+  tanrenSaveOrder(order);
+  renderTanren();
+}
+
+function tanrenReshuffle() {
+  tanrenState.shuffled = null;
+  renderTanren();
+  var app = document.getElementById('tanren-app');
+  if (app) app.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ══════════════════════════════════════════════════════════
    復習スケジュール
    localStorage キー: "srs_progress"
    構造: { [qid]: { nextReview: "YYYY-MM-DD" | null, lastRating: 0|1|2,
@@ -321,6 +453,9 @@ function srsRestoreRatingButtons() {
 
 /* ── ページ読み込み時の初期化 ── */
 document.addEventListener('DOMContentLoaded', function () {
+
+  /* 鍛錬タブがあるページでは問題を並べる（評価ボタンの復元より先に行う） */
+  renderTanren();
 
   /* 復習：以前の評価があればボタンを復元し、ボタンに説明を付ける */
   srsRestoreRatingButtons();

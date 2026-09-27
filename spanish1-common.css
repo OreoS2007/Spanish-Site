@@ -1,5 +1,7 @@
 @import url('common.css');
 
+:root { --tanren: #6b4f9e; --tanren-bg: #f1ecf8; }
+
 /* ══════════════════════════════════════════════
    Spanish1 固有スタイル
    スペイン語一列 — 文法解説シリーズ
@@ -27,6 +29,7 @@
 /* ── タブ アクティブ状態 ── */
 .tab-btn.active-grammar { color: var(--accent); border-bottom-color: var(--accent); background: var(--head-bg); }
 .tab-btn.active-renshu  { color: var(--ex-tab); border-bottom-color: var(--ex-tab); background: var(--ex-head); }
+.tab-btn.active-tanren  { color: var(--tanren); border-bottom-color: var(--tanren); background: var(--tanren-bg); }
 /* active-vocab は common.css で定義済み */
 
 /* ── フローティングナビ（廃止） ── */
@@ -381,6 +384,59 @@ body.is-printing .q-exp { display: block !important; }
   .quiz-toggle-all-btn, .quiz-exp-btn { display: none !important; }
   .quiz-exp { display: block !important; }
   .srs-rate { display: none !important; }
+}
+
+/* ══ 鍛錬タブ ══ */
+.tanren-intro {
+  background: var(--tanren-bg); border-left: 3px solid var(--tanren); border-radius: 0 6px 6px 0;
+  padding: 12px 16px; margin: 0 0 16px; font-size: 14.5px; line-height: 1.75;
+}
+.tanren-controls {
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  position: sticky; top: 52px; z-index: 400;
+  background: var(--bg); padding: 8px 0; margin-bottom: 4px;
+  border-bottom: 1px solid var(--rule);
+}
+.tanren-controls-label { font-size: 13px; font-weight: 700; color: var(--mid); }
+.tanren-seg { display: inline-flex; border: 1px solid var(--tanren); border-radius: 8px; overflow: hidden; }
+.tanren-seg-btn {
+  background: var(--surface); color: var(--tanren); border: none;
+  padding: 7px 16px; font-size: 13.5px; font-weight: 700; font-family: var(--sans); cursor: pointer;
+  transition: background .12s, color .12s;
+}
+.tanren-seg-btn + .tanren-seg-btn { border-left: 1px solid var(--tanren); }
+.tanren-seg-btn:hover { background: var(--tanren-bg); }
+.tanren-seg-btn.active { background: var(--tanren); color: #fff; }
+.tanren-reshuffle-btn {
+  background: none; border: 1px dashed var(--tanren); color: var(--tanren); border-radius: 8px;
+  padding: 6px 12px; font-size: 13px; font-weight: 700; font-family: var(--sans); cursor: pointer;
+}
+.tanren-reshuffle-btn:hover { background: var(--tanren-bg); }
+.tanren-summary { font-size: 13px; color: var(--mid); margin: 8px 0 4px; }
+.tanren-count-o   { color: var(--accent2); font-weight: 700; }
+.tanren-count-tri { color: #b07420; font-weight: 700; }
+.tanren-count-x   { color: var(--warn); font-weight: 700; }
+.tanren-block { border-left-color: var(--tanren); }
+.tanren-block .quiz-block-title { color: var(--tanren); }
+.tanren-block-count { margin-left: auto; font-size: 12px; font-weight: 700; color: var(--muted); }
+.tanren-num { background: var(--tanren); width: auto; min-width: 22px; padding: 0 6px; border-radius: 11px; }
+.tanren-exp-group {
+  display: inline-block; font-size: 11.5px; font-weight: 700; color: var(--tanren);
+  background: var(--tanren-bg); border-radius: 4px; padding: 0 6px; margin-right: 6px;
+}
+@media (max-width: 580px) {
+  /* タブが4つあるときはスマホで2×2に並べる */
+  .tab-nav:has(.tab-btn:nth-child(4)) { display: grid; grid-template-columns: 1fr 1fr; }
+  .tanren-controls { top: 50px; }
+}
+@media print {
+  .tanren-controls, .tanren-summary { display: none !important; }
+  body.is-printing #tab-tanren::before {
+    content: "鍛錬"; display: block;
+    font-family: var(--serif); font-size: 14pt; font-weight: 700;
+    border-top: 2pt solid #000; border-bottom: 1pt solid #888;
+    padding: 8pt 0 6pt; margin-bottom: 18pt;
+  }
 }
 
 /* ══ 理解度評価ボタン（○△×）・間隔反復システム ══ */

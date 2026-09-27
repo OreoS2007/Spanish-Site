@@ -7,6 +7,7 @@
 <link rel="stylesheet" href="common.css">
 <link rel="stylesheet" href="spanish1-common.css">
 <script src="question-bank.js" defer></script>
+<script src="tanren-bank.js" defer></script>
 <script src="site.js" defer></script>
 <style>
   #review-app { max-width: 100%; }
@@ -80,7 +81,9 @@
   var lastRatedMsg = '';  /* 直前に評価した問題の結果（次の画面の上に表示する） */
 
   function bankById(id) {
-    return QUESTION_BANK.find(function (q) { return q.id === id; });
+    /* まとめクイズ等（QUESTION_BANK）と鍛錬（TANREN_BANK）の両方から探す */
+    var bank = typeof TANREN_BANK !== 'undefined' ? QUESTION_BANK.concat(TANREN_BANK) : QUESTION_BANK;
+    return bank.find(function (q) { return q.id === id; });
   }
 
   function renderApp() {
