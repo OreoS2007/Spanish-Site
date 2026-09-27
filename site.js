@@ -182,17 +182,22 @@ function toggleQuizExp(btn) {
 /* ══════════════════════════════════════════════════════════
    復習スケジュール
    localStorage キー: "srs_progress"
-   構造: { [qid]: { nextReview: "YYYY-MM-DD" | null, lastRating: 0|1|2, lastDate: "YYYY-MM-DD" } }
+   構造: { [qid]: { nextReview: "YYYY-MM-DD" | null, lastRating: 0|1|2,
+                     lastDate: "YYYY-MM-DD", triStreak: △が続いた回数 } }
 
    評価の意味と、復習ページに出るタイミング：
-     ×（0）わからなかった。復習必須     → 翌日
-     △（1）今は分かったが復習が必要     → 3日後
+     ×（0）わからなかった。復習必須     → 翌日（△の回数はリセット）
+     △（1）今は分かったが復習が必要     → 続けて△を付けるほど間隔が伸びる
+                                          1回目 3日後 → 7日後 → 14日後 → 30日後 → 以降 60日後
      ○（2）完全に理解した。復習不要     → 出さない
    期限が来た問題は、解きなおして評価し直すまで復習ページに残り続ける。
+
+   △の間隔は、思い出すたびに記憶が長持ちするようになる「間隔反復」の考え方に沿って、
+   おおむね 2 倍ずつ伸ばしている。忘れかけた頃に思い出すのが最も定着しやすいため。
    ══════════════════════════════════════════════════════════ */
 
-/* 評価ごとの次回復習までの日数（null は復習に出さない） */
-const SRS_DAYS_BY_RATING = [1, 3, null];
+const SRS_DAYS_X = 1;
+const SRS_DAYS_TRI = [3, 7, 14, 30, 60];
 
 function srsToday() {
   var d = new Date();
@@ -227,15 +232,37 @@ function srsSaveProgress(progress) {
 function srsRate(qid, rating) {
   var progress = srsLoadProgress();
   var today = srsToday();
-  var days = SRS_DAYS_BY_RATING[rating];
+  var prev = progress[qid] || {};
+  var streak = 0;
+  var days = null;
+
+  if (rating === 0) {
+    days = SRS_DAYS_X;
+  } else if (rating === 1) {
+    /* 旧データ（回数の記録がない△）は 1 回目として扱う */
+    var prevStreak = prev.lastRating === 1 ? (prev.triStreak || 1) : 0;
+    /* 同じ日に△を押し直しても回数は増やさない（押し間違い・連打対策） */
+    streak = (prev.lastRating === 1 && prev.lastDate === today) ? prevStreak : prevStreak + 1;
+    days = SRS_DAYS_TRI[Math.min(streak, SRS_DAYS_TRI.length) - 1];
+  }
+
   var entry = {
     nextReview: days === null ? null : srsAddDays(today, days),
     lastRating: rating,
-    lastDate: today
+    lastDate: today,
+    triStreak: streak
   };
   progress[qid] = entry;
   srsSaveProgress(progress);
+  entry.days = days;
   return entry;
+}
+
+/* 評価を記録したときに表示する文 */
+function srsRatedMessage(entry) {
+  if (entry.days === null) return '記録しました（復習には出しません）';
+  if (entry.days === 1) return '記録しました（明日の復習に出ます）';
+  return '記録しました（' + entry.days + '日後の復習に出ます）';
 }
 
 function srsGetDueIds(progress) {
@@ -253,7 +280,7 @@ function srsGetDueIds(progress) {
 /* ○△×ボタンにマウスを乗せたとき、意味が分かるように説明を付ける */
 var SRS_BUTTON_TITLES = {
   'srs-x':   '×：わからなかった（明日の復習に出ます）',
-  'srs-tri': '△：今は分かったが復習が必要（3日後の復習に出ます）',
+  'srs-tri': '△：今は分かったが復習が必要（3日後の復習に出ます。続けて△だと間隔が伸びます）',
   'srs-o':   '○：完全に理解した（復習には出しません）'
 };
 function srsAddButtonTitles(root) {
@@ -266,15 +293,14 @@ function srsAddButtonTitles(root) {
 
 /* レッスンページ内の評価ボタンから呼ばれる */
 function rateQuestion(qid, rating, btnEl) {
-  srsRate(qid, rating);
+  var entry = srsRate(qid, rating);
   var container = btnEl.closest('.srs-rate');
   if (!container) return;
   container.querySelectorAll('.srs-btn').forEach(function (b) { b.classList.remove('active'); });
   btnEl.classList.add('active');
   var msg = container.querySelector('.srs-rated-msg');
   if (msg) {
-    var labels = ['記録しました（明日の復習に出ます）', '記録しました（3日後の復習に出ます）', '記録しました（復習には出しません）'];
-    msg.textContent = '✓ ' + labels[rating];
+    msg.textContent = '✓ ' + srsRatedMessage(entry);
     setTimeout(function () { msg.textContent = ''; }, 3000);
   }
 }

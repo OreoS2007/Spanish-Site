@@ -33,6 +33,10 @@
     font-family: var(--mono); font-size: 16px; line-height: 2; color: var(--ink); margin-bottom: 8px;
   }
   .review-ja { font-size: 14px; color: var(--muted); margin-bottom: 14px; }
+  .review-last-rated {
+    font-size: 13px; color: var(--accent2); font-weight: 700;
+    margin: -12px 0 14px;
+  }
   @media (max-width: 580px) { .review-card { padding: 16px 16px; } }
   .review-empty {
     text-align: center; padding: 60px 20px; color: var(--muted);
@@ -73,6 +77,7 @@
 (function () {
   var queue = [];
   var totalCount = 0;
+  var lastRatedMsg = '';  /* 直前に評価した問題の結果（次の画面の上に表示する） */
 
   function bankById(id) {
     return QUESTION_BANK.find(function (q) { return q.id === id; });
@@ -91,7 +96,7 @@
         '<div class="review-empty-title">今日復習する問題はありません</div>' +
         '<div>' + (hasAnyProgress
           ? '素晴らしい！ 今日の分はすべて終わっています。'
-          : 'まだ評価済みの問題がありません。各Lecciónのミニ確認・まとめクイズで「○／△／×」を記録すると、ここに復習リストが作られます（×は翌日、△は3日後に出題。○は出題しません）。') +
+          : 'まだ評価済みの問題がありません。各Lecciónのミニ確認・まとめクイズで「○／△／×」を記録すると、ここに復習リストが作られます（×は翌日、△は3日後から出題し、△が続くほど間隔が伸びます。○は出題しません）。') +
         '</div>' +
         '<a class="review-nav-link" href="index.html">ホームへ戻る</a>' +
         '</div>';
@@ -120,10 +125,11 @@
         '<span id="review-progress"></span>' +
         '</div>' +
         '<div id="review-progress-bar-wrap"><div id="review-progress-bar"></div></div>' +
+        lastRatedHtml() +
         '<div class="review-done">' +
         '<div class="review-done-icon">✅</div>' +
         '<div class="review-done-title">今日の復習はすべて完了しました！</div>' +
-        '<div style="color:var(--muted)">お疲れさまでした。×の問題は明日、△の問題は3日後にまた出題されます。</div>' +
+        '<div style="color:var(--muted)">お疲れさまでした。×の問題は明日、△の問題は数日後にまた出題されます（△が続くほど間隔が伸びます）。</div>' +
         '<a class="review-nav-link" href="index.html">ホームへ戻る</a>' +
         '</div>';
       updateProgressBar();
@@ -153,6 +159,7 @@
       '<span id="review-progress"></span>' +
       '</div>' +
       '<div id="review-progress-bar-wrap"><div id="review-progress-bar"></div></div>' +
+      lastRatedHtml() +
       '<div class="review-card">' +
       '<div class="review-card-meta">' + sectionLabel + '</div>' +
       bodyHtml +
@@ -169,8 +176,13 @@
     updateProgressBar();
   }
 
+  function lastRatedHtml() {
+    return lastRatedMsg ? '<div class="review-last-rated">前の問題：' + lastRatedMsg + '</div>' : '';
+  }
+
   window.__reviewRate = function (qid, rating) {
-    srsRate(qid, rating);
+    var entry = srsRate(qid, rating);
+    lastRatedMsg = ['×', '△', '○'][rating] + ' → ' + srsRatedMessage(entry).replace('記録しました（', '').replace('）', '');
     queue.shift();
     renderCard();
   };
