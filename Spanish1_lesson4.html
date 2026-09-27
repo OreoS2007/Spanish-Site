@@ -2,6 +2,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
 <script src="site.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <title>Lección 4 文法解説 | スペイン語一列①</title>
@@ -31,6 +32,8 @@
     <a class="fn-item" href="#exercises" onclick="jumpToSection('exercises'); closeToc(); return false;">⑤ 練習問題</a>
     <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙タブ</span>
     <a class="fn-item" href="#vocab" onclick="jumpToSection('vocab'); closeToc(); return false;">⑥ 語彙</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">💪 鍛錬タブ</span>
+    <a class="fn-item" href="#sec-tanren" data-tab="tanren" onclick="jumpToSection('sec-tanren'); closeToc(); return false;">💪 鍛錬（100問）</a>
   </div>
   <a id="home-btn" href="index.html">🏠 ホーム</a>
   <span id="top-nav-title">Lección 4 文法解説</span>
@@ -49,6 +52,7 @@
   <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
   <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
   <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬</button>
 </div>
 
 <div class="cover">
@@ -59,6 +63,7 @@
     <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">４ 無主語文</a>
     <a class="toc-item" href="#exercises" onclick="jumpToSection('exercises'); return false;">✏️ 練習問題</a>
     <a class="toc-item" href="#vocab" onclick="jumpToSection('vocab'); return false;">📖 語彙</a>
+    <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
   </div>
 </div>
 
@@ -1729,6 +1734,21 @@
 </div>
 
 </div><!-- /tab-vocab -->
+
+<!-- ══ 鍛錬タブ（問題は tanren-bank.js から表示） ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div id="sec-tanren" class="sec-heading">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-intro">Lección 4 の内容を総合的に使う問題が <b>100問</b> あります。まとめクイズと同じか、少し難しいレベルです。<br>「内容ごと」は文法項目の順、「ランダム」は全範囲を混ぜた順に並びます。○△× を付けた問題は「今日の復習」に出ます。</div>
+
+<div id="tanren-app" data-lesson="4"></div>
+
+</div><!-- /tab-tanren -->
 
 <footer class="course-footer">スペイン語一列① 文法解説集</footer>
 
