@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 19 文法解説 | B1〜B2 編</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 平叙文の伝達と時制のずれ</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 人称・場所・時の言い換え</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 疑問文の伝達</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ 命令・依頼の伝達</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 伝達動詞のいろいろ</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec6" data-tab="renshu" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8" data-tab="vocab" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ まとめ</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">💪 鍛錬タブ</span>
+    <a class="fn-item" href="#sec-tanren" data-tab="tanren" onclick="jumpToSection('sec-tanren'); closeToc(); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 19 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 19　文法解説</div>
+  <div class="cover-sub">B1〜B2 編　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br>「彼は疲れていると言っていた」「どこに住んでいるのか聞かれた」「早く来るように言われた」のように、人から聞いた言葉を、時制・人称・時の表現を正しく変えて伝えられるようになります。<span class="mono">prometer, advertir, negar</span> などの伝達動詞も使い分けます。<br><small>16課の時制の一致（接続法）の続きです。英語の間接話法（時制を1つずらす）とほぼ同じ考え方です。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 平叙文の伝達と時制のずれ</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 人称・場所・時の言い換え</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 疑問文の伝達</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ 命令・依頼の伝達</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 伝達動詞のいろいろ</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 練習問題</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 語彙リスト</a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ まとめ</a>
+    <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：dijo que　／　preguntar si　／　間接話法…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 平叙文の伝達と時制のずれ -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">平叙文の伝達と時制のずれ</span>
+  <span class="sec-es">Estilo indirecto: oraciones enunciativas</span>
+</div>
+
+<div class="sub" id="heijobun">1. 直接話法と間接話法</div>
+<p>人の言葉をそのまま引用するのが<span class="hi">直接話法</span>、自分の言葉に直して伝えるのが<span class="hi">間接話法</span>です。間接話法では <span class="mono">decir que …</span> のように <span class="mono">que</span> でつなぎます。伝達動詞が<span class="hi2">現在</span>なら、時制はそのままで、人称だけを変えます。</p>
+<div class="ex"><span class="ex-tag">直接話法</span><span class="ex-sp">Ana dice: «Estoy cansada».</span><span class="ex-ja">アナは「疲れた」と言っている。</span></div>
+<div class="ex"><span class="ex-tag">間接話法</span><span class="ex-sp">Ana dice <span class="hi">que</span> <span class="hi2">está</span> cansada.</span><span class="ex-ja">アナは疲れたと言っている。</span><span class="ex-note">伝達動詞が現在なので時制は変えない</span></div>
+<div class="box box-warn">
+  <div class="box-title">que は省略しない</div>
+  <p style="margin:0;font-size:13.5px;">英語では <i>She says (that) she is tired</i> と that を省けるが、スペイン語の <span class="mono">que</span> は省略できない：× <span class="mono">Ana dice está cansada</span>。</p>
+</div>
+
+<div class="sub" id="jisei-zure">2. 伝達動詞が過去なら、時制を1つ過去へずらす</div>
+<p><span class="mono">dijo que</span>, <span class="mono">me contó que</span> のように伝達動詞が過去のときは、英語と同じく、元の発言の時制を<span class="hi-r">1つ過去の側へずらし</span>ます。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:30%">元の発言</th><th>Dijo que …（訳）</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">現在<br><span class="mono">«Estoy cansada.»</span></td><td>→ 線過去：<span class="mono">Dijo que <b>estaba</b> cansada.</span><br>疲れていると言った。</td></tr>
+    <tr><td class="td-rule">現在完了<br><span class="mono">«He terminado.»</span></td><td>→ 過去完了：<span class="mono">Dijo que <b>había terminado</b>.</span><br>終わったと言った。</td></tr>
+    <tr><td class="td-rule">点過去<br><span class="mono">«Lo vi ayer.»</span></td><td>→ 過去完了：<span class="mono">Dijo que lo <b>había visto</b> el día anterior.</span><br>その前日に彼を見たと言った。<br><small>点過去のまま（lo vio）でもよい</small></td></tr>
+    <tr><td class="td-rule">未来<br><span class="mono">«Iré.»</span></td><td>→ 過去未来：<span class="mono">Dijo que <b>iría</b>.</span><br>行くと言った。</td></tr>
+    <tr><td class="td-rule">ir a ＋ 不定詞<br><span class="mono">«Voy a llamar.»</span></td><td>→ <span class="mono">Dijo que <b>iba a</b> llamar.</span><br>電話するつもりだと言った。</td></tr>
+    <tr><td class="td-rule">線過去・過去完了・過去未来</td><td>→ そのまま：<span class="mono">«Vivía en Lima.» → Dijo que <b>vivía</b> en Lima.</span><br>リマに住んでいたと言った。</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ 線過去は「過去の中の現在」なので、元が現在でも線過去でも、間接話法ではどちらも線過去になる。</p>
+
+<div class="sub" id="genzai-nokosu">3. 今も変わらない内容なら、現在のままでもよい</div>
+<p>伝える時点でも内容がそのまま当てはまるときは、伝達動詞が過去でも現在形・未来形を残せます。</p>
+<div class="ex"><span class="ex-sp">Me dijo que <span class="hi2">es</span> de Perú.</span><span class="ex-ja">彼はペルー出身だと言っていた。</span><span class="ex-note">出身は今も変わらないので現在形でもよい（era も可）</span></div>
+<div class="ex"><span class="ex-sp">Ayer me dijo que <span class="hi2">vendrá</span> el sábado.</span><span class="ex-ja">昨日、彼は土曜日に来ると言っていた。</span><span class="ex-note">土曜日がまだ先なので未来形でもよい（vendría も可）</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">« »</span>：スペイン語の引用符（" " も使う）</li>
+    <li><span class="mono">el día anterior</span>：その前日（②節）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L19-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">«Estoy cansada.» → Ana dijo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estaba</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">現在 → 線過去：estar</span></span> cansada.</div>
+  <div class="mini-check-ja">アナは疲れていると言った。</div>
+<div class="srs-rate" data-qid="L19-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：平叙文の伝達と時制のずれ</div>
+  <div class="quiz-item" id="L19-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«He perdido las llaves.» → Pedro me dijo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">había perdido</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">現在完了 → 過去完了：perder</span></span> las llaves.</div>
+    <div class="quiz-ja">ペドロは鍵をなくしたと私に言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>había perdido</b>：伝達動詞が過去なので、現在完了は過去完了にずらす。</div>
+  <div class="srs-rate" data-qid="L19-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«Iré a la fiesta.» → Luis dijo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">iría</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">未来 → 過去未来：ir</span></span> a la fiesta.</div>
+    <div class="quiz-ja">ルイスはパーティーに行くと言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>iría</b>：未来は過去未来にずらす。</div>
+  <div class="srs-rate" data-qid="L19-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«Voy a cambiar de trabajo.» → Carmen nos contó que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">iba</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ir a → ?</span></span> a cambiar de trabajo.</div>
+    <div class="quiz-ja">カルメンは転職するつもりだと私たちに話した。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>iba</b>：voy a ＋ 不定詞 → iba a ＋ 不定詞。</div>
+  <div class="srs-rate" data-qid="L19-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ② 人称・場所・時の言い換え -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">人称・場所・時の言い換え</span>
+  <span class="sec-es">Cambios de persona, lugar y tiempo</span>
+</div>
+
+<div class="sub" id="ninsho">1. 人称と所有詞を、伝える人の立場に合わせる</div>
+<p>間接話法では、元の発言の「私」「君」を、<span class="hi">伝える人から見た人称</span>に置き換えます。動詞の人称、目的格代名詞、所有詞もいっしょに変わります。</p>
+<div class="ex"><span class="ex-sp">«<b>Mi</b> hermano <b>está</b> enfermo.» → Ana dijo que <span class="hi">su</span> hermano <span class="hi2">estaba</span> enfermo.</span><span class="ex-ja">アナはお兄さんが病気だと言った。</span><span class="ex-note">mi → su</span></div>
+<div class="ex"><span class="ex-sp">«<b>Te</b> echo de menos.» → Me dijo que <span class="hi">me</span> <span class="hi2">echaba</span> de menos.</span><span class="ex-ja">彼は私に会えなくて寂しいと言った。</span><span class="ex-note">言われた本人が伝えるので te → me</span></div>
+<div class="ex"><span class="ex-sp">«<b>Estamos</b> muy contentos.» → Dijeron que <span class="hi2">estaban</span> muy contentos.</span><span class="ex-ja">彼らはとても満足していると言った。</span><span class="ex-note">nosotros → ellos</span></div>
+
+<div class="sub" id="jikan-basho">2. 時・場所・指示語の言い換え</div>
+<p>別の日・別の場所で伝えるときは、「今日」「ここ」のような<span class="hi">発言した時と場所を基準にした語</span>も言い換えます。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:40%">元の発言</th><th>間接話法</th></tr></thead>
+  <tbody>
+    <tr><td class="mono td-rule">hoy<br><small>今日</small></td><td><span class="mono">ese día / aquel día</span>（その日）</td></tr>
+    <tr><td class="mono td-rule">ayer<br><small>昨日</small></td><td><span class="mono">el día anterior</span>（その前日）</td></tr>
+    <tr><td class="mono td-rule">mañana<br><small>明日</small></td><td><span class="mono">al día siguiente</span>（その翌日）</td></tr>
+    <tr><td class="mono td-rule">ahora<br><small>今</small></td><td><span class="mono">entonces / en ese momento</span>（その時）</td></tr>
+    <tr><td class="mono td-rule">la semana que viene<br><small>来週</small></td><td><span class="mono">la semana siguiente</span>（その翌週）</td></tr>
+    <tr><td class="mono td-rule">el año pasado<br><small>去年</small></td><td><span class="mono">el año anterior</span>（その前年）</td></tr>
+    <tr><td class="mono td-rule">aquí / este<br><small>ここ／この</small></td><td><span class="mono">allí / ese, aquel</span>（そこ／その、あの）</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="ex"><span class="ex-sp">«Mañana vuelvo aquí.» → Dijo que <span class="hi">al día siguiente</span> volvía <span class="hi">allí</span>.</span><span class="ex-ja">彼は翌日そこへ戻ると言った。</span></div>
+<p class="note">※ 同じ日・同じ場所で伝えるなら、言い換えなくてよい：（その日のうちに）<span class="mono">Dijo que mañana vuelve aquí.</span></p>
+
+<div class="sub" id="venir-ir">3. venir ↔ ir、traer ↔ llevar</div>
+<p><span class="mono">venir</span>「（話し手のいる所へ）来る」、<span class="mono">traer</span>「持って来る」は、話し手の位置が基準です。伝える人がその場所にいなければ、<span class="mono">ir</span>「行く」、<span class="mono">llevar</span>「持って行く」に変わります。</p>
+<div class="ex"><span class="ex-sp">（セビリアでパブロが）«Muchos turistas <b>vienen aquí</b> en abril.»<br>→（東京で私が）Pablo me contó que muchos turistas <span class="hi">iban allí</span> en abril.</span><span class="ex-ja">パブロは、4月にはたくさんの観光客がそこへ行くと話してくれた。</span></div>
+<div class="ex"><span class="ex-sp">«<b>Traeré</b> una tarta.» → Laura dijo que <span class="hi">llevaría</span> una tarta.</span><span class="ex-ja">ラウラはケーキを持って行くと言った。</span><span class="ex-note">パーティーの前に、会場以外で伝えるとき</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">echar de menos</span>（表現）〜がいなくて寂しい ／ <span class="mono">tarta</span>（女）ケーキ</li>
+    <li><span class="mono">contar</span>（動）話して聞かせる（⑤節）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L19-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">«Vivo aquí desde 2010.» → Dijo que vivía <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">allí</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">aquí の言い換え</span></span> desde 2010.</div>
+  <div class="mini-check-ja">彼は2010年からそこに住んでいると言った。</div>
+<div class="srs-rate" data-qid="L19-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：人称・場所・時の言い換え</div>
+  <div class="quiz-item" id="L19-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«Mi madre es profesora.» → Lucía me dijo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">su</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">mi の言い換え</span></span> madre era profesora.</div>
+    <div class="quiz-ja">ルシアは、お母さんが先生だと私に言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>su</b>：ルシアの「私の」は、伝える人から見ると「彼女の」＝ su。</div>
+  <div class="srs-rate" data-qid="L19-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«Te devolveré el dinero mañana.» → Me dijo que me devolvería el dinero <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">al día siguiente</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">mañana の言い換え：3語</span></span>.</div>
+    <div class="quiz-ja">彼は翌日お金を返すと私に言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>al día siguiente</b>：別の日に伝えるので「明日」は「その翌日」に。</div>
+  <div class="srs-rate" data-qid="L19-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«Traeré el vino.» → Jorge dijo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">llevaría</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">traer の言い換え ＋ 過去未来</span></span> el vino.</div>
+    <div class="quiz-ja">ホルヘはワインを持って行くと言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>llevaría</b>：伝える人がその場にいないので traer → llevar、未来 → 過去未来。</div>
+  <div class="srs-rate" data-qid="L19-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ③ 疑問文の伝達 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">疑問文の伝達</span>
+  <span class="sec-es">Preguntas en estilo indirecto</span>
+</div>
+
+<div class="sub" id="preguntar-si">1. はい・いいえの疑問 → preguntar si</div>
+<p>「はい・いいえ」で答える疑問文は、<span class="mono">preguntar si …</span>「〜かどうか尋ねる」で伝えます。時制のずらし方は①節と同じです。</p>
+<div class="ex"><span class="ex-sp">«¿Tienes hambre?» → Me preguntó <span class="hi">si</span> <span class="hi2">tenía</span> hambre.</span><span class="ex-ja">彼は私にお腹がすいているかと尋ねた。</span></div>
+<div class="ex"><span class="ex-sp">«¿Has visto a Juan?» → Quería saber <span class="hi">si</span> <span class="hi2">había visto</span> a Juan.</span><span class="ex-ja">彼女は私がフアンを見かけたかどうか知りたがっていた。</span><span class="ex-note">querer saber「知りたがる」も疑問の伝達に使う</span></div>
+<p class="note">※ 会話では <span class="mono">Me preguntó <b>que si</b> tenía hambre</span> のように que を入れることも多い。書くときは <span class="mono">preguntar si</span> にする。</p>
+
+<div class="sub" id="gimonshi">2. 疑問詞のある疑問 → 疑問詞をそのまま残す</div>
+<p><span class="mono">dónde, qué, cuándo, cómo, cuánto, quién, por qué</span> などの疑問詞は、<span class="hi">アクセント記号を付けたまま</span>残します（<span class="mono">que</span> や <span class="mono">si</span> は付けない）。主語は動詞の後ろに置くのが普通です。</p>
+<div class="ex"><span class="ex-sp">«¿Dónde vives?» → Me preguntó <span class="hi">dónde</span> <span class="hi2">vivía</span>.</span><span class="ex-ja">彼は私にどこに住んでいるのかと尋ねた。</span></div>
+<div class="ex"><span class="ex-sp">«¿Cuándo llegó tu hermano?» → Me preguntó <span class="hi">cuándo</span> <span class="hi2">había llegado</span> mi hermano.</span><span class="ex-ja">彼は私に、兄がいつ着いたのかと尋ねた。</span><span class="ex-note">tu → mi（②節）、主語 mi hermano は動詞の後ろ</span></div>
+<div class="ex"><span class="ex-sp">No sé <span class="hi">qué</span> quiere decir esta palabra.</span><span class="ex-ja">この単語がどういう意味か分からない。</span><span class="ex-note">saber / no saber ＋ 疑問詞 も同じ形（間接疑問文）</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">tener hambre</span>（表現）お腹がすいている ／ <span class="mono">querer decir</span>（表現）意味する</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L19-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">«¿Estás bien?» → Me preguntó <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">si</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">はい・いいえの疑問</span></span> estaba bien.</div>
+  <div class="mini-check-ja">彼は私に大丈夫かと尋ねた。</div>
+<div class="srs-rate" data-qid="L19-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：疑問文の伝達</div>
+  <div class="quiz-item" id="L19-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«¿Dónde has puesto las gafas?» → Mi madre me preguntó dónde <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">había puesto</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">現在完了 → 過去完了：poner</span></span> las gafas.</div>
+    <div class="quiz-ja">母は私にメガネをどこに置いたのかと尋ねた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>había puesto</b>：疑問詞はそのまま、時制は現在完了 → 過去完了。</div>
+  <div class="srs-rate" data-qid="L19-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«¿Cuánto cuesta?» → Le pregunté <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">cuánto</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">疑問詞をそのまま（アクセントに注意）</span></span> costaba.</div>
+    <div class="quiz-ja">私は彼にいくらかと尋ねた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>cuánto</b>：間接疑問でも疑問詞のアクセントは残す。</div>
+  <div class="srs-rate" data-qid="L19-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«¿Tendrás tiempo mañana?» → Me preguntó si <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">tendría</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">未来 → 過去未来：tener</span></span> tiempo al día siguiente.</div>
+    <div class="quiz-ja">彼は私に、翌日時間があるかと尋ねた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>tendría</b>：未来は過去未来に。mañana → al día siguiente。</div>
+  <div class="srs-rate" data-qid="L19-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ④ 命令・依頼の伝達 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">命令・依頼の伝達</span>
+  <span class="sec-es">Órdenes y peticiones en estilo indirecto</span>
+</div>
+
+<div class="sub" id="meirei">1. 命令文 → decir / pedir que ＋ 接続法</div>
+<p>命令文を伝えるときは、<span class="mono">decir que</span>（〜するように言う）や <span class="mono">pedir que</span>（〜するように頼む）の後ろに<span class="hi-r">接続法</span>を使います（16課の働きかけ）。伝達動詞が現在なら接続法現在、過去なら接続法過去です。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:30%">元の発言</th><th>伝達動詞が現在</th><th>伝達動詞が過去</th></tr></thead>
+  <tbody>
+    <tr><td class="mono td-rule">«Llámame.»<br><small>電話して</small></td><td><span class="mono">Me dice que lo <b>llame</b>.</span><br>電話するように言っている。</td><td><span class="mono">Me dijo que lo <b>llamara</b>.</span><br>電話するように言った。</td></tr>
+    <tr><td class="mono td-rule">«No toques nada.»<br><small>何も触るな</small></td><td><span class="mono">Me dice que no <b>toque</b> nada.</span><br>何も触らないように言っている。</td><td><span class="mono">Me dijo que no <b>tocara</b> nada.</span><br>何も触らないように言った。</td></tr>
+    <tr><td class="mono td-rule">«Sentaos.»<br><small>座って（君たち）</small></td><td><span class="mono">Nos pide que nos <b>sentemos</b>.</span><br>座るように頼んでいる。</td><td><span class="mono">Nos pidió que nos <b>sentáramos</b>.</span><br>座るように頼んだ。</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="box box-warn">
+  <div class="box-title">decir の2つの意味（16課）</div>
+  <p style="margin:0;font-size:13.5px;"><span class="mono">Me dijo que <b>venía</b>.</span>（来ると<b>伝えた</b>：直説法）<br><span class="mono">Me dijo que <b>viniera</b>.</span>（来るように<b>言った</b>：接続法）<br>英語の <i>He told me (that) he was coming</i> と <i>He told me to come</i> の違いにあたる。</p>
+</div>
+
+<div class="sub" id="pedir-preguntar">2. pedir（頼む）と preguntar（尋ねる）</div>
+<p>どちらも英語の <i>ask</i> にあたりますが、<span class="mono">pedir</span> は「頼む・求める」、<span class="mono">preguntar</span> は「質問する」です。疑問文の形をしていても、中身が<span class="hi">依頼</span>なら <span class="mono">pedir que ＋ 接続法</span> で伝えます。</p>
+<div class="ex"><span class="ex-tag">依頼</span><span class="ex-sp">«¿Puedes cerrar la ventana?» → Me <span class="hi">pidió</span> que <span class="hi-r">cerrara</span> la ventana.</span><span class="ex-ja">彼は窓を閉めてくれと私に頼んだ。</span></div>
+<div class="ex"><span class="ex-tag">質問</span><span class="ex-sp">«¿Sabes nadar?» → Me <span class="hi">preguntó</span> si <span class="hi2">sabía</span> nadar.</span><span class="ex-ja">彼は私に泳げるかと尋ねた。</span></div>
+<p class="note">※ 物を頼むときは <span class="mono">pedir ＋ 名詞</span>：<span class="mono">Me pidió dinero.</span>（彼は私にお金を求めた）。× <span class="mono">Me preguntó dinero</span>。</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">tocar</span>（動）触る（接続法 toque：c → qu）</li>
+    <li><span class="mono">Sentaos</span>：sentarse の vosotros への命令（10課）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L19-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">«Cierra la puerta.» → Mi padre me dijo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">cerrara</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">命令 → 接続法過去：cerrar</span></span> la puerta.</div>
+  <div class="mini-check-ja">父は私にドアを閉めるように言った。</div>
+<div class="srs-rate" data-qid="L19-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：命令・依頼の伝達</div>
+  <div class="quiz-item" id="L19-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«No llegues tarde.» → Mi jefe me dijo que no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">llegara</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">否定命令 → 接続法過去：llegar</span></span> tarde.</div>
+    <div class="quiz-ja">上司は私に遅刻しないように言った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>llegara</b>：命令の伝達なので接続法。伝達動詞が過去なので接続法過去。</div>
+  <div class="srs-rate" data-qid="L19-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«¿Me prestas tu bolígrafo?» → Me <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">pidió</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">依頼を伝える動詞（点過去）</span></span> que le prestara mi bolígrafo.</div>
+    <div class="quiz-ja">彼はボールペンを貸してと私に頼んだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>pidió</b>：疑問文の形でも中身は依頼なので pedir que ＋ 接続法。</div>
+  <div class="srs-rate" data-qid="L19-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">«Esperadme aquí.» → Nos pide que lo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">esperemos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">命令・伝達動詞が現在：esperar</span></span> aquí.</div>
+    <div class="quiz-ja">彼は私たちにここで待つように言っている。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>esperemos</b>：伝達動詞が現在なので接続法現在。</div>
+  <div class="srs-rate" data-qid="L19-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ⑤ 伝達動詞のいろいろ -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">伝達動詞のいろいろ</span>
+  <span class="sec-es">Verbos de habla</span>
+</div>
+
+<div class="sub" id="dendou-doushi">1. decir 以外の伝達動詞</div>
+<p>いつも <span class="mono">decir</span> を使うと単調になります。発言の<span class="hi">種類</span>に合った動詞を選ぶと、伝える文が生き生きします。以下の動詞は <span class="mono">que ＋ 直説法</span> で内容を伝えます。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:30%">動詞</th><th>例と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="mono td-rule">contar<br><small>話して聞かせる</small></td><td><span class="mono">Me contó que se había casado.</span><br>彼は結婚したと話してくれた。</td></tr>
+    <tr><td class="mono td-rule">explicar<br><small>説明する</small></td><td><span class="mono">Nos explicó que el tren llegaba tarde por la nieve.</span><br>雪で列車が遅れていると説明してくれた。</td></tr>
+    <tr><td class="mono td-rule">comentar<br><small>（ふと）言う</small></td><td><span class="mono">Comentó que hacía mucho frío.</span><br>とても寒いと彼は言った。</td></tr>
+    <tr><td class="mono td-rule">asegurar<br><small>断言する</small></td><td><span class="mono">Me aseguró que no sabía nada.</span><br>彼は何も知らないと私にはっきり言った。</td></tr>
+    <tr><td class="mono td-rule">reconocer / admitir<br><small>認める</small></td><td><span class="mono">Reconoció que se había equivocado.</span><br>彼は間違えたことを認めた。</td></tr>
+    <tr><td class="mono td-rule">contestar / responder<br><small>答える</small></td><td><span class="mono">Contestó que no podía venir.</span><br>彼は来られないと答えた。</td></tr>
+    <tr><td class="mono td-rule">quejarse de que<br><small>不満を言う</small></td><td><span class="mono">Se quejó de que nadie lo ayudaba.</span><br>誰も手伝ってくれないと彼は文句を言った。<br><small>接続法（ayudara）も使われる</small></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="prometer">2. prometer と advertir</div>
+<div class="ex"><span class="ex-tag">約束</span><span class="ex-sp">«Te escribiré.» → Me <span class="hi">prometió</span> que me <span class="hi2">escribiría</span>.</span><span class="ex-ja">彼は私に手紙を書くと約束した。</span><span class="ex-note">約束の中身は未来なので過去未来。主語が同じなら prometer ＋ 不定詞 も可：Prometió escribirme.</span></div>
+<div class="ex"><span class="ex-tag">警告（事実）</span><span class="ex-sp">Me <span class="hi">advirtió</span> que la carretera <span class="hi2">estaba</span> cortada.</span><span class="ex-ja">道路が通行止めになっていると彼は注意してくれた。</span><span class="ex-note">事実を知らせる → 直説法</span></div>
+<div class="ex"><span class="ex-tag">警告（命令）</span><span class="ex-sp">Nos <span class="hi">advirtió</span> que no <span class="hi-r">nadáramos</span> en ese río.</span><span class="ex-ja">その川で泳がないようにと彼は私たちに注意した。</span><span class="ex-note">「〜するな」という働きかけ → 接続法</span></div>
+
+<div class="sub" id="negar">3. negar と働きかけの動詞は接続法</div>
+<p><span class="mono">negar que</span>「〜ではないと言う」は、内容を事実として主張しないので、<span class="hi-r">接続法</span>が普通です。<span class="mono">sugerir, recomendar, aconsejar</span> など働きかけの動詞も、16課と同じく接続法です。</p>
+<div class="ex"><span class="ex-sp">Negó que <span class="hi-r">hubiera</span> robado el dinero.</span><span class="ex-ja">彼はお金を盗んだことを否定した。</span></div>
+<div class="ex"><span class="ex-sp">Me recomendó que <span class="hi-r">viera</span> esa película.</span><span class="ex-ja">彼はその映画を見るように私に勧めた。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">casarse</span>（再動）結婚する ／ <span class="mono">equivocarse</span>（再動）間違える</li>
+    <li><span class="mono">cortado</span>（形）通行止めの ／ <span class="mono">robar</span>（動）盗む</li>
+    <li><span class="mono">advertir</span> は e→ie・e→i 型（advirtió）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L19-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">«Te llamaré.» → Me prometió que me <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">llamaría</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">prometer ＋ 過去未来：llamar</span></span>.</div>
+  <div class="mini-check-ja">彼は私に電話すると約束した。</div>
+<div class="srs-rate" data-qid="L19-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：伝達動詞のいろいろ</div>
+  <div class="quiz-item" id="L19-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">El ministro negó que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hubiera</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">negar ＋ 接続法：過去完了の助動詞</span></span> recibido dinero.</div>
+    <div class="quiz-ja">大臣はお金を受け取ったことを否定した。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hubiera</b>：negar que は接続法が普通。否定した時点より前のことなので接続法過去完了（hubiera recibido）。</div>
+  <div class="srs-rate" data-qid="L19-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Nos advirtió que no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">nadáramos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">警告（〜するな）→ 接続法過去：nadar</span></span> en ese río.</div>
+    <div class="quiz-ja">その川で泳がないようにと、彼は私たちに注意した。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>nadáramos</b>：「〜するな」という働きかけの advertir は接続法。</div>
+  <div class="srs-rate" data-qid="L19-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L19-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Reconoció que se <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">había equivocado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">認めた時点より前のこと：equivocarse</span></span>.</div>
+    <div class="quiz-ja">彼は間違えたことを認めた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>había equivocado</b>：reconocer que ＋ 直説法。認めた時点より前なので過去完了。</div>
+  <div class="srs-rate" data-qid="L19-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L19-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L19-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L19-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑥ 練習問題 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">間接話法に直すとき、空欄に入る語を答えなさい（伝達動詞は過去）。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">«Estoy muy ocupado.» → Pablo dijo que <span class="blank">______</span> muy ocupado.</div>
+      <div class="q-ja">パブロはとても忙しいと言った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">estaba</span></span></div>
+      <div class="q-exp">現在 → 線過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">«He comprado un coche.» → Marta me contó que <span class="blank">______</span> un coche.</div>
+      <div class="q-ja">マルタは車を買ったと話してくれた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">había comprado</span></span></div>
+      <div class="q-exp">現在完了 → 過去完了。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">«Volveré pronto.» → Mi padre dijo que <span class="blank">______</span> pronto.</div>
+      <div class="q-ja">父はすぐに戻ると言った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">volvería</span></span></div>
+      <div class="q-exp">未来 → 過去未来。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">«Vivíamos en Chile.» → Dijeron que <span class="blank">______</span> en Chile.</div>
+      <div class="q-ja">彼らはチリに住んでいたと言った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">vivían</span></span></div>
+      <div class="q-exp">線過去はそのまま。人称は nosotros → ellos に変える。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">«Mañana voy a estudiar.» → Dijo que <span class="blank">______</span> iba a estudiar.</div>
+      <div class="q-ja">彼は翌日勉強するつもりだと言った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">al día siguiente</span></span></div>
+      <div class="q-exp">別の日に伝えるので mañana → al día siguiente。voy a → iba a。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">«Este libro es mío.» → Dijo que <span class="blank">______</span> libro era suyo.</div>
+      <div class="q-ja">彼はその本は自分のものだと言った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">ese</span>（<span class="ans-fill">aquel</span>）</span></div>
+      <div class="q-exp">este → ese / aquel、mío → suyo。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">疑問文・命令文を伝える文の空欄に、適切な語を入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">«¿Cómo te llamas?» → Me preguntó <span class="blank">______</span> me llamaba.</div>
+      <div class="q-ja">彼は私に名前を尋ねた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">cómo</span></span></div>
+      <div class="q-exp">疑問詞はアクセントを付けたまま残す。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">«¿Te gusta el flamenco?» → Me preguntó <span class="blank">______</span> me gustaba el flamenco.</div>
+      <div class="q-ja">彼は私にフラメンコが好きかと尋ねた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">si</span></span></div>
+      <div class="q-exp">はい・いいえの疑問は preguntar si。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">«Abre la ventana.» → Me dijo que <span class="blank">______</span> la ventana.</div>
+      <div class="q-ja">彼は私に窓を開けるように言った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">abriera</span></span></div>
+      <div class="q-exp">命令の伝達 → 接続法。伝達動詞が過去なので接続法過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">«No hagáis ruido.» → Nos pidió que no <span class="blank">______</span> ruido.</div>
+      <div class="q-ja">彼は私たちに音を立てないように頼んだ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">hiciéramos</span></span></div>
+      <div class="q-exp">否定命令も que ＋ 接続法過去。vosotros → nosotros。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">«¿Puedes ayudarme?» → Me <span class="blank">______</span> que lo ayudara.</div>
+      <div class="q-ja">彼は手伝ってくれと私に頼んだ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">pidió</span></span></div>
+      <div class="q-exp">中身は依頼なので pedir。preguntar ではない。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">指示に従って、間接話法の文に書き換えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Ana: «Mi hermano llegó ayer.»（Ana dijo que … で。別の日に伝える）</div>
+      <div class="q-ja">アナは、お兄さんがその前日に着いたと言った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Ana dijo que su hermano había llegado el día anterior.</span>（<span class="ans-fill">…que su hermano llegó el día anterior.</span>）</span></div>
+      <div class="q-exp">mi → su、点過去 → 過去完了（点過去のままも可）、ayer → el día anterior。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Luis me preguntó: «¿Dónde está la estación?»</div>
+      <div class="q-ja">ルイスは私に駅はどこかと尋ねた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Luis me preguntó dónde estaba la estación.</span></span></div>
+      <div class="q-exp">疑問詞を残し、現在 → 線過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">El médico me dijo: «Descanse y beba mucha agua.»</div>
+      <div class="q-ja">医者は私に休んで水をたくさん飲むように言った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">El médico me dijo que descansara y bebiera mucha agua.</span></span></div>
+      <div class="q-exp">usted への命令も、伝えるときは que ＋ 接続法過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Carlos: «No volveré a llegar tarde.»（Carlos me prometió que … で）</div>
+      <div class="q-ja">カルロスは二度と遅刻しないと私に約束した。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Carlos me prometió que no volvería a llegar tarde.</span></span></div>
+      <div class="q-exp">prometer que ＋ 過去未来。volver a ＋ 不定詞「再び〜する」。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">彼は私に、何時に着くのかと尋ねた。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">Me preguntó a qué hora llegaría.</span>（<span class="ans-fill">Me preguntó a qué hora llegaba.</span>）</span></div>
+      <div class="q-exp"><b>疑問詞を残す</b>：a qué hora。これから着くことなので過去未来（線過去も可）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">母は私に、部屋を片付けるように言った。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">Mi madre me dijo que ordenara mi habitación.</span></span></div>
+      <div class="q-exp"><b>命令の伝達</b>：decir que ＋ 接続法過去。ordenar「片付ける」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">彼女は疲れていないと言った。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">Dijo que no estaba cansada.</span></span></div>
+      <div class="q-exp"><b>時制のずれ</b>：現在 → 線過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">先生は私たちに、試験は難しくないとはっきり言った。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">La profesora nos aseguró que el examen no sería difícil.</span>（<span class="ans-fill">El profesor nos aseguró que…</span>）</span></div>
+      <div class="q-exp"><b>asegurar ＋ 直説法</b>：試験はこれから先のことなので過去未来。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑦ 語彙リスト -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">伝達動詞（＋ que ＋ 直説法）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">decir</span><span class="pill-pos">動</span><span class="pill-ja">言う・伝える</span></span>
+  <span class="pill"><span class="pill-es">contar</span><span class="pill-pos">動</span><span class="pill-ja">話して聞かせる</span></span>
+  <span class="pill"><span class="pill-es">explicar</span><span class="pill-pos">動</span><span class="pill-ja">説明する</span></span>
+  <span class="pill"><span class="pill-es">comentar</span><span class="pill-pos">動</span><span class="pill-ja">（ふと）言う</span></span>
+  <span class="pill"><span class="pill-es">asegurar</span><span class="pill-pos">動</span><span class="pill-ja">断言する・請け合う</span></span>
+  <span class="pill"><span class="pill-es">reconocer / admitir</span><span class="pill-pos">動</span><span class="pill-ja">認める</span></span>
+  <span class="pill"><span class="pill-es">contestar / responder</span><span class="pill-pos">動</span><span class="pill-ja">答える</span></span>
+  <span class="pill"><span class="pill-es">prometer</span><span class="pill-pos">動</span><span class="pill-ja">約束する</span></span>
+  <span class="pill"><span class="pill-es">quejarse de</span><span class="pill-pos">再動</span><span class="pill-ja">〜について不満を言う</span></span>
+</div>
+
+<div class="vocab-category">疑問・依頼・命令を伝える動詞</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">preguntar</span><span class="pill-pos">動</span><span class="pill-ja">尋ねる（si / 疑問詞）</span></span>
+  <span class="pill"><span class="pill-es">querer saber</span><span class="pill-pos">表現</span><span class="pill-ja">知りたがる</span></span>
+  <span class="pill"><span class="pill-es">pedir</span><span class="pill-pos">動</span><span class="pill-ja">頼む（que ＋ 接続法）</span></span>
+  <span class="pill"><span class="pill-es">advertir</span><span class="pill-pos">動</span><span class="pill-ja">注意する・警告する</span></span>
+  <span class="pill"><span class="pill-es">negar</span><span class="pill-pos">動</span><span class="pill-ja">否定する（que ＋ 接続法）</span></span>
+  <span class="pill"><span class="pill-es">recomendar / aconsejar</span><span class="pill-pos">動</span><span class="pill-ja">勧める（que ＋ 接続法）</span></span>
+</div>
+
+<div class="vocab-category">時・場所の言い換え</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">ese día / aquel día</span><span class="pill-pos">表現</span><span class="pill-ja">その日（← hoy）</span></span>
+  <span class="pill"><span class="pill-es">el día anterior</span><span class="pill-pos">表現</span><span class="pill-ja">その前日（← ayer）</span></span>
+  <span class="pill"><span class="pill-es">al día siguiente</span><span class="pill-pos">表現</span><span class="pill-ja">その翌日（← mañana）</span></span>
+  <span class="pill"><span class="pill-es">entonces / en ese momento</span><span class="pill-pos">表現</span><span class="pill-ja">その時（← ahora）</span></span>
+  <span class="pill"><span class="pill-es">la semana siguiente</span><span class="pill-pos">表現</span><span class="pill-ja">その翌週（← la semana que viene）</span></span>
+  <span class="pill"><span class="pill-es">el año anterior</span><span class="pill-pos">表現</span><span class="pill-ja">その前年（← el año pasado）</span></span>
+  <span class="pill"><span class="pill-es">allí</span><span class="pill-pos">副</span><span class="pill-ja">そこ（← aquí）</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">echar de menos</span><span class="pill-pos">表現</span><span class="pill-ja">〜がいなくて寂しい</span></span>
+  <span class="pill"><span class="pill-es">casarse</span><span class="pill-pos">再動</span><span class="pill-ja">結婚する</span></span>
+  <span class="pill"><span class="pill-es">equivocarse</span><span class="pill-pos">再動</span><span class="pill-ja">間違える</span></span>
+  <span class="pill"><span class="pill-es">robar</span><span class="pill-pos">動</span><span class="pill-ja">盗む</span></span>
+  <span class="pill"><span class="pill-es">cortado</span><span class="pill-pos">形</span><span class="pill-ja">通行止めの</span></span>
+  <span class="pill"><span class="pill-es">ordenar</span><span class="pill-pos">動</span><span class="pill-ja">片付ける</span></span>
+  <span class="pill"><span class="pill-es">prestar</span><span class="pill-pos">動</span><span class="pill-ja">貸す</span></span>
+</div>
+
+<!-- ⑧ まとめ -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">que</td><td>間接話法の que は省略しない（× Dice está cansada）</td></tr>
+    <tr><td class="td-rule">伝達動詞が現在</td><td>時制はそのまま、人称だけ変える</td></tr>
+    <tr><td class="td-rule">伝達動詞が過去</td><td>現在 → 線過去／現在完了・点過去 → 過去完了／未来 → 過去未来／ir a → iba a／線過去・過去完了・過去未来はそのまま</td></tr>
+    <tr><td class="td-rule">今も有効な内容</td><td>現在形・未来形を残してもよい（Me dijo que es de Perú）</td></tr>
+    <tr><td class="td-rule">人称・所有詞</td><td>伝える人から見た形に（mi → su、te → me）</td></tr>
+    <tr><td class="td-rule">時・場所</td><td>hoy → ese día／ayer → el día anterior／mañana → al día siguiente／aquí → allí</td></tr>
+    <tr><td class="td-rule">venir / traer</td><td>その場にいなければ ir / llevar に</td></tr>
+    <tr><td class="td-rule">はい・いいえの疑問</td><td><span class="mono">preguntar si …</span>（会話では que si も）</td></tr>
+    <tr><td class="td-rule">疑問詞の疑問</td><td>疑問詞をアクセント付きで残す：<span class="mono">Me preguntó dónde vivía.</span></td></tr>
+    <tr><td class="td-rule">命令・依頼</td><td><span class="mono">decir / pedir que ＋ 接続法</span>（過去なら接続法過去）</td></tr>
+    <tr><td class="td-rule">pedir と preguntar</td><td>頼む＝pedir／尋ねる＝preguntar。依頼の疑問文は pedir で伝える</td></tr>
+    <tr><td class="td-rule">いろいろな伝達動詞</td><td>contar, explicar, asegurar, reconocer ＋ 直説法／prometer ＋ 過去未来／negar, recomendar ＋ 接続法／advertir は事実なら直説法、「〜するな」なら接続法</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 19 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<!-- ══ 鍛錬タブ（問題は tanren-bank.js から表示） ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div id="sec-tanren" class="sec-heading">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-intro">Lección 19 の内容を総合的に使う問題が <b>100問</b> あります。まとめクイズと同じか、少し難しいレベルです。<br>「内容ごと」は文法項目の順、「ランダム」は全範囲を混ぜた順に並びます。○△× を付けた問題は「今日の復習」に出ます。</div>
+
+<div id="tanren-app" data-lesson="19"></div>
+
+</div><!-- /tab-tanren -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① 平叙文の伝達と時制のずれ</a>
+    <a class="fn-item" href="#sec2">② 人称・場所・時の言い換え</a>
+    <a class="fn-item" href="#sec3">③ 疑問文の伝達</a>
+    <a class="fn-item" href="#sec4">④ 命令・依頼の伝達</a>
+    <a class="fn-item" href="#sec5">⑤ 伝達動詞のいろいろ</a>
+    <a class="fn-item" href="#sec6">⑥ 練習問題</a>
+    <a class="fn-item" href="#sec7">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8">⑧ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['間接話法','直接話法','estilo indirecto'], id: 'sec1', label: '間接話法（①節）' },
+  { terms: ['dijo que','dice que','que 省略'], id: 'heijobun', label: '直接話法と間接話法（①節）' },
+  { terms: ['時制のずれ','時制の一致','backshift','había','iría','iba a'], id: 'jisei-zure', label: '時制を1つずらす（①節）' },
+  { terms: ['現在のまま','今も有効'], id: 'genzai-nokosu', label: '現在のままでよい場合（①節）' },
+  { terms: ['人称','所有詞','mi su'], id: 'ninsho', label: '人称と所有詞の言い換え（②節）' },
+  { terms: ['al día siguiente','el día anterior','ese día','allí','言い換え'], id: 'jikan-basho', label: '時・場所の言い換え（②節）' },
+  { terms: ['venir','ir','traer','llevar'], id: 'venir-ir', label: 'venir ↔ ir、traer ↔ llevar（②節）' },
+  { terms: ['preguntar si','que si','querer saber','疑問文'], id: 'preguntar-si', label: 'preguntar si（③節）' },
+  { terms: ['疑問詞','間接疑問','dónde','cuándo','qué'], id: 'gimonshi', label: '疑問詞のある疑問（③節）' },
+  { terms: ['命令','依頼','decir que','pedir que'], id: 'meirei', label: '命令・依頼の伝達（④節）' },
+  { terms: ['pedir','preguntar','ask'], id: 'pedir-preguntar', label: 'pedir と preguntar（④節）' },
+  { terms: ['伝達動詞','contar','explicar','comentar','asegurar','reconocer','admitir','contestar','quejarse'], id: 'dendou-doushi', label: 'decir 以外の伝達動詞（⑤節）' },
+  { terms: ['prometer','advertir','約束','警告'], id: 'prometer', label: 'prometer と advertir（⑤節）' },
+  { terms: ['negar','recomendar','否定'], id: 'negar', label: 'negar と働きかけの動詞（⑤節）' },
+  { terms: ['練習問題','練習'], id: 'sec6', label: '練習問題（⑥節）' },
+  { terms: ['語彙','Vocabulario'], id: 'sec7', label: '語彙リスト（⑦節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec8', label: 'まとめ（⑧節）' },
+  { terms: ['鍛錬','Entrenamiento'], id: 'sec-tanren', label: '鍛錬（100問）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語文法解説集　B1〜B2 編</footer>
+
+</body>
+</html>
