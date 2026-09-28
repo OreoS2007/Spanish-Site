@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 18 文法解説 | B1〜B2 編</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 前置詞と関係詞</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 説明用法と quien・el cual</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 独立用法と強調構文</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ cuyo と関係副詞</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 関係節の法と不定詞</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec6" data-tab="renshu" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8" data-tab="vocab" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ まとめ</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">💪 鍛錬タブ</span>
+    <a class="fn-item" href="#sec-tanren" data-tab="tanren" onclick="jumpToSection('sec-tanren'); closeToc(); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 18 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 18　文法解説</div>
+  <div class="cover-sub">B1〜B2 編　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br>「一緒に働いている同僚」「その前で待ち合わせた建物」「父親が医者である友人」のように、前置詞や所有を含む名詞の説明を、スペイン語で組み立てられるようになります。<span class="mono">quien</span>・<span class="mono">el cual</span>・<span class="mono">cuyo</span> の使い分けや、<span class="mono">Fue Ana quien lo dijo</span>（そう言ったのはアナだ）のような強調の言い方も身につけます。<br><small>4課の関係詞（que・donde・el que・lo que）と、9課の「関係節の接続法」の続きです。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 前置詞と関係詞</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 説明用法と quien・el cual</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 独立用法と強調構文</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ cuyo と関係副詞</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 関係節の法と不定詞</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 練習問題</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 語彙リスト</a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ まとめ</a>
+    <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：el cual　／　cuyo　／　強調構文…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 前置詞と関係詞 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">前置詞と関係詞</span>
+  <span class="sec-es">Relativos con preposición</span>
+</div>
+
+<div class="sub" id="zenchi-el-que">1. 前置詞 ＋ 定冠詞 ＋ que（4課の復習と広がり）</div>
+<p>関係節の中の動詞が前置詞を必要とするとき（<span class="mono">hablar de</span>, <span class="mono">trabajar con</span> など）、その前置詞は<span class="hi">関係詞のすぐ前</span>に置きます。定冠詞は先行詞の性・数に合わせます。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:28%">動詞と前置詞</th><th>関係節の形と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="mono td-rule">hablar <b>de</b></td><td><span class="mono">la película <b>de la que</b> te hablé</span><br>君に話した映画</td></tr>
+    <tr><td class="mono td-rule">trabajar <b>con</b></td><td><span class="mono">los compañeros <b>con los que</b> trabajo</span><br>私が一緒に働いている同僚たち</td></tr>
+    <tr><td class="mono td-rule">pensar <b>en</b></td><td><span class="mono">el viaje <b>en el que</b> estoy pensando</span><br>私が考えている旅行</td></tr>
+    <tr><td class="mono td-rule">escribir <b>a</b></td><td><span class="mono">la amiga <b>a la que</b> escribí</span><br>私が手紙を書いた友達</td></tr>
+    <tr><td class="mono td-rule">luchar <b>por</b></td><td><span class="mono">las ideas <b>por las que</b> luchó</span><br>彼が闘って守ろうとした理念</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="box box-warn">
+  <div class="box-title">前置詞を後ろに残せない</div>
+  <p style="margin:0;font-size:13.5px;">英語では <i>the film I told you about</i> のように前置詞を最後に残せるが、スペイン語では必ず関係詞の前に出す：× <span class="mono">la película que te hablé de</span> → ○ <span class="mono">la película de la que te hablé</span>。前置詞を落とすのもよくある誤り（× <span class="mono">la película que te hablé</span>）。</p>
+</div>
+<p class="note">※ 物や時を受けるときは、短い前置詞（<span class="mono">a, de, en, con</span>）の後で冠詞を省くこともある：<span class="mono">el día <b>en que</b> nos conocimos</span>（私たちが出会った日）、<span class="mono">la casa <b>en (la) que</b> vivo</span>。人を受けるときは冠詞を省かない（× <span class="mono">la chica con que salgo</span>）。</p>
+
+<div class="sub" id="zenchi-quien">2. 人なら 前置詞 ＋ quien(es) も使える</div>
+<p>先行詞が<span class="hi">人</span>のときは、<span class="mono">前置詞 ＋ el que</span> の代わりに <span class="mono">前置詞 ＋ quien</span> も使えます。<span class="mono">quien</span> は性で変化せず、複数なら <span class="mono">quienes</span>。</p>
+<div class="ex"><span class="ex-sp">La chica <span class="hi">con quien</span> sales es muy simpática.</span><span class="ex-ja">君が付き合っている女の子はとても感じがいい。</span><span class="ex-note">＝ con la que sales</span></div>
+<div class="ex"><span class="ex-sp">Los amigos <span class="hi">a quienes</span> invité no pudieron venir.</span><span class="ex-ja">招待した友人たちは来られなかった。</span><span class="ex-note">人の直接目的語の a（＝ a los que invité）</span></div>
+<div class="ex"><span class="ex-sp">Esa es la profesora <span class="hi">de quien</span> aprendí más.</span><span class="ex-ja">あれが私が一番多くを学んだ先生だ。</span></div>
+
+<div class="sub" id="el-cual">3. el cual / la cual / los cuales / las cuales</div>
+<p><span class="mono">el cual</span> は <span class="mono">el que</span> と同じ意味の、<span class="hi">書き言葉的でかたい</span>関係詞です。特に<span class="hi">長い前置詞・複合前置詞</span>（<span class="mono">delante de, a través de, gracias a, según, sin, entre</span> など）の後でよく使われます。</p>
+<div class="ex"><span class="ex-sp">El edificio <span class="hi">delante del cual</span> quedamos ya no existe.</span><span class="ex-ja">私たちが前で待ち合わせたビルは、もうない。</span></div>
+<div class="ex"><span class="ex-sp">Es una herramienta <span class="hi">sin la cual</span> no podría trabajar.</span><span class="ex-ja">それがなければ仕事ができない道具だ。</span></div>
+<div class="ex"><span class="ex-sp">Esa es la razón <span class="hi">por la cual</span> me fui.</span><span class="ex-ja">それが私が去った理由だ。</span><span class="ex-note">＝ por la que</span></div>
+<p class="note">※ <span class="mono">el cual</span> は、カンマのない関係節で主語や直接目的語として使うことはできない：× <span class="mono">el libro el cual leí</span> → ○ <span class="mono">el libro que leí</span>。</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">salir con</span>（動）〜と付き合う ／ <span class="mono">quedar</span>（動）待ち合わせる ／ <span class="mono">herramienta</span>（女）道具</li>
+    <li><span class="mono">luchar por</span>（動）〜のために闘う ／ <span class="mono">razón</span>（女）理由</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L18-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Los amigos con <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">quienes</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">人・複数</span></span> viajé son de Chile.</div>
+  <div class="mini-check-ja">私が一緒に旅行した友人たちはチリ出身だ。</div>
+<div class="srs-rate" data-qid="L18-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：前置詞と関係詞</div>
+  <div class="quiz-item" id="L18-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">El chico <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">del que</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">hablar de：男性単数</span></span> te hablé es mi primo.</div>
+    <div class="quiz-ja">君に話した男の子は私のいとこだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>del que</b>：hablar de なので de ＋ el ＋ que → del que。前置詞は関係詞の前に置く。</div>
+  <div class="srs-rate" data-qid="L18-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">La empresa para <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">la que</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">trabajar para：女性単数</span></span> trabajo es alemana.</div>
+    <div class="quiz-ja">私が働いている会社はドイツの会社だ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>la que</b>：先行詞 la empresa（女性単数）に合わせる。</div>
+  <div class="srs-rate" data-qid="L18-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Es un documento sin <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">el cual</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">かたい言い方：男性単数</span></span> no puedes salir del país.</div>
+    <div class="quiz-ja">それがないと出国できない書類だ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>el cual</b>：sin のような前置詞の後で、el que のかたい言い方。先行詞 documento（男性単数）に合わせる。</div>
+  <div class="srs-rate" data-qid="L18-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ② 説明用法と quien・el cual -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">説明用法と quien・el cual</span>
+  <span class="sec-es">Relativas explicativas</span>
+</div>
+
+<div class="sub" id="setsumei-quien">1. 主語の quien は説明用法だけ</div>
+<p>関係節の主語として <span class="mono">quien</span> を使えるのは、<span class="hi">カンマのある説明用法</span>（4課）のときだけです。カンマのない限定用法の主語は <span class="mono">que</span> しか使えません。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:26%">位置</th><th style="background:#d8eeea;color:var(--accent2)">限定用法（カンマなし）</th><th style="background:#fbe4e4;color:var(--warn)">説明用法（カンマあり）</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">関係節の主語<br><small>（人）</small></td><td><span class="mono">el chico <b>que</b> vive aquí</span><br>ここに住んでいる男の子<br><small>× el chico quien vive aquí</small></td><td><span class="mono">Mi hermano, <b>que / quien / el cual</b> vive aquí, …</span><br>私の兄は、ここに住んでいるのだが…</td></tr>
+    <tr><td class="td-rule">前置詞の後<br><small>（人）</small></td><td><span class="mono">la chica <b>con la que / con quien</b> hablé</span><br>私が話した女の子</td><td><span class="mono">Ana, <b>con la que / con quien / con la cual</b> hablé, …</span><br>アナとは話をしたのだが…</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="ex"><span class="ex-sp">Mi abuela, <span class="hi">quien</span> tiene noventa años, todavía conduce.</span><span class="ex-ja">祖母は90歳だが、今でも車を運転する。</span><span class="ex-note">説明用法なので que でもよい</span></div>
+<p class="note">※ 人の直接目的語は、限定用法でも <span class="mono">que / a la que / a quien</span> のどれでもよい：<span class="mono">la chica que conocí ＝ la chica a la que conocí ＝ la chica a quien conocí</span>（私が知り合った女の子）。</p>
+
+<div class="sub" id="el-cual-sentaku">2. el cual・el que で先行詞をはっきりさせる</div>
+<p>先行詞の候補が2つあると、<span class="mono">que</span> ではどちらを指すか分かりにくいことがあります。<span class="mono">el cual / el que</span> は<span class="hi">性・数</span>を表すので、先行詞をはっきり示せます。</p>
+<div class="ex"><span class="ex-sp">La hermana de Juan, <span class="hi">la cual</span> vive en París, viene a vernos.</span><span class="ex-ja">フアンのお姉さんは、パリに住んでいるのだが、私たちに会いに来る。</span><span class="ex-note">la cual ＝ la hermana（パリに住んでいるのは姉）</span></div>
+<div class="ex"><span class="ex-sp">La hermana de Juan, <span class="hi">el cual</span> vive en París, viene a vernos.</span><span class="ex-ja">フアン（パリに住んでいる）のお姉さんが、私たちに会いに来る。</span><span class="ex-note">el cual ＝ Juan（パリに住んでいるのはフアン）</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">conducir</span>（動）運転する（中南米では manejar）</li>
+    <li><span class="mono">conocer</span>（動・点過去で）知り合う</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L18-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">El chico <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">que</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">限定用法の主語</span></span> vive arriba es muy simpático.</div>
+  <div class="mini-check-ja">上の階に住んでいる男の子はとても感じがいい。</div>
+<div class="srs-rate" data-qid="L18-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：説明用法と quien・el cual</div>
+  <div class="quiz-item" id="L18-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Mis padres, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">quienes</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">説明用法・人・複数（que 以外で）</span></span> viven en Osaka, vienen a verme.</div>
+    <div class="quiz-ja">両親は大阪に住んでいるのだが、私に会いに来る。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>quienes</b>：カンマのある説明用法なので、人の主語に quien(es) が使える（que でもよい）。</div>
+  <div class="srs-rate" data-qid="L18-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">El amigo de Laura, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">el cual</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">説明用法：先行詞が男性単数と分かる形</span></span> es médico, nos ayudó.</div>
+    <div class="quiz-ja">ラウラの男友達は医者なのだが、私たちを助けてくれた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>el cual</b>：男性単数の形なので、医者なのは Laura ではなく el amigo だと分かる。</div>
+  <div class="srs-rate" data-qid="L18-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Los alumnos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">que</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">限定用法の主語</span></span> aprobaron recibieron un diploma.</div>
+    <div class="quiz-ja">合格した生徒たちは修了証を受け取った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>que</b>：カンマのない限定用法の主語には quien も el cual も使えない。</div>
+  <div class="srs-rate" data-qid="L18-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ③ 独立用法と強調構文 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">独立用法と強調構文</span>
+  <span class="sec-es">Relativas sin antecedente y oraciones enfáticas</span>
+</div>
+
+<div class="sub" id="quien-dokuritsu">1. quien / el que「〜する人」</div>
+<p>先行詞なしで「〜する人」を表すには、<span class="mono">el que / la que</span>（4課）のほか <span class="mono">quien</span> も使えます。一般論やことわざでは <span class="mono">quien</span> がよく使われます。<span class="mono">quien</span> は人だけを表し、「〜するもの・こと」には使えません。</p>
+<div class="ex"><span class="ex-tag">ことわざ</span><span class="ex-sp"><span class="hi">Quien</span> mucho abarca, poco aprieta.</span><span class="ex-ja">多くを抱えようとする者は、少ししか握れない。</span><span class="ex-note">「二兎を追う者は一兎をも得ず」に近い</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Los que</span> llegaron tarde no pudieron entrar.</span><span class="ex-ja">遅れて来た人たちは入れなかった。</span><span class="ex-note">複数の人なら los que / quienes</span></div>
+<div class="ex"><span class="ex-sp">No se lo digas a <span class="hi">quien</span> no conozcas.</span><span class="ex-ja">知らない人には言わないでね。</span><span class="ex-note">特定の人を指さないので接続法（⑤節）</span></div>
+
+<div class="sub" id="lo-que-bun">2. 前の文全体を受ける lo que / lo cual</div>
+<p>カンマの後の <span class="mono">lo que / lo cual</span> は、前の<span class="hi">文の内容全体</span>を受けて「そしてそのことは〜」と続けます。「こと」なので中性の <span class="mono">lo</span> を使います。</p>
+<div class="ex"><span class="ex-sp">Llegó tarde otra vez, <span class="hi">lo que</span> me molestó mucho.</span><span class="ex-ja">彼はまた遅刻し、それが私にはとても腹立たしかった。</span><span class="ex-note">lo cual でもよい。× que me molestó（遅刻したこと全体を受けていることが分からない）</span></div>
+<div class="ex"><span class="ex-sp">Te agradezco <span class="hi">todo lo que</span> has hecho por mí.</span><span class="ex-ja">私のためにしてくれたこと、すべてに感謝しているよ。</span><span class="ex-note">todo lo que「〜することすべて」</span></div>
+
+<div class="sub" id="kyouchou">3. 強調構文：ser ＋ 強調したい部分 ＋ 関係詞</div>
+<p>文の一部を強調したいときは、<span class="mono">ser</span> で強調する部分を示し、残りを関係詞でつなぎます（英語の <i>It was Ana who…</i> にあたる）。関係詞は、強調する部分の種類で決まります。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:22%">強調する部分</th><th style="width:26%">関係詞</th><th>例と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">人</td><td class="mono">quien / el que</td><td><span class="mono">Fue Ana <b>quien</b> lo dijo.</span><br>そう言ったのはアナだ。</td></tr>
+    <tr><td class="td-rule">もの・こと</td><td class="mono">lo que / el que</td><td><span class="mono">Es el precio <b>lo que</b> me preocupa.</span><br>私が心配なのは値段だ。</td></tr>
+    <tr><td class="td-rule">場所</td><td class="mono">donde</td><td><span class="mono">Es aquí <b>donde</b> nací.</span><br>私が生まれたのはここだ。</td></tr>
+    <tr><td class="td-rule">時</td><td class="mono">cuando</td><td><span class="mono">Fue entonces <b>cuando</b> lo entendí.</span><br>私が理解したのはその時だった。</td></tr>
+    <tr><td class="td-rule">方法</td><td class="mono">como</td><td><span class="mono">Así es <b>como</b> se prepara.</span><br>こうやって作るんだよ。</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ <span class="mono">ser</span> の時制は関係節の動詞に合わせるのが普通（過去の話なら <span class="mono">Fue … quien lo dijo</span>）。<span class="mono">que</span> だけでつなぐ形（× <span class="mono">Es aquí que nací</span>）は、標準的とはされない。</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">abarcar</span>（動）抱え込む ／ <span class="mono">apretar</span>（動）握りしめる</li>
+    <li><span class="mono">agradecer</span>（動）感謝する（agradezco） ／ <span class="mono">entonces</span>（副）その時</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L18-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Es aquí <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">donde</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">強調構文・場所</span></span> nací.</div>
+  <div class="mini-check-ja">私が生まれたのはここだ。</div>
+<div class="srs-rate" data-qid="L18-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：独立用法と強調構文</div>
+  <div class="quiz-item" id="L18-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Llegó tarde otra vez, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">lo cual</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">前の文全体を受ける：かたい言い方</span></span> enfadó a todos.</div>
+    <div class="quiz-ja">彼はまた遅刻し、そのことでみんなを怒らせた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>lo cual</b>：前の文の内容全体を受ける中性の形。lo que でもよい。</div>
+  <div class="srs-rate" data-qid="L18-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Fue en 2015 <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">cuando</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">強調構文・時</span></span> empecé a estudiar español.</div>
+    <div class="quiz-ja">私がスペイン語を勉強し始めたのは2015年だった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>cuando</b>：時を強調するときは cuando でつなぐ。</div>
+  <div class="srs-rate" data-qid="L18-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Quien</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">先行詞なしの「〜する人」：1語</span></span> no arriesga, no gana.</div>
+    <div class="quiz-ja">危険を冒さない者は勝てない。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Quien</b>：ことわざでよく使う「〜する人」。El que でも同じ意味。arriesgar「危険を冒す」。</div>
+  <div class="srs-rate" data-qid="L18-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ④ cuyo と関係副詞 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">cuyo と関係副詞</span>
+  <span class="sec-es">Cuyo y adverbios relativos</span>
+</div>
+
+<div class="sub" id="cuyo">1. cuyo「その〜が」：後ろの名詞に一致</div>
+<p><span class="mono">cuyo</span> は「（先行詞）の〜」という所有を表します（英語の <i>whose</i>）。形は、<span class="hi-r">持ち主（先行詞）ではなく、後ろの名詞（持たれるもの）</span>の性・数に合わせて <span class="mono">cuyo / cuya / cuyos / cuyas</span> と変わります。</p>
+<div class="ex"><span class="ex-sp">Tengo un amigo <span class="hi">cuyo</span> padre es médico.</span><span class="ex-ja">父親が医者をしている友人がいる。</span><span class="ex-note">padre（男性単数）に一致</span></div>
+<div class="ex"><span class="ex-sp">Es una escritora <span class="hi">cuyas</span> novelas conoce todo el mundo.</span><span class="ex-ja">彼女は、その小説を誰もが知っている作家だ。</span><span class="ex-note">持ち主は女性単数だが、novelas（女性複数）に一致</span></div>
+<div class="ex"><span class="ex-sp">El pueblo, <span class="hi">cuya</span> iglesia es del siglo XII, recibe muchos turistas.</span><span class="ex-ja">その村は、教会が12世紀のもので、多くの観光客が訪れる。</span><span class="ex-note">iglesia（女性単数）に一致</span></div>
+<div class="box box-warn">
+  <div class="box-title">cuyo のよくある誤り</div>
+  <p style="margin:0;font-size:13.5px;">・後ろに冠詞を付けない：× <span class="mono">cuyo el padre</span><br>・<span class="mono">cuyo</span> は書き言葉的で、会話では避けられがち。ただし代わりの <span class="mono">que su</span>（× <span class="mono">un amigo que su padre es médico</span>）は誤りとされるので、書くときは <span class="mono">cuyo</span> を使う。</p>
+</div>
+
+<div class="sub" id="donde-kankei">2. donde と前置詞</div>
+<p>場所を受ける <span class="mono">donde</span>（4課）は <span class="mono">en el que</span> と同じ意味です。方向や起点を表すときは前置詞を付けます。</p>
+<div class="ex"><span class="ex-sp">La ciudad <span class="hi">donde</span> vivo es tranquila.</span><span class="ex-ja">私が住んでいる街は静かだ。</span><span class="ex-note">＝ la ciudad en la que vivo</span></div>
+<div class="ex"><span class="ex-sp">El pueblo <span class="hi">de donde</span> viene mi familia está en Galicia.</span><span class="ex-ja">私の家族の出身の村はガリシアにある。</span><span class="ex-note">起点「〜から」</span></div>
+<div class="ex"><span class="ex-sp">Ese es el lugar <span class="hi">adonde</span> vamos cada verano.</span><span class="ex-ja">そこが私たちが毎年夏に行く場所だ。</span><span class="ex-note">方向「〜へ」は adonde（a donde とも書く）</span></div>
+<div class="ex"><span class="ex-sp">Esta es la calle <span class="hi">por donde</span> pasa el desfile.</span><span class="ex-ja">ここがパレードが通る通りだ。</span><span class="ex-note">経路「〜を通って」</span></div>
+
+<div class="sub" id="cuando-como">3. cuando と como</div>
+<p><span class="mono">cuando</span> は時、<span class="mono">como</span> は方法を受ける関係副詞です。<span class="mono">cuando</span> は主にカンマのある説明用法で使い、カンマのない限定用法では <span class="mono">en que</span> が普通です。</p>
+<div class="ex"><span class="ex-sp">En agosto, <span class="hi">cuando</span> hace más calor, la ciudad se queda vacía.</span><span class="ex-ja">8月は、一番暑い時期で、街は空っぽになる。</span></div>
+<div class="ex"><span class="ex-sp">Nunca olvidaré el día <span class="hi">en que</span> nació mi hija.</span><span class="ex-ja">娘が生まれた日のことは決して忘れない。</span><span class="ex-note">限定用法なので × el día cuando より en que が普通</span></div>
+<div class="ex"><span class="ex-sp">No me gusta la manera <span class="hi">como</span> me habla.</span><span class="ex-ja">彼の私への話し方が気に入らない。</span><span class="ex-note">＝ la manera en que me habla</span></div>
+
+<div class="sub" id="cuanto">4. cuanto「〜するものすべて」</div>
+<p><span class="mono">cuanto</span> は <span class="mono">todo lo que</span>、<span class="mono">cuantos / cuantas</span> は <span class="mono">todos los que / todas las que</span> と同じ意味の、かたい言い方です。</p>
+<div class="ex"><span class="ex-sp">Le di <span class="hi">cuanto</span> tenía.</span><span class="ex-ja">私は持っているものすべてを彼にあげた。</span><span class="ex-note">＝ todo lo que tenía</span></div>
+<div class="ex"><span class="ex-sp">Todos <span class="hi">cuantos</span> lo conocen lo admiran.</span><span class="ex-ja">彼を知る人は皆、彼を尊敬している。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">desfile</span>（男）パレード ／ <span class="mono">quedarse vacío</span>（表現）空っぽになる（13課）</li>
+    <li><span class="mono">admirar</span>（動）尊敬する ／ <span class="mono">siglo</span>（男）世紀</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L18-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Tengo una vecina <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">cuyos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">所有：hijos に一致</span></span> hijos estudian en Japón.</div>
+  <div class="mini-check-ja">子どもたちが日本で勉強している隣人がいる。</div>
+<div class="srs-rate" data-qid="L18-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：cuyo と関係副詞</div>
+  <div class="quiz-item" id="L18-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Es un autor <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">cuya</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">所有：obra に一致</span></span> obra conozco bien.</div>
+    <div class="quiz-ja">作品をよく知っている作家だ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>cuya</b>：持ち主の autor（男性）ではなく、後ろの obra（女性単数）に一致させる。</div>
+  <div class="srs-rate" data-qid="L18-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Este es el pueblo de <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">donde</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">場所の関係副詞</span></span> vienen mis abuelos.</div>
+    <div class="quiz-ja">ここが祖父母の出身の村だ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>donde</b>：起点「〜から」なので de donde。</div>
+  <div class="srs-rate" data-qid="L18-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Me dio <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">cuanto</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">todo lo que の意味：1語</span></span> tenía.</div>
+    <div class="quiz-ja">彼は持っているものすべてを私にくれた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>cuanto</b>：todo lo que のかたい言い方。</div>
+  <div class="srs-rate" data-qid="L18-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ⑤ 関係節の法と不定詞 -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">関係節の法と不定詞</span>
+  <span class="sec-es">El modo en las relativas</span>
+</div>
+
+<div class="sub" id="kankei-hou">1. 先行詞が実在するかどうか（9課の復習）</div>
+<p>関係節の動詞は、先行詞が<span class="hi2">実在する・特定されている</span>なら直説法、<span class="hi-r">まだ見つかっていない・存在しない</span>なら接続法です。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:22%">先行詞</th><th style="background:#d8eeea;color:var(--accent2)">実在する → 直説法</th><th style="background:#fbe4e4;color:var(--warn)">未確定・存在しない → 接続法</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">探している人</td><td><span class="mono">Busco a la secretaria que <b>habla</b> inglés.</span><br>英語を話す（あの）秘書を探している。</td><td><span class="mono">Busco una secretaria que <b>hable</b> inglés.</span><br>英語を話せる秘書を探している（誰でもよい）。</td></tr>
+    <tr><td class="td-rule">否定・疑問</td><td><span class="mono">Hay alguien que <b>sabe</b> la respuesta.</span><br>答えを知っている人がいる。</td><td><span class="mono">No hay nadie que <b>sepa</b> la respuesta.</span><br>答えを知っている人は誰もいない。</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="futei-mirai">2. これから決まる人・もの → 接続法</div>
+<p>「（これから）〜する人は誰でも」「〜するものは何でも」のように、<span class="hi-r">未来のことで、まだ誰・何か決まっていない</span>ときも接続法です。17課の <span class="mono">cuando ＋ 接続法</span> と同じ考え方です。</p>
+<div class="ex"><span class="ex-tag">未確定</span><span class="ex-sp">Los que <span class="hi-r">lleguen</span> tarde no podrán entrar.</span><span class="ex-ja">遅れて来た人は入れません。</span><span class="ex-note">誰が遅れるかはまだ分からない</span></div>
+<div class="ex"><span class="ex-tag">実在</span><span class="ex-sp">Los que <span class="hi2">llegaron</span> tarde no pudieron entrar.</span><span class="ex-ja">遅れて来た人たちは入れなかった。</span></div>
+<div class="ex"><span class="ex-sp">Haz lo que <span class="hi-r">quieras</span>.</span><span class="ex-ja">好きなことをしなさい。</span><span class="ex-note">何をするかは決まっていない</span></div>
+<p class="note">※ 最上級の先行詞は直説法が普通：<span class="mono">Es la mejor película que <b>he visto</b>.</span>（今まで見た中で一番いい映画だ）。接続法（que haya visto）も使われるが、かたい響きになる。</p>
+
+<div class="sub" id="futeishi-kankei">3. 不定詞の関係節「〜すべき・〜できる」</div>
+<p><span class="mono">que / quien / donde ＋ 不定詞</span> で「〜するための・〜すべき」を表せます。<span class="mono">tener</span>・<span class="mono">haber</span>・<span class="mono">buscar</span> の後でよく使います。</p>
+<div class="ex"><span class="ex-sp">No tengo nada <span class="hi">que hacer</span>.</span><span class="ex-ja">することが何もない。</span></div>
+<div class="ex"><span class="ex-sp">Tengo mucho <span class="hi">que estudiar</span> este fin de semana.</span><span class="ex-ja">今週末は勉強することがたくさんある。</span></div>
+<div class="ex"><span class="ex-sp">No tengo <span class="hi">con quién hablar</span>.</span><span class="ex-ja">話し相手がいない。</span><span class="ex-note">この形では quién とアクセントを付けて書くことが多い</span></div>
+<div class="ex"><span class="ex-sp">No hay <span class="hi">donde sentarse</span>.</span><span class="ex-ja">座る場所がない。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">secretaria</span>（女）秘書 ／ <span class="mono">respuesta</span>（女）答え</li>
+    <li><span class="mono">buscar a</span>：特定の人を探すときは a を付ける。未確定の人（una secretaria que hable…）には付けないことが多い</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L18-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">No hay nadie que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">sepa</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">先行詞が存在しない：saber</span></span> la respuesta.</div>
+  <div class="mini-check-ja">答えを知っている人は誰もいない。</div>
+<div class="srs-rate" data-qid="L18-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：関係節の法と不定詞</div>
+  <div class="quiz-item" id="L18-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Los que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">lleguen</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">未来の不特定の人：llegar</span></span> tarde no podrán entrar.</div>
+    <div class="quiz-ja">遅れて来た人は入れません。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>lleguen</b>：誰が遅れるかまだ決まっていないので接続法。llegar は g → gu。</div>
+  <div class="srs-rate" data-qid="L18-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Busco un piso que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">tenga</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">まだ見つかっていない：tener</span></span> terraza.</div>
+    <div class="quiz-ja">テラス付きのマンションを探している。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>tenga</b>：まだ見つかっていない（実在が確かでない）先行詞なので接続法。</div>
+  <div class="srs-rate" data-qid="L18-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L18-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No tengo nada que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">ponerme</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">不定詞の関係節：ponerse</span></span> para la boda.</div>
+    <div class="quiz-ja">結婚式に着ていくものが何もない。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>ponerme</b>：nada que ＋ 不定詞「〜すべきもの」。再帰代名詞は不定詞の後ろに付ける。</div>
+  <div class="srs-rate" data-qid="L18-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L18-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L18-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L18-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑥ 練習問題 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">（　）に適切な関係詞を入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Esta es la casa en <span class="blank">______</span> vivió Cervantes.</div>
+      <div class="q-ja">ここはセルバンテスが住んでいた家だ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">la que</span>（<span class="ans-fill">que</span>）</span></div>
+      <div class="q-exp">vivir en なので前置詞 en ＋ la que。場所なので <span class="mono">Esta es la casa donde vivió…</span> とも言える。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Mi amiga, <span class="blank">______</span> es profesora, me ayudó con los deberes.</div>
+      <div class="q-ja">友人は教師なのだが、宿題を手伝ってくれた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">que</span>（<span class="ans-fill">quien</span>／<span class="ans-fill">la cual</span>）</span></div>
+      <div class="q-exp">カンマのある説明用法なので、人の主語に quien / la cual も使える。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">El señor con <span class="blank">______</span> hablaste es mi jefe.</div>
+      <div class="q-ja">君が話した男性は私の上司だ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">quien</span>（<span class="ans-fill">el que</span>／<span class="ans-fill">el cual</span>）</span></div>
+      <div class="q-exp">人を受ける 前置詞 ＋ quien（el que / el cual でもよい）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Tengo un vecino <span class="blank">______</span> perro ladra toda la noche.</div>
+      <div class="q-ja">犬が一晩中吠える隣人がいる。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">cuyo</span></span></div>
+      <div class="q-exp">後ろの perro（男性単数）に一致させる。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">No entiendo <span class="blank">______</span> quieres decir.</div>
+      <div class="q-ja">君が何を言いたいのか分からない。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">lo que</span></span></div>
+      <div class="q-exp">先行詞のない「〜こと」（4課）。querer decir「意味する・言いたい」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Fue mi hermano <span class="blank">______</span> rompió la ventana.</div>
+      <div class="q-ja">窓を割ったのは私の兄だ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">quien</span>（<span class="ans-fill">el que</span>）</span></div>
+      <div class="q-exp">人を強調する強調構文。<span class="mono">que</span> だけでつなぐのは標準的でない。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">（　）内の動詞を、直説法か接続法の適切な形にしなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Necesitamos un guía que <span class="blank">______</span>（conocer）bien la zona.</div>
+      <div class="q-ja">その地域をよく知っているガイドが必要だ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">conozca</span></span></div>
+      <div class="q-exp">まだ見つかっていない先行詞なので接続法。conocer → conozca。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Tengo un amigo que <span class="blank">______</span>（vivir）en Lima.</div>
+      <div class="q-ja">リマに住んでいる友達がいる。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">vive</span></span></div>
+      <div class="q-exp">実在する先行詞なので直説法。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Los que <span class="blank">______</span>（querer）participar pueden apuntarse aquí.</div>
+      <div class="q-ja">参加したい人は、ここで申し込めます。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">quieran</span></span></div>
+      <div class="q-exp">誰が参加したいかは決まっていないので接続法。apuntarse「申し込む・名前を書く」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">No conozco a nadie que <span class="blank">______</span>（hablar）ruso.</div>
+      <div class="q-ja">ロシア語を話す人は一人も知らない。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">hable</span></span></div>
+      <div class="q-exp">存在しない先行詞（nadie）なので接続法。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Es el libro más interesante que <span class="blank">______</span>（leer, yo）este año.</div>
+      <div class="q-ja">今年読んだ中で一番面白い本だ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">he leído</span>（<span class="ans-fill">haya leído</span>）</span></div>
+      <div class="q-exp">最上級の先行詞は直説法が普通。接続法も使われるが、かたい響き。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">指示に従って書き換えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Tengo una amiga. Su madre es actriz.（cuyo を使って1文に）</div>
+      <div class="q-ja">母親が女優をしている友人がいる。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Tengo una amiga cuya madre es actriz.</span></span></div>
+      <div class="q-exp">cuyo は後ろの madre（女性単数）に一致させて cuya。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Ana lo dijo.（Ana を強調する強調構文に）</div>
+      <div class="q-ja">そう言ったのはアナだ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Fue Ana quien lo dijo.</span>（<span class="ans-fill">Fue Ana la que lo dijo.</span>）</span></div>
+      <div class="q-exp">過去の話なので ser も点過去の fue にそろえる。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Suspendió el examen. Eso preocupó a sus padres.（lo que を使って1文に）</div>
+      <div class="q-ja">彼は試験に落ち、それが両親を心配させた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Suspendió el examen, lo que preocupó a sus padres.</span>（<span class="ans-fill">…, lo cual preocupó a sus padres.</span>）</span></div>
+      <div class="q-exp">前の文全体を受けるのは中性の lo que / lo cual。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Este es el hotel. Nos alojamos en él el año pasado.（前置詞 ＋ 関係詞を使って）</div>
+      <div class="q-ja">ここは去年私たちが泊まったホテルだ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Este es el hotel en el que nos alojamos el año pasado.</span>（<span class="ans-fill">en que</span>／<span class="ans-fill">donde</span>）</span></div>
+      <div class="q-exp">alojarse en なので en el que。前置詞は関係詞の前に置く。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">私が一緒に働いている人たちは、とても親切だ。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">Las personas con las que trabajo son muy amables.</span>（<span class="ans-fill">con quienes</span>）</span></div>
+      <div class="q-exp"><b>前置詞 ＋ 関係詞</b>：con を関係詞の前に出す（× que trabajo con）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">これが、私が君に話した本だ。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">Este es el libro del que te hablé.</span></span></div>
+      <div class="q-exp"><b>hablar de</b> なので del que。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">彼には話し相手が誰もいない。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">No tiene con quién hablar.</span></span></div>
+      <div class="q-exp"><b>不定詞の関係節</b>：con quién ＋ 不定詞。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">遅れて来る人は誰でも、外で待たなければならない。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">Quien llegue tarde tendrá que esperar fuera.</span>（<span class="ans-fill">Los que lleguen tarde tendrán que esperar fuera.</span>）</span></div>
+      <div class="q-exp"><b>未来の不特定の人</b>なので接続法。quien なら動詞は3人称単数。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑦ 語彙リスト -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">関係代名詞</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">que</span><span class="pill-pos">関</span><span class="pill-ja">人・物（最も基本）</span></span>
+  <span class="pill"><span class="pill-es">el que / la que / los que / las que</span><span class="pill-pos">関</span><span class="pill-ja">前置詞の後・「〜する人／もの」</span></span>
+  <span class="pill"><span class="pill-es">quien / quienes</span><span class="pill-pos">関</span><span class="pill-ja">人だけ（前置詞の後・説明用法・「〜する人」）</span></span>
+  <span class="pill"><span class="pill-es">el cual / la cual / los cuales / las cuales</span><span class="pill-pos">関</span><span class="pill-ja">el que のかたい言い方</span></span>
+  <span class="pill"><span class="pill-es">lo que / lo cual</span><span class="pill-pos">関</span><span class="pill-ja">〜なこと・前の文全体を受ける</span></span>
+  <span class="pill"><span class="pill-es">cuyo / cuya / cuyos / cuyas</span><span class="pill-pos">関</span><span class="pill-ja">その〜が（所有）</span></span>
+  <span class="pill"><span class="pill-es">cuanto / cuantos</span><span class="pill-pos">関</span><span class="pill-ja">〜するものすべて</span></span>
+</div>
+
+<div class="vocab-category">関係副詞</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">donde</span><span class="pill-pos">関</span><span class="pill-ja">〜する所</span></span>
+  <span class="pill"><span class="pill-es">de donde</span><span class="pill-pos">関</span><span class="pill-ja">〜から来る所</span></span>
+  <span class="pill"><span class="pill-es">adonde</span><span class="pill-pos">関</span><span class="pill-ja">〜へ行く所</span></span>
+  <span class="pill"><span class="pill-es">por donde</span><span class="pill-pos">関</span><span class="pill-ja">〜を通る所</span></span>
+  <span class="pill"><span class="pill-es">cuando</span><span class="pill-pos">関</span><span class="pill-ja">〜する時（主に説明用法）</span></span>
+  <span class="pill"><span class="pill-es">como</span><span class="pill-pos">関</span><span class="pill-ja">〜するやり方</span></span>
+</div>
+
+<div class="vocab-category">前置詞を伴う動詞</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">hablar de</span><span class="pill-pos">動</span><span class="pill-ja">〜について話す</span></span>
+  <span class="pill"><span class="pill-es">pensar en</span><span class="pill-pos">動</span><span class="pill-ja">〜のことを考える</span></span>
+  <span class="pill"><span class="pill-es">salir con</span><span class="pill-pos">動</span><span class="pill-ja">〜と付き合う</span></span>
+  <span class="pill"><span class="pill-es">contar con</span><span class="pill-pos">動</span><span class="pill-ja">〜を当てにする</span></span>
+  <span class="pill"><span class="pill-es">luchar por</span><span class="pill-pos">動</span><span class="pill-ja">〜のために闘う</span></span>
+  <span class="pill"><span class="pill-es">alojarse en</span><span class="pill-pos">再動</span><span class="pill-ja">〜に泊まる</span></span>
+  <span class="pill"><span class="pill-es">quedar</span><span class="pill-pos">動</span><span class="pill-ja">待ち合わせる</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">herramienta</span><span class="pill-pos">女</span><span class="pill-ja">道具</span></span>
+  <span class="pill"><span class="pill-es">razón</span><span class="pill-pos">女</span><span class="pill-ja">理由</span></span>
+  <span class="pill"><span class="pill-es">desfile</span><span class="pill-pos">男</span><span class="pill-ja">パレード</span></span>
+  <span class="pill"><span class="pill-es">admirar</span><span class="pill-pos">動</span><span class="pill-ja">尊敬する</span></span>
+  <span class="pill"><span class="pill-es">agradecer</span><span class="pill-pos">動</span><span class="pill-ja">感謝する</span></span>
+  <span class="pill"><span class="pill-es">arriesgar</span><span class="pill-pos">動</span><span class="pill-ja">危険を冒す</span></span>
+  <span class="pill"><span class="pill-es">apuntarse</span><span class="pill-pos">再動</span><span class="pill-ja">申し込む</span></span>
+  <span class="pill"><span class="pill-es">querer decir</span><span class="pill-pos">表現</span><span class="pill-ja">意味する・言いたい</span></span>
+</div>
+
+<!-- ⑧ まとめ -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">前置詞 ＋ 関係詞</td><td>前置詞は関係詞の前に置く：<span class="mono">la película de la que te hablé</span>（× que te hablé de）</td></tr>
+    <tr><td class="td-rule">冠詞の省略</td><td>物・時で短い前置詞なら <span class="mono">en que</span> も可（<span class="mono">el día en que</span>）。人には冠詞が必要</td></tr>
+    <tr><td class="td-rule">quien</td><td>人だけ。前置詞の後・説明用法・「〜する人」で使う。限定用法の主語には使えない（× el chico quien vive aquí）</td></tr>
+    <tr><td class="td-rule">el cual</td><td>el que のかたい言い方。長い前置詞の後（<span class="mono">delante del cual, sin la cual</span>）。性数で先行詞を示せる</td></tr>
+    <tr><td class="td-rule">lo que / lo cual</td><td>前の文全体を受ける：<span class="mono">Llegó tarde, lo que me molestó.</span></td></tr>
+    <tr><td class="td-rule">強調構文</td><td><span class="mono">Fue Ana quien… / Es aquí donde… / Fue entonces cuando… / Así es como…</span></td></tr>
+    <tr><td class="td-rule">cuyo</td><td>後ろの名詞に性数一致（<span class="mono">una escritora cuyas novelas</span>）。冠詞は付けない</td></tr>
+    <tr><td class="td-rule">donde</td><td>＝ en el que。<span class="mono">de donde / adonde / por donde</span></td></tr>
+    <tr><td class="td-rule">cuando / como</td><td>cuando は主に説明用法（限定用法は el día en que）。<span class="mono">la manera como</span> ＝ la manera en que</td></tr>
+    <tr><td class="td-rule">cuanto</td><td>＝ todo lo que（かたい）</td></tr>
+    <tr><td class="td-rule">関係節の法</td><td>実在 → 直説法／未確定・存在しない・これから決まる → 接続法</td></tr>
+    <tr><td class="td-rule">不定詞の関係節</td><td><span class="mono">No tengo nada que hacer / con quién hablar / No hay donde sentarse</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 18 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<!-- ══ 鍛錬タブ（問題は tanren-bank.js から表示） ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div id="sec-tanren" class="sec-heading">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-intro">Lección 18 の内容を総合的に使う問題が <b>100問</b> あります。まとめクイズと同じか、少し難しいレベルです。<br>「内容ごと」は文法項目の順、「ランダム」は全範囲を混ぜた順に並びます。○△× を付けた問題は「今日の復習」に出ます。</div>
+
+<div id="tanren-app" data-lesson="18"></div>
+
+</div><!-- /tab-tanren -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① 前置詞と関係詞</a>
+    <a class="fn-item" href="#sec2">② 説明用法と quien・el cual</a>
+    <a class="fn-item" href="#sec3">③ 独立用法と強調構文</a>
+    <a class="fn-item" href="#sec4">④ cuyo と関係副詞</a>
+    <a class="fn-item" href="#sec5">⑤ 関係節の法と不定詞</a>
+    <a class="fn-item" href="#sec6">⑥ 練習問題</a>
+    <a class="fn-item" href="#sec7">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8">⑧ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['関係詞','関係代名詞','relativos'], id: 'sec1', label: '前置詞と関係詞（①節）' },
+  { terms: ['前置詞 ＋ 関係詞','del que','de la que','con el que','en el que','en que'], id: 'zenchi-el-que', label: '前置詞 ＋ 定冠詞 ＋ que（①節）' },
+  { terms: ['quien','quienes','con quien','a quien'], id: 'zenchi-quien', label: '前置詞 ＋ quien（①節）' },
+  { terms: ['el cual','la cual','los cuales','las cuales','del cual'], id: 'el-cual', label: 'el cual（①節）' },
+  { terms: ['説明用法','非制限用法','explicativas'], id: 'setsumei-quien', label: '説明用法と quien（②節）' },
+  { terms: ['先行詞','あいまい'], id: 'el-cual-sentaku', label: 'el cual で先行詞を示す（②節）' },
+  { terms: ['独立用法','〜する人','ことわざ','el que'], id: 'quien-dokuritsu', label: 'quien / el que「〜する人」（③節）' },
+  { terms: ['lo que','lo cual','todo lo que','文全体'], id: 'lo-que-bun', label: '前の文を受ける lo que（③節）' },
+  { terms: ['強調構文','fue ... quien','es aquí donde','enfáticas'], id: 'kyouchou', label: '強調構文（③節）' },
+  { terms: ['cuyo','cuya','cuyos','cuyas','所有','whose'], id: 'cuyo', label: 'cuyo（④節）' },
+  { terms: ['donde','adonde','de donde','por donde','関係副詞'], id: 'donde-kankei', label: 'donde と前置詞（④節）' },
+  { terms: ['cuando','como','la manera como','el día en que'], id: 'cuando-como', label: 'cuando と como（④節）' },
+  { terms: ['cuanto','cuantos','todo lo que'], id: 'cuanto', label: 'cuanto（④節）' },
+  { terms: ['関係節 接続法','形容詞節','先行詞 実在'], id: 'kankei-hou', label: '関係節の法（⑤節）' },
+  { terms: ['los que lleguen','lo que quieras','未確定','最上級'], id: 'futei-mirai', label: 'これから決まる人・もの（⑤節）' },
+  { terms: ['不定詞','nada que hacer','con quién hablar','donde sentarse'], id: 'futeishi-kankei', label: '不定詞の関係節（⑤節）' },
+  { terms: ['練習問題','練習'], id: 'sec6', label: '練習問題（⑥節）' },
+  { terms: ['語彙','Vocabulario'], id: 'sec7', label: '語彙リスト（⑦節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec8', label: 'まとめ（⑧節）' },
+  { terms: ['鍛錬','Entrenamiento'], id: 'sec-tanren', label: '鍛錬（100問）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語文法解説集　B1〜B2 編</footer>
+
+</body>
+</html>
