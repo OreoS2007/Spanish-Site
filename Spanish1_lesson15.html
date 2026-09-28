@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 15 文法解説 | B1〜B2 編</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 現在完了と点過去</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 点過去と線過去</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 時制で意味が変わる動詞</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ 過去完了と前過去</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 線過去の特別な用法と時の手がかり</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec6" data-tab="renshu" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8" data-tab="vocab" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ まとめ</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">💪 鍛錬タブ</span>
+    <a class="fn-item" href="#sec-tanren" data-tab="tanren" onclick="jumpToSection('sec-tanren'); closeToc(); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 15 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 15　文法解説</div>
+  <div class="cover-sub">B1〜B2 編　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br>過去の出来事を話すとき、現在完了・点過去・線過去・過去完了のどれを使うかを、理由を持って選べるようになります。<span class="mono">conocí / conocía</span>、<span class="mono">quise / quería</span> のように、時制によって意味そのものが変わる動詞も使い分けられるようになります。<br><small>5課（現在完了）、6課（点過去）、7課（線過去・過去完了）で形は学びました。この課では「どれを選ぶか」と「過去の話をどう組み立てるか」に集中します。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 現在完了と点過去</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 点過去と線過去</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 時制で意味が変わる動詞</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ 過去完了と前過去</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 線過去の特別な用法と時の手がかり</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 練習問題</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 語彙リスト</a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ まとめ</a>
+    <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：conocí　／　背景　／　había…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 現在完了と点過去 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">現在完了と点過去</span>
+  <span class="sec-es">Pretérito perfecto y pretérito indefinido</span>
+</div>
+
+<p>どちらも「〜した」と訳せますが、決め手は<span class="hi">出来事が起きた時間を、話している「今」を含む時間として見ているかどうか</span>です。</p>
+
+<div class="sub" id="pp-vs-indef">1. 時間の枠で選ぶ（スペインの標準）</div>
+<div class="box box-rule">
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th style="width:50%;background:#dde8f5;color:var(--accent)">現在完了（今を含む時間）</th><th style="background:#d8eeea;color:var(--accent2)">点過去（今と切り離された時間）</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">hoy, esta mañana, esta semana, este mes, este año, últimamente, hace un rato</td><td class="mono">ayer, anoche, la semana pasada, el mes pasado, en 2015, hace tres años</td></tr>
+      <tr><td><span class="mono">Esta semana <b>he trabajado</b> mucho.</span><br>今週はたくさん働いた。</td><td><span class="mono">La semana pasada <b>trabajé</b> mucho.</span><br>先週はたくさん働いた。</td></tr>
+      <tr><td><span class="mono">Hoy <b>me he levantado</b> a las seis.</span><br>今日は6時に起きた。</td><td><span class="mono">Ayer <b>me levanté</b> a las seis.</span><br>昨日は6時に起きた。</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:6px;">時の表現がないときは、<span class="hi">今の状況と関係があるか</span>で決める：<span class="mono">¿Has visto mis llaves?</span>（今探している）／<span class="mono">¿Viste el partido?</span>（昨日の試合など、終わった出来事）</p>
+</div>
+
+<div class="sub">2. 経験と「まだ・もう」は現在完了</div>
+<div class="ex"><span class="ex-tag">経験</span><span class="ex-sp">¿<span class="hi">Has estado</span> alguna vez en Perú?</span><span class="ex-ja">ペルーに行ったことはある？</span></div>
+<div class="ex"><span class="ex-tag">まだ・もう</span><span class="ex-sp">Todavía no <span class="hi">he terminado</span>. ／ Ya <span class="hi">he comido</span>.</span><span class="ex-ja">まだ終わっていない。／もう食べた。</span></div>
+<div class="ex"><span class="ex-tag">いつの経験かを言うと点過去</span><span class="ex-sp"><span class="hi2">Estuve</span> en Perú en 2019.</span><span class="ex-ja">2019年にペルーに行った。</span><span class="ex-note">時を特定したら「経験」ではなく「過去の出来事」になる</span></div>
+
+<div class="sub" id="chiiki">3. 地域による違い</div>
+<p>中南米の多くの地域やスペインのカナリア諸島では、「今日・今週」のことでも<span class="hi">点過去</span>を使うのが普通です。</p>
+<div class="ex"><span class="ex-tag">スペイン</span><span class="ex-sp">Hoy <span class="hi">he desayunado</span> tarde.</span><span class="ex-ja">今日は遅く朝食をとった。</span></div>
+<div class="ex"><span class="ex-tag">中南米</span><span class="ex-sp">Hoy <span class="hi2">desayuné</span> tarde.</span><span class="ex-ja">今日は遅く朝食をとった。</span></div>
+<p class="note">※ どちらも正しい。このサイトの問題はスペインの標準に合わせるが、中南米の形で答えても誤りではない。<br>※ 「経験」（<span class="mono">¿Has estado…?</span>）は中南米でも現在完了がよく使われる。</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">hace un rato</span>：少し前に（今日の出来事なので、スペインでは現在完了と組む）</li>
+    <li><span class="mono">últimamente</span>：最近 ／ <span class="mono">partido</span>（男）試合</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L15-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Esta mañana <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">he visto</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">今日のこと：現在完了（スペイン）</span></span> a tu hermano en el metro.</div>
+  <div class="mini-check-ja">今朝、地下鉄で君の弟を見かけたよ。</div>
+<div class="srs-rate" data-qid="L15-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：現在完了と点過去</div>
+
+  <div class="quiz-item" id="L15-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">El año pasado <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">viajamos</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">区切られた過去：点過去</span></span> por todo Chile.</div>
+    <div class="quiz-ja">去年、私たちはチリじゅうを旅行した。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>viajamos</b>：el año pasado は今と切り離された時間なので点過去。-ar 動詞の nosotros は現在形と同じ形。</div>
+  <div class="srs-rate" data-qid="L15-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿Todavía no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">has llamado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">まだ〜していない：現在完了</span></span> a tu madre?</div>
+    <div class="quiz-ja">まだお母さんに電話していないの？</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>has llamado</b>：todavía no「まだ〜ない」は今までのことなので現在完了。</div>
+  <div class="srs-rate" data-qid="L15-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Has comido</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">経験：現在完了</span></span> alguna vez paella negra?</div>
+    <div class="quiz-ja">イカ墨のパエリャを食べたことはある？</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Has comido</b>：alguna vez と組む経験は現在完了。</div>
+  <div class="srs-rate" data-qid="L15-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ② 点過去と線過去 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">点過去と線過去</span>
+  <span class="sec-es">Pretérito indefinido y pretérito imperfecto</span>
+</div>
+
+<p>過去の話は、舞台にたとえると分かりやすくなります。<span class="hi2">線過去は舞台装置（背景・状況の説明）</span>、<span class="hi-r">点過去は舞台の上で起きる出来事（話を前に進める）</span>です。</p>
+
+<div class="sub" id="dekigoto-haikei">1. 出来事と背景</div>
+<div class="box box-rule">
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th style="width:50%;background:#fbe4e4;color:var(--warn)">点過去：出来事（話を進める）</th><th style="background:#d8eeea;color:var(--accent2)">線過去：背景（場面の説明）</th></tr></thead>
+    <tbody>
+      <tr><td>1回の完結した行為・変化</td><td>その時の状況・天気・時刻・年齢</td></tr>
+      <tr><td>続けて起きた出来事の連続</td><td>人や物の様子の描写</td></tr>
+      <tr><td>始まりと終わりのある期間（dos horas, toda la noche）</td><td>進行中だった動作（〜していた）</td></tr>
+      <tr><td>—</td><td>過去の習慣（〜したものだ）</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="ex"><span class="ex-sp"><span class="hi2">Era</span> un sábado de invierno. <span class="hi2">Hacía</span> frío y <span class="hi2">llovía</span>. De repente <span class="hi-r">sonó</span> el timbre, <span class="hi-r">abrí</span> la puerta y <span class="hi-r">vi</span> a mi hermano.</span><span class="ex-ja">冬の土曜日だった。寒くて雨が降っていた。突然チャイムが鳴り、ドアを開けると弟がいた。</span><span class="ex-note">背景（era, hacía, llovía）で場面を作り、出来事（sonó, abrí, vi）で話を進めている</span></div>
+
+<div class="sub" id="warikomi">2. 割り込み：進行中の背景 ＋ 出来事</div>
+<div class="ex"><span class="ex-sp"><span class="hi2">Estaba duchándome</span> cuando <span class="hi-r">se fue</span> la luz.</span><span class="ex-ja">シャワーを浴びていたら停電した。</span></div>
+<div class="ex"><span class="ex-sp">Cuando <span class="hi-r">llegué</span> a la fiesta, todos <span class="hi2">bailaban</span>.</span><span class="ex-ja">私がパーティーに着いたとき、みんな踊っていた。</span></div>
+<div class="ex"><span class="ex-sp">Cuando <span class="hi-r">llegué</span> a la fiesta, todos <span class="hi-r">se pusieron</span> a bailar.</span><span class="ex-ja">私がパーティーに着くと、みんな踊り出した。</span><span class="ex-note">1つ前の例と比べる。点過去どうしだと「着いた → それから踊り出した」という出来事の順番になる</span></div>
+
+<div class="sub" id="kikan">3. 同時進行と、区切られた期間</div>
+<div class="ex"><span class="ex-tag">同時進行</span><span class="ex-sp">Mientras yo <span class="hi2">cocinaba</span>, mi marido <span class="hi2">ponía</span> la mesa.</span><span class="ex-ja">私が料理している間、夫は食卓の準備をしていた。</span><span class="ex-note">2つの背景が同時に続いている（7課）</span></div>
+<div class="ex"><span class="ex-tag">区切られた期間</span><span class="ex-sp"><span class="hi-r">Viví</span> en Barcelona cinco años.</span><span class="ex-ja">バルセロナに5年住んだ。</span><span class="ex-note">「5年」と長さが決まっていて、全体を1つの出来事として見るので点過去（× vivía cinco años）</span></div>
+<div class="ex"><span class="ex-tag">背景としての居住</span><span class="ex-sp">Cuando <span class="hi2">vivía</span> en Barcelona, <span class="hi2">iba</span> a la playa todos los días.</span><span class="ex-ja">バルセロナに住んでいた頃、毎日ビーチに行っていた。</span></div>
+
+<div class="box box-warn">
+  <div class="box-title">よくある誤り</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li>「長い間続いた＝線過去」ではない：<span class="mono">Estuve enfermo toda la semana</span>（1週間ずっと病気だった：期間が区切られているので点過去）</li>
+    <li>時刻と年齢は背景なので線過去：<span class="mono">Eran las diez.</span>／<span class="mono">Tenía ocho años.</span>（7課）</li>
+  </ul>
+</div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">timbre</span>（男）呼び鈴 ／ <span class="mono">irse la luz</span>：停電する ／ <span class="mono">poner la mesa</span>：食卓の準備をする</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L15-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Cuando <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">era</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">背景：年齢・時期</span></span> niño, vivía en un pueblo pequeño.</div>
+  <div class="mini-check-ja">子どもの頃、小さな村に住んでいた。</div>
+<div class="srs-rate" data-qid="L15-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：点過去と線過去</div>
+
+  <div class="quiz-item" id="L15-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Leía</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">進行中の背景</span></span> el periódico cuando de repente <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">oí</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">割り込んだ出来事</span></span> un grito.</div>
+    <div class="quiz-ja">新聞を読んでいると、突然叫び声が聞こえた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Leía</b>：進行中だった背景は線過去。<b>oí</b>：割り込んだ1回の出来事は点過去（oír の yo 形）。</div>
+  <div class="srs-rate" data-qid="L15-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Anoche <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estuve</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">区切られた期間</span></span> dos horas hablando por teléfono con Ana.</div>
+    <div class="quiz-ja">昨夜はアナと2時間電話で話していた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>estuve</b>：「2時間」と区切られた期間は点過去（14課の点過去の進行形）。</div>
+  <div class="srs-rate" data-qid="L15-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">La casa <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">tenía</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">描写：背景</span></span> un jardín enorme y siempre <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">olía</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">描写：背景</span></span> a flores.</div>
+    <div class="quiz-ja">その家には大きな庭があって、いつも花の香りがしていた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>tenía / olía</b>：過去の物の様子の描写は線過去。oler の線過去は olía（規則）。</div>
+  <div class="srs-rate" data-qid="L15-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ③ 時制で意味が変わる動詞 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">時制で意味が変わる動詞</span>
+  <span class="sec-es">Verbos que cambian de significado</span>
+</div>
+
+<p>状態を表す動詞は、線過去では「その状態だった」、点過去では<span class="hi">「その状態が始まった（変化した）」「やってみた結果」</span>を表します。そのため、日本語に訳すと別の動詞のようになるものがあります。</p>
+
+<div class="tbl-wrap" id="imi-kawaru">
+<table>
+  <thead><tr><th style="width:16%">動詞</th><th style="width:42%;background:#fbe4e4;color:var(--warn)">点過去</th><th style="background:#d8eeea;color:var(--accent2)">線過去</th></tr></thead>
+  <tbody>
+    <tr><td class="mono td-rule">conocer</td><td><span class="mono">Conocí a Ana en 2018.</span><br>アナと2018年に<b>知り合った</b>。</td><td><span class="mono">Ya conocía a Ana.</span><br>アナのことはもう<b>知っていた</b>。</td></tr>
+    <tr><td class="mono td-rule">saber</td><td><span class="mono">Ayer supe la verdad.</span><br>昨日真実を<b>知った</b>（聞かされた）。</td><td><span class="mono">No sabía la verdad.</span><br>真実を<b>知らなかった</b>。</td></tr>
+    <tr><td class="mono td-rule">querer</td><td><span class="mono">Quise ayudarla.</span>　手伝おうと<b>した</b>。<br><span class="mono">No quiso venir.</span>　来ることを<b>拒んだ</b>。</td><td><span class="mono">Quería ayudarla.</span><br>手伝い<b>たかった</b>（実際にしたかは不明）。</td></tr>
+    <tr><td class="mono td-rule">poder</td><td><span class="mono">Por fin pude dormir.</span>　やっと眠<b>れた</b>。<br><span class="mono">No pude abrir la puerta.</span>　（やってみたが）開けられ<b>なかった</b>。</td><td><span class="mono">Podía nadar muy bien.</span><br>とても上手に泳ぐ<b>ことができた</b>（能力）。</td></tr>
+    <tr><td class="mono td-rule">tener</td><td><span class="mono">Ayer tuve noticias de él.</span>　昨日彼から<b>便りがあった</b>。<br><span class="mono">Tuve un accidente.</span>　事故に<b>あった</b>。</td><td><span class="mono">Tenía un coche rojo.</span><br>赤い車を<b>持っていた</b>。</td></tr>
+    <tr><td class="mono td-rule">costar</td><td><span class="mono">El coche me costó mucho.</span><br>（買ったとき）その車は高く<b>ついた</b>。</td><td><span class="mono">El coche costaba mucho.</span><br>その車は値段が高<b>かった</b>（値札の説明）。</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="hubo-habia">hubo と había、fue と era</div>
+<div class="ex"><span class="ex-tag">hubo：出来事</span><span class="ex-sp">Anoche <span class="hi-r">hubo</span> un accidente en la autopista.</span><span class="ex-ja">昨夜、高速道路で事故があった（起きた）。</span></div>
+<div class="ex"><span class="ex-tag">había：状況</span><span class="ex-sp">En la autopista <span class="hi2">había</span> mucho tráfico.</span><span class="ex-ja">高速道路は車が多かった。</span></div>
+<div class="ex"><span class="ex-tag">fue：全体の評価</span><span class="ex-sp">El viaje <span class="hi-r">fue</span> maravilloso.</span><span class="ex-ja">旅行は素晴らしかった（振り返って全体をまとめる）。</span></div>
+<div class="ex"><span class="ex-tag">era：その時の描写</span><span class="ex-sp">El hotel <span class="hi2">era</span> antiguo y <span class="hi2">tenía</span> vistas al mar.</span><span class="ex-ja">ホテルは古く、海が見えた。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">tener vistas a</span>：〜の眺めがある ／ <span class="mono">autopista</span>（女）高速道路</li>
+    <li><span class="mono">hubo</span> は <span class="mono">haber</span> の点過去（無主語で「〜があった」：4課の hay の過去）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L15-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Conocí</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">初めて会った：点過去</span></span> a mi mujer en un viaje a Cuba.</div>
+  <div class="mini-check-ja">妻とはキューバへの旅行で知り合った。</div>
+<div class="srs-rate" data-qid="L15-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：時制で意味が変わる動詞</div>
+
+  <div class="quiz-item" id="L15-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Llamé varias veces, pero no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">pude</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">やってみたができなかった：点過去</span></span> hablar con él.</div>
+    <div class="quiz-ja">何度も電話したが、彼と話せなかった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>pude</b>：実際に試みてできなかったのは点過去。no podía だと「（その頃）話せる状況になかった」という背景になる。</div>
+  <div class="srs-rate" data-qid="L15-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Le invitamos, pero no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">quiso</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">拒んだ：点過去</span></span> venir.</div>
+    <div class="quiz-ja">彼を招待したが、来ようとしなかった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>quiso</b>：no quiso は「拒んだ」。no quería なら「来たくなかった（気持ち）」。</div>
+  <div class="srs-rate" data-qid="L15-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Ayer <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hubo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">出来事：点過去</span></span> una manifestación en el centro.</div>
+    <div class="quiz-ja">昨日、中心街でデモがあった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hubo</b>：「起きた・行われた」出来事は haber の点過去 hubo。</div>
+  <div class="srs-rate" data-qid="L15-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ④ 過去完了と前過去 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">過去完了と前過去</span>
+  <span class="sec-es">Pluscuamperfecto y pretérito anterior</span>
+</div>
+
+<div class="sub" id="kakokanryo">1. 過去完了：過去のある時点より前</div>
+<p>過去の話の中で、<span class="hi">基準となる過去の時点よりさらに前</span>に済んでいたことは過去完了（<span class="mono">había ＋ 過去分詞</span>：7課）で表します。</p>
+<div class="ex"><span class="ex-sp">Cuando llegué a la estación, el tren ya <span class="hi-r">había salido</span>.</span><span class="ex-ja">駅に着いたとき、列車はもう出てしまっていた。</span></div>
+<div class="ex"><span class="ex-sp">Cuando llegué a la estación, el tren <span class="hi2">salió</span>.</span><span class="ex-ja">私が駅に着くと、（そのとき）列車が出た。</span><span class="ex-note">点過去どうしなら、ほぼ同時か「着いた → 出た」の順番</span></div>
+<div class="ex"><span class="ex-sp">Nunca <span class="hi-r">había visto</span> el mar antes de aquel viaje.</span><span class="ex-ja">あの旅行の前には、一度も海を見たことがなかった。</span><span class="ex-note">過去の時点までの「経験」も過去完了</span></div>
+<div class="ex"><span class="ex-sp">Me dijo que <span class="hi-r">había perdido</span> el pasaporte.</span><span class="ex-ja">彼はパスポートをなくしたと私に言った。</span><span class="ex-note">言った時点より前の出来事（19課の間接話法で詳しく扱う）</span></div>
+
+<div class="sub" id="zenkako">2. 前過去（pretérito anterior）：書き言葉で見かける形</div>
+<div class="box box-rule">
+  <div class="box-title">hube ＋ 過去分詞</div>
+  <p style="margin:0 0 6px;font-size:13.5px;"><span class="mono">haber</span> の点過去（<span class="mono">hube, hubiste, hubo, hubimos, hubisteis, hubieron</span>）＋ 過去分詞。<span class="mono">apenas</span>（〜するやいなや）、<span class="mono">en cuanto</span>、<span class="mono">cuando</span> の後で、<span class="hi">直前に済んだこと</span>を表します。小説などの書き言葉でしか使われないので、<span class="hi-r">読んで分かれば十分</span>です。</p>
+  <div class="ex"><span class="ex-sp">Apenas <span class="hi">hubo terminado</span> la cena, se marchó.</span><span class="ex-ja">夕食を終えるやいなや、彼は立ち去った。</span><span class="ex-note">話し言葉では <span class="mono">En cuanto terminó la cena, se marchó.</span>（点過去）</span></div>
+</div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">marcharse</span>（再動）立ち去る ／ <span class="mono">aquel viaje</span>：あの旅行（遠い過去を指す指示詞：3課）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L15-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Cuando llegamos al cine, la película ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">había empezado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">より前に済んでいた：過去完了</span></span>.</div>
+  <div class="mini-check-ja">私たちが映画館に着いたとき、映画はもう始まっていた。</div>
+<div class="srs-rate" data-qid="L15-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：過去完了と前過去</div>
+
+  <div class="quiz-item" id="L15-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Antes de venir a Japón, nunca <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">había comido</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">過去の時点までの経験</span></span> sushi.</div>
+    <div class="quiz-ja">日本に来る前は、一度も寿司を食べたことがなかった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>había comido</b>：過去のある時点（日本に来る前）までの経験は過去完了。</div>
+  <div class="srs-rate" data-qid="L15-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Cuando mi madre volvió, yo ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">había limpiado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">より前に済んでいた</span></span> toda la casa.</div>
+    <div class="quiz-ja">母が帰ってきたとき、私はもう家じゅうを掃除し終えていた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>había limpiado</b>：母が帰る時点より前に掃除は済んでいた。</div>
+  <div class="srs-rate" data-qid="L15-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Apenas <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">hubo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">前過去：haber の点過去</span></span> terminado su discurso, el público aplaudió.</div>
+    <div class="quiz-ja">彼がスピーチを終えるやいなや、聴衆は拍手した。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>hubo</b>：前過去 hubo ＋ 過去分詞。書き言葉の形（話し言葉なら En cuanto terminó…）。</div>
+  <div class="srs-rate" data-qid="L15-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ⑤ 線過去の特別な用法と時の手がかり -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">線過去の特別な用法と時の手がかり</span>
+  <span class="sec-es">Usos especiales del imperfecto y marcadores temporales</span>
+</div>
+
+<div class="sub" id="teinei">1. 丁寧の線過去</div>
+<p>お願いや申し出を切り出すとき、今の気持ちなのに線過去を使うと、<span class="hi">控えめで丁寧な響き</span>になります（10課の <span class="mono">quisiera</span> と同じ発想）。</p>
+<div class="ex"><span class="ex-sp"><span class="hi2">Quería</span> pedirte un favor.</span><span class="ex-ja">ちょっとお願いがあるんだけど。</span></div>
+<div class="ex"><span class="ex-sp">Buenos días, <span class="hi2">venía</span> a preguntar por el piso de alquiler.</span><span class="ex-ja">こんにちは、賃貸マンションのことでお尋ねしたくて参りました。</span></div>
+
+<div class="sub" id="iba-a">2. iba a ＋ 不定詞「〜するつもりだった・〜するところだった」</div>
+<div class="ex"><span class="ex-sp"><span class="hi2">Iba a</span> llamarte, pero se me olvidó.</span><span class="ex-ja">電話するつもりだったんだけど、忘れちゃった。</span><span class="ex-note">予定が実現しなかったことを表すことが多い（12課の意図しない se）</span></div>
+<div class="ex"><span class="ex-sp">Justo cuando <span class="hi2">iba a</span> salir, empezó a llover.</span><span class="ex-ja">ちょうど出かけようとしたとき、雨が降り始めた。</span></div>
+
+<div class="sub" id="tegakari">3. 時の表現は時制の手がかり</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:26%">よく組む時制</th><th>時の表現</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule hi-r">点過去</td><td class="mono">ayer, anoche, el otro día, la semana pasada, en 2010, hace dos años, de repente, de pronto, una vez, en ese momento, al final</td></tr>
+    <tr><td class="td-rule hi2">線過去</td><td class="mono">siempre, a menudo, a veces, todos los días, normalmente, de niño, antes, en aquella época, mientras, cada verano</td></tr>
+    <tr><td class="td-rule hi">現在完了（スペイン）</td><td class="mono">hoy, esta mañana, este año, últimamente, ya, todavía no, alguna vez, nunca（今までに）</td></tr>
+    <tr><td class="td-rule">過去完了</td><td class="mono">ya（その時までに）, nunca antes, todavía no（その時まで）</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ あくまで目安。<span class="mono">siempre</span> でも、区切られた期間全体を振り返るなら点過去になる：<span class="mono">Siempre me trató bien.</span>（彼はいつも私に親切にしてくれた：もう終わった関係を振り返る）</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">preguntar por</span>：〜について尋ねる ／ <span class="mono">piso de alquiler</span>：賃貸マンション ／ <span class="mono">justo cuando</span>：ちょうど〜したとき</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L15-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Íbamos a</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">〜するつもりだった</span></span> ir a la playa, pero hizo mal tiempo.</div>
+  <div class="mini-check-ja">海に行くつもりだったが、天気が悪かった。</div>
+<div class="srs-rate" data-qid="L15-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：線過去の特別な用法と時の手がかり</div>
+
+  <div class="quiz-item" id="L15-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Perdone, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">quería</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">丁寧の線過去</span></span> hacerle una pregunta.</div>
+    <div class="quiz-ja">すみません、ひとつお伺いしたいのですが。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>quería</b>：今の気持ちでも線過去を使うと控えめで丁寧になる。</div>
+  <div class="srs-rate" data-qid="L15-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">De pequeña, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">pasaba</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">習慣：de pequeña と組む</span></span> los veranos en casa de mis tíos.</div>
+    <div class="quiz-ja">小さい頃、夏はいつも叔父の家で過ごしていた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>pasaba</b>：de pequeña（子どもの頃）の繰り返しの習慣は線過去。</div>
+  <div class="srs-rate" data-qid="L15-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L15-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Estábamos cenando cuando de pronto <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se apagaron</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">de pronto：出来事</span></span> todas las luces.</div>
+    <div class="quiz-ja">夕食中に、突然すべての明かりが消えた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>se apagaron</b>：de pronto（突然）と組む1回の出来事は点過去。主語 todas las luces は複数。</div>
+  <div class="srs-rate" data-qid="L15-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L15-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L15-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L15-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑥ 練習問題 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">（　）内の動詞を、現在完了か点過去の適切な形にしなさい（スペインの標準で答えること）。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Este verano <span class="blank">______</span>（ir, nosotros）a Grecia.</div>
+      <div class="q-ja">この夏、私たちはギリシャに行った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">hemos ido</span></span></div>
+      <div class="q-exp"><span class="mono">este verano</span> は「今年の夏」で今を含む時間の枠なので現在完了。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">El verano pasado <span class="blank">______</span>（ir, nosotros）a Grecia.</div>
+      <div class="q-ja">去年の夏、私たちはギリシャに行った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">fuimos</span></span></div>
+      <div class="q-exp"><span class="mono">el verano pasado</span> は今と切り離された時間なので点過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">¿<span class="blank">______</span>（leer, tú）alguna vez una novela de García Márquez?</div>
+      <div class="q-ja">ガルシア＝マルケスの小説を読んだことはある？</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">¿<span class="ans-fill">Has leído</span>…?</span></div>
+      <div class="q-exp"><span class="mono">alguna vez</span> と組む経験は現在完了。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Cervantes <span class="blank">______</span>（morir）en 1616.</div>
+      <div class="q-ja">セルバンテスは1616年に亡くなった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">murió</span></span></div>
+      <div class="q-exp">年号で時点が特定された歴史的な出来事は点過去。<span class="mono">morir</span> は o→u 型（6課）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Todavía no <span class="blank">______</span>（decidir, yo）qué voy a estudiar.</div>
+      <div class="q-ja">何を勉強するか、まだ決めていない。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">he decidido</span></span></div>
+      <div class="q-exp"><span class="mono">todavía no</span>「まだ〜ない」は今までのことなので現在完了。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">次の話の（　）内の動詞を、点過去か線過去の適切な形にしなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence"><span class="blank">______</span>（ser）las once de la noche y <span class="blank">______</span>（llover）mucho.</div>
+      <div class="q-ja">夜の11時で、雨が激しく降っていた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Eran</span> ／ <span class="ans-fill">llovía</span></span></div>
+      <div class="q-exp">時刻と天気は場面の背景なので線過去。時刻は複数（las once）なので eran。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Yo <span class="blank">______</span>（estar）sola en casa y <span class="blank">______</span>（ver）una película de miedo.</div>
+      <div class="q-ja">私は家に一人でいて、ホラー映画を見ていた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">estaba</span> ／ <span class="ans-fill">veía</span></span></div>
+      <div class="q-exp">状況の説明と進行中の動作なので線過去（<span class="mono">estaba viendo</span> でもよい）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">De repente <span class="blank">______</span>（oír）un ruido en la cocina.</div>
+      <div class="q-ja">突然、台所で物音が聞こえた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">oí</span></span></div>
+      <div class="q-exp"><span class="mono">de repente</span> と組む1回の出来事は点過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence"><span class="blank">______</span>（levantarse）, <span class="blank">______</span>（coger）una linterna y <span class="blank">______</span>（ir）a la cocina.</div>
+      <div class="q-ja">私は起き上がり、懐中電灯を持って台所へ行った。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Me levanté</span>, <span class="ans-fill">cogí</span> … y <span class="ans-fill">fui</span></span></div>
+      <div class="q-exp">続けて起きた出来事の連続なので、すべて点過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">5</span>
+    <div class="q-content">
+      <div class="q-sentence">La ventana <span class="blank">______</span>（estar）abierta y el gato <span class="blank">______</span>（comerse）mi cena.</div>
+      <div class="q-ja">窓が開いていて、猫が私の夕食を食べているところだった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">estaba</span> ／ <span class="ans-fill">se comía</span>（または <span class="ans-fill">se estaba comiendo</span>）</span></div>
+      <div class="q-exp">台所に着いたときに見えた光景（背景）なので線過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Al final, los dos <span class="blank">______</span>（cenar）juntos en el sofá. ¡<span class="blank">______</span>（ser）una noche divertida!</div>
+      <div class="q-ja">結局、私たちふたりはソファで一緒に夕食を食べた。楽しい夜だった！</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">cenamos</span> ／ <span class="ans-fill">Fue</span></span></div>
+      <div class="q-exp"><span class="mono">al final</span> の出来事は点過去。最後の <span class="mono">Fue</span> は、夜全体を振り返った評価なので点過去。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">（　）内から適切なものを選び、その理由を考えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Cuando entré en la empresa, ya (conocí / conocía) al director.</div>
+      <div class="q-ja">入社したとき、私はもう社長と知り合いだった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">conocía</span></span></div>
+      <div class="q-exp">「知り合いだった」という状態なので線過去。<span class="mono">conocí</span> は「知り合った（初めて会った）」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Anoche (supe / sabía) que te casas. ¡Enhorabuena!</div>
+      <div class="q-ja">君が結婚するって昨夜知ったよ。おめでとう！</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">supe</span></span></div>
+      <div class="q-exp">「知った（聞かされた）」という出来事なので点過去の <span class="mono">supe</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Después de tres intentos, por fin (pude / podía) aprobar el examen.</div>
+      <div class="q-ja">3回挑戦して、やっと試験に合格できた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">pude</span></span></div>
+      <div class="q-exp">実際にやり遂げたことは点過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">En la fiesta (hubo / había) mucha gente que no conocía.</div>
+      <div class="q-ja">パーティーには知らない人がたくさんいた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">había</span></span></div>
+      <div class="q-exp">パーティーの様子の説明（背景）なので <span class="mono">había</span>。<span class="mono">hubo</span> は「（出来事が）起きた」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Cuando llegó la policía, el ladrón ya (escapó / se había escapado).</div>
+      <div class="q-ja">警察が着いたとき、泥棒はもう逃げていた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">se había escapado</span></span></div>
+      <div class="q-exp">警察が着いた時点より前に済んでいたので過去完了。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">子どもの頃、私は毎年夏を祖父母の家で過ごしていたが、12歳のとき初めて外国に行った。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">De niño, pasaba todos los veranos en casa de mis abuelos, pero cuando tenía doce años fui al extranjero por primera vez.</span></span>
+      </div>
+      <div class="q-exp"><b>pasaba</b>：繰り返された習慣は線過去。<b>tenía</b>：年齢は背景。<b>fui</b>：1回の出来事は点過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">今朝、会社に着いたとき、会議はもう始まっていた。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Esta mañana, cuando he llegado a la oficina, la reunión ya había empezado.</span></span>
+      </div>
+      <div class="q-exp"><b>he llegado</b>：esta mañana なのでスペインでは現在完了（中南米なら llegué）。<b>había empezado</b>：着いた時点より前に始まっていたので過去完了。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">彼女に電話しようとしたが、どうしても番号を思い出せなかった。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Quise llamarla, pero no pude recordar su número.</span></span>
+      </div>
+      <div class="q-exp"><b>Quise</b>：点過去の querer は「〜しようとした」。<b>no pude</b>：試みてできなかった。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">すみません、この本について伺いたいのですが。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Perdone, quería preguntarle por este libro.</span></span>
+      </div>
+      <div class="q-exp"><b>quería</b>：丁寧の線過去。<span class="mono">quisiera</span>（10課）を使うとさらに丁寧。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑦ 語彙リスト -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">点過去と組みやすい時の表現</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">ayer / anoche</span><span class="pill-pos">副</span><span class="pill-ja">昨日／昨夜</span></span>
+  <span class="pill"><span class="pill-es">el otro día</span><span class="pill-pos">表現</span><span class="pill-ja">先日</span></span>
+  <span class="pill"><span class="pill-es">la semana pasada</span><span class="pill-pos">表現</span><span class="pill-ja">先週</span></span>
+  <span class="pill"><span class="pill-es">hace ＋ 時間</span><span class="pill-pos">表現</span><span class="pill-ja">〜前に</span></span>
+  <span class="pill"><span class="pill-es">de repente / de pronto</span><span class="pill-pos">表現</span><span class="pill-ja">突然</span></span>
+  <span class="pill"><span class="pill-es">en ese momento</span><span class="pill-pos">表現</span><span class="pill-ja">その瞬間</span></span>
+  <span class="pill"><span class="pill-es">al final</span><span class="pill-pos">表現</span><span class="pill-ja">結局・最後に</span></span>
+  <span class="pill"><span class="pill-es">una vez</span><span class="pill-pos">表現</span><span class="pill-ja">一度・あるとき</span></span>
+</div>
+
+<div class="vocab-category">線過去と組みやすい時の表現</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">siempre</span><span class="pill-pos">副</span><span class="pill-ja">いつも</span></span>
+  <span class="pill"><span class="pill-es">a menudo</span><span class="pill-pos">表現</span><span class="pill-ja">しばしば</span></span>
+  <span class="pill"><span class="pill-es">a veces</span><span class="pill-pos">表現</span><span class="pill-ja">ときどき</span></span>
+  <span class="pill"><span class="pill-es">de niño / de pequeño</span><span class="pill-pos">表現</span><span class="pill-ja">子どもの頃</span></span>
+  <span class="pill"><span class="pill-es">antes</span><span class="pill-pos">副</span><span class="pill-ja">以前は</span></span>
+  <span class="pill"><span class="pill-es">en aquella época</span><span class="pill-pos">表現</span><span class="pill-ja">当時</span></span>
+  <span class="pill"><span class="pill-es">mientras</span><span class="pill-pos">接</span><span class="pill-ja">〜する間</span></span>
+  <span class="pill"><span class="pill-es">cada verano</span><span class="pill-pos">表現</span><span class="pill-ja">毎年夏に</span></span>
+</div>
+
+<div class="vocab-category">現在完了と組みやすい時の表現（スペイン）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">hoy / esta mañana</span><span class="pill-pos">表現</span><span class="pill-ja">今日／今朝</span></span>
+  <span class="pill"><span class="pill-es">esta semana / este año</span><span class="pill-pos">表現</span><span class="pill-ja">今週／今年</span></span>
+  <span class="pill"><span class="pill-es">últimamente</span><span class="pill-pos">副</span><span class="pill-ja">最近</span></span>
+  <span class="pill"><span class="pill-es">hace un rato</span><span class="pill-pos">表現</span><span class="pill-ja">少し前に</span></span>
+  <span class="pill"><span class="pill-es">ya / todavía no</span><span class="pill-pos">副</span><span class="pill-ja">もう／まだ〜ない</span></span>
+  <span class="pill"><span class="pill-es">alguna vez</span><span class="pill-pos">表現</span><span class="pill-ja">これまでに</span></span>
+</div>
+
+<div class="vocab-category">時制で意味が変わる動詞</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">conocí / conocía</span><span class="pill-pos">動</span><span class="pill-ja">知り合った／知っていた</span></span>
+  <span class="pill"><span class="pill-es">supe / sabía</span><span class="pill-pos">動</span><span class="pill-ja">知った／知っていた</span></span>
+  <span class="pill"><span class="pill-es">quise / quería</span><span class="pill-pos">動</span><span class="pill-ja">しようとした／したかった</span></span>
+  <span class="pill"><span class="pill-es">no quise</span><span class="pill-pos">動</span><span class="pill-ja">拒んだ</span></span>
+  <span class="pill"><span class="pill-es">pude / podía</span><span class="pill-pos">動</span><span class="pill-ja">できた（やり遂げた）／できた（能力）</span></span>
+  <span class="pill"><span class="pill-es">tuve / tenía</span><span class="pill-pos">動</span><span class="pill-ja">受け取った・起きた／持っていた</span></span>
+  <span class="pill"><span class="pill-es">hubo / había</span><span class="pill-pos">動</span><span class="pill-ja">起きた・行われた／あった</span></span>
+  <span class="pill"><span class="pill-es">fue / era</span><span class="pill-pos">動</span><span class="pill-ja">（全体として）〜だった／（描写）〜だった</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">timbre</span><span class="pill-pos">男</span><span class="pill-ja">呼び鈴</span></span>
+  <span class="pill"><span class="pill-es">irse la luz</span><span class="pill-pos">表現</span><span class="pill-ja">停電する</span></span>
+  <span class="pill"><span class="pill-es">poner la mesa</span><span class="pill-pos">表現</span><span class="pill-ja">食卓の準備をする</span></span>
+  <span class="pill"><span class="pill-es">grito</span><span class="pill-pos">男</span><span class="pill-ja">叫び声</span></span>
+  <span class="pill"><span class="pill-es">linterna</span><span class="pill-pos">女</span><span class="pill-ja">懐中電灯</span></span>
+  <span class="pill"><span class="pill-es">manifestación</span><span class="pill-pos">女</span><span class="pill-ja">デモ</span></span>
+  <span class="pill"><span class="pill-es">discurso</span><span class="pill-pos">男</span><span class="pill-ja">スピーチ</span></span>
+  <span class="pill"><span class="pill-es">aplaudir</span><span class="pill-pos">動</span><span class="pill-ja">拍手する</span></span>
+  <span class="pill"><span class="pill-es">marcharse</span><span class="pill-pos">再動</span><span class="pill-ja">立ち去る</span></span>
+  <span class="pill"><span class="pill-es">apenas</span><span class="pill-pos">接・副</span><span class="pill-ja">〜するやいなや／ほとんど〜ない</span></span>
+  <span class="pill"><span class="pill-es">¡Enhorabuena!</span><span class="pill-pos">間</span><span class="pill-ja">おめでとう</span></span>
+  <span class="pill"><span class="pill-es">piso de alquiler</span><span class="pill-pos">男</span><span class="pill-ja">賃貸マンション</span></span>
+</div>
+
+<!-- ⑧ まとめ -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">現在完了 vs 点過去</td><td>今を含む時間（hoy, este año）→ 現在完了／切り離された時間（ayer, en 2010）→ 点過去（スペイン）</td></tr>
+    <tr><td class="td-rule">経験・まだ・もう</td><td>現在完了：<span class="mono">¿Has estado…? ／ Todavía no he terminado.</span> 時を特定すると点過去</td></tr>
+    <tr><td class="td-rule">地域差</td><td>中南米では今日のことでも点過去が普通（どちらも正しい）</td></tr>
+    <tr><td class="td-rule">点過去 vs 線過去</td><td>点過去＝出来事（話を進める）／線過去＝背景（状況・描写・進行中・習慣）</td></tr>
+    <tr><td class="td-rule">割り込み</td><td><span class="mono">Estaba duchándome cuando se fue la luz.</span>（背景 ＋ 出来事）</td></tr>
+    <tr><td class="td-rule">区切られた期間</td><td>長さが決まっていれば点過去：<span class="mono">Viví cinco años en Barcelona.</span></td></tr>
+    <tr><td class="td-rule">意味が変わる動詞</td><td><span class="mono">conocí</span>（知り合った）、<span class="mono">supe</span>（知った）、<span class="mono">quise / no quise</span>（試みた／拒んだ）、<span class="mono">pude</span>（やり遂げた）、<span class="mono">hubo</span>（起きた）、<span class="mono">fue</span>（全体の評価）</td></tr>
+    <tr><td class="td-rule">過去完了</td><td>基準の過去より前：<span class="mono">Cuando llegué, el tren ya había salido.</span></td></tr>
+    <tr><td class="td-rule">前過去</td><td><span class="mono">hube ＋ 過去分詞</span>（apenas / en cuanto の後、書き言葉のみ）</td></tr>
+    <tr><td class="td-rule">丁寧の線過去</td><td><span class="mono">Quería pedirte un favor. ／ Venía a preguntar…</span></td></tr>
+    <tr><td class="td-rule">iba a</td><td>〜するつもりだった（実現しなかった予定）・〜しようとしていた</td></tr>
+    <tr><td class="td-rule">時の手がかり</td><td><span class="mono">de repente, ayer</span> → 点過去／<span class="mono">siempre, de niño, mientras</span> → 線過去（目安）</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 15 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<!-- ══ 鍛錬タブ（問題は tanren-bank.js から表示） ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div id="sec-tanren" class="sec-heading">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-intro">Lección 15 の内容を総合的に使う問題が <b>100問</b> あります。まとめクイズと同じか、少し難しいレベルです。<br>「内容ごと」は文法項目の順、「ランダム」は全範囲を混ぜた順に並びます。○△× を付けた問題は「今日の復習」に出ます。</div>
+
+<div id="tanren-app" data-lesson="15"></div>
+
+</div><!-- /tab-tanren -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① 現在完了と点過去</a>
+    <a class="fn-item" href="#sec2">② 点過去と線過去</a>
+    <a class="fn-item" href="#sec3">③ 時制で意味が変わる動詞</a>
+    <a class="fn-item" href="#sec4">④ 過去完了と前過去</a>
+    <a class="fn-item" href="#sec5">⑤ 線過去の特別な用法と時の手がかり</a>
+    <a class="fn-item" href="#sec6">⑥ 練習問題</a>
+    <a class="fn-item" href="#sec7">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8">⑧ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['現在完了','点過去','perfecto','indefinido'], id: 'sec1', label: '現在完了と点過去（①節）' },
+  { terms: ['時間の枠','hoy','esta semana','ayer','este año'], id: 'pp-vs-indef', label: '時間の枠で選ぶ（①節）' },
+  { terms: ['地域差','中南米','カナリア'], id: 'chiiki', label: '地域による違い（①節）' },
+  { terms: ['点過去と線過去','imperfecto','線過去'], id: 'sec2', label: '点過去と線過去（②節）' },
+  { terms: ['出来事','背景','描写','舞台'], id: 'dekigoto-haikei', label: '出来事と背景（②節）' },
+  { terms: ['割り込み','estaba cuando','cuando llegué'], id: 'warikomi', label: '割り込み（②節）' },
+  { terms: ['同時進行','mientras','期間','区切られた'], id: 'kikan', label: '同時進行と区切られた期間（②節）' },
+  { terms: ['意味が変わる','conocí','conocía','supe','sabía','quise','no quiso','pude','podía','tuve','costó'], id: 'imi-kawaru', label: '時制で意味が変わる動詞（③節）' },
+  { terms: ['hubo','había','fue','era'], id: 'hubo-habia', label: 'hubo と había、fue と era（③節）' },
+  { terms: ['過去完了','pluscuamperfecto','había salido'], id: 'kakokanryo', label: '過去完了（④節）' },
+  { terms: ['前過去','pretérito anterior','hubo terminado','apenas'], id: 'zenkako', label: '前過去（④節）' },
+  { terms: ['丁寧','quería pedirte','venía a'], id: 'teinei', label: '丁寧の線過去（⑤節）' },
+  { terms: ['iba a','つもりだった'], id: 'iba-a', label: 'iba a ＋ 不定詞（⑤節）' },
+  { terms: ['時の表現','手がかり','de repente','siempre','a menudo'], id: 'tegakari', label: '時の表現は時制の手がかり（⑤節）' },
+  { terms: ['練習問題','練習'], id: 'sec6', label: '練習問題（⑥節）' },
+  { terms: ['語彙','Vocabulario'], id: 'sec7', label: '語彙リスト（⑦節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec8', label: 'まとめ（⑧節）' },
+  { terms: ['鍛錬','Entrenamiento'], id: 'sec-tanren', label: '鍛錬（100問）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語文法解説集　B1〜B2 編</footer>
+
+</body>
+</html>
