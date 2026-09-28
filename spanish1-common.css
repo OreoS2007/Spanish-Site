@@ -473,3 +473,41 @@ body.is-printing .q-exp { display: block !important; }
 @media (max-width: 580px) {
   .course-footer { margin: 48px -12px -72px; }
 }
+
+/* ── 例文カード：用法ラベル → スペイン語 → 和訳 → その文だけの注 を縦に並べる ── */
+.ex {
+  display: block; margin: 10px 0; padding: 6px 0 6px 12px;
+  border-left: 3px solid var(--rule);
+}
+.ex-tag {
+  display: inline-block; margin-bottom: 3px; padding: 1px 7px;
+  font-family: var(--sans); font-size: 11px; font-weight: 700;
+  color: var(--accent2); background: var(--sub-bg); border-radius: 4px;
+}
+.ex-sp { display: block; line-height: 1.7; }
+.ex-ja { display: block; }
+.ex-note { display: block; margin-top: 3px; font-size: 12.5px; color: var(--mid); }
+.ex-note::before { content: "→ "; color: var(--accent2); font-weight: 700; }
+.ex-group { margin: 6px 0 14px; }
+
+/* ── 和訳を隠す：まず自分で意味を考え、タップした和訳だけを表示する ── */
+#ja-toggle-btn {
+  position: fixed; bottom: 20px; left: 16px; z-index: 950;
+  padding: 0 14px; height: 40px; border-radius: 20px;
+  border: 2px solid var(--accent2); background: var(--surface); color: var(--accent2);
+  font-family: var(--sans); font-size: 13px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+}
+body.hide-ja #ja-toggle-btn { background: var(--accent2); color: #fff; }
+@media screen {
+  body.hide-ja:not(.is-printing) .ex-ja:not(.revealed) {
+    font-size: 0; cursor: pointer;
+  }
+  body.hide-ja:not(.is-printing) .ex-ja:not(.revealed)::before {
+    content: "▸ タップで和訳を表示"; font-size: 12px; color: var(--accent2);
+    background: var(--sub-bg); border-radius: 4px; padding: 1px 8px;
+  }
+  body.hide-ja .ex-ja.revealed { cursor: pointer; }
+}
+body.is-printing #ja-toggle-btn { display: none !important; }
+@media print { #ja-toggle-btn { display: none !important; } }

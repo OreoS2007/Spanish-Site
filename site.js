@@ -451,8 +451,42 @@ function srsRestoreRatingButtons() {
   });
 }
 
+/* ── 和訳を隠すボタン：例文カード（.ex-ja）があるページだけに出す ──
+   隠している間は、タップした和訳だけが表示される。設定はこの端末にだけ保存する。 */
+function jaHiddenLoad() {
+  try { return localStorage.getItem('hideJa') === '1'; } catch (e) { return false; }
+}
+function jaHiddenSave(hidden) {
+  try { localStorage.setItem('hideJa', hidden ? '1' : '0'); } catch (e) {}
+}
+function setupJaToggle() {
+  if (!document.querySelector('.ex-ja')) return;
+  var btn = document.createElement('button');
+  btn.id = 'ja-toggle-btn';
+  btn.type = 'button';
+  function apply(hidden) {
+    document.body.classList.toggle('hide-ja', hidden);
+    document.querySelectorAll('.ex-ja.revealed').forEach(function (el) { el.classList.remove('revealed'); });
+    btn.textContent = hidden ? '👀 和訳を表示' : '🙈 和訳を隠す';
+    btn.setAttribute('aria-pressed', hidden ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function () {
+    var hidden = !document.body.classList.contains('hide-ja');
+    jaHiddenSave(hidden);
+    apply(hidden);
+  });
+  document.addEventListener('click', function (e) {
+    var ja = e.target.closest ? e.target.closest('.ex-ja') : null;
+    if (ja && document.body.classList.contains('hide-ja')) ja.classList.toggle('revealed');
+  });
+  document.body.appendChild(btn);
+  apply(jaHiddenLoad());
+}
+
 /* ── ページ読み込み時の初期化 ── */
 document.addEventListener('DOMContentLoaded', function () {
+
+  setupJaToggle();
 
   /* 鍛錬タブがあるページでは問題を並べる（評価ボタンの復元より先に行う） */
   renderTanren();
