@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 11 文法解説 | B1〜B2 編</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① para の用法</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② por の用法</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ por と para の使い分け</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ por・para の慣用表現</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 前置詞と組む動詞</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec6" data-tab="renshu" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8" data-tab="vocab" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ まとめ</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">💪 鍛錬タブ</span>
+    <a class="fn-item" href="#sec-tanren" data-tab="tanren" onclick="jumpToSection('sec-tanren'); closeToc(); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 11 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 11　文法解説</div>
+  <div class="cover-sub">B1〜B2 編　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br>日本語ではどちらも「〜のために」になる <span class="mono">por</span> と <span class="mono">para</span> を迷わず使い分けられるようになります。また、<span class="mono">pensar en</span>・<span class="mono">soñar con</span> のように、前置詞とセットで覚えるべき動詞を正しく使えるようになります。<br><small>2課の前置詞一覧が土台です。<span class="mono">para que ＋ 接続法</span>（9課）や受身の <span class="mono">por</span>（5課）も、ここでまとめて整理し直します。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① para の用法</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② por の用法</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ por と para の使い分け</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ por・para の慣用表現</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 前置詞と組む動詞</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 練習問題</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 語彙リスト</a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ まとめ</a>
+    <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：por si acaso　／　soñar con　／　期限…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① para の用法 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">para の用法</span>
+  <span class="sec-es">Usos de «para»</span>
+</div>
+
+<p><span class="mono hi2">para</span> の中心にあるイメージは<span class="hi">「矢印の先」</span>です。目的・行き先・期限・受け手など、<span class="hi2">これから向かっていくゴール</span>を指します。以下の8用法は、すべてこのイメージから説明できます。</p>
+
+<div class="box box-rule">
+  <div class="box-title">para ＝ 矢印の先（ゴール）</div>
+  <div style="text-align:center;font-size:15px;font-weight:700;padding:8px 0;">
+    今の自分 <span class="hi2">──── para ───▶</span> 目的・行き先・期限・受け手
+  </div>
+</div>
+
+<div class="sub" id="para-mokuteki">1. 目的「〜するために」</div>
+<p>主語が同じなら <span class="mono hi2">para ＋ 不定詞</span>、主語が変わるなら <span class="mono hi2">para que ＋ 接続法</span>（9課）。</p>
+<div class="ex"><span class="ex-sp">Estudio español <span class="hi2">para viajar</span> por Sudamérica.</span><span class="ex-ja">南米を旅するためにスペイン語を勉強している。（主語は同じ yo）</span></div>
+<div class="ex"><span class="ex-sp">Te lo explico otra vez <span class="hi2">para que lo entiendas</span>.</span><span class="ex-ja">君が理解できるように、もう一度説明するね。（主語が yo → tú に変わる）</span></div>
+<div class="ex"><span class="ex-sp">Te lo expliqué otra vez <span class="hi2">para que lo entendieras</span>.</span><span class="ex-ja">君が理解できるように、もう一度説明した。（主節が過去 → 接続法過去：10課）</span></div>
+
+<div class="sub" id="para-youto">2. 用途「〜用の」</div>
+<div class="ex"><span class="ex-sp">Necesito una taza <span class="hi2">para</span> café.</span><span class="ex-ja">コーヒー用のカップが必要だ。</span></div>
+<div class="ex"><span class="ex-sp">Esta pastilla es <span class="hi2">para</span> el dolor de cabeza.</span><span class="ex-ja">この錠剤は頭痛用だ。</span></div>
+<p class="note">※ <span class="mono">una taza de café</span> は「コーヒー（が入った）1杯」。<span class="mono">de</span> は中身、<span class="mono">para</span> は用途。</p>
+
+<div class="sub" id="para-houkou">3. 行き先・方向「〜へ向けて」</div>
+<div class="ex"><span class="ex-sp">Mañana salgo <span class="hi2">para</span> Madrid.</span><span class="ex-ja">明日マドリードへ出発する。</span></div>
+<div class="ex"><span class="ex-sp">El tren <span class="hi2">para</span> Sevilla sale a las diez.</span><span class="ex-ja">セビーリャ行きの列車は10時に出る。</span></div>
+<p class="note">※ <span class="mono">a</span> は「到着点」、<span class="mono">para</span> は「向かう方向」に重点がある。<span class="mono">Voy a Madrid</span>（マドリードに行く）／<span class="mono">Salgo para Madrid</span>（マドリードに向けて発つ）。</p>
+
+<div class="sub" id="para-kigen">4. 期限「〜までに」</div>
+<div class="ex"><span class="ex-sp">Tengo que terminar el informe <span class="hi2">para</span> el viernes.</span><span class="ex-ja">金曜日までに報告書を仕上げなければならない。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi2">Para</span> entonces ya habremos vuelto.</span><span class="ex-ja">その頃までには私たちはもう帰っているだろう。（未来完了：8課）</span></div>
+<p class="note">※ <span class="mono">hasta</span> は「〜まで（ずっと）」＝継続の終点。<span class="mono">Trabajo hasta el viernes</span>（金曜まで働く）と <span class="mono">Lo termino para el viernes</span>（金曜までに終える）の違いに注意。</p>
+
+<div class="sub" id="para-taishou">5. 受け手・対象「〜宛ての／〜向けの」</div>
+<div class="ex"><span class="ex-sp">Estas flores son <span class="hi2">para</span> mi madre.</span><span class="ex-ja">この花は母へのものだ。</span></div>
+<div class="ex"><span class="ex-sp">Trabajo <span class="hi2">para</span> una empresa japonesa.</span><span class="ex-ja">日本の会社に勤めている。（雇い主＝働いた成果の受け手）</span></div>
+
+<div class="sub" id="para-kanten">6. 意見の主体「〜にとって」</div>
+<div class="ex"><span class="ex-sp"><span class="hi2">Para mí</span>, esta es la mejor novela del año.</span><span class="ex-ja">私にとっては、これが今年最高の小説だ。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi2">Para</span> los niños, este examen es demasiado difícil.</span><span class="ex-ja">子どもたちにとって、この試験は難しすぎる。</span></div>
+
+<div class="sub" id="para-kijun">7. 比較の基準「〜にしては」</div>
+<div class="ex"><span class="ex-sp"><span class="hi2">Para</span> ser extranjero, habla muy bien el japonés.</span><span class="ex-ja">外国人にしては、彼はとても上手に日本語を話す。</span></div>
+<div class="ex"><span class="ex-sp">Hace mucho calor <span class="hi2">para</span> ser octubre.</span><span class="ex-ja">10月にしてはとても暑い。</span></div>
+
+<div class="sub" id="para-estar">8. estar para ＋ 不定詞「今にも〜しそう／〜する気分だ」</div>
+<div class="ex"><span class="ex-sp">El tren <span class="hi2">está para</span> salir.</span><span class="ex-ja">列車は今にも出発するところだ。（主にスペイン。中南米では <span class="mono">estar por</span> も使う）</span></div>
+<div class="ex"><span class="ex-sp">Hoy no <span class="hi2">estoy para</span> bromas.</span><span class="ex-ja">今日は冗談を言う気分じゃない。（否定文で「〜する気分ではない」）</span></div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">para</span> は古いスペイン語の <span class="mono">pora</span> から来ています。さらにさかのぼると、ラテン語の <span class="mono">pro</span>（〜のために）と <span class="mono">ad</span>（〜へ）の2語が合わさったものです。<b>「〜へ」という方向の意味が最初から入っている</b>ので、目的・行き先・期限といった「前方のゴール」を表すのは自然なことなのです。</span>
+</div>
+
+<div class="mini-check" id="L11-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Ahorro dinero <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">para</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">目的：主語が同じ</span></span> comprarme una moto.</div>
+  <div class="mini-check-ja">バイクを買うためにお金を貯めている。</div>
+<div class="srs-rate" data-qid="L11-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：para の用法</div>
+
+  <div class="quiz-item" id="L11-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Tenemos que entregar la tarea <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">para</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">期限「〜までに」</span></span> el lunes.</div>
+    <div class="quiz-ja">私たちは月曜日までに課題を提出しなければならない。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>para</b>：期限を表す。「月曜まで（ずっと）」なら hasta だが、ここは「月曜までに提出を済ませる」なので para。</div>
+  <div class="srs-rate" data-qid="L11-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Te dejo mis apuntes para que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estudies</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">estudiar：主語が変わる目的</span></span> mejor.</div>
+    <div class="quiz-ja">君がもっとよく勉強できるように、僕のノートを貸すよ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>estudies</b>：主節（yo）と目的節（tú）で主語が違うので para que ＋ 接続法現在。主語が同じなら para ＋ 不定詞になる。</div>
+  <div class="srs-rate" data-qid="L11-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Para</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">比較の基準「〜にしては」</span></span> ser tan joven, sabe mucho de historia.</div>
+    <div class="quiz-ja">あんなに若いのに、彼は歴史にとても詳しい。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Para</b>：para ＋ 不定詞（ser）で「〜にしては」。一般的な基準から見て意外だ、という含みがある。</div>
+  <div class="srs-rate" data-qid="L11-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ② por の用法 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">por の用法</span>
+  <span class="sec-es">Usos de «por»</span>
+</div>
+
+<p><span class="mono hi-r">por</span> の中心イメージは<span class="hi">「通り道」と「背後にあるきっかけ」</span>です。どこを通るか（経由・漠然とした場所や時間・手段）と、何がきっかけか（原因・動機・交換）を表します。</p>
+
+<div class="box box-rule">
+  <div class="box-title">por ＝ 通り道・背後のきっかけ</div>
+  <div style="text-align:center;font-size:15px;font-weight:700;padding:8px 0;">
+    原因・動機 <span class="hi-r">── por ──▶</span> 行動　／　<span class="hi-r">〜〜 por 〜〜</span>（中を通り抜ける）
+  </div>
+</div>
+
+<div class="sub" id="por-riyuu">1. 原因・理由・動機「〜のせいで／〜が理由で」</div>
+<div class="ex"><span class="ex-sp">No salimos <span class="hi-r">por</span> la lluvia.</span><span class="ex-ja">雨のせいで私たちは出かけなかった。</span></div>
+<div class="ex"><span class="ex-sp">Lo castigaron <span class="hi-r">por</span> mentir.</span><span class="ex-ja">彼は嘘をついたことで罰を受けた。（por ＋ 不定詞＝理由）</span></div>
+<div class="ex"><span class="ex-sp">Gracias <span class="hi-r">por</span> tu ayuda.</span><span class="ex-ja">手伝ってくれてありがとう。（感謝の理由）</span></div>
+
+<div class="sub" id="por-keiyu">2. 経由・通過「〜を通って」</div>
+<div class="ex"><span class="ex-sp">Para ir a Granada pasamos <span class="hi-r">por</span> Toledo.</span><span class="ex-ja">グラナダへ行くのに私たちはトレドを経由した。</span></div>
+<div class="ex"><span class="ex-sp">El ladrón entró <span class="hi-r">por</span> la ventana.</span><span class="ex-ja">泥棒は窓から入った。</span></div>
+<div class="ex"><span class="ex-sp">Me gusta pasear <span class="hi-r">por</span> el parque.</span><span class="ex-ja">公園を散歩するのが好きだ。（公園の中をあちこち）</span></div>
+
+<div class="sub" id="por-bakuzen">3. 漠然とした場所・時間「〜あたりで／〜ごろ」</div>
+<div class="ex"><span class="ex-sp">¿Hay una farmacia <span class="hi-r">por</span> aquí?</span><span class="ex-ja">このあたりに薬局はありますか？</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi-r">Por</span> la mañana estudio y <span class="hi-r">por</span> la tarde trabajo.</span><span class="ex-ja">午前中は勉強して、午後は働く。</span></div>
+<p class="note">※ 時刻を言うときは <span class="mono">a las diez de la mañana</span>（2課・4課）。時刻がなく「午前中に」とだけ言うなら <span class="mono">por la mañana</span>。</p>
+
+<div class="sub" id="por-shudan">4. 手段「〜で（伝達・輸送の手段）」</div>
+<div class="ex"><span class="ex-sp">Te llamo <span class="hi-r">por</span> teléfono esta noche.</span><span class="ex-ja">今夜電話するね。</span></div>
+<div class="ex"><span class="ex-sp">Le mandé los documentos <span class="hi-r">por</span> correo electrónico.</span><span class="ex-ja">彼に書類をメールで送った。</span></div>
+
+<div class="sub" id="por-koukan">5. 交換・代価「〜と引き換えに／〜で（値段）」</div>
+<div class="ex"><span class="ex-sp">Compré esta chaqueta <span class="hi-r">por</span> cincuenta euros.</span><span class="ex-ja">このジャケットを50ユーロで買った。</span></div>
+<div class="ex"><span class="ex-sp">Cambié mi bicicleta <span class="hi-r">por</span> una guitarra.</span><span class="ex-ja">自転車をギターと交換した。</span></div>
+
+<div class="sub" id="por-dairi">6. 代理・利益「〜の代わりに／〜のことを思って」</div>
+<div class="ex"><span class="ex-sp">Hoy trabajo <span class="hi-r">por</span> mi compañero, que está enfermo.</span><span class="ex-ja">今日は病気の同僚の代わりに働く。</span></div>
+<div class="ex"><span class="ex-sp">Lo hice <span class="hi-r">por</span> ti.</span><span class="ex-ja">君のためを思ってそうしたんだ。（君が行動の動機）</span></div>
+<div class="ex"><span class="ex-sp">Muchos lucharon <span class="hi-r">por</span> la libertad.</span><span class="ex-ja">多くの人が自由のために戦った。</span></div>
+
+<div class="sub" id="por-ukemi">7. 受身の動作主「〜によって」</div>
+<div class="ex"><span class="ex-sp">El Quijote fue escrito <span class="hi-r">por</span> Cervantes.</span><span class="ex-ja">『ドン・キホーテ』はセルバンテスによって書かれた。（ser 受身：5課）</span></div>
+
+<div class="sub" id="por-wariai">8. 割合・単位「〜につき」</div>
+<div class="ex"><span class="ex-sp">El tren va a trescientos kilómetros <span class="hi-r">por</span> hora.</span><span class="ex-ja">その列車は時速300キロで走る。</span></div>
+<div class="ex"><span class="ex-sp">Voy al gimnasio dos veces <span class="hi-r">por</span> semana.</span><span class="ex-ja">週に2回ジムに行く。（<span class="mono">a la semana</span> とも言う）</span></div>
+<div class="ex"><span class="ex-sp">El veinte <span class="hi-r">por</span> ciento de los alumnos vive lejos.</span><span class="ex-ja">生徒の20パーセントは遠くに住んでいる。</span></div>
+
+<div class="sub" id="por-kikan">9. 期間「〜の間」</div>
+<div class="ex"><span class="ex-sp">Estuve en Perú <span class="hi-r">por</span> dos meses.</span><span class="ex-ja">私はペルーに2か月間いた。</span></div>
+<p class="note">※ 期間の <span class="mono">por</span> は中南米でよく使う。スペインでは <span class="mono">durante dos meses</span> か、前置詞なしの <span class="mono">Estuve dos meses en Perú</span> が普通。</p>
+
+<div class="sub" id="por-toriniiku">10. 取りに行く・呼びに行く「〜を求めて」</div>
+<div class="ex"><span class="ex-sp">Voy <span class="hi-r">por</span> pan. ¿Quieres algo?</span><span class="ex-ja">パンを買いに行くけど、何か要る？</span></div>
+<p class="note">※ スペインの口語では <span class="mono">Voy a por pan</span> と <span class="mono">a por</span> を重ねる言い方も非常に多い。</p>
+
+<div class="sub" id="por-estar">11. estar por ＋ 不定詞「まだ〜されていない／〜しようかと思っている」</div>
+<div class="ex"><span class="ex-sp">La casa todavía <span class="hi-r">está por</span> limpiar.</span><span class="ex-ja">家はまだ掃除されていない。（これから掃除すべき状態）</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi-r">Estoy por</span> dejarlo todo y irme de viaje.</span><span class="ex-ja">全部放り出して旅に出ようかと思っている。</span></div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">por</span> は、ラテン語の <span class="mono">pro</span>（〜の代わりに・〜のために）と <span class="mono">per</span>（〜を通って）が1つにまとまった語です。「代理・動機」と「通過」という、一見ばらばらな意味が同居しているのはこのためです。英語の <span class="mono">per cent</span> や <span class="mono">per hour</span> の <span class="mono">per</span> も同じ語から来ています。</span>
+</div>
+
+<div class="mini-check" id="L11-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Muchas gracias <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">感謝の理由</span></span> la invitación.</div>
+  <div class="mini-check-ja">ご招待ありがとうございます。</div>
+<div class="srs-rate" data-qid="L11-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：por の用法</div>
+
+  <div class="quiz-item" id="L11-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Pagué treinta euros <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">代価</span></span> estas entradas.</div>
+    <div class="quiz-ja">このチケットに30ユーロ払った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>por</b>：代価・交換の por。「〜と引き換えに」お金を払う、というイメージ。</div>
+  <div class="srs-rate" data-qid="L11-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Esta novela fue escrita <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">受身の動作主</span></span> una autora chilena.</div>
+    <div class="quiz-ja">この小説はチリの女性作家によって書かれた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>por</b>：ser ＋ 過去分詞の受身で、動作主（〜によって）を示すのは por。</div>
+  <div class="srs-rate" data-qid="L11-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No pudimos aterrizar <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">原因</span></span> la niebla.</div>
+    <div class="quiz-ja">霧のせいで着陸できなかった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>por</b>：原因・理由。「霧」は着陸できなかったことの<b>背後にあるきっかけ</b>なので por。</div>
+  <div class="srs-rate" data-qid="L11-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ③ por と para の使い分け -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">por と para の使い分け</span>
+  <span class="sec-es">«Por» y «para»: contraste</span>
+</div>
+
+<p>迷ったら、<span class="hi">「その名詞は行動の<span class="hi2">前方（これから向かう先）</span>にあるか、<span class="hi-r">後方（きっかけ）や途中（通り道）</span>にあるか」</span>を考えます。</p>
+
+<div class="box box-rule" id="por-para-hantei">
+  <div class="box-title">判定の目安</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th style="width:50%;background:#fbe4e4;color:var(--warn)">por（後方・途中）</th><th style="background:#d8eeea;color:var(--accent2)">para（前方）</th></tr></thead>
+    <tbody>
+      <tr><td>原因・動機（なぜ？ → <span class="mono">¿Por qué?</span>）</td><td>目的（何のため？ → <span class="mono">¿Para qué?</span>）</td></tr>
+      <tr><td>経由・通過・漠然とした場所</td><td>行き先・方向</td></tr>
+      <tr><td>漠然とした時間・期間</td><td>期限</td></tr>
+      <tr><td>交換・代価・代理</td><td>受け手・用途</td></tr>
+      <tr><td>手段・割合・受身の動作主</td><td>意見の主体・比較の基準</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="sub" id="por-para-pair">意味が変わるペア</div>
+<p>同じ文で <span class="mono">por</span> と <span class="mono">para</span> を入れ替えると、意味がはっきり変わります。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:50%;background:#fbe4e4;color:var(--warn)">por</th><th style="background:#d8eeea;color:var(--accent2)">para</th></tr></thead>
+  <tbody>
+    <tr><td><span class="mono">Lo hice <b>por</b> ti.</span><br>君のためを思って／君のせいでそうした（君が<b>動機</b>）</td><td><span class="mono">Lo hice <b>para</b> ti.</span><br>君にあげるために作った（君が<b>受け手</b>）</td></tr>
+    <tr><td><span class="mono">Pasamos <b>por</b> Madrid.</span><br>マドリードを経由した</td><td><span class="mono">Salimos <b>para</b> Madrid.</span><br>マドリードへ向けて出発した</td></tr>
+    <tr><td><span class="mono">Trabajo <b>por</b> mi madre.</span><br>母の代わりに働く</td><td><span class="mono">Trabajo <b>para</b> mi madre.</span><br>母に雇われて働く</td></tr>
+    <tr><td><span class="mono">Estudio <b>por</b> obligación.</span><br>義務だから勉強する（理由）</td><td><span class="mono">Estudio <b>para</b> aprobar.</span><br>合格するために勉強する（目的）</td></tr>
+    <tr><td><span class="mono">Volveré <b>por</b> marzo.</span><br>3月ごろ戻る</td><td><span class="mono">Volveré <b>para</b> marzo.</span><br>3月までには戻る</td></tr>
+    <tr><td><span class="mono"><b>Por</b> mí, puedes quedarte.</span><br>私としては残ってもいいよ（私は構わない）</td><td><span class="mono"><b>Para</b> mí, es un error.</span><br>私の考えでは、それは間違いだ</td></tr>
+    <tr><td><span class="mono">La cena está <b>por</b> hacer.</span><br>夕食はまだ作っていない</td><td><span class="mono">El avión está <b>para</b> despegar.</span><br>飛行機は今にも離陸する</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="porque-paraque">¿Por qué? と ¿Para qué?</div>
+<div class="ex"><span class="ex-sp">—<span class="hi-r">¿Por qué</span> estudias español? —<span class="hi-r">Porque</span> me encanta la música latina.</span><span class="ex-ja">「なぜスペイン語を勉強するの？」「ラテン音楽が大好きだからだよ」（理由を答える）</span></div>
+<div class="ex"><span class="ex-sp">—<span class="hi2">¿Para qué</span> estudias español? —<span class="hi2">Para</span> trabajar en México.</span><span class="ex-ja">「何のためにスペイン語を勉強するの？」「メキシコで働くためだよ」（目的を答える）</span></div>
+
+<div class="box box-warn">
+  <div class="box-title">よくある誤り</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li>× <span class="mono">Gracias para todo.</span> → ○ <span class="mono hi-r">Gracias por todo.</span>（感謝は「理由」なので必ず por）</li>
+    <li>× <span class="mono">Estudio por aprobar.</span> → ○ <span class="mono hi2">Estudio para aprobar.</span>（合格はこれから向かう「目的」）</li>
+    <li>× <span class="mono">Te llamo para teléfono.</span> → ○ <span class="mono hi-r">Te llamo por teléfono.</span>（伝達の「手段」）</li>
+    <li>× <span class="mono">Lo necesito por mañana.</span> → ○ <span class="mono hi2">Lo necesito para mañana.</span>（「明日までに」＝期限）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L11-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">—¿<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Para</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">目的を尋ねる</span></span> qué sirve este botón? —<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Para</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">目的</span></span> encender la luz.</div>
+  <div class="mini-check-ja">「このボタンは何のためのもの？」「電気をつけるためだよ」</div>
+<div class="srs-rate" data-qid="L11-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：por と para の使い分け</div>
+
+  <div class="quiz-item" id="L11-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Mi hermano trabaja <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">para</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">雇い主</span></span> una empresa alemana, pero hoy trabaja <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">代理</span></span> su jefe, que está de viaje.</div>
+    <div class="quiz-ja">兄はドイツの会社に勤めているが、今日は出張中の上司の代わりに働いている。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>para</b>：雇い主（働いた成果の受け手）。<b>por</b>：「〜の代わりに」という代理。</div>
+  <div class="srs-rate" data-qid="L11-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Este regalo es <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">para</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">受け手</span></span> ti; lo compré <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">代価</span></span> muy poco dinero.</div>
+    <div class="quiz-ja">このプレゼントは君にだよ。すごく安く買ったんだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>para</b>：プレゼントの受け手。<b>por</b>：代価（〜の値段で）。</div>
+  <div class="srs-rate" data-qid="L11-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Salimos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">para</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">行き先</span></span> Barcelona mañana y pasaremos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">経由</span></span> Zaragoza.</div>
+    <div class="quiz-ja">私たちは明日バルセロナへ向けて出発し、サラゴサを経由する。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>para</b>：行き先・方向。<b>por</b>：途中で通る場所（経由）。</div>
+  <div class="srs-rate" data-qid="L11-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ④ por・para の慣用表現 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">por・para の慣用表現</span>
+  <span class="sec-es">Expresiones con «por» y «para»</span>
+</div>
+
+<p>どちらを使うかが固定された表現です。上の用法から意味を推測できるものも多いですが、<span class="hi">まとまりで覚える</span>のが近道です。特に文と文をつなぐ表現（<span class="mono">por eso</span>、<span class="mono">por lo tanto</span> など）は B2 の作文で欠かせません。</p>
+
+<div class="sub" id="kanyou-por">por を使う表現</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:34%">表現</th><th style="width:26%">意味</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr><td class="mono hi-r">por fin</td><td>ついに・やっと</td><td class="mono">Por fin ha llegado el verano.</td></tr>
+    <tr><td class="mono hi-r">por supuesto</td><td>もちろん</td><td class="mono">—¿Me ayudas? —Por supuesto.</td></tr>
+    <tr><td class="mono hi-r">por eso</td><td>だから・そのために</td><td class="mono">Estaba cansado; por eso me acosté pronto.</td></tr>
+    <tr><td class="mono hi-r">por lo tanto</td><td>したがって（書き言葉）</td><td class="mono">No hay datos; por lo tanto, no podemos concluir nada.</td></tr>
+    <tr><td class="mono hi-r">por lo menos</td><td>少なくとも</td><td class="mono">Tardaremos por lo menos dos horas.</td></tr>
+    <tr><td class="mono hi-r">por lo general</td><td>一般に・普段は</td><td class="mono">Por lo general, ceno a las nueve.</td></tr>
+    <tr><td class="mono hi-r">por cierto</td><td>ところで（話題転換）</td><td class="mono">Por cierto, ¿has visto a Luis?</td></tr>
+    <tr><td class="mono hi-r">por ejemplo</td><td>例えば</td><td class="mono">Me gustan las frutas tropicales, por ejemplo, el mango.</td></tr>
+    <tr><td class="mono hi-r">por primera vez</td><td>初めて</td><td class="mono">Visité Japón por primera vez en 2019.</td></tr>
+    <tr><td class="mono hi-r">por casualidad</td><td>偶然</td><td class="mono">Nos encontramos por casualidad en el metro.</td></tr>
+    <tr><td class="mono hi-r">por culpa de</td><td>〜のせいで（悪い結果）</td><td class="mono">Llegamos tarde por culpa del tráfico.</td></tr>
+    <tr><td class="mono hi-r">por suerte / por desgracia</td><td>運よく／残念ながら</td><td class="mono">Por suerte, nadie resultó herido.</td></tr>
+    <tr><td class="mono hi-r">por lo visto</td><td>どうやら〜らしい</td><td class="mono">Por lo visto, van a cerrar la tienda.</td></tr>
+    <tr><td class="mono hi-r">por completo</td><td>完全に</td><td class="mono">Me olvidé por completo de su cumpleaños.</td></tr>
+    <tr><td class="mono hi-r">por un lado… por otro (lado)</td><td>一方では…他方では</td><td class="mono">Por un lado es barato; por otro, es lento.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box box-rule" id="por-si">
+  <div class="box-title">por si (acaso)「〜するといけないから／念のため」</div>
+  <p style="margin:0 0 6px;"><span class="mono hi-r">por si ＋ 直説法現在</span> が基本。起こる可能性が低いと感じるときは <span class="mono hi-r">por si ＋ 接続法過去</span> も使う。<span class="hi">接続法現在は使わない</span>（条件の si と同じ：10課）。</p>
+  <div class="ex"><span class="ex-sp">Llévate el paraguas <span class="hi-r">por si llueve</span>.</span><span class="ex-ja">雨が降るといけないから傘を持って行きなさい。</span></div>
+  <div class="ex"><span class="ex-sp">Te dejo mi número <span class="hi-r">por si necesitaras</span> algo.</span><span class="ex-ja">万一何か必要になったときのために、私の番号を置いていくね。</span></div>
+  <div class="ex"><span class="ex-sp">Compra más leche, <span class="hi-r">por si acaso</span>.</span><span class="ex-ja">念のため、牛乳をもっと買っておいて。（文末で単独でも使う）</span></div>
+</div>
+
+<div class="sub" id="kanyou-para">para を使う表現</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:34%">表現</th><th style="width:26%">意味</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr><td class="mono hi2">para siempre</td><td>永遠に</td><td class="mono">Te querré para siempre.</td></tr>
+    <tr><td class="mono hi2">para colmo</td><td>おまけに（悪いことが重なる）</td><td class="mono">Perdí el tren y, para colmo, empezó a llover.</td></tr>
+    <tr><td class="mono hi2">no es para tanto</td><td>大げさだ・それほどのことではない</td><td class="mono">Tranquilo, no es para tanto.</td></tr>
+    <tr><td class="mono hi2">para nada</td><td>全然（〜ない）</td><td class="mono">No me gustó para nada.</td></tr>
+    <tr><td class="mono hi2">para entonces</td><td>その時までには</td><td class="mono">Para entonces ya lo sabremos.</td></tr>
+    <tr><td class="mono hi2">¿para qué?</td><td>何のために</td><td class="mono">¿Para qué quieres tanto dinero?</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">por culpa de</span> は、悪い結果の原因にしか使いません。「君のおかげで合格できた」のように良い結果なら <span class="mono hi">gracias a</span> を使います（<span class="mono">Aprobé gracias a ti</span>）。日本語の「〜のせいで／〜のおかげで」とちょうど同じ区別です。</span>
+</div>
+
+<div class="mini-check" id="L11-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Apunta mi dirección, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por si</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">念のため：可能性がある</span></span> te pierdes.</div>
+  <div class="mini-check-ja">迷うといけないから、私の住所を控えておいて。</div>
+<div class="srs-rate" data-qid="L11-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：por・para の慣用表現</div>
+
+  <div class="quiz-item" id="L11-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Se me rompió el coche y, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">para colmo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">悪いことが重なる</span></span>, perdí la cartera.</div>
+    <div class="quiz-ja">車が壊れて、おまけに財布までなくした。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>para colmo</b>：「おまけに・さらに悪いことに」。悪い出来事を積み重ねるときの決まり文句。</div>
+  <div class="srs-rate" data-qid="L11-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No encontramos habitación; <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por lo tanto</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">結論を導く（書き言葉）</span></span>, tuvimos que dormir en el coche.</div>
+    <div class="quiz-ja">部屋が見つからなかった。したがって車で寝なければならなかった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>por lo tanto</b>：前の文から当然出てくる結論を導く。会話なら por eso や así que でもよい。</div>
+  <div class="srs-rate" data-qid="L11-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Llegamos tarde <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">por culpa del</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">悪い結果の原因</span></span> tráfico.</div>
+    <div class="quiz-ja">渋滞のせいで私たちは遅刻した。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>por culpa del</b>：por culpa de ＋ el tráfico で del。良い結果の原因なら gracias a を使う。</div>
+  <div class="srs-rate" data-qid="L11-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ⑤ 前置詞と組む動詞 -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">前置詞と組む動詞</span>
+  <span class="sec-es">Verbos con preposición (régimen preposicional)</span>
+</div>
+
+<p>スペイン語には、目的語の前に<span class="hi">決まった前置詞</span>を必要とする動詞がたくさんあります。日本語の「〜を」「〜に」からは予想できないことが多いので、<span class="hi-r">動詞と前置詞をセットで</span>覚えます。</p>
+
+<div class="box box-rule">
+  <div class="box-title">3つの大原則</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li>前置詞の後ろには<span class="hi">名詞・不定詞・que 節</span>のどれでも来られる：<span class="mono">Sueño <b>con</b> Italia ／ Sueño <b>con</b> viajar ／ Sueño <b>con</b> que vengas</span></li>
+    <li>前置詞の後ろの動詞は<span class="hi-r">必ず不定詞</span>（英語の -ing にあたる形は使わない）：× <span class="mono">pienso en viajando</span> → ○ <span class="mono">pienso en viajar</span></li>
+    <li>疑問文・関係節でも前置詞は<span class="hi-r">文頭に出す</span>（文末に残さない）：<span class="mono"><b>¿En</b> qué piensas?</span>／<span class="mono">la chica <b>con</b> la que me casé</span></li>
+  </ul>
+</div>
+
+<div class="sub" id="doushi-a">a と組む動詞</div>
+<p>多くは「〜へ向かう・〜し始める」という方向の意味をもちます。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:36%">動詞</th><th style="width:24%">意味</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">empezar / comenzar <b>a</b></td><td>〜し始める</td><td class="mono">Empezó a llover.</td></tr>
+    <tr><td class="mono">aprender <b>a</b></td><td>〜するのを学ぶ</td><td class="mono">Aprendí a nadar a los cinco años.</td></tr>
+    <tr><td class="mono">ayudar <b>a</b></td><td>〜するのを手伝う</td><td class="mono">¿Me ayudas a mover la mesa?</td></tr>
+    <tr><td class="mono">acostumbrarse <b>a</b></td><td>〜に慣れる</td><td class="mono">Ya me he acostumbrado a la comida picante.</td></tr>
+    <tr><td class="mono">atreverse <b>a</b></td><td>思い切って〜する</td><td class="mono">No me atrevo a decírselo.</td></tr>
+    <tr><td class="mono">negarse <b>a</b></td><td>〜するのを拒む</td><td class="mono">Se negó a firmar el contrato.</td></tr>
+    <tr><td class="mono">invitar <b>a</b></td><td>〜に招待する・〜をおごる</td><td class="mono">Te invito a un café.</td></tr>
+    <tr><td class="mono">asistir <b>a</b></td><td>〜に出席する</td><td class="mono">Asistí a la conferencia.</td></tr>
+    <tr><td class="mono">parecerse <b>a</b></td><td>〜に似ている</td><td class="mono">Te pareces mucho a tu padre.</td></tr>
+    <tr><td class="mono">renunciar <b>a</b></td><td>〜を諦める・放棄する</td><td class="mono">Renunció a su puesto.</td></tr>
+    <tr><td class="mono">oler / saber <b>a</b></td><td>〜のにおい／味がする</td><td class="mono">Esta sopa sabe a ajo.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="doushi-de">de と組む動詞</div>
+<p>「〜について・〜から離れる」の意味をもつものが多く、<span class="hi">感情や記憶を表す再帰動詞</span>の多くがここに入ります。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:36%">動詞</th><th style="width:24%">意味</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">acordarse <b>de</b></td><td>〜を覚えている・思い出す</td><td class="mono">¿Te acuerdas de mí?</td></tr>
+    <tr><td class="mono">olvidarse <b>de</b></td><td>〜を忘れる</td><td class="mono">Me olvidé de llamarte.</td></tr>
+    <tr><td class="mono">darse cuenta <b>de</b></td><td>〜に気づく</td><td class="mono">No me di cuenta del error.</td></tr>
+    <tr><td class="mono">depender <b>de</b></td><td>〜次第だ</td><td class="mono">Depende del tiempo.</td></tr>
+    <tr><td class="mono">tratar <b>de</b> ＋ 不定詞</td><td>〜しようと努める</td><td class="mono">Trato de dormir ocho horas.</td></tr>
+    <tr><td class="mono">dejar <b>de</b> ＋ 不定詞</td><td>〜するのをやめる</td><td class="mono">Dejé de fumar hace un año.</td></tr>
+    <tr><td class="mono">enamorarse <b>de</b></td><td>〜に恋をする</td><td class="mono">Se enamoró de una chica argentina.</td></tr>
+    <tr><td class="mono">quejarse <b>de</b></td><td>〜について不平を言う</td><td class="mono">Siempre se queja del ruido.</td></tr>
+    <tr><td class="mono">alegrarse <b>de</b></td><td>〜を喜ぶ</td><td class="mono">Me alegro de verte.</td></tr>
+    <tr><td class="mono">arrepentirse <b>de</b></td><td>〜を後悔する</td><td class="mono">No me arrepiento de nada.</td></tr>
+    <tr><td class="mono">despedirse <b>de</b></td><td>〜に別れを告げる</td><td class="mono">Me despedí de mis amigos.</td></tr>
+    <tr><td class="mono">disfrutar <b>de</b></td><td>〜を楽しむ</td><td class="mono">Disfrutamos del buen tiempo.</td></tr>
+    <tr><td class="mono">carecer <b>de</b></td><td>〜を欠いている</td><td class="mono">El proyecto carece de fondos.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="doushi-en">en と組む動詞</div>
+<p>「〜の中に・〜に（入り込む）」のイメージです。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:36%">動詞</th><th style="width:24%">意味</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">pensar <b>en</b></td><td>〜のことを考える</td><td class="mono">Siempre pienso en ti.</td></tr>
+    <tr><td class="mono">confiar <b>en</b></td><td>〜を信頼する</td><td class="mono">Confío en ella.</td></tr>
+    <tr><td class="mono">consistir <b>en</b></td><td>〜から成る・〜にある</td><td class="mono">El trabajo consiste en atender a los clientes.</td></tr>
+    <tr><td class="mono">insistir <b>en</b></td><td>〜を言い張る</td><td class="mono">Insistió en pagar la cuenta.</td></tr>
+    <tr><td class="mono">fijarse <b>en</b></td><td>〜に注目する・気づく</td><td class="mono">Fíjate en los detalles.</td></tr>
+    <tr><td class="mono">tardar ＋ 時間 ＋ <b>en</b></td><td>〜するのに（時間が）かかる</td><td class="mono">Tardé dos horas en llegar.</td></tr>
+    <tr><td class="mono">convertirse <b>en</b></td><td>〜に変わる</td><td class="mono">El agua se convirtió en hielo.</td></tr>
+    <tr><td class="mono">quedar <b>en</b> ＋ 不定詞</td><td>〜することに決める</td><td class="mono">Quedamos en vernos el sábado.</td></tr>
+    <tr><td class="mono">entrar <b>en</b></td><td>〜に入る（中南米では <span class="mono">entrar a</span> も多い）</td><td class="mono">Entró en la sala sin saludar.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="doushi-con">con と組む動詞</div>
+<p>「〜と一緒に・〜を相手に」のイメージです。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:36%">動詞</th><th style="width:24%">意味</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">soñar <b>con</b></td><td>〜の夢を見る・〜を夢見る</td><td class="mono">Anoche soñé contigo.</td></tr>
+    <tr><td class="mono">casarse <b>con</b></td><td>〜と結婚する</td><td class="mono">Se casó con un médico.</td></tr>
+    <tr><td class="mono">contar <b>con</b></td><td>〜を当てにする</td><td class="mono">Puedes contar conmigo.</td></tr>
+    <tr><td class="mono">quedar <b>con</b></td><td>〜と会う約束をする</td><td class="mono">He quedado con Ana a las seis.</td></tr>
+    <tr><td class="mono">encontrarse <b>con</b></td><td>〜に（偶然）出会う</td><td class="mono">Me encontré con un viejo amigo.</td></tr>
+    <tr><td class="mono">dar <b>con</b></td><td>〜を見つけ出す</td><td class="mono">Por fin di con la solución.</td></tr>
+    <tr><td class="mono">acabar <b>con</b></td><td>〜を終わらせる・なくす</td><td class="mono">Hay que acabar con la corrupción.</td></tr>
+    <tr><td class="mono">amenazar <b>con</b></td><td>〜すると脅す</td><td class="mono">Amenazó con irse.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="doushi-por">por と組む動詞</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:36%">動詞</th><th style="width:24%">意味</th><th>例文</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">preocuparse <b>por</b></td><td>〜を心配する</td><td class="mono">No te preocupes por mí.</td></tr>
+    <tr><td class="mono">interesarse <b>por</b></td><td>〜に関心を持つ</td><td class="mono">Se interesa por la política.</td></tr>
+    <tr><td class="mono">optar <b>por</b></td><td>〜を選ぶ</td><td class="mono">Optamos por el tren.</td></tr>
+    <tr><td class="mono">luchar <b>por</b></td><td>〜のために戦う</td><td class="mono">Luchan por sus derechos.</td></tr>
+    <tr><td class="mono">disculparse <b>por</b></td><td>〜について謝る</td><td class="mono">Se disculpó por el retraso.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="imi-kawaru">前置詞で意味が変わる動詞</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:22%">動詞</th><th style="width:30%">形</th><th>意味・例</th></tr></thead>
+  <tbody>
+    <tr><td class="mono" rowspan="3">pensar</td><td class="mono">pensar <b>en</b></td><td>〜のことを考える：<span class="mono">Pienso en mi futuro.</span></td></tr>
+    <tr><td class="mono">pensar <b>de</b></td><td>〜について意見を持つ（疑問文で）：<span class="mono">¿Qué piensas de él?</span></td></tr>
+    <tr><td class="mono">pensar ＋ 不定詞</td><td>〜するつもりだ：<span class="mono">Pienso estudiar en Chile.</span></td></tr>
+    <tr><td class="mono" rowspan="3">quedar</td><td class="mono">quedar <b>con</b> 人</td><td>〜と会う約束をする：<span class="mono">Quedé con Luis.</span></td></tr>
+    <tr><td class="mono">quedar <b>en</b> ＋ 不定詞</td><td>〜することに決める：<span class="mono">Quedamos en llamarnos.</span></td></tr>
+    <tr><td class="mono">quedarse <b>con</b> 物</td><td>〜を手元に残す・選ぶ：<span class="mono">Me quedo con este.</span></td></tr>
+    <tr><td class="mono" rowspan="2">tratar</td><td class="mono">tratar <b>de</b> ＋ 不定詞</td><td>〜しようと努める：<span class="mono">Trata de relajarte.</span></td></tr>
+    <tr><td class="mono">tratarse <b>de</b></td><td>（話題・問題は）〜である：<span class="mono">Se trata de un asunto serio.</span>（主語なし・3単のみ）</td></tr>
+    <tr><td class="mono" rowspan="2">acabar</td><td class="mono">acabar <b>de</b> ＋ 不定詞</td><td>〜したばかりだ：<span class="mono">Acabo de llegar.</span></td></tr>
+    <tr><td class="mono">acabar <b>con</b></td><td>〜を終わらせる：<span class="mono">Acabemos con esto.</span></td></tr>
+    <tr><td class="mono" rowspan="2">contar</td><td class="mono">contar（前置詞なし）</td><td>数える／語る：<span class="mono">Te cuento un secreto.</span></td></tr>
+    <tr><td class="mono">contar <b>con</b></td><td>〜を当てにする：<span class="mono">Cuento contigo.</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="dequeismo">前置詞 ＋ que（dequeísmo と queísmo）</div>
+<p>前置詞と組む動詞の後ろに que 節が来るときは、<span class="hi-r">前置詞を残して</span> <span class="mono">前置詞 ＋ que</span> にします。逆に、前置詞を取らない動詞に <span class="mono">de</span> を足すのは誤りです。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:50%;background:#fbe4e4;color:var(--warn)">誤り</th><th style="background:#d8eeea;color:var(--accent2)">正しい形</th></tr></thead>
+  <tbody>
+    <tr><td>× <span class="mono">Pienso <u>de</u> que tienes razón.</span><br><small>dequeísmo（不要な de を足す）</small></td><td>○ <span class="mono">Pienso que tienes razón.</span></td></tr>
+    <tr><td>× <span class="mono">Me dijo <u>de</u> que vendría.</span><br><small>dequeísmo</small></td><td>○ <span class="mono">Me dijo que vendría.</span></td></tr>
+    <tr><td>× <span class="mono">Me acuerdo que era verano.</span><br><small>queísmo（必要な de を落とす）</small></td><td>○ <span class="mono">Me acuerdo <b>de</b> que era verano.</span></td></tr>
+    <tr><td>× <span class="mono">Estoy seguro que vendrá.</span><br><small>queísmo</small></td><td>○ <span class="mono">Estoy seguro <b>de</b> que vendrá.</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box box-rule">
+  <div class="box-title">見分け方：que 節を eso に置き換える</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li><span class="mono">Pienso <b>eso</b>.</span>（de は要らない）→ <span class="mono hi2">Pienso que…</span></li>
+    <li><span class="mono">Me acuerdo <b>de eso</b>.</span>（de が要る）→ <span class="mono hi-r">Me acuerdo de que…</span></li>
+    <li><span class="mono">Insisto <b>en eso</b>.</span> → <span class="mono hi-r">Insisto en que…</span>／<span class="mono">Confío <b>en eso</b>.</span> → <span class="mono hi-r">Confío en que…</span></li>
+  </ul>
+  <p class="note" style="margin:6px 0 0;">※ 感情・願望・働きかけの動詞なら que 節の中は接続法（9課）：<span class="mono">Me alegro de que <b>estés</b> aquí.</span>／<span class="mono">Insisto en que <b>vengas</b>.</span>／<span class="mono">Confío en que todo <b>salga</b> bien.</span></p>
+</div>
+
+<div class="mini-check" id="L11-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Anoche soñé <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">con</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">soñar ＋ 前置詞</span></span> mi abuela.</div>
+  <div class="mini-check-ja">昨夜、祖母の夢を見た。</div>
+<div class="srs-rate" data-qid="L11-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+<div class="mini-check" id="L11-mc-6">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Me alegro <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">de que</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">alegrarse ＋ 前置詞 ＋ que</span></span> te guste el regalo.</div>
+  <div class="mini-check-ja">プレゼントを気に入ってもらえてうれしい。</div>
+<div class="srs-rate" data-qid="L11-mc-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-mc-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-mc-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-mc-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：前置詞と組む動詞</div>
+
+  <div class="quiz-item" id="L11-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Tardamos tres horas <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">en</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">tardar ＋ 時間 ＋ 前置詞</span></span> llegar al pueblo.</div>
+    <div class="quiz-ja">村に着くのに3時間かかった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>en</b>：tardar ＋ 時間 ＋ en ＋ 不定詞で「〜するのに（時間が）かかる」。</div>
+  <div class="srs-rate" data-qid="L11-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿Te acuerdas <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">de</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">acordarse ＋ 前置詞</span></span> la primera vez que nos vimos?</div>
+    <div class="quiz-ja">私たちが初めて会ったときのことを覚えてる？</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>de</b>：acordarse de 〜「〜を覚えている」。再帰動詞として使うときは必ず de が要る。</div>
+  <div class="srs-rate" data-qid="L11-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L11-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Mis padres insisten <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">en que</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">insistir ＋ 前置詞 ＋ que</span></span> <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">vuelva</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">volver：働きかけ → 接続法</span></span> antes de las doce.</div>
+    <div class="quiz-ja">両親は私が12時前に帰るよう強く言う。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>en que</b>：insistir en ＋ que 節で、前置詞 en は残す（Insisto en eso）。<b>vuelva</b>：「〜するよう主張する」は働きかけなので、que 節は接続法現在。</div>
+  <div class="srs-rate" data-qid="L11-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L11-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L11-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L11-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑥ 練習問題 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">空欄に por か para を入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Mañana salgo <span class="blank">______</span> Lima y el lunes paso <span class="blank">______</span> Cuzco.</div>
+      <div class="q-ja">明日リマへ発ち、月曜日にクスコを通る。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Mañana salgo <span class="ans-fill">para</span> Lima y el lunes paso <span class="ans-fill">por</span> Cuzco.</span>
+      </div>
+      <div class="q-exp"><b>para</b>：行き先・方向。<b>por</b>：経由・通過。<span class="mono">salir para</span>（〜へ向けて発つ）と <span class="mono">pasar por</span>（〜を通る）はセットで覚えるとよい。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Necesito el informe <span class="blank">______</span> el jueves, así que trabajaré <span class="blank">______</span> la noche.</div>
+      <div class="q-ja">木曜日までに報告書が必要なので、夜に作業するつもりだ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Necesito el informe <span class="ans-fill">para</span> el jueves, así que trabajaré <span class="ans-fill">por</span> la noche.</span>
+      </div>
+      <div class="q-exp"><b>para</b>：期限（〜までに）。<b>por</b>：漠然とした時間帯（夜に）。時刻を言わず「夜のあいだに」なので <span class="mono">por la noche</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence"><span class="blank">______</span> ser principiante, juegas muy bien al tenis.</div>
+      <div class="q-ja">初心者にしては、君はとてもテニスが上手だね。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Para</span> ser principiante, juegas muy bien al tenis.</span>
+      </div>
+      <div class="q-exp"><b>Para</b>：比較の基準（〜にしては）。<span class="mono">Por ser principiante</span> だと「初心者なので（理由）」となり、「上手だ」とつながらない。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Le dieron un premio <span class="blank">______</span> su novela, que fue traducida <span class="blank">______</span> un famoso escritor.</div>
+      <div class="q-ja">彼女は小説によって賞をもらった。その小説はある有名な作家によって翻訳された。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Le dieron un premio <span class="ans-fill">por</span> su novela, que fue traducida <span class="ans-fill">por</span> un famoso escritor.</span>
+      </div>
+      <div class="q-exp">1つ目の <b>por</b>：受賞の理由。2つ目の <b>por</b>：受身の動作主。どちらも「背後にあるもの」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">—¿<span class="blank">______</span> qué no viniste ayer? —Porque tuve que quedarme en casa <span class="blank">______</span> cuidar a mi hermano.</div>
+      <div class="q-ja">「なぜ昨日来なかったの？」「弟の面倒を見るために家にいなければならなかったからだよ」</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">—¿<span class="ans-fill">Por</span> qué no viniste ayer? —Porque tuve que quedarme en casa <span class="ans-fill">para</span> cuidar a mi hermano.</span>
+      </div>
+      <div class="q-exp"><b>Por qué</b>：理由を尋ねる（答えは Porque…）。<b>para</b>：目的（〜するために）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Voy al supermercado <span class="blank">______</span> leche. ¿Necesitas algo <span class="blank">______</span> la cena?</div>
+      <div class="q-ja">スーパーに牛乳を買いに行くよ。夕食用に何か要る？</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Voy al supermercado <span class="ans-fill">por</span> leche. ¿Necesitas algo <span class="ans-fill">para</span> la cena?</span>
+      </div>
+      <div class="q-exp"><b>por</b>：取りに行く対象（ir por 〜：スペインの口語では a por）。<b>para</b>：用途（夕食のための）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">7</span>
+    <div class="q-content">
+      <div class="q-sentence">Este medicamento es <span class="blank">______</span> la tos. Tómalo tres veces <span class="blank">______</span> día.</div>
+      <div class="q-ja">この薬は咳止めだ。1日3回飲みなさい。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Este medicamento es <span class="ans-fill">para</span> la tos. Tómalo tres veces <span class="ans-fill">por</span> día.</span>
+      </div>
+      <div class="q-exp"><b>para</b>：用途。<b>por</b>：割合（〜につき）。<span class="mono">tres veces al día</span> とも言う。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">8</span>
+    <div class="q-content">
+      <div class="q-sentence">Todavía quedan muchos platos <span class="blank">______</span> lavar, y yo no estoy <span class="blank">______</span> hacerlo ahora.</div>
+      <div class="q-ja">まだ洗っていない皿がたくさんあるのに、私は今それをする気分じゃない。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">Todavía quedan muchos platos <span class="ans-fill">por</span> lavar, y yo no estoy <span class="ans-fill">para</span> hacerlo ahora.</span>
+      </div>
+      <div class="q-exp"><b>por lavar</b>：「まだ〜されていない」（quedar/estar por ＋ 不定詞）。<b>no estoy para</b>：「〜する気分ではない」。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">空欄に適切な前置詞（a / de / en / con / por）を入れなさい。不要なら × を書きなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Mi hermana se casó <span class="blank">______</span> un chico mexicano.</div>
+      <div class="q-ja">姉はメキシコ人の男性と結婚した。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">con</span></span></div>
+      <div class="q-exp"><span class="mono">casarse con</span>：「〜と結婚する」。日本語の「〜と」につられて <span class="mono">y</span> にしないこと。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">No me atrevo <span class="blank">______</span> hablar en público.</div>
+      <div class="q-ja">人前で話す勇気がない。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">a</span></span></div>
+      <div class="q-exp"><span class="mono">atreverse a ＋ 不定詞</span>：「思い切って〜する」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Qué piensas <span class="blank">______</span> la nueva profesora?</div>
+      <div class="q-ja">新しい先生のこと、どう思う？</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">de</span></span></div>
+      <div class="q-exp"><span class="mono">¿Qué piensas de…?</span>：意見を尋ねる。<span class="mono">pensar en</span> なら「〜のことを思い浮かべる」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Creo <span class="blank">______</span> que tienes razón.</div>
+      <div class="q-ja">君の言うとおりだと思う。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">×</span>（Creo que tienes razón.）</span></div>
+      <div class="q-exp"><span class="mono">creer</span> は前置詞なしで目的語をとる（<span class="mono">Lo creo / Creo eso</span>）。<span class="mono">Creo de que</span> は dequeísmo の誤り。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">El secreto del éxito consiste <span class="blank">______</span> no rendirse nunca.</div>
+      <div class="q-ja">成功の秘訣は決して諦めないことにある。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">en</span></span></div>
+      <div class="q-exp"><span class="mono">consistir en</span>：「〜にある・〜から成る」。後ろは不定詞でもよい。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Mis abuelos se preocupan mucho <span class="blank">______</span> mi salud.</div>
+      <div class="q-ja">祖父母は私の健康をとても心配している。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">por</span></span></div>
+      <div class="q-exp"><span class="mono">preocuparse por</span>：「〜を心配する」（<span class="mono">de</span> も可）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">7</span>
+    <div class="q-content">
+      <div class="q-sentence">Estoy segura <span class="blank">______</span> que aprobarás.</div>
+      <div class="q-ja">あなたはきっと合格すると私は確信している。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">de</span></span></div>
+      <div class="q-exp"><span class="mono">estar seguro de</span>：<span class="mono">Estoy segura de eso</span> と言えるので、que 節の前でも de を残す（落とすと queísmo）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">8</span>
+    <div class="q-content">
+      <div class="q-sentence">Después de buscar mucho, dimos <span class="blank">______</span> un restaurante muy barato.</div>
+      <div class="q-ja">さんざん探したあと、私たちはとても安いレストランを見つけた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">con</span></span></div>
+      <div class="q-exp"><span class="mono">dar con</span>：「（探していたもの）を見つけ出す」。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">誤りを1か所見つけて直しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Gracias para ayudarme con la mudanza.</div>
+      <div class="q-ja">引っ越しを手伝ってくれてありがとう。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Gracias <span class="ans-fill">por</span> ayudarme con la mudanza.</span></div>
+      <div class="q-exp">感謝の対象は「理由」なので <span class="mono">por</span>。後ろが不定詞でも同じ。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Me dijeron de que la tienda estaba cerrada.</div>
+      <div class="q-ja">店は閉まっていると言われた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Me dijeron <span class="ans-fill">que</span> la tienda estaba cerrada.</span></div>
+      <div class="q-exp"><span class="mono">decir</span> は前置詞をとらない（<span class="mono">Me dijeron eso</span>）。<span class="mono">de que</span> は dequeísmo。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Estudio mucho por conseguir una beca.</div>
+      <div class="q-ja">奨学金を得るために一生懸命勉強している。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Estudio mucho <span class="ans-fill">para</span> conseguir una beca.</span></div>
+      <div class="q-exp">奨学金は「これから手に入れたいゴール」＝目的なので <span class="mono">para</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Qué chica estás pensando en?</div>
+      <div class="q-ja">どの女の子のことを考えているの？</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">¿<span class="ans-fill">En</span> qué chica estás pensando?</span></div>
+      <div class="q-exp">スペイン語では前置詞を文末に残せない。疑問詞とともに<span class="hi-r">文頭</span>に出す。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Aprobé el examen por culpa de tu ayuda.</div>
+      <div class="q-ja">君の助けのおかげで試験に合格した。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Aprobé el examen <span class="ans-fill">gracias a</span> tu ayuda.</span></div>
+      <div class="q-exp"><span class="mono">por culpa de</span> は悪い結果の原因だけに使う。良い結果の原因は <span class="mono">gracias a</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Llévate un jersey por si hará frío.</div>
+      <div class="q-ja">寒くなるといけないから、セーターを持って行きなさい。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Llévate un jersey por si <span class="ans-fill">hace</span> frío.</span></div>
+      <div class="q-exp"><span class="mono">por si</span> の後ろに未来形は置けない（条件の si と同じ）。直説法現在を使う。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">この手紙は君宛てだよ。今朝郵便で届いたんだ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Esta carta es para ti. Ha llegado por correo esta mañana.</span></span>
+      </div>
+      <div class="q-exp"><b>para ti</b>：受け手。<b>por correo</b>：手段。<span class="mono">esta mañana</span> は今日のことなので現在完了（スペインの用法：5課）。中南米なら <span class="mono">Llegó</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">私たちは土曜日に会うことに決めたが、彼が来るかどうかは天気次第だ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Quedamos en vernos el sábado, pero que él venga o no depende del tiempo.</span></span>
+      </div>
+      <div class="q-exp"><b>quedar en ＋ 不定詞</b>：〜することに決める。<b>depender de</b>：〜次第だ。主語の <span class="mono">que él venga o no</span>（彼が来るかどうか）は、まだ事実として決まっていないので接続法。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">念のため、出発前に私に電話して。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Llámame antes de salir, por si acaso.</span></span>
+      </div>
+      <div class="q-exp"><b>por si acaso</b>：念のため。<b>antes de ＋ 不定詞</b>：〜する前に。<b>Llámame</b>：肯定命令＋代名詞の後置（10課）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">彼はやっとタバコをやめた。医者がそうするように強く言ったからだ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Por fin dejó de fumar, porque el médico insistió en que lo hiciera.</span></span>
+      </div>
+      <div class="q-exp"><b>por fin</b>：やっと。<b>dejar de ＋ 不定詞</b>：〜をやめる。<b>insistir en que ＋ 接続法</b>：主節が点過去なので接続法過去 <span class="mono">hiciera</span>（10課の時制の一致）。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑦ 語彙リスト -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">por の慣用表現</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">por fin</span><span class="pill-pos">表現</span><span class="pill-ja">ついに・やっと</span></span>
+  <span class="pill"><span class="pill-es">por supuesto</span><span class="pill-pos">表現</span><span class="pill-ja">もちろん</span></span>
+  <span class="pill"><span class="pill-es">por eso</span><span class="pill-pos">表現</span><span class="pill-ja">だから</span></span>
+  <span class="pill"><span class="pill-es">por lo tanto</span><span class="pill-pos">表現</span><span class="pill-ja">したがって</span></span>
+  <span class="pill"><span class="pill-es">por lo menos</span><span class="pill-pos">表現</span><span class="pill-ja">少なくとも</span></span>
+  <span class="pill"><span class="pill-es">por lo general</span><span class="pill-pos">表現</span><span class="pill-ja">一般に</span></span>
+  <span class="pill"><span class="pill-es">por cierto</span><span class="pill-pos">表現</span><span class="pill-ja">ところで</span></span>
+  <span class="pill"><span class="pill-es">por ejemplo</span><span class="pill-pos">表現</span><span class="pill-ja">例えば</span></span>
+  <span class="pill"><span class="pill-es">por primera vez</span><span class="pill-pos">表現</span><span class="pill-ja">初めて</span></span>
+  <span class="pill"><span class="pill-es">por casualidad</span><span class="pill-pos">表現</span><span class="pill-ja">偶然</span></span>
+  <span class="pill"><span class="pill-es">por culpa de</span><span class="pill-pos">表現</span><span class="pill-ja">〜のせいで</span></span>
+  <span class="pill"><span class="pill-es">por suerte</span><span class="pill-pos">表現</span><span class="pill-ja">運よく</span></span>
+  <span class="pill"><span class="pill-es">por desgracia</span><span class="pill-pos">表現</span><span class="pill-ja">残念ながら</span></span>
+  <span class="pill"><span class="pill-es">por lo visto</span><span class="pill-pos">表現</span><span class="pill-ja">どうやら〜らしい</span></span>
+  <span class="pill"><span class="pill-es">por completo</span><span class="pill-pos">表現</span><span class="pill-ja">完全に</span></span>
+  <span class="pill"><span class="pill-es">por si (acaso)</span><span class="pill-pos">表現</span><span class="pill-ja">念のため・〜するといけないから</span></span>
+  <span class="pill"><span class="pill-es">por un lado… por otro</span><span class="pill-pos">表現</span><span class="pill-ja">一方では…他方では</span></span>
+</div>
+
+<div class="vocab-category">para の慣用表現・関連語</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">para siempre</span><span class="pill-pos">表現</span><span class="pill-ja">永遠に</span></span>
+  <span class="pill"><span class="pill-es">para colmo</span><span class="pill-pos">表現</span><span class="pill-ja">おまけに</span></span>
+  <span class="pill"><span class="pill-es">no es para tanto</span><span class="pill-pos">表現</span><span class="pill-ja">大げさだ</span></span>
+  <span class="pill"><span class="pill-es">para nada</span><span class="pill-pos">表現</span><span class="pill-ja">全然（〜ない）</span></span>
+  <span class="pill"><span class="pill-es">para entonces</span><span class="pill-pos">表現</span><span class="pill-ja">その時までには</span></span>
+  <span class="pill"><span class="pill-es">gracias a</span><span class="pill-pos">表現</span><span class="pill-ja">〜のおかげで</span></span>
+  <span class="pill"><span class="pill-es">hasta</span><span class="pill-pos">前</span><span class="pill-ja">〜まで（継続の終点）</span></span>
+</div>
+
+<div class="vocab-category">前置詞と組む動詞（a・de）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">acostumbrarse a</span><span class="pill-pos">再動</span><span class="pill-ja">〜に慣れる</span></span>
+  <span class="pill"><span class="pill-es">atreverse a</span><span class="pill-pos">再動</span><span class="pill-ja">思い切って〜する</span></span>
+  <span class="pill"><span class="pill-es">negarse a</span><span class="pill-pos">再動</span><span class="pill-ja">〜を拒む</span></span>
+  <span class="pill"><span class="pill-es">asistir a</span><span class="pill-pos">動</span><span class="pill-ja">〜に出席する</span></span>
+  <span class="pill"><span class="pill-es">parecerse a</span><span class="pill-pos">再動</span><span class="pill-ja">〜に似ている</span></span>
+  <span class="pill"><span class="pill-es">renunciar a</span><span class="pill-pos">動</span><span class="pill-ja">〜を諦める</span></span>
+  <span class="pill"><span class="pill-es">oler / saber a</span><span class="pill-pos">動</span><span class="pill-ja">〜のにおい／味がする</span></span>
+  <span class="pill"><span class="pill-es">acordarse de</span><span class="pill-pos">再動</span><span class="pill-ja">〜を覚えている</span></span>
+  <span class="pill"><span class="pill-es">depender de</span><span class="pill-pos">動</span><span class="pill-ja">〜次第だ</span></span>
+  <span class="pill"><span class="pill-es">tratar de</span><span class="pill-pos">動</span><span class="pill-ja">〜しようと努める</span></span>
+  <span class="pill"><span class="pill-es">tratarse de</span><span class="pill-pos">再動</span><span class="pill-ja">（話は）〜である</span></span>
+  <span class="pill"><span class="pill-es">dejar de</span><span class="pill-pos">動</span><span class="pill-ja">〜をやめる</span></span>
+  <span class="pill"><span class="pill-es">enamorarse de</span><span class="pill-pos">再動</span><span class="pill-ja">〜に恋をする</span></span>
+  <span class="pill"><span class="pill-es">quejarse de</span><span class="pill-pos">再動</span><span class="pill-ja">〜の不平を言う</span></span>
+  <span class="pill"><span class="pill-es">arrepentirse de</span><span class="pill-pos">再動</span><span class="pill-ja">〜を後悔する</span></span>
+  <span class="pill"><span class="pill-es">despedirse de</span><span class="pill-pos">再動</span><span class="pill-ja">〜に別れを告げる</span></span>
+  <span class="pill"><span class="pill-es">carecer de</span><span class="pill-pos">動</span><span class="pill-ja">〜を欠く</span></span>
+</div>
+
+<div class="vocab-category">前置詞と組む動詞（en・con・por）</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">confiar en</span><span class="pill-pos">動</span><span class="pill-ja">〜を信頼する</span></span>
+  <span class="pill"><span class="pill-es">consistir en</span><span class="pill-pos">動</span><span class="pill-ja">〜にある・〜から成る</span></span>
+  <span class="pill"><span class="pill-es">insistir en</span><span class="pill-pos">動</span><span class="pill-ja">〜を言い張る</span></span>
+  <span class="pill"><span class="pill-es">fijarse en</span><span class="pill-pos">再動</span><span class="pill-ja">〜に注目する</span></span>
+  <span class="pill"><span class="pill-es">tardar … en</span><span class="pill-pos">動</span><span class="pill-ja">〜するのに時間がかかる</span></span>
+  <span class="pill"><span class="pill-es">convertirse en</span><span class="pill-pos">再動</span><span class="pill-ja">〜に変わる</span></span>
+  <span class="pill"><span class="pill-es">quedar en</span><span class="pill-pos">動</span><span class="pill-ja">〜することに決める</span></span>
+  <span class="pill"><span class="pill-es">soñar con</span><span class="pill-pos">動</span><span class="pill-ja">〜の夢を見る</span></span>
+  <span class="pill"><span class="pill-es">casarse con</span><span class="pill-pos">再動</span><span class="pill-ja">〜と結婚する</span></span>
+  <span class="pill"><span class="pill-es">contar con</span><span class="pill-pos">動</span><span class="pill-ja">〜を当てにする</span></span>
+  <span class="pill"><span class="pill-es">quedar con</span><span class="pill-pos">動</span><span class="pill-ja">〜と会う約束をする</span></span>
+  <span class="pill"><span class="pill-es">encontrarse con</span><span class="pill-pos">再動</span><span class="pill-ja">〜に出くわす</span></span>
+  <span class="pill"><span class="pill-es">dar con</span><span class="pill-pos">動</span><span class="pill-ja">〜を見つけ出す</span></span>
+  <span class="pill"><span class="pill-es">acabar con</span><span class="pill-pos">動</span><span class="pill-ja">〜を終わらせる</span></span>
+  <span class="pill"><span class="pill-es">amenazar con</span><span class="pill-pos">動</span><span class="pill-ja">〜すると脅す</span></span>
+  <span class="pill"><span class="pill-es">preocuparse por</span><span class="pill-pos">再動</span><span class="pill-ja">〜を心配する</span></span>
+  <span class="pill"><span class="pill-es">interesarse por</span><span class="pill-pos">再動</span><span class="pill-ja">〜に関心を持つ</span></span>
+  <span class="pill"><span class="pill-es">optar por</span><span class="pill-pos">動</span><span class="pill-ja">〜を選ぶ</span></span>
+  <span class="pill"><span class="pill-es">luchar por</span><span class="pill-pos">動</span><span class="pill-ja">〜のために戦う</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">informe</span><span class="pill-pos">男</span><span class="pill-ja">報告書</span></span>
+  <span class="pill"><span class="pill-es">entregar</span><span class="pill-pos">動</span><span class="pill-ja">提出する・渡す</span></span>
+  <span class="pill"><span class="pill-es">apuntes</span><span class="pill-pos">男複</span><span class="pill-ja">（授業の）ノート</span></span>
+  <span class="pill"><span class="pill-es">pastilla</span><span class="pill-pos">女</span><span class="pill-ja">錠剤</span></span>
+  <span class="pill"><span class="pill-es">tos</span><span class="pill-pos">女</span><span class="pill-ja">咳</span></span>
+  <span class="pill"><span class="pill-es">castigar</span><span class="pill-pos">動</span><span class="pill-ja">罰する</span></span>
+  <span class="pill"><span class="pill-es">niebla</span><span class="pill-pos">女</span><span class="pill-ja">霧</span></span>
+  <span class="pill"><span class="pill-es">aterrizar / despegar</span><span class="pill-pos">動</span><span class="pill-ja">着陸する／離陸する</span></span>
+  <span class="pill"><span class="pill-es">mudanza</span><span class="pill-pos">女</span><span class="pill-ja">引っ越し</span></span>
+  <span class="pill"><span class="pill-es">beca</span><span class="pill-pos">女</span><span class="pill-ja">奨学金</span></span>
+  <span class="pill"><span class="pill-es">rendirse</span><span class="pill-pos">再動</span><span class="pill-ja">諦める・降参する</span></span>
+  <span class="pill"><span class="pill-es">derecho</span><span class="pill-pos">男</span><span class="pill-ja">権利</span></span>
+  <span class="pill"><span class="pill-es">retraso</span><span class="pill-pos">男</span><span class="pill-ja">遅れ</span></span>
+  <span class="pill"><span class="pill-es">fondos</span><span class="pill-pos">男複</span><span class="pill-ja">資金</span></span>
+</div>
+
+<!-- ⑧ まとめ -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">para のイメージ</td><td><b>矢印の先（前方のゴール）</b>：目的・用途・行き先・期限・受け手・意見の主体・比較の基準</td></tr>
+    <tr><td class="td-rule">para ＋ 目的</td><td>主語が同じ → <span class="mono">para ＋ 不定詞</span>／主語が違う → <span class="mono">para que ＋ 接続法</span></td></tr>
+    <tr><td class="td-rule">por のイメージ</td><td><b>通り道・背後のきっかけ</b>：原因・経由・漠然とした場所と時間・手段・交換・代理・受身の動作主・割合・期間</td></tr>
+    <tr><td class="td-rule">決め手の問い</td><td><span class="mono">¿Por qué?</span>（理由）→ por ／ <span class="mono">¿Para qué?</span>（目的）→ para</td></tr>
+    <tr><td class="td-rule">意味が変わるペア</td><td><span class="mono">Lo hice por ti</span>（動機）／<span class="mono">para ti</span>（受け手）、<span class="mono">por marzo</span>（ごろ）／<span class="mono">para marzo</span>（までに）</td></tr>
+    <tr><td class="td-rule">estar por / para</td><td><span class="mono">está por hacer</span>（まだ〜されていない）／<span class="mono">está para salir</span>（今にも〜しそう）</td></tr>
+    <tr><td class="td-rule">por si</td><td><span class="mono">por si ＋ 直説法現在</span>（接続法過去も可）。未来形・接続法現在は不可</td></tr>
+    <tr><td class="td-rule">por culpa de / gracias a</td><td>悪い結果の原因 → <span class="mono">por culpa de</span>／良い結果の原因 → <span class="mono">gracias a</span></td></tr>
+    <tr><td class="td-rule">前置詞と組む動詞</td><td>a（方向・開始）、de（記憶・感情）、en（内側）、con（相手）、por（関心・動機）。動詞と前置詞をセットで覚える</td></tr>
+    <tr><td class="td-rule">前置詞の後ろ</td><td>名詞・<b>不定詞</b>・que 節。現在分詞は置けない</td></tr>
+    <tr><td class="td-rule">前置詞の位置</td><td>疑問文・関係節でも文頭へ：<span class="mono">¿En qué piensas?</span></td></tr>
+    <tr><td class="td-rule">意味が変わる動詞</td><td><span class="mono">pensar en / de / ＋不定詞</span>、<span class="mono">quedar con / en</span>、<span class="mono">tratar de / tratarse de</span>、<span class="mono">acabar de / con</span></td></tr>
+    <tr><td class="td-rule">dequeísmo / queísmo</td><td>eso に置き換えて判定：<span class="mono">Pienso eso</span> → <span class="mono">Pienso que</span>／<span class="mono">Me acuerdo de eso</span> → <span class="mono">Me acuerdo de que</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 11 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<!-- ══ 鍛錬タブ（問題は tanren-bank.js から表示） ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div id="sec-tanren" class="sec-heading">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-intro">Lección 11 の内容を総合的に使う問題が <b>100問</b> あります。まとめクイズと同じか、少し難しいレベルです。<br>「内容ごと」は文法項目の順、「ランダム」は全範囲を混ぜた順に並びます。○△× を付けた問題は「今日の復習」に出ます。</div>
+
+<div id="tanren-app" data-lesson="11"></div>
+
+</div><!-- /tab-tanren -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① para の用法</a>
+    <a class="fn-item" href="#sec2">② por の用法</a>
+    <a class="fn-item" href="#sec3">③ por と para の使い分け</a>
+    <a class="fn-item" href="#sec4">④ por・para の慣用表現</a>
+    <a class="fn-item" href="#sec5">⑤ 前置詞と組む動詞</a>
+    <a class="fn-item" href="#sec6">⑥ 練習問題</a>
+    <a class="fn-item" href="#sec7">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8">⑧ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['para','目的','〜するために','para que'], id: 'sec1', label: 'para の用法（①節）' },
+  { terms: ['para 目的','para que','para ＋ 不定詞'], id: 'para-mokuteki', label: 'para：目的（①節）' },
+  { terms: ['用途','〜用の','taza para café'], id: 'para-youto', label: 'para：用途（①節）' },
+  { terms: ['行き先','方向','salir para'], id: 'para-houkou', label: 'para：行き先・方向（①節）' },
+  { terms: ['期限','〜までに','para el viernes','hasta'], id: 'para-kigen', label: 'para：期限（①節）' },
+  { terms: ['受け手','宛て','trabajar para'], id: 'para-taishou', label: 'para：受け手・対象（①節）' },
+  { terms: ['para mí','にとって','意見'], id: 'para-kanten', label: 'para：意見の主体（①節）' },
+  { terms: ['にしては','para ser','比較の基準'], id: 'para-kijun', label: 'para：比較の基準（①節）' },
+  { terms: ['estar para','今にも','no estoy para bromas'], id: 'para-estar', label: 'estar para ＋ 不定詞（①節）' },
+  { terms: ['por','原因','理由','gracias por'], id: 'sec2', label: 'por の用法（②節）' },
+  { terms: ['por 原因','por 理由','por ＋ 不定詞','gracias por'], id: 'por-riyuu', label: 'por：原因・理由（②節）' },
+  { terms: ['経由','通過','pasar por','pasear por'], id: 'por-keiyu', label: 'por：経由・通過（②節）' },
+  { terms: ['por aquí','por la mañana','por la tarde','por la noche','あたり'], id: 'por-bakuzen', label: 'por：漠然とした場所・時間（②節）' },
+  { terms: ['手段','por teléfono','por correo'], id: 'por-shudan', label: 'por：手段（②節）' },
+  { terms: ['交換','代価','値段','cambiar por'], id: 'por-koukan', label: 'por：交換・代価（②節）' },
+  { terms: ['代理','代わりに','lo hice por ti','luchar por'], id: 'por-dairi', label: 'por：代理・利益（②節）' },
+  { terms: ['受身 por','動作主','escrito por'], id: 'por-ukemi', label: 'por：受身の動作主（②節）' },
+  { terms: ['割合','por ciento','por hora','por semana'], id: 'por-wariai', label: 'por：割合・単位（②節）' },
+  { terms: ['期間','durante'], id: 'por-kikan', label: 'por：期間（②節）' },
+  { terms: ['ir por','a por','取りに行く'], id: 'por-toriniiku', label: 'por：取りに行く（②節）' },
+  { terms: ['estar por','está por limpiar','まだ〜されていない'], id: 'por-estar', label: 'estar por ＋ 不定詞（②節）' },
+  { terms: ['por と para','por para','使い分け','判定'], id: 'sec3', label: 'por と para の使い分け（③節）' },
+  { terms: ['por para ペア','lo hice para ti','por marzo','para marzo','por mí'], id: 'por-para-pair', label: '意味が変わるペア（③節）' },
+  { terms: ['por qué','para qué','porque'], id: 'porque-paraque', label: '¿Por qué? と ¿Para qué?（③節）' },
+  { terms: ['慣用表現','por fin','por supuesto','por eso','por lo tanto','por lo menos','por lo general','por cierto','por ejemplo','por primera vez','por casualidad','por culpa de','por suerte','por desgracia','por lo visto','por completo','por un lado','por otro'], id: 'kanyou-por', label: 'por を使う表現（④節）' },
+  { terms: ['por si','por si acaso','念のため'], id: 'por-si', label: 'por si (acaso)（④節）' },
+  { terms: ['para siempre','para colmo','no es para tanto','para nada','para entonces'], id: 'kanyou-para', label: 'para を使う表現（④節）' },
+  { terms: ['前置詞と組む動詞','régimen','前置詞 動詞'], id: 'sec5', label: '前置詞と組む動詞（⑤節）' },
+  { terms: ['empezar a','aprender a','ayudar a','acostumbrarse a','atreverse a','negarse a','invitar a','asistir a','parecerse a','renunciar a','oler a','saber a'], id: 'doushi-a', label: 'a と組む動詞（⑤節）' },
+  { terms: ['acordarse de','olvidarse de','darse cuenta de','depender de','tratar de','dejar de','enamorarse de','quejarse de','alegrarse de','arrepentirse de','despedirse de','disfrutar de','carecer de'], id: 'doushi-de', label: 'de と組む動詞（⑤節）' },
+  { terms: ['pensar en','confiar en','consistir en','insistir en','fijarse en','tardar en','convertirse en','quedar en','entrar en'], id: 'doushi-en', label: 'en と組む動詞（⑤節）' },
+  { terms: ['soñar con','casarse con','contar con','quedar con','encontrarse con','dar con','acabar con','amenazar con'], id: 'doushi-con', label: 'con と組む動詞（⑤節）' },
+  { terms: ['preocuparse por','interesarse por','optar por','luchar por','disculparse por'], id: 'doushi-por', label: 'por と組む動詞（⑤節）' },
+  { terms: ['意味が変わる動詞','pensar de','quedarse con','tratarse de','acabar de'], id: 'imi-kawaru', label: '前置詞で意味が変わる動詞（⑤節）' },
+  { terms: ['dequeísmo','queísmo','de que','前置詞 que'], id: 'dequeismo', label: 'dequeísmo と queísmo（⑤節）' },
+  { terms: ['練習問題','練習'], id: 'sec6', label: '練習問題（⑥節）' },
+  { terms: ['語彙','Vocabulario'], id: 'sec7', label: '語彙リスト（⑦節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec8', label: 'まとめ（⑧節）' },
+  { terms: ['鍛錬','Entrenamiento'], id: 'sec-tanren', label: '鍛錬（100問）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語文法解説集　B1〜B2 編</footer>
+
+</body>
+</html>

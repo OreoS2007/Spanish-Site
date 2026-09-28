@@ -90,13 +90,13 @@
 
 <div class="cover-title-block">
   <div class="cover-title">実力診断テスト</div>
-  <div class="cover-sub">スペイン語一列①（Lección 2〜10） — 実力測定</div>
+  <div class="cover-sub">スペイン語文法（Lección 2〜11） — 実力測定</div>
 </div>
 
 <div id="test-app">
   <div class="test-intro" id="test-intro">
     <h2>このテストについて</h2>
-    <p>Lección 2〜10の文法項目からバランスよく問題を出題します。空欄にスペイン語を直接入力してください（<span class="hi">アクセント記号も正確に</span>入力してください。é や ñ の入力が難しい場合は、テスト画面上部のボタンから挿入できます）。</p>
+    <p>Lección 2〜11の文法項目からバランスよく問題を出題します。空欄にスペイン語を直接入力してください（<span class="hi">アクセント記号も正確に</span>入力してください。é や ñ の入力が難しい場合は、テスト画面上部のボタンから挿入できます）。</p>
     <p>採点後、CEFR目安レベル・得意分野・不得意分野・復習すべきLecciónを表示します。問題は毎回ランダムに選ばれるため、繰り返し受けても新鮮な内容になります。</p>
     <button class="test-start-btn" onclick="window.__startTest()">テストを始める（約20問）</button>
   </div>
@@ -162,13 +162,17 @@ const LESSON_LABELS = {
   8: 'Lección 8（未来・過去未来）',
   9: 'Lección 9（接続法現在）',
   10: 'Lección 10（命令文・接続法過去・条件文）',
+  11: 'Lección 11（por と para・前置詞と組む動詞）',
 };
 
 const CEFR_GROUPS = {
   A2: [2, 3, 4],
   B1: [5, 6, 7],
-  B2: [8, 9, 10],
+  B2: [8, 9, 10, 11],
 };
+
+// 出題・集計の対象になる課（LESSON_LABELS に載っている課）
+const TEST_LESSONS = Object.keys(LESSON_LABELS).map(Number);
 
 var selectedQuestions = [];
 
@@ -206,10 +210,10 @@ function buildTestSet() {
   });
 
   var picked = [];
-  for (var lesson = 2; lesson <= 10; lesson++) {
+  TEST_LESSONS.forEach(function (lesson) {
     var items = shuffle(byLesson[lesson] || []);
     picked = picked.concat(items.slice(0, 2));
-  }
+  });
   return shuffle(picked);
 }
 
@@ -309,7 +313,7 @@ function normalizeAnswer(s) {
 
 window.__gradeTest = function () {
   var lessonStats = {};
-  for (var l = 2; l <= 10; l++) lessonStats[l] = { correct: 0, total: 0 };
+  TEST_LESSONS.forEach(function (l) { lessonStats[l] = { correct: 0, total: 0 }; });
 
   selectedQuestions.forEach(function (q, idx) {
     var allAnswers = q.answers.slice();
@@ -368,7 +372,7 @@ function renderReport(lessonStats) {
   }
 
   var overallCorrect = 0, overallTotal = 0;
-  for (var l = 2; l <= 10; l++) { overallCorrect += lessonStats[l].correct; overallTotal += lessonStats[l].total; }
+  TEST_LESSONS.forEach(function (l) { overallCorrect += lessonStats[l].correct; overallTotal += lessonStats[l].total; });
   var overallPct = pct(overallCorrect, overallTotal);
 
   var html = '';
@@ -376,7 +380,7 @@ function renderReport(lessonStats) {
   html += '<div style="font-size:12px;color:var(--muted);margin-bottom:4px;">文法習得度からみた目安レベル</div>';
   html += '<div class="report-cefr-level">' + cefr + '</div>';
   html += '<div class="report-cefr-note">全体正答率：' + overallPct + '%（' + overallCorrect + '/' + overallTotal + '問）</div>';
-  html += '<div class="report-cefr-note">※ これはLección2〜10の文法カバー率に基づく目安です。実際のCEFR判定はリスニング・スピーキング等も含めて総合的に行われます。</div>';
+  html += '<div class="report-cefr-note">※ これはLección2〜11の文法カバー率に基づく目安です。実際のCEFR判定はリスニング・スピーキング等も含めて総合的に行われます。</div>';
   html += '</div>';
 
   html += '<div class="report-section-title">レベル帯ごとの正答率</div>';
@@ -390,7 +394,7 @@ function renderReport(lessonStats) {
   });
 
   html += '<div class="report-section-title">Lecciónごとの正答率</div>';
-  for (var lesson = 2; lesson <= 10; lesson++) {
+  TEST_LESSONS.forEach(function (lesson) {
     var st = lessonStats[lesson];
     var p = pct(st.correct, st.total);
     html += '<div class="report-bar-row">';
@@ -398,15 +402,15 @@ function renderReport(lessonStats) {
     html += '<div class="report-bar-track"><div class="report-bar-fill" style="width:' + p + '%; background:' + (p < 60 ? 'var(--warn)' : 'var(--accent2)') + '"></div></div>';
     html += '<div class="report-bar-pct">' + p + '%</div>';
     html += '</div>';
-  }
+  });
 
   var weakLessons = [];
-  for (var lesson2 = 2; lesson2 <= 10; lesson2++) {
+  TEST_LESSONS.forEach(function (lesson2) {
     var st2 = lessonStats[lesson2];
     if (st2.total > 0 && pct(st2.correct, st2.total) < 70) {
       weakLessons.push({ lesson: lesson2, pct: pct(st2.correct, st2.total) });
     }
-  }
+  });
   weakLessons.sort(function (a, b) { return a.pct - b.pct; });
 
   html += '<div class="report-section-title">復習をおすすめするLección</div>';
