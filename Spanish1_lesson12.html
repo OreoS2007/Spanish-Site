@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 12 文法解説 | B1〜B2 編</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 目的格代名詞の総まとめ</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 目的語の重複</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 中性の lo</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ 不定語と否定語</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 数量を表す語</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec6" data-tab="renshu" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8" data-tab="vocab" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ まとめ</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">💪 鍛錬タブ</span>
+    <a class="fn-item" href="#sec-tanren" data-tab="tanren" onclick="jumpToSection('sec-tanren'); closeToc(); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 12 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 12　文法解説</div>
+  <div class="cover-sub">B1〜B2 編　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br><span class="mono">Te lo voy a dar</span>・<span class="mono">Se me olvidó</span>・<span class="mono">El libro lo compré ayer</span> のように、代名詞を自然な位置と順番で使えるようになります。「何も〜ない」「誰でも」「どんなに〜か」といった、否定・不定・程度の表現も正確に言えるようになります。<br><small>3課の「目的格代名詞の5つのルール」、5課の再帰代名詞、10課の命令文での代名詞の位置が土台です。ここではそれらを1つの体系にまとめ直し、会話や作文で差がつく使い方まで広げます。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 目的格代名詞の総まとめ</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 目的語の重複</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 中性の lo</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ 不定語と否定語</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 数量を表す語</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 練習問題</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 語彙リスト</a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ まとめ</a>
+    <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：se lo　／　nadie　／　中性の lo…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 目的格代名詞の総まとめ -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">目的格代名詞の総まとめ</span>
+  <span class="sec-es">Pronombres átonos: orden y posición</span>
+</div>
+
+<p>動詞にくっついて使う代名詞（<span class="mono">me, te, se, nos, os, lo, la, le…</span>）は、スペイン語では<span class="hi">「弱い代名詞」（pronombres átonos）</span>と呼ばれます。単独ではアクセントを持たず、必ず動詞と一緒に発音されるからです。3課・5課・10課で少しずつ学んだルールを、ここで1つの体系にまとめます。</p>
+
+<div class="sub" id="junban">1. 2つ以上並ぶときの順番</div>
+<div class="box box-rule">
+  <div class="box-title">並べる順番は固定：se → 2人称 → 1人称 → 3人称</div>
+  <div style="text-align:center;font-size:15px;font-weight:700;padding:8px 0;" class="mono">
+    <span class="hi-r">se</span>　→　<span class="hi2">te / os</span>　→　<span class="hi">me / nos</span>　→　lo / la / le / los / las / les
+  </div>
+  <p class="note" style="margin:0;text-align:center;">覚え方：<b>「セ・テ・メ・レ」</b>。実際に並ぶのはほぼ2つまでで、多くの場合は「間接 → 直接」の順（3課のルール②）と同じ結果になる。</p>
+</div>
+
+<div class="ex"><span class="ex-tag">間接 → 直接</span><span class="ex-sp">¿El diccionario? <span class="hi">Te lo</span> presto mañana.</span><span class="ex-ja">辞書？ 明日君に貸すよ。</span></div>
+<div class="ex"><span class="ex-tag">le → se（3課ルール③）</span><span class="ex-sp">¿Las fotos? Ya <span class="hi">se las</span> mandé a mis padres.</span><span class="ex-ja">写真？ もう両親に送ったよ。</span><span class="ex-note"><span class="mono">les las</span> とは言わない。3人称どうしが並ぶと、間接の <span class="mono">le/les</span> は <span class="mono">se</span> になる</span></div>
+<div class="ex"><span class="ex-tag">se が先頭</span><span class="ex-sp"><span class="hi-r">Se me</span> olvidó tu cumpleaños.</span><span class="ex-ja">君の誕生日を忘れてしまった。</span><span class="ex-note">再帰の <span class="mono">se</span> はいつも一番前（× <span class="mono">Me se olvidó</span> は子どもや方言に見られる誤り）</span></div>
+
+<div class="sub" id="pos-ichiran">2. 置く位置の一覧</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:34%">動詞の形</th><th style="width:22%">位置</th><th>例</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">活用した動詞</td><td class="td-c hi">前（離して書く）</td><td class="mono">Te lo <b>doy</b>.<br><small>君にそれをあげる。</small></td></tr>
+    <tr><td class="td-rule">否定文</td><td class="td-c hi">no と動詞の間</td><td class="mono">No te lo <b>doy</b>.<br><small>君にそれをあげない。</small></td></tr>
+    <tr><td class="td-rule">不定詞・現在分詞と組む形<br><small>（ir a, poder, querer, estar ＋ 現在分詞 など）</small></td><td class="td-c hi2">前 か 後ろ<br><small>どちらでもよい</small></td><td class="mono">Te lo voy a <b>dar</b>. ＝ Voy a <b>dártelo</b>.<br><small>君にそれをあげるつもりだ。</small><br>Me lo estás <b>diciendo</b>. ＝ Estás <b>diciéndomelo</b>.<br><small>君はそれを私に言っているところだ。</small></td></tr>
+    <tr><td class="td-rule">肯定命令</td><td class="td-c hi-r">後ろ（必ず）</td><td class="mono"><b>Dámelo</b>.<br><small>それを私にちょうだい。</small></td></tr>
+    <tr><td class="td-rule">否定命令</td><td class="td-c hi-r">前（必ず）</td><td class="mono">No me lo <b>des</b>.<br><small>それを私にくれないで。</small></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box box-warn">
+  <div class="box-title">よくある誤り</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li>2つの代名詞を<span class="hi-r">離してはいけない</span>：× <span class="mono">Te voy a darlo</span> → ○ <span class="mono">Te lo voy a dar</span> ／ <span class="mono">Voy a dártelo</span></li>
+    <li>後ろに付けるときは<span class="hi-r">1語で書く</span>：× <span class="mono">Voy a dar te lo</span></li>
+    <li>後ろに付けて強勢の位置が後ろから3番目以前になったら、<span class="hi-r">アクセント記号</span>を付ける：<span class="mono">diciendo → diciéndomelo</span>、<span class="mono">dar → dártelo</span>（<span class="mono">dar + lo</span> の <span class="mono">darlo</span> は記号なし）</li>
+  </ul>
+</div>
+
+<div class="sub" id="se-muishiki">3. 意図しない出来事の se（se ＋ 間接目的格代名詞）</div>
+<p>「うっかり〜してしまった」「（勝手に）〜になってしまった」と、<span class="hi">自分の意図ではない出来事</span>を言うときの形です。出来事の主語は<span class="hi-r">物</span>で、影響を受けた人は間接目的格代名詞で表します。動詞は<span class="hi-r">物に合わせて</span>活用します。</p>
+<div class="box box-rule">
+  <div style="text-align:center;font-size:15px;font-weight:700;padding:8px 0;">
+    <span class="mono hi-r">se</span> ＋ <span class="mono hi">me / te / le / nos / os / les</span>（影響を受けた人）＋ 動詞（主語＝物に一致）＋ 物
+  </div>
+</div>
+<div class="ex"><span class="ex-sp">Se me <span class="hi-r">olvidaron</span> las llaves.</span><span class="ex-ja">鍵を忘れてしまった。</span><span class="ex-note">主語は <span class="mono">las llaves</span>（複数）なので動詞も複数。直訳は「鍵が私から忘れ去られた」</span></div>
+<div class="ex"><span class="ex-sp">A Pablo se le <span class="hi-r">cayó</span> el vaso.</span><span class="ex-ja">パブロはコップを落としてしまった。</span><span class="ex-note"><span class="mono">A Pablo</span> と <span class="mono">le</span> の重複は②で扱う</span></div>
+<div class="ex"><span class="ex-sp">Se nos <span class="hi-r">rompió</span> el coche en la autopista.</span><span class="ex-ja">高速道路で車が壊れてしまった。</span></div>
+<div class="ex"><span class="ex-sp">De repente se me <span class="hi-r">ocurrió</span> una idea.</span><span class="ex-ja">突然いい考えが浮かんだ。</span></div>
+<p class="note">※ よく使う動詞：<span class="mono">olvidarse</span>（忘れる）、<span class="mono">caerse</span>（落ちる）、<span class="mono">romperse</span>（壊れる）、<span class="mono">perderse</span>（なくなる）、<span class="mono">acabarse</span>（尽きる）、<span class="mono">ocurrirse</span>（思いつく）、<span class="mono">quemarse</span>（焦げる）。<br>※ <span class="mono">Olvidé las llaves</span> と言うこともできるが、<span class="mono">Se me olvidaron las llaves</span> のほうが「うっかり」の感じが出て、責任が軽く聞こえる。</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">presto</span>：<span class="mono">prestar</span>（動）貸す ／ <span class="mono">autopista</span>（女）高速道路 ／ <span class="mono">de repente</span>：突然</li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　なぜ <span class="mono">le lo</span> ではなく <span class="mono">se lo</span> になるのでしょうか。中世スペイン語では <span class="mono">ge lo</span>（ジェロ）と言っていました。この <span class="mono">ge</span> は間接目的格の <span class="mono">le</span> から変化した音です。その後の発音の変化で、<span class="mono">ge</span> が音の近い再帰代名詞の <span class="mono">se</span> と同じ発音になり、つづりも <span class="mono">se</span> に統一されました。ですから <span class="mono">se lo</span> の <span class="mono">se</span> は、見た目は再帰代名詞と同じでも、生まれは<b>「彼に・彼女に」を表す間接目的格</b>なのです。</span>
+</div>
+
+<div class="mini-check" id="L12-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">¿Las entradas? <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Te las</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">te ＋ las：2人称 → 3人称の順</span></span> compro yo.</div>
+  <div class="mini-check-ja">チケット？ 僕が君に買うよ。</div>
+<div class="srs-rate" data-qid="L12-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+<div class="mini-check" id="L12-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Se me <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">rompieron</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">romperse：主語は las gafas（複数）</span></span> las gafas.</div>
+  <div class="mini-check-ja">眼鏡が壊れてしまった。</div>
+<div class="srs-rate" data-qid="L12-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：目的格代名詞の総まとめ</div>
+
+  <div class="quiz-item" id="L12-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">—¿Le devolviste el libro a Marta? —Sí, ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se lo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">le ＋ lo</span></span> devolví.</div>
+    <div class="quiz-ja">「マルタに本を返した？」「うん、もう返したよ」</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>se lo</b>：le（彼女に）＋ lo（その本を）。3人称どうしが並ぶので le は se になる。</div>
+  <div class="srs-rate" data-qid="L12-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¿El informe? Tengo que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">terminarlo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">terminar ＋ lo：後ろに付ける形</span></span> hoy.</div>
+    <div class="quiz-ja">報告書？ 今日中に仕上げなきゃ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>terminarlo</b>：tener que ＋ 不定詞では、代名詞を不定詞の後ろに付けてもよい（＝Lo tengo que terminar hoy）。強勢は nar のままなので記号は不要。</div>
+  <div class="srs-rate" data-qid="L12-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">A mi hermano se le <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">perdió</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">perderse：主語は el pasaporte</span></span> el pasaporte en el aeropuerto.</div>
+    <div class="quiz-ja">兄は空港でパスポートをなくしてしまった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>perdió</b>：意図しない出来事の se。主語は el pasaporte（単数）なので動詞も3人称単数。影響を受けた人（兄）は le で表す。</div>
+  <div class="srs-rate" data-qid="L12-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ② 目的語の重複 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">目的語の重複</span>
+  <span class="sec-es">Duplicación de complementos</span>
+</div>
+
+<p>スペイン語では、名詞の目的語と、それを指す代名詞を<span class="hi">1つの文に両方入れる</span>ことがよくあります。日本語や英語の感覚では「同じものを二度言っている」ように見えますが、どこで必要か・どこで不要かには、はっきりした決まりがあります。</p>
+
+<div class="sub" id="kansetsu-choufuku">1. 間接目的語は、名詞があっても le / les を重ねるのが普通</div>
+<div class="ex"><span class="ex-sp"><span class="hi">Le</span> di el libro <span class="hi">a Ana</span>.</span><span class="ex-ja">私はアナに本をあげた。</span><span class="ex-note"><span class="mono">Di el libro a Ana</span> も文法的には誤りではないが、話し言葉では <span class="mono">le</span> を入れるのがごく普通</span></div>
+<div class="ex"><span class="ex-sp">¿<span class="hi">Les</span> has contado la noticia <span class="hi">a tus padres</span>?</span><span class="ex-ja">そのニュース、ご両親に話した？</span></div>
+
+<div class="box box-rule">
+  <div class="box-title">重複が「必ず」必要な3つの場合</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li><span class="hi">a ＋ 人称代名詞</span>（<span class="mono">a mí, a ti, a él…</span>）を目的語に使うとき：× <span class="mono">Vi a ella</span> → ○ <span class="mono"><b>La</b> vi a ella</span></li>
+    <li><span class="hi">gustar 型の動詞</span>（3課）：× <span class="mono">A Ana gusta el té</span> → ○ <span class="mono">A Ana <b>le</b> gusta el té</span></li>
+    <li><span class="hi">目的語を動詞より前に出したとき</span>（→ 下の2）</li>
+  </ul>
+</div>
+
+<div class="sub" id="zenchi">2. 目的語を文頭に出したら、代名詞で受け直す</div>
+<p>話題として目的語を先に言う（「その映画はね、〜」）ときは、動詞の前に<span class="hi-r">代名詞をもう一度置く</span>必要があります。これを落とすと不自然な文になります。</p>
+<div class="ex"><span class="ex-sp"><span class="hi">Esa película</span> ya <span class="hi-r">la</span> he visto.</span><span class="ex-ja">その映画はもう見たよ。</span><span class="ex-note">× <span class="mono">Esa película ya he visto</span></span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Los deberes</span> <span class="hi-r">los</span> hago después de cenar.</span><span class="ex-ja">宿題は夕食の後にやる。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">A tu hermana</span> <span class="hi-r">la</span> conocí en la universidad.</span><span class="ex-ja">君のお姉さんとは大学で知り合った。</span></div>
+
+<div class="sub" id="todo-lo">3. todo を目的語にするときは lo を添える</div>
+<div class="ex"><span class="ex-sp">Ya <span class="hi-r">lo</span> sé <span class="hi">todo</span>.</span><span class="ex-ja">もう全部知っているよ。</span><span class="ex-note">× <span class="mono">Ya sé todo</span> も口語では聞かれるが、<span class="mono">lo … todo</span> が標準的</span></div>
+<div class="ex"><span class="ex-sp">Los niños se <span class="hi-r">lo</span> comieron <span class="hi">todo</span>.</span><span class="ex-ja">子どもたちは全部食べてしまった。</span></div>
+
+<div class="sub" id="leismo">4. leísmo・laísmo（le と lo / la の混同）</div>
+<p>スペインの中部・北部では、「人」を指す直接目的語に <span class="mono">lo</span> の代わりに <span class="mono">le</span> を使う話し方があります（3課のトリビア）。規範上の扱いは次のとおりです。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:24%">名称</th><th style="width:36%">例</th><th>規範（RAE）の扱い</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">leísmo<br><small>男性の人</small></td><td class="mono">A Juan <b>le</b> vi ayer.<br><small>（標準：lo vi）</small></td><td><span class="hi2">許容される</span>（スペインでは非常に多い）</td></tr>
+    <tr><td class="td-rule">leísmo<br><small>女性・物</small></td><td class="mono">× A María <b>le</b> vi.<br>× El libro <b>le</b> compré.</td><td><span class="hi-r">誤り</span>（la vi ／ lo compré）</td></tr>
+    <tr><td class="td-rule">laísmo</td><td class="mono">× <b>La</b> dije la verdad.<br><small>（標準：le dije）</small></td><td><span class="hi-r">誤り</span>：間接目的語に la を使う</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ 迷ったら「直接目的語は lo / la、間接目的語は le」という基本どおりに使えば、どの地域でも正しい。</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">contar</span>（動）話す・語る（o→ue型）／ <span class="mono">noticia</span>（女）知らせ・ニュース ／ <span class="mono">deberes</span>（男複）宿題</li>
+    <li><span class="mono">se lo comieron todo</span>：<span class="mono">comerse</span> は「平らげる」（5課の強意の再帰）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L12-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Ese libro ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">lo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">文頭に出した直接目的語を受け直す</span></span> he leído dos veces.</div>
+  <div class="mini-check-ja">その本はもう2回読んだ。</div>
+<div class="srs-rate" data-qid="L12-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：目的語の重複</div>
+
+  <div class="quiz-item" id="L12-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">A mis abuelos <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">les</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">gustar 型：a ＋ 人と重複させる</span></span> encanta pasear por el campo.</div>
+    <div class="quiz-ja">祖父母は田舎を散歩するのが大好きだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>les</b>：gustar 型の動詞では、a ＋ 人（a mis abuelos）があっても間接目的格代名詞を必ず入れる。複数なので les。</div>
+  <div class="srs-rate" data-qid="L12-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Las fotos del viaje <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">las</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">文頭の目的語を受け直す</span></span> subí ayer a internet.</div>
+    <div class="quiz-ja">旅行の写真は昨日ネットに上げた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>las</b>：直接目的語 las fotos を文頭に出したので、動詞の前で las と受け直す。</div>
+  <div class="srs-rate" data-qid="L12-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No te preocupes, ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">lo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">todo を目的語にするとき</span></span> he preparado todo.</div>
+    <div class="quiz-ja">心配しないで、もう全部準備したから。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>lo</b>：todo を目的語にするときは、動詞の前に lo を添えるのが標準的（lo … todo）。</div>
+  <div class="srs-rate" data-qid="L12-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ③ 中性の lo -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">中性の lo</span>
+  <span class="sec-es">«Lo» neutro</span>
+</div>
+
+<p><span class="mono">lo</span> には「それ（男性名詞）を」という直接目的格代名詞のほかに、<span class="hi">性を持たない「そのこと」「〜なこと」</span>を表す使い方があります。どれも<span class="hi-r">形は lo のまま変化しない</span>のが特徴です。</p>
+
+<div class="sub" id="lo-bun">1. 文や内容を受ける lo「そのこと」</div>
+<div class="ex"><span class="ex-sp">—¿Sabes dónde vive Carlos? —No, no <span class="hi">lo</span> sé.</span><span class="ex-ja">「カルロスがどこに住んでいるか知ってる？」「いや、知らない」</span><span class="ex-note"><span class="mono">lo</span> ＝「カルロスがどこに住んでいるか」という内容全体</span></div>
+<div class="ex"><span class="ex-sp">Ya te <span class="hi">lo</span> dije: no pienso ir.</span><span class="ex-ja">もう言ったでしょ、行くつもりはないって。</span></div>
+
+<div class="sub" id="lo-hogo">2. ser / estar / parecer の補語を受ける lo</div>
+<p>形容詞や名詞の補語を繰り返さずに受けるとき、<span class="hi-r">性・数に関係なく lo</span> を使います。</p>
+<div class="ex"><span class="ex-sp">—¿Estás cansada? —Sí, <span class="hi">lo</span> estoy.</span><span class="ex-ja">「疲れてる？」「うん、疲れてる」</span><span class="ex-note">× <span class="mono">la estoy</span>。<span class="mono">cansada</span> が女性形でも lo</span></div>
+<div class="ex"><span class="ex-sp">Parece fácil, pero no <span class="hi">lo</span> es.</span><span class="ex-ja">簡単そうに見えるが、そうではない。</span></div>
+<div class="ex"><span class="ex-sp">Mis padres son médicos y yo también <span class="hi">lo</span> seré.</span><span class="ex-ja">両親は医者で、私も医者になるつもりだ。</span></div>
+
+<div class="sub" id="lo-adj">3. lo ＋ 形容詞（男性単数）「〜なこと・〜な点」</div>
+<p>形容詞を<span class="hi">抽象的な名詞</span>にします。形容詞は必ず<span class="hi-r">男性単数形</span>です。</p>
+<div class="ex"><span class="ex-sp"><span class="hi">Lo bueno</span> de vivir aquí es el clima.</span><span class="ex-ja">ここに住んでいて良いところは気候だ。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Lo mejor</span> es esperar un poco.</span><span class="ex-ja">一番いいのは少し待つことだ。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Lo importante</span> no es ganar, sino participar.</span><span class="ex-ja">大切なのは勝つことではなく参加することだ。</span></div>
+
+<div class="sub" id="lo-que-kyodo">4. lo ＋ 形容詞・副詞 ＋ que「どれほど〜か」</div>
+<p>程度の大きさを強調する言い方です。3 と違って、<span class="hi-r">形容詞は指す名詞に性数一致</span>します。</p>
+<div class="ex"><span class="ex-sp">No sabes <span class="hi">lo difícil que</span> es este examen.</span><span class="ex-ja">この試験がどれだけ難しいか、君には分からないよ。</span></div>
+<div class="ex"><span class="ex-sp">No te imaginas <span class="hi">lo cansadas que</span> estamos.</span><span class="ex-ja">私たちがどれほど疲れているか、君には想像もつかないよ。</span><span class="ex-note">主語は女性複数なので <span class="mono">cansadas</span>。<span class="mono">lo</span> 自体は変化しない</span></div>
+<div class="ex"><span class="ex-sp">Me sorprendió <span class="hi">lo bien que</span> habla japonés.</span><span class="ex-ja">彼が日本語をとても上手に話すのに驚いた。</span></div>
+
+<div class="sub" id="lo-de">5. lo de ＋ 名詞・不定詞「〜の件・〜のこと」</div>
+<div class="ex"><span class="ex-sp"><span class="hi">Lo de</span> ayer fue un malentendido.</span><span class="ex-ja">昨日の件は誤解だった。</span></div>
+<div class="ex"><span class="ex-sp">¿Te has enterado de <span class="hi">lo de</span> Marta?</span><span class="ex-ja">マルタのこと、聞いた？</span></div>
+<p class="note">※ <span class="mono">lo que</span>「〜なこと」（4課の独立用法）とあわせて、<span class="mono">lo</span> は「内容・こと」をまとめて指すための道具だと考えるとよい：<span class="mono">Lo que más me gusta es leer.</span>（私が一番好きなのは読書だ）</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">no … sino ～</span>：〜ではなく～（L20で詳しく扱う）／ <span class="mono">malentendido</span>（男）誤解 ／ <span class="mono">enterarse de</span>：〜を知る・耳にする</li>
+    <li><span class="mono">pensar ＋ 不定詞</span>：〜するつもりだ（11課）</li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　スペイン語の名詞には男性と女性しかありませんが、<span class="mono">lo</span>・<span class="mono">esto</span>・<span class="mono">eso</span>・<span class="mono">aquello</span>・<span class="mono">algo</span>・<span class="mono">nada</span> などは「中性」と呼ばれます。これらはラテン語の中性の名残で、<b>特定の名詞ではなく「ことがら」を指す</b>ときにだけ使われます。だから <span class="mono">¿Qué es esto?</span>（これは何？）のように、まだ正体の分からない物を指すときも中性の <span class="mono">esto</span> を使うのです。</span>
+</div>
+
+<div class="mini-check" id="L12-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">—¿Eres estudiante? —Sí, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">lo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">補語を受ける中性の lo</span></span> soy.</div>
+  <div class="mini-check-ja">「学生なの？」「うん、そうだよ」</div>
+<div class="srs-rate" data-qid="L12-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：中性の lo</div>
+
+  <div class="quiz-item" id="L12-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Lo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">lo ＋ 形容詞</span></span> peor del viaje fue el tiempo.</div>
+    <div class="quiz-ja">旅行で最悪だったのは天気だった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Lo</b>：lo ＋ 形容詞（男性単数）で「〜なこと」。peor は malo の比較級（4課）。</div>
+  <div class="srs-rate" data-qid="L12-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No te imaginas lo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">contentas</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">contento：主語は女性複数</span></span> que están mis hijas.</div>
+    <div class="quiz-ja">娘たちがどれほど喜んでいるか、想像もつかないでしょう。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>contentas</b>：lo ＋ 形容詞 ＋ que「どれほど〜か」では、形容詞を指す名詞（mis hijas）に一致させる。lo 自体は変化しない。</div>
+  <div class="srs-rate" data-qid="L12-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">—¿Tus padres están preocupados? —Sí, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">lo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">補語 preocupados を受ける</span></span> están.</div>
+    <div class="quiz-ja">「ご両親は心配してる？」「うん、心配してる」</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>lo</b>：estar の補語（preocupados）を受けるときは、性数に関係なく中性の lo（× los están）。</div>
+  <div class="srs-rate" data-qid="L12-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ④ 不定語と否定語 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">不定語と否定語</span>
+  <span class="sec-es">Indefinidos y negativos</span>
+</div>
+
+<div class="sub" id="futeigo-ichiran">1. 肯定と否定のペア</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:18%">対象</th><th style="width:41%;background:#d8eeea;color:var(--accent2)">肯定（不定語）</th><th style="background:#fbe4e4;color:var(--warn)">否定</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">人</td><td class="mono">alguien<br><small>誰か</small></td><td class="mono">nadie<br><small>誰も〜ない</small></td></tr>
+    <tr><td class="td-rule">物・こと</td><td class="mono">algo<br><small>何か</small></td><td class="mono">nada<br><small>何も〜ない</small></td></tr>
+    <tr><td class="td-rule">人・物（形容詞にも）</td><td class="mono">alguno, -a, -os, -as<br><small>いくつかの・誰か（ある集団の中の）</small></td><td class="mono">ninguno, -a<br><small>1つ（1人）も〜ない</small></td></tr>
+    <tr><td class="td-rule">時</td><td class="mono">siempre ／ alguna vez<br><small>いつも ／ いつか・これまでに</small></td><td class="mono">nunca ／ jamás<br><small>決して〜ない</small></td></tr>
+    <tr><td class="td-rule">追加</td><td class="mono">también<br><small>〜も</small></td><td class="mono">tampoco<br><small>〜も（〜ない）</small></td></tr>
+    <tr><td class="td-rule">選択</td><td class="mono">o … o<br><small>〜か〜か</small></td><td class="mono">ni … ni<br><small>〜も〜も（〜ない）</small></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ <span class="mono">alguien, nadie, algo, nada</span> は性数変化しない。<span class="mono">alguno, ninguno</span> は男性単数名詞の前で <span class="mono hi-r">algún, ningún</span> になる（<span class="mono">algún día</span>, <span class="mono">ningún problema</span>）。<br>※ 人を指す <span class="mono">alguien / nadie / alguno / ninguno</span> が直接目的語になるときは <span class="mono">a</span> が必要（3課）：<span class="mono">¿Viste a alguien? — No, no vi a nadie.</span></p>
+
+<div class="sub" id="nijuu-hitei">2. 否定語が動詞の後ろに来たら、動詞の前に no</div>
+<div class="box box-rule">
+  <div class="box-title">否定語の位置で no の有無が決まる</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th>否定語が動詞の前</th><th>否定語が動詞の後ろ</th></tr></thead>
+    <tbody>
+      <tr><td class="mono"><b>Nadie</b> vino.</td><td class="mono"><b>No</b> vino <b>nadie</b>.</td></tr>
+      <tr><td class="mono"><b>Nunca</b> lo he visto.</td><td class="mono"><b>No</b> lo he visto <b>nunca</b>.</td></tr>
+      <tr><td class="mono"><b>Tampoco</b> me gusta.</td><td class="mono"><b>No</b> me gusta <b>tampoco</b>.</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:6px;">日本語や英語と違い、「否定＋否定」でも肯定にはならない（二重否定）。否定語はいくつ重ねてもよい：<span class="mono">No le dije nada a nadie.</span>（誰にも何も言わなかった）</p>
+</div>
+
+<div class="sub" id="ninguno">3. ninguno の使い方</div>
+<div class="ex"><span class="ex-sp">No tengo <span class="hi">ningún</span> amigo en esta ciudad.</span><span class="ex-ja">この町には友達が1人もいない。</span><span class="ex-note">「1つも〜ない」なので、ふつうは<span class="hi">単数</span>で使う（× <span class="mono">ningunos amigos</span>）</span></div>
+<div class="ex"><span class="ex-sp">—¿Cuál de estas camisas te gusta? —<span class="hi">Ninguna</span>.</span><span class="ex-ja">「このシャツのうちどれが好き？」「どれも好きじゃない」</span></div>
+<div class="ex"><span class="ex-sp">¿Tienes <span class="hi">alguna</span> pregunta? — No, <span class="hi">ninguna</span>.</span><span class="ex-ja">「何か質問はある？」「いいえ、ありません」</span></div>
+
+<div class="sub" id="tampoco">4. también と tampoco、algo と nada の副詞用法</div>
+<div class="ex"><span class="ex-tag">肯定に同意</span><span class="ex-sp">—Me encanta el jazz. —A mí <span class="hi2">también</span>.</span><span class="ex-ja">「ジャズが大好き」「私も」</span></div>
+<div class="ex"><span class="ex-tag">否定に同意</span><span class="ex-sp">—No me gusta el pescado. —A mí <span class="hi-r">tampoco</span>.</span><span class="ex-ja">「魚は好きじゃない」「私も（好きじゃない）」</span><span class="ex-note">否定の文に「私も」と言うときは <span class="mono">también</span> ではなく <span class="mono">tampoco</span></span></div>
+<div class="ex"><span class="ex-tag">algo ＝ 少し</span><span class="ex-sp">Hoy estoy <span class="hi">algo</span> cansado.</span><span class="ex-ja">今日は少し疲れている。</span></div>
+<div class="ex"><span class="ex-tag">nada ＝ 全然</span><span class="ex-sp">Este libro no es <span class="hi">nada</span> interesante.</span><span class="ex-ja">この本は全然面白くない。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">¿Cuál de …?</span>：〜のうちどれ ／ <span class="mono">camisa</span>（女）シャツ ／ <span class="mono">pescado</span>（男）（食べ物としての）魚</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L12-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">No ha llamado <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">nadie</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">否定語が動詞の後ろ：no ＋ 動詞 ＋ 否定語</span></span> esta mañana.</div>
+  <div class="mini-check-ja">今朝は誰も電話してこなかった。</div>
+<div class="srs-rate" data-qid="L12-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：不定語と否定語</div>
+
+  <div class="quiz-item" id="L12-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">—¿Has estado <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">alguna vez</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">これまでに</span></span> en Argentina? —No, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">nunca</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">一度も〜ない</span></span>.</div>
+    <div class="quiz-ja">「アルゼンチンに行ったことはある？」「いいえ、一度もない」</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>alguna vez</b>：現在完了の疑問文で「これまでに〜したことがあるか」（5課）。<b>nunca</b>：否定の答え。</div>
+  <div class="srs-rate" data-qid="L12-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No tengo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">ningún</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ninguno：男性単数名詞の前</span></span> problema con eso.</div>
+    <div class="quiz-ja">それについては何の問題もないよ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>ningún</b>：ninguno は男性単数名詞（problema は男性名詞）の前で ningún になる。動詞の後ろなので no も必要。</div>
+  <div class="srs-rate" data-qid="L12-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">—Yo no he visto esa película. —Yo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">tampoco</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">否定に同意</span></span>.</div>
+    <div class="quiz-ja">「私はその映画を見ていない」「私も（見ていない）」</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>tampoco</b>：否定の内容に「〜も」と同意するときは también ではなく tampoco。</div>
+  <div class="srs-rate" data-qid="L12-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ⑤ 数量を表す語 -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">数量を表す語</span>
+  <span class="sec-es">Cuantificadores</span>
+</div>
+
+<div class="sub" id="cualquiera">1. cualquier / cualquiera「どんな〜でも・誰でも」</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:30%">形</th><th style="width:30%">位置</th><th>例</th></tr></thead>
+  <tbody>
+    <tr><td class="mono hi">cualquier</td><td>名詞の<b>前</b>（男女とも）</td><td class="mono">Llámame a cualquier hora.<br><small>いつでも電話して。</small></td></tr>
+    <tr><td class="mono hi">cualquiera</td><td>名詞の<b>後ろ</b></td><td class="mono">No es un restaurante cualquiera.<br><small>そこらのレストランとは違う。</small></td></tr>
+    <tr><td class="mono hi">cualquiera</td><td>単独（代名詞）</td><td class="mono">Cualquiera puede hacerlo.<br><small>誰でもそれはできる。</small></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ 名詞の後ろに置く <span class="mono">cualquiera</span> は「ありふれた・どうでもいい」という軽い意味になりやすい。</p>
+
+<div class="sub" id="todo">2. todo</div>
+<div class="ex"><span class="ex-tag">todo el ＋ 名詞</span><span class="ex-sp">Estuve en casa <span class="hi">todo el día</span>.</span><span class="ex-ja">一日中家にいた。</span></div>
+<div class="ex"><span class="ex-tag">todos los ＋ 名詞</span><span class="ex-sp">Voy al gimnasio <span class="hi">todos los días</span>.</span><span class="ex-ja">毎日ジムに行く。</span><span class="ex-note"><span class="mono">todo el día</span>「一日中」と <span class="mono">todos los días</span>「毎日」の違いに注意</span></div>
+<div class="ex"><span class="ex-tag">todo（単独）</span><span class="ex-sp"><span class="hi">Todo</span> está listo. ／ <span class="hi">Todos</span> están de acuerdo.</span><span class="ex-ja">すべて準備ができている。／ みんな賛成している。</span></div>
+
+<div class="sub" id="cada-otro">3. cada・otro・mismo</div>
+<div class="ex"><span class="ex-tag">cada（無変化・単数）</span><span class="ex-sp"><span class="hi">Cada</span> alumno tiene su ordenador. ／ Nos vemos <span class="hi">cada dos semanas</span>.</span><span class="ex-ja">生徒は1人1台パソコンを持っている。／ 私たちは2週間に1度会う。</span><span class="ex-note"><span class="mono">cada uno</span>「それぞれ」。<span class="mono">cada</span> は性数変化せず、複数名詞には付かない（数詞がある <span class="mono">cada dos semanas</span> は例外）</span></div>
+<div class="ex"><span class="ex-tag">otro（un を付けない）</span><span class="ex-sp">¿Me pone <span class="hi">otro</span> café, por favor?</span><span class="ex-ja">コーヒーをもう1杯お願いします。</span><span class="ex-note">× <span class="mono">un otro café</span>（英語の another につられやすい）</span></div>
+<div class="ex"><span class="ex-tag">mismo</span><span class="ex-sp">Tenemos <span class="hi">el mismo</span> profesor. ／ Lo hice yo <span class="hi">mismo</span>. ／ Ven ahora <span class="hi">mismo</span>.</span><span class="ex-ja">私たちは同じ先生だ。／ それは自分でやった。／ 今すぐ来て。</span></div>
+
+<div class="sub" id="ryou">4. demasiado・bastante・varios</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:26%">語</th><th style="width:37%">形容詞（名詞に一致）</th><th>副詞（無変化）</th></tr></thead>
+  <tbody>
+    <tr><td class="mono hi">demasiado</td><td class="mono">Hay <b>demasiada</b> gente.<br><small>人が多すぎる。</small></td><td class="mono">Comes <b>demasiado</b>.<br><small>君は食べすぎだ。</small></td></tr>
+    <tr><td class="mono hi">bastante</td><td class="mono">Tenemos <b>bastantes</b> problemas.<br><small>かなり多くの問題を抱えている。</small></td><td class="mono">Es <b>bastante</b> caro.<br><small>かなり高い。</small></td></tr>
+    <tr><td class="mono hi">varios</td><td class="mono"><b>varias</b> veces<br><small>何度か（複数形のみ）</small></td><td class="td-c">—</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ 副詞として形容詞や動詞を修飾するときは変化しない：<span class="mono">Las calles son <b>demasiado</b> estrechas.</span>（× demasiadas estrechas）</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">estar de acuerdo</span>：賛成している ／ <span class="mono">¿Me pone …?</span>：（店で）〜をください（スペイン）／ <span class="mono">estrecho, -a</span>（形）狭い</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L12-mc-6">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Voy a clase de baile <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">todos los</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">毎週決まって：todo ＋ 定冠詞 ＋ 複数名詞</span></span> martes.</div>
+  <div class="mini-check-ja">毎週火曜日にダンスのレッスンに行く。</div>
+<div class="srs-rate" data-qid="L12-mc-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-mc-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-mc-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-mc-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：数量を表す語</div>
+
+  <div class="quiz-item" id="L12-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Puedes venir <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">cualquier</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">名詞の前の形</span></span> día de la semana.</div>
+    <div class="quiz-ja">週のどの日に来てもいいよ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>cualquier</b>：名詞の前では男女とも cualquier。名詞の後ろや単独では cualquiera。</div>
+  <div class="srs-rate" data-qid="L12-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Este café está frío. ¿Me traes <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">otro</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">un を付けない</span></span>, por favor?</div>
+    <div class="quiz-ja">このコーヒー冷めてる。もう1杯持ってきてくれる？</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>otro</b>：「もう1つ・別の」は otro だけで表し、un は付けない（× un otro）。</div>
+  <div class="srs-rate" data-qid="L12-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L12-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Había <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">demasiados</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">形容詞として coches に一致</span></span> coches en el centro y llegamos tarde.</div>
+    <div class="quiz-ja">中心街は車が多すぎて、私たちは遅刻した。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>demasiados</b>：名詞（coches：男性複数）を修飾する形容詞なので性数一致する。副詞として使う場合（llegamos demasiado tarde）は変化しない。</div>
+  <div class="srs-rate" data-qid="L12-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L12-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L12-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L12-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑥ 練習問題 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">太字の部分を代名詞に置き換えて、全文を書き換えなさい。代名詞の位置が2通りある文は、両方書きなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Le regalé <b>un reloj</b> a mi padre.</div>
+      <div class="q-ja">私は父に腕時計をプレゼントした。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Se lo regalé</span> (a mi padre).</span>
+      </div>
+      <div class="q-exp"><span class="mono">le</span>（父に）＋ <span class="mono">lo</span>（腕時計を）→ 3人称どうしなので <span class="mono">le</span> は <span class="mono">se</span> になる。<span class="mono">a mi padre</span> は、誰のことか明らかなら省いてよい。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Voy a enviarte <b>las fotos</b> esta noche.</div>
+      <div class="q-ja">今夜君に写真を送るね。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Voy a enviártelas</span> esta noche. ／ <span class="ans-fill">Te las voy a enviar</span> esta noche.</span>
+      </div>
+      <div class="q-exp"><span class="mono">ir a ＋ 不定詞</span> では、代名詞を不定詞の後ろに付けても、<span class="mono">voy</span> の前に置いてもよい。後ろに付けると強勢（en-viár-te-las）が後ろから4番目になるのでアクセント記号が必要。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Estoy explicando <b>la gramática</b> a los alumnos.</div>
+      <div class="q-ja">私は生徒たちに文法を説明しているところだ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Se la estoy explicando</span>. ／ <span class="ans-fill">Estoy explicándosela</span>.</span>
+      </div>
+      <div class="q-exp">間接目的語 <span class="mono">a los alumnos</span>（les）と直接目的語 <span class="mono">la gramática</span>（la）→ <span class="mono">les la</span> ではなく <span class="mono">se la</span>。現在分詞の後ろに付けるときはアクセント記号（explicándosela）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">¡Dame <b>la sal</b>, por favor!</div>
+      <div class="q-ja">塩を取って！</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">¡<span class="ans-fill">Dámela</span>, por favor!</span>
+      </div>
+      <div class="q-exp">肯定命令では代名詞を必ず後ろに付ける（位置は1通り）。<span class="mono">da ＋ me ＋ la</span> で音節が増えるのでアクセント記号が必要。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">No compres <b>esos zapatos</b> a tu hijo.</div>
+      <div class="q-ja">息子さんにその靴を買ってあげないで。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text">No <span class="ans-fill">se los compres</span>.</span>
+      </div>
+      <div class="q-exp">否定命令では代名詞を動詞の前に置く（10課）。<span class="mono">le</span>（息子に）＋ <span class="mono">los</span>（靴を）→ <span class="mono">se los</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Quiero decir <b>la verdad</b> a Laura.</div>
+      <div class="q-ja">私はラウラに本当のことを言いたい。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">答え</span>
+        <span class="ans-text"><span class="ans-fill">Quiero decírsela</span>. ／ <span class="ans-fill">Se la quiero decir</span>.</span>
+      </div>
+      <div class="q-exp"><span class="mono">querer ＋ 不定詞</span> も位置は2通り。元の文は間接目的語の <span class="mono">le</span> を省いているが、代名詞にするときは <span class="mono">se la</span> の形で必ず入る。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">空欄に適切な不定語・否定語を入れなさい（必要なら no も補いなさい）。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">—¿Hay <span class="blank">______</span> en la puerta? —No, no hay <span class="blank">______</span>.</div>
+      <div class="q-ja">「玄関に誰かいる？」「いいえ、誰もいない」</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">alguien</span> ／ <span class="ans-fill">nadie</span></span></div>
+      <div class="q-exp">人については <span class="mono">alguien / nadie</span>。<span class="mono">nadie</span> が動詞の後ろにあるので、動詞の前に <span class="mono">no</span> が必要。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Mi abuelo <span class="blank">______</span> ha salido de España.</div>
+      <div class="q-ja">祖父は一度もスペインから出たことがない。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">nunca</span>（または <span class="ans-fill">jamás</span>）</span></div>
+      <div class="q-exp">否定語が動詞の前にあるときは <span class="mono">no</span> は不要。<span class="mono">No ha salido nunca de España</span> とも言える。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">¿Tienes <span class="blank">______</span> libro de cocina? Quiero hacer una tarta.</div>
+      <div class="q-ja">料理の本を何か持ってる？ ケーキを作りたいんだ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">algún</span></span></div>
+      <div class="q-exp"><span class="mono">alguno</span> は男性単数名詞（libro）の前で <span class="mono">algún</span> になる。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence"><span class="blank">______</span> mi hermano <span class="blank">______</span> yo sabemos nadar.</div>
+      <div class="q-ja">兄も私も泳げない。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Ni</span> mi hermano <span class="ans-fill">ni</span> yo sabemos nadar.</span></div>
+      <div class="q-exp"><span class="mono">ni … ni</span> が動詞の前にあるので <span class="mono">no</span> は不要。動詞は2人を合わせた nosotros（sabemos）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">—No entiendo este ejercicio. —Yo <span class="blank">______</span>.</div>
+      <div class="q-ja">「この問題が分からない」「私も（分からない）」</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">tampoco</span></span></div>
+      <div class="q-exp">否定の内容に同意するので <span class="mono">tampoco</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Esta sopa no está <span class="blank">______</span> rica. No me gusta.</div>
+      <div class="q-ja">このスープは全然おいしくない。好きじゃない。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">nada</span></span></div>
+      <div class="q-exp">否定文の中で形容詞の前に置く <span class="mono">nada</span> は「全然〜ない」。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">誤りを1か所見つけて直しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Me se cayó el móvil al agua.</div>
+      <div class="q-ja">携帯を水に落としてしまった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Se me</span> cayó el móvil al agua.</span></div>
+      <div class="q-exp"><span class="mono">se</span> は代名詞の中で必ず先頭（セ・テ・メ・レ）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Esa canción ya he escuchado muchas veces.</div>
+      <div class="q-ja">その歌はもう何度も聞いた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Esa canción ya <span class="ans-fill">la</span> he escuchado muchas veces.</span></div>
+      <div class="q-exp">直接目的語を文頭に出したら、動詞の前に代名詞を置いて受け直す。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">—¿Estáis listas? —Sí, las estamos.</div>
+      <div class="q-ja">「準備はできた？」「うん、できてる」</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">—Sí, <span class="ans-fill">lo</span> estamos.</span></div>
+      <div class="q-exp">estar の補語（listas）を受けるのは、性数に関係なく中性の <span class="mono">lo</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Necesito un otro bolígrafo; este no escribe.</div>
+      <div class="q-ja">別のボールペンが要る。これは書けない。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Necesito <span class="ans-fill">otro</span> bolígrafo.</span></div>
+      <div class="q-exp"><span class="mono">otro</span> の前に不定冠詞 <span class="mono">un</span> は付けない。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">A mi hermana gustan mucho los perros.</div>
+      <div class="q-ja">姉は犬が大好きだ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">A mi hermana <span class="ans-fill">le</span> gustan mucho los perros.</span></div>
+      <div class="q-exp">gustar 型の動詞では、<span class="mono">a ＋ 人</span> があっても間接目的格代名詞を必ず入れる。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Voy al mercado todo los sábados.</div>
+      <div class="q-ja">毎週土曜日に市場へ行く。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Voy al mercado <span class="ans-fill">todos</span> los sábados.</span></div>
+      <div class="q-exp"><span class="mono">todo</span> は後ろの名詞に性数一致する：<span class="mono">todos los sábados</span>（毎週土曜日）。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">ごめん、君の本を家に忘れてきてしまった。明日必ず返すよ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Perdona, se me ha olvidado tu libro en casa. Mañana te lo devuelvo sin falta.</span></span>
+      </div>
+      <div class="q-exp"><b>se me ha olvidado</b>：意図しない出来事の se（中南米なら <span class="mono">se me olvidó</span>）。<b>te lo devuelvo</b>：te（君に）＋ lo（本を）。近い未来の予定は現在形でも言える。<br>※ <span class="mono">sin falta</span>：必ず</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">この町で一番いいのは、何でも歩いて行けることだ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Lo mejor de esta ciudad es que puedes ir a todas partes andando.</span></span>
+      </div>
+      <div class="q-exp"><b>Lo mejor</b>：lo ＋ 形容詞「〜なこと」。<b>todas partes</b>：どこへでも。<b>andando</b>：歩いて（5課の現在分詞の副詞的用法。<span class="mono">a pie</span> でもよい）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">パーティーには誰も来なかったし、誰も電話してこなかった。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">No vino nadie a la fiesta y nadie llamó tampoco.</span></span>
+      </div>
+      <div class="q-exp"><b>No vino nadie</b>：否定語が動詞の後ろなので no が必要（<span class="mono">Nadie vino</span> でもよい）。<b>tampoco</b>：「〜も（〜ない）」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">私がどれほど君に会いたかったか、君には分からないよ。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">No sabes lo mucho que tenía ganas de verte.</span></span>
+      </div>
+      <div class="q-exp"><b>lo mucho que</b>：lo ＋ 副詞 ＋ que「どれほど〜か」。<b>tenía ganas de ＋ 不定詞</b>：〜したかった（線過去で「会いたい気持ちが続いていた」）。<span class="mono">No sabes cuánto te echaba de menos</span>（どれほど君が恋しかったか）という言い方もある。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑦ 語彙リスト -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">意図しない出来事の se と組む動詞</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">olvidarse (a alguien)</span><span class="pill-pos">再動</span><span class="pill-ja">（うっかり）忘れる</span></span>
+  <span class="pill"><span class="pill-es">caerse</span><span class="pill-pos">再動</span><span class="pill-ja">落ちる・落としてしまう</span></span>
+  <span class="pill"><span class="pill-es">romperse</span><span class="pill-pos">再動</span><span class="pill-ja">壊れる</span></span>
+  <span class="pill"><span class="pill-es">perderse</span><span class="pill-pos">再動</span><span class="pill-ja">なくなる・迷う</span></span>
+  <span class="pill"><span class="pill-es">acabarse</span><span class="pill-pos">再動</span><span class="pill-ja">尽きる・なくなる</span></span>
+  <span class="pill"><span class="pill-es">ocurrirse</span><span class="pill-pos">再動</span><span class="pill-ja">（考えが）浮かぶ</span></span>
+  <span class="pill"><span class="pill-es">quemarse</span><span class="pill-pos">再動</span><span class="pill-ja">焦げる</span></span>
+  <span class="pill"><span class="pill-es">escaparse</span><span class="pill-pos">再動</span><span class="pill-ja">逃げる・（うっかり）漏れる</span></span>
+</div>
+
+<div class="vocab-category">不定語・否定語</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">alguien / nadie</span><span class="pill-pos">代</span><span class="pill-ja">誰か／誰も〜ない</span></span>
+  <span class="pill"><span class="pill-es">algo / nada</span><span class="pill-pos">代</span><span class="pill-ja">何か／何も〜ない</span></span>
+  <span class="pill"><span class="pill-es">alguno / ninguno</span><span class="pill-pos">形・代</span><span class="pill-ja">いくつかの／1つも〜ない</span></span>
+  <span class="pill"><span class="pill-es">alguna vez</span><span class="pill-pos">表現</span><span class="pill-ja">いつか・これまでに</span></span>
+  <span class="pill"><span class="pill-es">nunca / jamás</span><span class="pill-pos">副</span><span class="pill-ja">決して〜ない</span></span>
+  <span class="pill"><span class="pill-es">también / tampoco</span><span class="pill-pos">副</span><span class="pill-ja">〜も／〜も（〜ない）</span></span>
+  <span class="pill"><span class="pill-es">ni … ni</span><span class="pill-pos">接</span><span class="pill-ja">〜も〜も（〜ない）</span></span>
+  <span class="pill"><span class="pill-es">en ninguna parte</span><span class="pill-pos">表現</span><span class="pill-ja">どこにも（〜ない）</span></span>
+  <span class="pill"><span class="pill-es">(a) todas partes</span><span class="pill-pos">表現</span><span class="pill-ja">どこへでも・至る所に</span></span>
+</div>
+
+<div class="vocab-category">数量を表す語</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">cualquier / cualquiera</span><span class="pill-pos">形・代</span><span class="pill-ja">どんな〜でも／誰でも</span></span>
+  <span class="pill"><span class="pill-es">todo el día</span><span class="pill-pos">表現</span><span class="pill-ja">一日中</span></span>
+  <span class="pill"><span class="pill-es">todos los días</span><span class="pill-pos">表現</span><span class="pill-ja">毎日</span></span>
+  <span class="pill"><span class="pill-es">cada uno</span><span class="pill-pos">表現</span><span class="pill-ja">それぞれ</span></span>
+  <span class="pill"><span class="pill-es">cada dos semanas</span><span class="pill-pos">表現</span><span class="pill-ja">2週間ごとに</span></span>
+  <span class="pill"><span class="pill-es">otro, -a</span><span class="pill-pos">形</span><span class="pill-ja">別の・もう1つの</span></span>
+  <span class="pill"><span class="pill-es">otra vez</span><span class="pill-pos">表現</span><span class="pill-ja">もう一度</span></span>
+  <span class="pill"><span class="pill-es">el mismo, la misma</span><span class="pill-pos">形</span><span class="pill-ja">同じ</span></span>
+  <span class="pill"><span class="pill-es">ahora mismo</span><span class="pill-pos">表現</span><span class="pill-ja">今すぐ</span></span>
+  <span class="pill"><span class="pill-es">demasiado</span><span class="pill-pos">形・副</span><span class="pill-ja">多すぎる／〜すぎる</span></span>
+  <span class="pill"><span class="pill-es">bastante</span><span class="pill-pos">形・副</span><span class="pill-ja">かなりの／かなり</span></span>
+  <span class="pill"><span class="pill-es">varios, -as</span><span class="pill-pos">形</span><span class="pill-ja">いくつかの</span></span>
+</div>
+
+<div class="vocab-category">中性の lo を使う表現</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">lo bueno / lo malo</span><span class="pill-pos">表現</span><span class="pill-ja">良い点／悪い点</span></span>
+  <span class="pill"><span class="pill-es">lo mejor / lo peor</span><span class="pill-pos">表現</span><span class="pill-ja">一番良いこと／最悪なこと</span></span>
+  <span class="pill"><span class="pill-es">lo importante</span><span class="pill-pos">表現</span><span class="pill-ja">大切なこと</span></span>
+  <span class="pill"><span class="pill-es">lo de ～</span><span class="pill-pos">表現</span><span class="pill-ja">～の件</span></span>
+  <span class="pill"><span class="pill-es">no sabes lo … que</span><span class="pill-pos">表現</span><span class="pill-ja">どれほど…か君には分からない</span></span>
+  <span class="pill"><span class="pill-es">ya lo creo</span><span class="pill-pos">表現</span><span class="pill-ja">もちろんだとも</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">prestar</span><span class="pill-pos">動</span><span class="pill-ja">貸す</span></span>
+  <span class="pill"><span class="pill-es">devolver</span><span class="pill-pos">動</span><span class="pill-ja">返す</span></span>
+  <span class="pill"><span class="pill-es">enterarse de</span><span class="pill-pos">再動</span><span class="pill-ja">〜を知る</span></span>
+  <span class="pill"><span class="pill-es">malentendido</span><span class="pill-pos">男</span><span class="pill-ja">誤解</span></span>
+  <span class="pill"><span class="pill-es">noticia</span><span class="pill-pos">女</span><span class="pill-ja">知らせ・ニュース</span></span>
+  <span class="pill"><span class="pill-es">deberes</span><span class="pill-pos">男複</span><span class="pill-ja">宿題</span></span>
+  <span class="pill"><span class="pill-es">autopista</span><span class="pill-pos">女</span><span class="pill-ja">高速道路</span></span>
+  <span class="pill"><span class="pill-es">de repente</span><span class="pill-pos">表現</span><span class="pill-ja">突然</span></span>
+  <span class="pill"><span class="pill-es">sin falta</span><span class="pill-pos">表現</span><span class="pill-ja">必ず</span></span>
+  <span class="pill"><span class="pill-es">estar de acuerdo</span><span class="pill-pos">表現</span><span class="pill-ja">賛成している</span></span>
+  <span class="pill"><span class="pill-es">tener ganas de</span><span class="pill-pos">表現</span><span class="pill-ja">〜したい</span></span>
+  <span class="pill"><span class="pill-es">echar de menos</span><span class="pill-pos">表現</span><span class="pill-ja">〜が恋しい</span></span>
+</div>
+
+<!-- ⑧ まとめ -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">並べる順番</td><td><b>se → te/os → me/nos → lo/la/le</b>（セ・テ・メ・レ）。<span class="mono">le/les ＋ lo/la</span> → <span class="mono">se lo / se la</span></td></tr>
+    <tr><td class="td-rule">置く位置</td><td>活用した動詞の<b>前</b>／不定詞・現在分詞の<b>前か後ろ</b>／肯定命令の<b>後ろ</b>／否定命令の<b>前</b>。2つの代名詞は離さない</td></tr>
+    <tr><td class="td-rule">アクセント記号</td><td>後ろに付けて強勢が後ろから3番目以前になったら付ける：<span class="mono">dártelo, diciéndomelo, dámela</span></td></tr>
+    <tr><td class="td-rule">意図しない出来事</td><td><span class="mono">se ＋ 人の代名詞 ＋ 動詞（物に一致）</span>：<span class="mono">Se me olvidaron las llaves.</span></td></tr>
+    <tr><td class="td-rule">間接目的語の重複</td><td><span class="mono">Le di el libro a Ana.</span> gustar 型と <span class="mono">a ＋ 人称代名詞</span> では必須</td></tr>
+    <tr><td class="td-rule">目的語を文頭に</td><td>代名詞で受け直す：<span class="mono">Esa película ya la he visto.</span></td></tr>
+    <tr><td class="td-rule">todo を目的語に</td><td><span class="mono">Lo sé todo. ／ Se lo comieron todo.</span></td></tr>
+    <tr><td class="td-rule">leísmo・laísmo</td><td>男性の人に使う <span class="mono">le</span> だけ許容。女性・物の le、間接目的語の la は誤り</td></tr>
+    <tr><td class="td-rule">中性の lo ①</td><td>内容を受ける（<span class="mono">No lo sé</span>）／補語を受ける（<span class="mono">Sí, lo estoy</span>：性数に関係なく lo）</td></tr>
+    <tr><td class="td-rule">中性の lo ②</td><td><span class="mono">lo ＋ 形容詞（男性単数）</span>「〜なこと」／<span class="mono">lo ＋ 形容詞（一致）・副詞 ＋ que</span>「どれほど〜か」／<span class="mono">lo de</span>「〜の件」</td></tr>
+    <tr><td class="td-rule">否定語の位置</td><td>動詞の後ろなら動詞の前に <span class="mono">no</span>：<span class="mono">No vino nadie ＝ Nadie vino</span>。否定語は重ねてよい</td></tr>
+    <tr><td class="td-rule">alguno / ninguno</td><td>男性単数名詞の前で <span class="mono">algún / ningún</span>。<span class="mono">ninguno</span> はふつう単数</td></tr>
+    <tr><td class="td-rule">también / tampoco</td><td>肯定への同意は <span class="mono">también</span>、否定への同意は <span class="mono">tampoco</span></td></tr>
+    <tr><td class="td-rule">cualquier / cualquiera</td><td>名詞の前は <span class="mono">cualquier</span>、後ろ・単独は <span class="mono">cualquiera</span></td></tr>
+    <tr><td class="td-rule">todo・cada・otro</td><td><span class="mono">todo el día</span>（一日中）／<span class="mono">todos los días</span>（毎日）、<span class="mono">cada</span> は無変化・単数、<span class="mono">otro</span> に un を付けない</td></tr>
+    <tr><td class="td-rule">demasiado・bastante</td><td>名詞の前では一致（<span class="mono">demasiada gente</span>）、副詞では無変化（<span class="mono">demasiado caro</span>）</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 12 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<!-- ══ 鍛錬タブ（問題は tanren-bank.js から表示） ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div id="sec-tanren" class="sec-heading">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-intro">Lección 12 の内容を総合的に使う問題が <b>100問</b> あります。まとめクイズと同じか、少し難しいレベルです。<br>「内容ごと」は文法項目の順、「ランダム」は全範囲を混ぜた順に並びます。○△× を付けた問題は「今日の復習」に出ます。</div>
+
+<div id="tanren-app" data-lesson="12"></div>
+
+</div><!-- /tab-tanren -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① 目的格代名詞の総まとめ</a>
+    <a class="fn-item" href="#sec2">② 目的語の重複</a>
+    <a class="fn-item" href="#sec3">③ 中性の lo</a>
+    <a class="fn-item" href="#sec4">④ 不定語と否定語</a>
+    <a class="fn-item" href="#sec5">⑤ 数量を表す語</a>
+    <a class="fn-item" href="#sec6">⑥ 練習問題</a>
+    <a class="fn-item" href="#sec7">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8">⑧ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['目的格代名詞','代名詞','pronombres átonos','弱い代名詞'], id: 'sec1', label: '目的格代名詞の総まとめ（①節）' },
+  { terms: ['順番','語順','se lo','se la','se los','se las','te lo','me lo','セテメレ'], id: 'junban', label: '代名詞を並べる順番（①節）' },
+  { terms: ['位置','後置','dártelo','diciéndomelo','voy a','estar ＋ 現在分詞','アクセント記号'], id: 'pos-ichiran', label: '代名詞を置く位置の一覧（①節）' },
+  { terms: ['意図しない','うっかり','se me olvidó','se me cayó','se nos rompió','se me ocurrió','olvidarse','caerse','romperse'], id: 'se-muishiki', label: '意図しない出来事の se（①節）' },
+  { terms: ['重複','duplicación','目的語の重複'], id: 'sec2', label: '目的語の重複（②節）' },
+  { terms: ['間接目的語','le di','a Ana','a mí','a ella','gustar'], id: 'kansetsu-choufuku', label: '間接目的語の重複（②節）' },
+  { terms: ['文頭','前置','話題','la he visto'], id: 'zenchi', label: '目的語を文頭に出す（②節）' },
+  { terms: ['todo','lo sé todo','se lo comieron todo'], id: 'todo-lo', label: 'todo を目的語にするときの lo（②節）' },
+  { terms: ['leísmo','laísmo','loísmo','le vi'], id: 'leismo', label: 'leísmo・laísmo（②節）' },
+  { terms: ['中性','lo neutro','中性の lo'], id: 'sec3', label: '中性の lo（③節）' },
+  { terms: ['no lo sé','te lo dije','内容を受ける'], id: 'lo-bun', label: '内容を受ける lo（③節）' },
+  { terms: ['lo estoy','lo es','補語','ser estar parecer'], id: 'lo-hogo', label: '補語を受ける lo（③節）' },
+  { terms: ['lo bueno','lo mejor','lo importante','lo peor','lo ＋ 形容詞'], id: 'lo-adj', label: 'lo ＋ 形容詞（③節）' },
+  { terms: ['lo difícil que','lo bien que','どれほど','lo mucho que'], id: 'lo-que-kyodo', label: 'lo ＋ 形容詞・副詞 ＋ que（③節）' },
+  { terms: ['lo de','の件'], id: 'lo-de', label: 'lo de ＋ 名詞（③節）' },
+  { terms: ['不定語','否定語','indefinidos','negativos'], id: 'sec4', label: '不定語と否定語（④節）' },
+  { terms: ['alguien','nadie','algo','nada','siempre','nunca','jamás','ni'], id: 'futeigo-ichiran', label: '肯定と否定のペア（④節）' },
+  { terms: ['二重否定','no vino nadie','否定語の位置'], id: 'nijuu-hitei', label: '否定語の位置と no（④節）' },
+  { terms: ['alguno','ninguno','algún','ningún'], id: 'ninguno', label: 'alguno・ninguno（④節）' },
+  { terms: ['también','tampoco','algo cansado','nada interesante'], id: 'tampoco', label: 'también と tampoco（④節）' },
+  { terms: ['数量','cuantificadores'], id: 'sec5', label: '数量を表す語（⑤節）' },
+  { terms: ['cualquier','cualquiera','誰でも'], id: 'cualquiera', label: 'cualquier・cualquiera（⑤節）' },
+  { terms: ['todo el día','todos los días','todos','毎日','一日中'], id: 'todo', label: 'todo（⑤節）' },
+  { terms: ['cada','otro','mismo','cada uno','ahora mismo'], id: 'cada-otro', label: 'cada・otro・mismo（⑤節）' },
+  { terms: ['demasiado','bastante','varios'], id: 'ryou', label: 'demasiado・bastante・varios（⑤節）' },
+  { terms: ['練習問題','練習'], id: 'sec6', label: '練習問題（⑥節）' },
+  { terms: ['語彙','Vocabulario'], id: 'sec7', label: '語彙リスト（⑦節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec8', label: 'まとめ（⑧節）' },
+  { terms: ['鍛錬','Entrenamiento'], id: 'sec-tanren', label: '鍛錬（100問）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語文法解説集　B1〜B2 編</footer>
+
+</body>
+</html>
