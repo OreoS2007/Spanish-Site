@@ -57,9 +57,29 @@ function bi(ja, en) {
 }
 function biKey(key) { return bi(I18N[key].ja, I18N[key].en); }
 
+/* 切り替えても読んでいた場所がずれないように、画面上端にある「両言語で共通の要素」を
+   目印にして、切り替え後も同じ位置に来るようにスクロールを戻す */
+var LANG_ANCHOR_SELECTOR = '.sec-heading, .sub, .sub2, .ex, .mini-check, .quiz-item, .quiz-block-title, ' +
+  '.box, .tbl-wrap, .trivia, .q-item, .daimon, .ex-block-title, .vocab-category, .pill, .tanren-intro, .cover-goal';
+function langAnchorElement() {
+  var nav = document.getElementById('top-nav');
+  var top = nav ? nav.getBoundingClientRect().bottom : 0;
+  var best = null, bestDist = Infinity;
+  document.querySelectorAll(LANG_ANCHOR_SELECTOR).forEach(function (el) {
+    if (el.closest('body [lang]') || !el.offsetParent) return;
+    var r = el.getBoundingClientRect();
+    if (r.bottom <= top || r.top >= window.innerHeight) return;   /* 画面に見えているものだけ */
+    var d = Math.abs(r.top - top);
+    if (d < bestDist) { best = el; bestDist = d; }
+  });
+  return best;
+}
 function setSiteLang(lang) {
+  var anchor = langAnchorElement();
+  var before = anchor ? anchor.getBoundingClientRect().top : 0;
   try { localStorage.setItem('siteLang', lang); } catch (e) {}
   applySiteLang();
+  if (anchor) window.scrollBy(0, anchor.getBoundingClientRect().top - before);
 }
 function applySiteLang() {
   if (!isBilingualPage()) return;
@@ -71,6 +91,13 @@ function applySiteLang() {
     b.classList.toggle('active', on);
     b.setAttribute('aria-pressed', on ? 'true' : 'false');
   });
+  /* 左下の丸いボタンは「押すと切り替わる先の言語」を表示する */
+  var fab = document.getElementById('lang-fab');
+  if (fab) {
+    fab.textContent = lang === 'en' ? '日' : 'EN';
+    fab.title = lang === 'en' ? '日本語で表示' : 'Show in English';
+    fab.setAttribute('aria-label', fab.title);
+  }
   /* 入力欄の案内文は CSS で切り替えられないので、data-placeholder-en を見て差し替える */
   document.querySelectorAll('[data-placeholder-en]').forEach(function (el) {
     if (!el.hasAttribute('data-placeholder-ja')) el.setAttribute('data-placeholder-ja', el.getAttribute('placeholder') || '');
@@ -108,6 +135,12 @@ function setupLangSwitch() {
   if (cover) cover.appendChild(makeSwitch());
   var menu = document.getElementById('top-toc-menu');
   if (menu) menu.insertBefore(makeSwitch(), menu.firstChild);
+  /* どこまでスクロールしていても押せるよう、左下に固定の切り替えボタンも置く */
+  var fab = document.createElement('button');
+  fab.id = 'lang-fab';
+  fab.type = 'button';
+  fab.addEventListener('click', function () { setSiteLang(siteLang() === 'en' ? 'ja' : 'en'); });
+  document.body.appendChild(fab);
   applySiteLang();
 }
 
@@ -599,8 +632,8 @@ function setupJaToggle() {
 /* ── ページ読み込み時の初期化 ── */
 document.addEventListener('DOMContentLoaded', function () {
 
-  setupLangSwitch();
   setupJaToggle();
+  setupLangSwitch();
 
   /* 鍛錬タブがあるページでは問題を並べる（評価ボタンの復元より先に行う） */
   renderTanren();

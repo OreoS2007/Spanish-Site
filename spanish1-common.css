@@ -531,4 +531,14 @@ html[data-lang="en"] body [lang="ja"] { display: none !important; }
 .lang-switch button.active { background: var(--accent); color: #fff; }
 #top-toc-menu .lang-switch { margin: 0 0 4px; width: 100%; }
 #top-toc-menu .lang-switch button { flex: 1; }
-@media print { .lang-switch { display: none !important; } }
+/* 左下に固定する言語切り替えボタン（「和訳を隠す」ボタンの上に重ねる） */
+#lang-fab {
+  position: fixed; left: 16px; bottom: 20px; z-index: 950;
+  width: 44px; height: 44px; border-radius: 50%;
+  border: 2px solid var(--accent); background: var(--accent); color: #fff;
+  font-family: var(--sans); font-size: 14px; font-weight: 700; cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.22);
+}
+#ja-toggle-btn ~ #lang-fab { bottom: 70px; }
+@media print { .lang-switch, #lang-fab { display: none !important; } }
+body.is-printing #lang-fab { display: none !important; }
