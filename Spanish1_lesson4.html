@@ -20,6 +20,12 @@
     <div id="dict-modal-body"></div>
   </div>
 </div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
 
 <div id="top-nav">
   <div id="top-toc-menu">
@@ -39,6 +45,7 @@
   <span id="top-nav-title">Lección 4 文法解説</span>
   <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
   <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
 </div>
 
 <!-- 表紙 -->
@@ -65,8 +72,16 @@
     <a class="toc-item" href="#vocab" onclick="jumpToSection('vocab'); return false;">📖 語彙</a>
     <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
   </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：quiero　／　比較級　／　関係詞…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
 </div>
 
+<div id="cover-search-results"></div>
 
 
 <div id="tab-grammar" class="tab-content active">
@@ -1749,6 +1764,35 @@
 <div id="tanren-app" data-lesson="4"></div>
 
 </div><!-- /tab-tanren -->
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['不規則活用','不規則動詞','直説法現在','irregular','presente de indicativo'], id: 'sec1', label: '直説法現在形不規則活用（１節）' },
+  { terms: ['語根母音変化','ブーツ型','e→ie','e-ie','pensar','pienso','cerrar','cierro','querer','quiero','empezar','empiezo','entender','entiendo','preferir','prefiero','sentir','siento'], id: 'sec1a-eie', label: '語根母音変化：e → ie 型（１節）' },
+  { terms: ['o→ue','o-ue','poder','puedo','puede','volver','vuelvo','llover','llueve','dormir','duermo','contar','cuento','costar','cuesta','encontrar','encuentro'], id: 'sec1a-oue', label: '語根母音変化：o → ue 型（１節）' },
+  { terms: ['e→i','e-i','pedir','pido','pide','servir','sirvo','repetir','repito','seguir','sigo'], id: 'sec1a-ei', label: '語根母音変化：e → i 型（１節）' },
+  { terms: ['u→ue','u-ue','jugar','juego','juega'], id: 'sec1a-uue', label: '語根母音変化：u → ue 型 jugar（１節）' },
+  { terms: ['-zco','zco','conocer','conozco','conducir','conduzco','traducir','traduzco','parecer','parezco'], id: 'sec1b', label: '-zco 型動詞（１節）' },
+  { terms: ['-go','go型','tener','tengo','tiene','salir','salgo','traer','traigo','hacer','hago','poner','pongo','venir','vengo','viene','decir','digo','dice','oír','oigo','oye'], id: 'sec1c', label: '-go 型動詞（１節）' },
+  { terms: ['その他の不規則動詞','-uir','construir','construyo','huir','huyo','ir','voy','vas','va','vamos','ver','veo','saber','sé','dar','doy','estar','estoy'], id: 'sec1d', label: 'その他の不規則動詞（１節）' },
+  { terms: ['関係詞','関係代名詞','relativo','先行詞'], id: 'sec2', label: '関係詞（２節）' },
+  { terms: ['que','関係代名詞 que','限定用法','説明用法'], id: 'sec2a', label: '関係代名詞 que（２節）' },
+  { terms: ['独立用法','lo que','el que','la que'], id: 'sec2b', label: '関係代名詞 que の独立用法（２節）' },
+  { terms: ['関係副詞','donde'], id: 'sec2c', label: '関係副詞 donde（２節）' },
+  { terms: ['cual','quien','cuando','cuyo'], id: 'sec2d', label: 'その他の関係詞（２節）' },
+  { terms: ['比較','比較表現','comparativo','comparación'], id: 'sec3', label: '比較表現（３節）' },
+  { terms: ['比較級','más','menos','tan','tanto','como','que','mejor','peor','mayor','menor','mejores','peores','mayores','menores'], id: 'sec3a', label: '比較級（３節）' },
+  { terms: ['最上級','superlativo','el más','la más','ísimo','ísima','muchísimo','de todos'], id: 'sec3b', label: '最上級（３節）' },
+  { terms: ['無主語文','impersonal','主語なし'], id: 'sec4', label: '無主語文（４節）' },
+  { terms: ['天候','天気','気象','hace','calor','frío','sol','viento','buen tiempo','llueve','nieva','llover','nevar'], id: 'sec4a', label: '天候・気象現象・時期（４節）' },
+  { terms: ['時刻','何時','hora','es la una','son las','y media','y cuarto','menos cuarto','a las','a la una','qué hora','mañana','tarde','noche','madrugada'], id: 'sec4b', label: '時刻表現（４節）' },
+  { terms: ['hay','hay que','tener que','dicen que','義務','存在'], id: 'sec4c', label: 'その他の無主語文（４節）' },
+  { terms: ['まとめ','早見表','総まとめ','Resumen'], id: 'sec-summary', label: 'Lección 4 総まとめ早見表' },
+  { terms: ['練習問題','練習','ejercicios'], id: 'exercises', label: '練習問題' },
+  { terms: ['語彙','Vocabulario','単語'], id: 'vocab', label: '語彙' },
+  { terms: ['鍛錬','Entrenamiento'], id: 'sec-tanren', label: '鍛錬（100問）' },
+];
+</script>
 
 <footer class="course-footer">スペイン語一列① 文法解説集</footer>
 
