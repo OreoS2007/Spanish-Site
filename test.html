@@ -90,13 +90,13 @@
 
 <div class="cover-title-block">
   <div class="cover-title">実力診断テスト</div>
-  <div class="cover-sub">スペイン語文法（Lección 2〜19） — 実力測定</div>
+  <div class="cover-sub">スペイン語文法（Lección 2〜20） — 実力測定</div>
 </div>
 
 <div id="test-app">
   <div class="test-intro" id="test-intro">
     <h2>このテストについて</h2>
-    <p>Lección 2〜19の文法項目からバランスよく問題を出題します。空欄にスペイン語を直接入力してください（<span class="hi">アクセント記号も正確に</span>入力してください。é や ñ の入力が難しい場合は、テスト画面上部のボタンから挿入できます）。</p>
+    <p>Lección 2〜20の文法項目からバランスよく問題を出題します。空欄にスペイン語を直接入力してください（<span class="hi">アクセント記号も正確に</span>入力してください。é や ñ の入力が難しい場合は、テスト画面上部のボタンから挿入できます）。</p>
     <p>採点後、CEFR目安レベル・得意分野・不得意分野・復習すべきLecciónを表示します。問題は毎回ランダムに選ばれるため、繰り返し受けても新鮮な内容になります。</p>
     <button class="test-start-btn" onclick="window.__startTest()">テストを始める（約20問）</button>
   </div>
@@ -171,12 +171,13 @@ const LESSON_LABELS = {
   17: 'Lección 17（接続法の総合②：副詞節・譲歩・条件）',
   18: 'Lección 18（関係詞の発展）',
   19: 'Lección 19（間接話法）',
+  20: 'Lección 20（受動と無人称の総まとめ・つなぎの言葉）',
 };
 
 const CEFR_GROUPS = {
   A2: [2, 3, 4],
   B1: [5, 6, 7],
-  B2: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19],
+  B2: [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20],
 };
 
 // 出題・集計の対象になる課（LESSON_LABELS に載っている課）

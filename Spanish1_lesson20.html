@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 20 文法解説 | B1〜B2 編</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 3つの受け身の使い分け</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② 動作と状態</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 無人称のいろいろ</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④ つなぎの言葉①（追加・対比）</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ つなぎの言葉②（結果・言い換え・構成）</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec6" data-tab="renshu" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8" data-tab="vocab" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ まとめ</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">💪 鍛錬タブ</span>
+    <a class="fn-item" href="#sec-tanren" data-tab="tanren" onclick="jumpToSection('sec-tanren'); closeToc(); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 20 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 20　文法解説</div>
+  <div class="cover-sub">B1〜B2 編　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br>「この橋は1900年に建てられた」「ここではスペイン語が話されている」「財布を盗まれた」のような受け身・無人称の文を、場面に合った形で言い分けられるようになります。さらに <span class="mono">sin embargo</span>（しかしながら）、<span class="mono">por lo tanto</span>（したがって）、<span class="mono">es decir</span>（つまり）などのつなぎの言葉で、筋の通った文章を組み立てられるようになります。<br><small>5課の過去分詞・再帰受身・不定主語の se の続きで、B1〜B2 編の最終課です。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 3つの受け身の使い分け</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② 動作と状態</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 無人称のいろいろ</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④ つなぎの言葉①（追加・対比）</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ つなぎの言葉②（結果・言い換え・構成）</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 練習問題</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 語彙リスト</a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ まとめ</a>
+    <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：sin embargo　／　se vende　／　受け身…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 3つの受け身の使い分け -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">3つの受け身の使い分け</span>
+  <span class="sec-es">Tres maneras de expresar la pasiva</span>
+</div>
+
+<p>「〜される」を表す形は3つあります。スペイン語は英語ほど <span class="mono">ser</span> の受け身を使わず、会話では<span class="hi">再帰受身</span>や<span class="hi">3人称複数の無人称</span>がよく使われます。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:26%">形</th><th style="width:30%">よく使う場面</th><th>例と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">ser ＋ 過去分詞</td><td>書き言葉・報道・歴史。行為者を示すとき</td><td><span class="mono">El puente <b>fue construido</b> por los romanos.</span><br>その橋はローマ人によって建てられた。</td></tr>
+    <tr><td class="td-rule">se ＋ 3人称（再帰受身）</td><td>会話でいちばん普通。行為者は言わない</td><td><span class="mono">Aquí <b>se venden</b> entradas.</span><br>ここで入場券が売られている。</td></tr>
+    <tr><td class="td-rule">3人称複数の無人称</td><td>会話。「誰かが」した（誰かは分からない・言わない）</td><td><span class="mono">Me <b>han robado</b> la cartera.</span><br>財布を盗まれた。</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="ser-pasiva">1. ser ＋ 過去分詞（＋ por ＋ 行為者）</div>
+<p>過去分詞は<span class="hi">主語の性・数</span>に一致します（5課）。時制は <span class="mono">ser</span> で表し、行為者は <span class="mono">por</span> で示します。</p>
+<div class="ex"><span class="ex-sp">La novela <span class="hi">fue escrita</span> por Cervantes.</span><span class="ex-ja">その小説はセルバンテスによって書かれた。</span><span class="ex-note">novela（女性単数）に合わせて escrita</span></div>
+<div class="ex"><span class="ex-sp">Los ganadores <span class="hi">serán anunciados</span> mañana.</span><span class="ex-ja">受賞者は明日発表される。</span><span class="ex-note">未来の受け身：serán ＋ 過去分詞</span></div>
+<p class="note">※ 日常の習慣を <span class="mono">ser</span> の受け身の現在形で言うと不自然になりやすい：× <span class="mono">La puerta es abierta cada mañana por el portero.</span> → ○ <span class="mono">El portero abre la puerta cada mañana.</span>（能動文にする）</p>
+
+<div class="sub" id="pasiva-refleja">2. 再帰受身：se ＋ 3人称</div>
+<p>行為者が問題にならないときの、最も普通の受け身です。動詞は<span class="hi">主語（物）の数</span>に一致します。</p>
+<div class="ex"><span class="ex-sp">En 2010 <span class="hi">se construyó</span> un nuevo hospital.</span><span class="ex-ja">2010年に新しい病院が建てられた。</span></div>
+<div class="ex"><span class="ex-sp">Aquí no <span class="hi">se aceptan</span> tarjetas.</span><span class="ex-ja">ここではカードは使えません。</span><span class="ex-note">tarjetas（複数）なので aceptan</span></div>
+<div class="box box-warn">
+  <div class="box-title">再帰受身に por ＋ 行為者は付けない</div>
+  <p style="margin:0;font-size:13.5px;">× <span class="mono">Se construyó el puente por los romanos.</span><br>行為者を言いたいなら <span class="mono">ser</span> の受け身（<span class="mono">El puente fue construido por los romanos</span>）か、能動文（<span class="mono">Los romanos construyeron el puente</span>）にする。</p>
+</div>
+
+<div class="sub" id="sanninsho">3. 3人称複数の無人称</div>
+<p>主語を言わずに動詞を3人称複数にすると、「（誰かが）〜する」という意味になります。日本語の「〜された」にあたることが多い形です。話し手自身は含みません。</p>
+<div class="ex"><span class="ex-sp">Me <span class="hi">han robado</span> la cartera.</span><span class="ex-ja">財布を盗まれた。</span><span class="ex-note">英語の <i>I've had my wallet stolen</i></span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Dicen</span> que va a llover mañana.</span><span class="ex-ja">明日は雨が降るそうだ。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Llaman</span> a la puerta.</span><span class="ex-ja">誰かがドアをノックしている。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">ganador</span>（男）受賞者・勝者 ／ <span class="mono">portero</span>（男）門番・管理人</li>
+    <li><span class="mono">entrada</span>（女）入場券 ／ <span class="mono">llamar a la puerta</span>（表現）ドアをノックする</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L20-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">La Alhambra <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">fue construida</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ser の受け身・点過去：construir</span></span> en la Edad Media.</div>
+  <div class="mini-check-ja">アルハンブラ宮殿は中世に建てられた。</div>
+<div class="srs-rate" data-qid="L20-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：3つの受け身の使い分け</div>
+  <div class="quiz-item" id="L20-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">En este restaurante <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se habla</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">再帰受身：hablar</span></span> inglés.</div>
+    <div class="quiz-ja">このレストランでは英語が通じる。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>se habla</b>：再帰受身。主語 inglés（単数）に合わせて habla。</div>
+  <div class="srs-rate" data-qid="L20-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Anoche me <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">robaron</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">3人称複数の無人称：robar（点過去）</span></span> la bicicleta.</div>
+    <div class="quiz-ja">昨夜、自転車を盗まれた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>robaron</b>：誰が盗んだか分からないので3人称複数の無人称。</div>
+  <div class="srs-rate" data-qid="L20-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Los resultados <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">serán publicados</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">ser の受け身・未来：publicar</span></span> la semana que viene.</div>
+    <div class="quiz-ja">結果は来週発表される。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>serán publicados</b>：ser の未来 ＋ 過去分詞。los resultados（男性複数）に一致。</div>
+  <div class="srs-rate" data-qid="L20-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ② 動作と状態 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">動作と状態</span>
+  <span class="sec-es">Acción y resultado</span>
+</div>
+
+<div class="sub" id="estar-kekka">1. ser ＋ 過去分詞＝動作、estar ＋ 過去分詞＝結果の状態</div>
+<p><span class="mono">ser</span> の受け身は「〜される」という<span class="hi">動作</span>、<span class="mono">estar ＋ 過去分詞</span>は「〜されている・〜してある」という<span class="hi2">結果の状態</span>を表します（13課の ser / estar の違いと同じ考え方）。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="background:#fbe4e4;color:var(--warn)">ser：動作（〜された）</th><th style="background:#d8eeea;color:var(--accent2)">estar：状態（〜されている）</th></tr></thead>
+  <tbody>
+    <tr><td><span class="mono">La tienda <b>fue cerrada</b> por la policía.</span><br>店は警察によって閉鎖された。</td><td><span class="mono">La tienda <b>está cerrada</b>.</span><br>店は閉まっている。</td></tr>
+    <tr><td><span class="mono">La carta <b>fue escrita</b> en 1920.</span><br>その手紙は1920年に書かれた。</td><td><span class="mono">La carta <b>está escrita</b> a mano.</span><br>その手紙は手書きだ。</td></tr>
+    <tr><td><span class="mono">El problema <b>fue resuelto</b> ayer.</span><br>問題は昨日解決された。</td><td><span class="mono">El problema ya <b>está resuelto</b>.</span><br>問題はもう解決している。</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="box box-warn">
+  <div class="box-title">「〜してある・〜している」は estar</div>
+  <p style="margin:0;font-size:13.5px;">「窓が開いている」は状態なので <span class="mono">La ventana <b>está</b> abierta</span>（× es abierta）。英語の <i>The window is open</i>（状態）と <i>The window was opened</i>（動作）の区別と同じ。</p>
+</div>
+
+<div class="sub" id="quedar-pp">2. quedar(se) ＋ 過去分詞「〜の状態になる」</div>
+<p><span class="mono">quedar ＋ 過去分詞</span>は、出来事の<span class="hi">結果としてある状態になった</span>ことを表します。掲示やお知らせでは <span class="mono">queda prohibido</span>「〜は禁止されている」の形でよく見ます。</p>
+<div class="ex"><span class="ex-sp">Después de la reunión, el asunto <span class="hi">quedó resuelto</span>.</span><span class="ex-ja">会議の後、その件は解決した。</span></div>
+<div class="ex"><span class="ex-tag">掲示</span><span class="ex-sp"><span class="hi">Queda prohibido</span> fumar en todo el edificio.</span><span class="ex-ja">建物内は全面禁煙です。</span></div>
+<div class="ex"><span class="ex-sp">Me <span class="hi">quedé dormido</span> y llegué tarde.</span><span class="ex-ja">寝過ごして遅刻した。</span><span class="ex-note">quedarse dormido「（うっかり）寝入る」（13課の quedarse）</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">a mano</span>（表現）手で・手書きで ／ <span class="mono">asunto</span>（男）件・用件</li>
+    <li><span class="mono">resolver</span> の過去分詞は <span class="mono">resuelto</span>（不規則、5課）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L20-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">La ventana <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">está</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">結果の状態</span></span> abierta; por eso hace frío.</div>
+  <div class="mini-check-ja">窓が開いているから寒いんだ。</div>
+<div class="srs-rate" data-qid="L20-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：動作と状態</div>
+  <div class="quiz-item" id="L20-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">El museo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">fue inaugurado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">動作・点過去：inaugurar</span></span> por el rey en 1990.</div>
+    <div class="quiz-ja">その美術館は1990年に国王によって開館された。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>fue inaugurado</b>：「国王によって」という行為者と、いつという動作なので ser の受け身。</div>
+  <div class="srs-rate" data-qid="L20-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No puedes entrar: la puerta <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">está cerrada</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">結果の状態：cerrar</span></span> con llave.</div>
+    <div class="quiz-ja">入れないよ。ドアに鍵がかかっている。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>está cerrada</b>：閉められた結果の状態なので estar。</div>
+  <div class="srs-rate" data-qid="L20-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Con este acuerdo, el problema <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">quedó</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">quedar ＋ 過去分詞（点過去）</span></span> resuelto.</div>
+    <div class="quiz-ja">この合意で、問題は解決した。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>quedó</b>：出来事の結果ある状態になった。</div>
+  <div class="srs-rate" data-qid="L20-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ③ 無人称のいろいろ -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">無人称のいろいろ</span>
+  <span class="sec-es">Oraciones impersonales</span>
+</div>
+
+<div class="sub" id="se-muninsho">1. se ＋ 3人称単数「（人は一般に）〜する」</div>
+<p>5課の不定主語の se です。自動詞などと使い、「人は一般に〜する」を表します。動詞は<span class="hi">常に単数</span>です。</p>
+<div class="ex"><span class="ex-sp">En esta ciudad <span class="hi">se vive</span> muy bien.</span><span class="ex-ja">この街はとても暮らしやすい。</span></div>
+<div class="ex"><span class="ex-sp">¿Por dónde <span class="hi">se va</span> a la estación?</span><span class="ex-ja">駅へはどう行けばいいですか？</span></div>
+
+<div class="sub" id="se-a-hito">2. 人が目的語なら se ＋ 単数 ＋ a</div>
+<p>「物」が主語なら再帰受身で動詞を一致させますが（①節）、<span class="hi">特定の人</span>を目的語にするときは、<span class="mono">a</span> を付けて動詞は<span class="hi-r">単数のまま</span>にします。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:28%">目的語</th><th>形と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">物</td><td><span class="mono">Se <b>venden</b> coches usados.</span><br>中古車売ります。<br><small>再帰受身：coches に一致して複数</small></td></tr>
+    <tr><td class="td-rule">特定の人</td><td><span class="mono">Se <b>detuvo</b> a los ladrones.</span><br>泥棒たちが逮捕された。<br><small>無人称：a ＋ 人、動詞は単数</small></td></tr>
+    <tr><td class="td-rule">不特定の人（求人など）</td><td><span class="mono">Se <b>buscan</b> camareros.</span><br>ウェイター募集。<br><small>a を付けず、物と同じく複数に一致</small></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="uno-tu">3. uno・tú で「人は〜」</div>
+<p>再帰動詞は se を2つ重ねられないので、「人は（一般に）〜する」は <span class="mono">uno</span> を主語にします。会話では、相手に限らない一般の <span class="mono">tú</span> もよく使います。</p>
+<div class="ex"><span class="ex-sp">Al principio es difícil, pero <span class="hi">uno</span> se acostumbra.</span><span class="ex-ja">最初は大変だけど、人は慣れるものだ。</span><span class="ex-note">× se se acostumbra。話し手が女性なら una も使う</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Uno</span> nunca sabe lo que puede pasar.</span><span class="ex-ja">何が起こるかなんて誰にも分からない。</span></div>
+<div class="ex"><span class="ex-sp">Si <span class="hi">estudias</span> un poco cada día, <span class="hi">aprendes</span> rápido.</span><span class="ex-ja">毎日少しずつ勉強すれば、早く身につくものだ。</span><span class="ex-note">一般の tú（英語の一般の <i>you</i>）</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">detener</span>（動）逮捕する（点過去 detuvo） ／ <span class="mono">ladrón</span>（男）泥棒</li>
+    <li><span class="mono">usado</span>（形）中古の ／ <span class="mono">acostumbrarse</span>（再動）慣れる</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L20-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">En este país <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se vive</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">無人称の se：vivir</span></span> muy bien.</div>
+  <div class="mini-check-ja">この国はとても暮らしやすい。</div>
+<div class="srs-rate" data-qid="L20-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：無人称のいろいろ</div>
+  <div class="quiz-item" id="L20-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Anoche <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se detuvo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">特定の人が目的語：detener（点過去）</span></span> a los sospechosos.</div>
+    <div class="quiz-ja">昨夜、容疑者たちが逮捕された。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>se detuvo</b>：特定の人が目的語なので a を付け、動詞は単数。</div>
+  <div class="srs-rate" data-qid="L20-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Se buscan</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">求人：不特定の人・複数に一致</span></span> camareros con experiencia.</div>
+    <div class="quiz-ja">経験のあるウェイター募集。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Se buscan</b>：不特定の人（a なし）は物と同じく動詞を一致させる。</div>
+  <div class="srs-rate" data-qid="L20-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Al principio cuesta, pero <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">uno</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">再帰動詞の一般主語：1語</span></span> se acostumbra a todo.</div>
+    <div class="quiz-ja">最初は大変だが、人は何にでも慣れるものだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>uno</b>：再帰動詞 acostumbrarse は se を重ねられないので uno を使う。</div>
+  <div class="srs-rate" data-qid="L20-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ④ つなぎの言葉①（追加・対比） -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">つなぎの言葉①（追加・対比）</span>
+  <span class="sec-es">Conectores de adición y contraste</span>
+</div>
+
+<div class="sub" id="tsuika">1. 追加：además, incluso, es más</div>
+<div class="ex"><span class="ex-tag">さらに</span><span class="ex-sp">El piso es barato y, <span class="hi">además</span>, está cerca del centro.</span><span class="ex-ja">そのマンションは安いし、さらに中心街に近い。</span></div>
+<div class="ex"><span class="ex-tag">〜さえ</span><span class="ex-sp">Trabaja los sábados e <span class="hi">incluso</span> los domingos.</span><span class="ex-ja">彼は土曜日、さらには日曜日まで働く。</span><span class="ex-note">i- の前の y は e になる（e incluso）</span></div>
+<div class="ex"><span class="ex-tag">それどころか</span><span class="ex-sp">No me gustó el restaurante. <span class="hi">Es más</span>, no pienso volver.</span><span class="ex-ja">あのレストランは気に入らなかった。それどころか、二度と行くつもりはない。</span></div>
+<div class="ex"><span class="ex-tag">おまけに（口語）</span><span class="ex-sp">Llegó tarde y, <span class="hi">encima</span>, se olvidó los documentos.</span><span class="ex-ja">彼は遅刻したうえに、おまけに書類を忘れた。</span><span class="ex-note">よくないことを重ねるときに使う</span></div>
+<div class="ex"><span class="ex-tag">〜だけでなく</span><span class="ex-sp"><span class="hi">No solo</span> habla inglés, <span class="hi">sino también</span> chino.</span><span class="ex-ja">彼は英語だけでなく中国語も話す。</span></div>
+
+<div class="sub" id="taihi">2. 対比・逆接：sin embargo, no obstante, en cambio, aun así</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:30%">表現</th><th>ニュアンスと例</th></tr></thead>
+  <tbody>
+    <tr><td class="mono td-rule">sin embargo<br><small>しかしながら</small></td><td>pero より改まった逆接<br><span class="mono">Es muy listo; <b>sin embargo</b>, no estudia nada.</span><br>彼はとても頭がいいが、まったく勉強しない。</td></tr>
+    <tr><td class="mono td-rule">no obstante<br><small>それにもかかわらず</small></td><td>書き言葉的<br><span class="mono">El proyecto es caro; <b>no obstante</b>, lo vamos a aprobar.</span><br>その計画は費用がかかるが、承認するつもりだ。</td></tr>
+    <tr><td class="mono td-rule">en cambio<br><small>一方</small></td><td>2つのものを並べて対比する<br><span class="mono">Mi hermano es tímido; yo, <b>en cambio</b>, hablo con todos.</span><br>兄は内気だが、一方私は誰とでも話す。</td></tr>
+    <tr><td class="mono td-rule">por el contrario<br><small>反対に</small></td><td>前の内容と正反対のことを言う<br><span class="mono">No estaba triste; <b>por el contrario</b>, estaba feliz.</span><br>悲しくなんかなかった。それどころか幸せだった。</td></tr>
+    <tr><td class="mono td-rule">aun así<br><small>それでも</small></td><td>予想に反する結果<br><span class="mono">Estudié mucho; <b>aun así</b>, suspendí.</span><br>たくさん勉強した。それでも落ちた。</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ これらのつなぎの言葉は、前後をカンマで区切る。文と文の間には、セミコロン（;）かピリオドを置くことが多い。</p>
+
+<div class="sub" id="de-hecho">3. de hecho と en realidad</div>
+<div class="ex"><span class="ex-tag">実際（裏付け）</span><span class="ex-sp">Habla muy bien japonés. <span class="hi">De hecho</span>, vivió diez años en Tokio.</span><span class="ex-ja">彼は日本語がとても上手だ。実際、東京に10年住んでいた。</span><span class="ex-note">前の発言を強める・証拠を出す</span></div>
+<div class="ex"><span class="ex-tag">実は（見かけと違う）</span><span class="ex-sp">Parece antipático, pero <span class="hi">en realidad</span> es muy amable.</span><span class="ex-ja">感じが悪そうに見えるが、実はとても親切だ。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">olvidarse ＋ 物</span>（再動）〜を忘れる（口語） ／ <span class="mono">aprobar</span>（動）承認する・合格する</li>
+    <li><span class="mono">antipático</span>（形）感じの悪い ／ <span class="mono">listo</span>（形・ser と）頭がいい</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L20-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Es muy listo; <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">sin embargo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">逆接「しかしながら」：2語</span></span>, no estudia nada.</div>
+  <div class="mini-check-ja">彼はとても頭がいいが、まったく勉強しない。</div>
+<div class="srs-rate" data-qid="L20-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：つなぎの言葉①</div>
+  <div class="quiz-item" id="L20-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">El hotel era caro y, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">además</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">追加「さらに」：1語</span></span>, estaba lejos del centro.</div>
+    <div class="quiz-ja">そのホテルは高かったうえに、中心街から遠かった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>además</b>：情報を付け加える。</div>
+  <div class="srs-rate" data-qid="L20-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Yo prefiero el mar; mi hermana, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">en cambio</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">対比「一方」：2語</span></span>, prefiere la montaña.</div>
+    <div class="quiz-ja">私は海が好きだが、一方妹は山が好きだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>en cambio</b>：2人の好みを並べて対比する。</div>
+  <div class="srs-rate" data-qid="L20-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Estaba muy cansado; <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">aun así</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">「それでも」：2語</span></span>, fue al gimnasio.</div>
+    <div class="quiz-ja">彼はとても疲れていた。それでもジムに行った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>aun así</b>：予想に反する結果を導く。aun はアクセントなし（＝ incluso）。</div>
+  <div class="srs-rate" data-qid="L20-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ⑤ つなぎの言葉②（結果・言い換え・構成） -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">つなぎの言葉②（結果・言い換え・構成）</span>
+  <span class="sec-es">Conectores de consecuencia, reformulación y orden</span>
+</div>
+
+<div class="sub" id="kekka">1. 結果：por eso, así que, por lo tanto, de ahí que</div>
+<div class="ex"><span class="ex-tag">だから（口語）</span><span class="ex-sp">Llovía mucho, <span class="hi">así que</span> nos quedamos en casa.</span><span class="ex-ja">雨がひどかったので、私たちは家にいた。</span></div>
+<div class="ex"><span class="ex-tag">だから</span><span class="ex-sp">Mañana tengo un examen; <span class="hi">por eso</span> no salgo esta noche.</span><span class="ex-ja">明日試験がある。だから今夜は出かけない。</span></div>
+<div class="ex"><span class="ex-tag">したがって（かたい）</span><span class="ex-sp">No ha presentado los documentos; <span class="hi">por lo tanto</span>, no puede participar.</span><span class="ex-ja">彼は書類を提出していない。したがって参加できない。</span><span class="ex-note">por consiguiente も同じ意味</span></div>
+<div class="ex"><span class="ex-tag">そのため〜なのだ</span><span class="ex-sp">Es un tema muy complejo; <span class="hi">de ahí que</span> <span class="hi-r">haya</span> tantas opiniones.</span><span class="ex-ja">とても複雑なテーマだ。だから意見がこれほど分かれるのだ。</span><span class="ex-note">de ahí que の後ろは接続法</span></div>
+
+<div class="sub" id="iikae">2. 言い換え：es decir, o sea, mejor dicho</div>
+<div class="ex"><span class="ex-tag">つまり</span><span class="ex-sp">Llegaré pasado mañana, <span class="hi">es decir</span>, el jueves.</span><span class="ex-ja">あさって、つまり木曜日に着きます。</span></div>
+<div class="ex"><span class="ex-tag">つまり（口語）</span><span class="ex-sp">No tengo dinero, <span class="hi">o sea que</span> no puedo ir.</span><span class="ex-ja">お金がない、つまり行けないってこと。</span></div>
+<div class="ex"><span class="ex-tag">いや、正確には</span><span class="ex-sp">Nos vemos a las ocho, <span class="hi">mejor dicho</span>, a las ocho y media.</span><span class="ex-ja">8時に会おう、いや、8時半に。</span></div>
+
+<div class="sub" id="kousei">3. 文章を組み立てる表現</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:28%">働き</th><th>表現と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">2つの面</td><td><span class="mono">por un lado … por otro (lado)</span>　一方では…他方では</td></tr>
+    <tr><td class="td-rule">順序</td><td><span class="mono">en primer lugar / en segundo lugar / por último</span>　第一に／第二に／最後に</td></tr>
+    <tr><td class="td-rule">まとめ</td><td><span class="mono">en resumen / en definitiva / en conclusión</span>　要するに／結局のところ／結論として</td></tr>
+    <tr><td class="td-rule">話題の転換</td><td><span class="mono">por cierto</span>　ところで</td></tr>
+  </tbody>
+</table>
+</div>
+<div class="ex"><span class="ex-sp"><span class="hi">Por un lado</span>, la ciudad es preciosa; <span class="hi">por otro</span>, es demasiado cara.</span><span class="ex-ja">一方でその街はとても美しいが、他方で物価が高すぎる。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">En definitiva</span>, es una buena oportunidad y no debemos perderla.</span><span class="ex-ja">結局のところ、これはいい機会で、逃すべきではない。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">pasado mañana</span>（副）あさって ／ <span class="mono">presentar</span>（動）提出する</li>
+    <li><span class="mono">oportunidad</span>（女）機会 ／ <span class="mono">complejo</span>（形）複雑な</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L20-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Llovía mucho, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">así que</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">結果「それで」：2語</span></span> nos quedamos en casa.</div>
+  <div class="mini-check-ja">雨がひどかったので、私たちは家にいた。</div>
+<div class="srs-rate" data-qid="L20-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：つなぎの言葉②</div>
+  <div class="quiz-item" id="L20-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Llegaré pasado mañana, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">es decir</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">言い換え「つまり」：2語</span></span>, el jueves.</div>
+    <div class="quiz-ja">あさって、つまり木曜日に着きます。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>es decir</b>：前の内容を別の言葉で言い換える。</div>
+  <div class="srs-rate" data-qid="L20-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Es un tema muy complejo; de ahí que <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">haya</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">de ahí que ＋ 接続法：haber</span></span> tantas opiniones distintas.</div>
+    <div class="quiz-ja">とても複雑なテーマだから、これほど多くの異なる意見があるのだ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>haya</b>：de ahí que の後ろは接続法（hay → haya）。</div>
+  <div class="srs-rate" data-qid="L20-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L20-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence"><span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">Por cierto</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">話題を変える「ところで」：2語</span></span>, ¿sabes algo de Laura?</div>
+    <div class="quiz-ja">ところで、ラウラのこと何か知ってる？</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>Por cierto</b>：話題を変えるときの決まった言い方。</div>
+  <div class="srs-rate" data-qid="L20-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L20-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L20-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L20-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑥ 練習問題 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">（　）内の動詞を、受け身・無人称の適切な形にしなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Esta iglesia <span class="blank">______</span>（construir）en el siglo XV.</div>
+      <div class="q-ja">この教会は15世紀に建てられた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">fue construida</span>（<span class="ans-fill">se construyó</span>）</span></div>
+      <div class="q-exp">過去の動作の受け身。ser の受け身なら iglesia（女性単数）に一致。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">En Brasil <span class="blank">______</span>（hablar）portugués.</div>
+      <div class="q-ja">ブラジルではポルトガル語が話されている。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">se habla</span></span></div>
+      <div class="q-exp">再帰受身。portugués（単数）に一致。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Aquí <span class="blank">______</span>（vender）periódicos extranjeros.</div>
+      <div class="q-ja">ここでは外国の新聞が売られている。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">se venden</span></span></div>
+      <div class="q-exp">再帰受身。periódicos（複数）に一致して venden。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Me <span class="blank">______</span>（robar）el móvil en el metro.</div>
+      <div class="q-ja">地下鉄で携帯を盗まれた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">robaron</span>（<span class="ans-fill">han robado</span>）</span></div>
+      <div class="q-exp">誰が盗んだか分からないので3人称複数の無人称。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Cuando llegamos, la tienda ya <span class="blank">______</span>（cerrar）.</div>
+      <div class="q-ja">私たちが着いたとき、店はもう閉まっていた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">estaba cerrada</span></span></div>
+      <div class="q-exp">閉められた結果の状態なので estar ＋ 過去分詞。過去の状態なので線過去。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Anoche <span class="blank">______</span>（detener）a tres personas.</div>
+      <div class="q-ja">昨夜3人が逮捕された。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">se detuvo</span></span></div>
+      <div class="q-exp">特定の人が目的語（a ＋ 人）なので、動詞は単数のまま。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">（　）に入る適切なつなぎの言葉を答えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Es un coche bonito; <span class="blank">______</span>, es demasiado caro.</div>
+      <div class="q-ja">かっこいい車だが、高すぎる。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">sin embargo</span>（<span class="ans-fill">no obstante</span>）</span></div>
+      <div class="q-exp">逆接。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Juan es muy hablador; su hermano, <span class="blank">______</span>, casi no habla.</div>
+      <div class="q-ja">フアンはとてもおしゃべりだが、一方お兄さんはほとんど話さない。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">en cambio</span>（<span class="ans-fill">por el contrario</span>）</span></div>
+      <div class="q-exp">2人を並べて対比する。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">No tenía hambre, <span class="blank">______</span> no cené.</div>
+      <div class="q-ja">お腹がすいていなかったので、夕食を食べなかった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">así que</span>（<span class="ans-fill">por eso</span>）</span></div>
+      <div class="q-exp">結果「だから」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">El examen será el 3 de mayo, <span class="blank">______</span>, dentro de dos semanas.</div>
+      <div class="q-ja">試験は5月3日、つまり2週間後だ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">es decir</span>（<span class="ans-fill">o sea</span>）</span></div>
+      <div class="q-exp">言い換え「つまり」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Habla cinco idiomas. <span class="blank">______</span>, trabaja como intérprete.</div>
+      <div class="q-ja">彼は5か国語を話す。実際、通訳として働いている。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">De hecho</span></span></div>
+      <div class="q-exp">前の発言を裏付ける「実際」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Estaba lloviendo; <span class="blank">______</span>, salimos a correr.</div>
+      <div class="q-ja">雨が降っていた。それでも私たちは走りに出た。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">aun así</span></span></div>
+      <div class="q-exp">予想に反する結果「それでも」。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">指示に従って書き換えなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge teal">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Los romanos construyeron este puente.（ser の受け身に）</div>
+      <div class="q-ja">この橋はローマ人によって建てられた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Este puente fue construido por los romanos.</span></span></div>
+      <div class="q-exp">目的語 este puente を主語にし、過去分詞を一致させる。行為者は por。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Se construyó el puente por los romanos.（誤りを直しなさい）</div>
+      <div class="q-ja">その橋はローマ人によって建てられた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">El puente fue construido por los romanos.</span>（<span class="ans-fill">Los romanos construyeron el puente.</span>）</span></div>
+      <div class="q-exp">再帰受身には por ＋ 行為者を付けない。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">3</span>
+    <div class="q-content">
+      <div class="q-sentence">La policía detuvo a los ladrones.（se を使った無人称の文に）</div>
+      <div class="q-ja">泥棒たちが逮捕された。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Se detuvo a los ladrones.</span></span></div>
+      <div class="q-exp">人が目的語なので a を残し、動詞は単数。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge teal">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Es un problema complejo. Por eso hay tantas opiniones.（de ahí que を使って）</div>
+      <div class="q-ja">複雑な問題だから、これほど多くの意見があるのだ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Es un problema complejo; de ahí que haya tantas opiniones.</span></span></div>
+      <div class="q-exp">de ahí que の後ろは接続法（hay → haya）。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">この本は多くの言語に翻訳されてきた。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">Este libro ha sido traducido a muchos idiomas.</span>（<span class="ans-fill">Este libro se ha traducido a muchos idiomas.</span>）</span></div>
+      <div class="q-exp"><b>ser の受け身・現在完了</b>：ha sido ＋ 過去分詞。再帰受身でもよい。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">店はもう閉まっている。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">La tienda ya está cerrada.</span></span></div>
+      <div class="q-exp"><b>結果の状態</b>なので estar ＋ 過去分詞（× es cerrada）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">そのレストランは安い。さらに、料理がとてもおいしい。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">El restaurante es barato. Además, la comida es muy buena.</span></span></div>
+      <div class="q-exp"><b>además</b>：情報を付け加える。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">一方でこの仕事は面白いが、他方で給料が安い。</div>
+      <div class="q-answer-row"><span class="ans-label">解答例</span><span class="ans-text"><span class="ans-fill">Por un lado, este trabajo es interesante; por otro, el sueldo es bajo.</span></span></div>
+      <div class="q-exp"><b>por un lado … por otro</b>：2つの面を並べる。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑦ 語彙リスト -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">受け身・無人称の表現</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">ser ＋ 過去分詞 ＋ por</span><span class="pill-pos">表現</span><span class="pill-ja">〜によって…される</span></span>
+  <span class="pill"><span class="pill-es">se ＋ 3人称</span><span class="pill-pos">表現</span><span class="pill-ja">〜される（再帰受身）</span></span>
+  <span class="pill"><span class="pill-es">estar ＋ 過去分詞</span><span class="pill-pos">表現</span><span class="pill-ja">〜されている（状態）</span></span>
+  <span class="pill"><span class="pill-es">quedar ＋ 過去分詞</span><span class="pill-pos">表現</span><span class="pill-ja">〜の状態になる</span></span>
+  <span class="pill"><span class="pill-es">queda prohibido</span><span class="pill-pos">表現</span><span class="pill-ja">〜は禁止されている</span></span>
+  <span class="pill"><span class="pill-es">dicen que</span><span class="pill-pos">表現</span><span class="pill-ja">〜だそうだ</span></span>
+  <span class="pill"><span class="pill-es">uno</span><span class="pill-pos">代</span><span class="pill-ja">（一般の）人</span></span>
+</div>
+
+<div class="vocab-category">追加・対比</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">además</span><span class="pill-pos">副</span><span class="pill-ja">さらに</span></span>
+  <span class="pill"><span class="pill-es">incluso</span><span class="pill-pos">副</span><span class="pill-ja">〜さえ</span></span>
+  <span class="pill"><span class="pill-es">es más</span><span class="pill-pos">表現</span><span class="pill-ja">それどころか</span></span>
+  <span class="pill"><span class="pill-es">encima</span><span class="pill-pos">副</span><span class="pill-ja">おまけに（口語）</span></span>
+  <span class="pill"><span class="pill-es">sin embargo</span><span class="pill-pos">表現</span><span class="pill-ja">しかしながら</span></span>
+  <span class="pill"><span class="pill-es">no obstante</span><span class="pill-pos">表現</span><span class="pill-ja">それにもかかわらず</span></span>
+  <span class="pill"><span class="pill-es">en cambio</span><span class="pill-pos">表現</span><span class="pill-ja">一方</span></span>
+  <span class="pill"><span class="pill-es">por el contrario</span><span class="pill-pos">表現</span><span class="pill-ja">反対に</span></span>
+  <span class="pill"><span class="pill-es">aun así</span><span class="pill-pos">表現</span><span class="pill-ja">それでも</span></span>
+  <span class="pill"><span class="pill-es">de hecho</span><span class="pill-pos">表現</span><span class="pill-ja">実際</span></span>
+  <span class="pill"><span class="pill-es">en realidad</span><span class="pill-pos">表現</span><span class="pill-ja">実は</span></span>
+</div>
+
+<div class="vocab-category">結果・言い換え・構成</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">así que</span><span class="pill-pos">接</span><span class="pill-ja">それで</span></span>
+  <span class="pill"><span class="pill-es">por eso</span><span class="pill-pos">表現</span><span class="pill-ja">だから</span></span>
+  <span class="pill"><span class="pill-es">por lo tanto / por consiguiente</span><span class="pill-pos">表現</span><span class="pill-ja">したがって</span></span>
+  <span class="pill"><span class="pill-es">de ahí que</span><span class="pill-pos">接</span><span class="pill-ja">そのため〜だ（＋ 接続法）</span></span>
+  <span class="pill"><span class="pill-es">es decir</span><span class="pill-pos">表現</span><span class="pill-ja">つまり</span></span>
+  <span class="pill"><span class="pill-es">o sea</span><span class="pill-pos">表現</span><span class="pill-ja">つまり（口語）</span></span>
+  <span class="pill"><span class="pill-es">mejor dicho</span><span class="pill-pos">表現</span><span class="pill-ja">いや、正確には</span></span>
+  <span class="pill"><span class="pill-es">por un lado … por otro</span><span class="pill-pos">表現</span><span class="pill-ja">一方では…他方では</span></span>
+  <span class="pill"><span class="pill-es">en primer lugar / por último</span><span class="pill-pos">表現</span><span class="pill-ja">第一に／最後に</span></span>
+  <span class="pill"><span class="pill-es">en resumen / en definitiva</span><span class="pill-pos">表現</span><span class="pill-ja">要するに／結局のところ</span></span>
+  <span class="pill"><span class="pill-es">por cierto</span><span class="pill-pos">表現</span><span class="pill-ja">ところで</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">detener</span><span class="pill-pos">動</span><span class="pill-ja">逮捕する</span></span>
+  <span class="pill"><span class="pill-es">ladrón</span><span class="pill-pos">男</span><span class="pill-ja">泥棒</span></span>
+  <span class="pill"><span class="pill-es">sospechoso</span><span class="pill-pos">男</span><span class="pill-ja">容疑者</span></span>
+  <span class="pill"><span class="pill-es">inaugurar</span><span class="pill-pos">動</span><span class="pill-ja">開館する・開通させる</span></span>
+  <span class="pill"><span class="pill-es">traducir</span><span class="pill-pos">動</span><span class="pill-ja">翻訳する</span></span>
+  <span class="pill"><span class="pill-es">acostumbrarse</span><span class="pill-pos">再動</span><span class="pill-ja">慣れる</span></span>
+  <span class="pill"><span class="pill-es">sueldo</span><span class="pill-pos">男</span><span class="pill-ja">給料</span></span>
+  <span class="pill"><span class="pill-es">intérprete</span><span class="pill-pos">男女</span><span class="pill-ja">通訳</span></span>
+</div>
+
+<!-- ⑧ まとめ -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">ser の受け身</td><td>書き言葉・報道。過去分詞は主語に一致、行為者は por</td></tr>
+    <tr><td class="td-rule">再帰受身</td><td>会話で最も普通。動詞は物の主語に一致。por ＋ 行為者は付けない</td></tr>
+    <tr><td class="td-rule">3人称複数の無人称</td><td>「誰かが〜した」：<span class="mono">Me han robado la cartera. / Dicen que …</span></td></tr>
+    <tr><td class="td-rule">動作と状態</td><td>ser ＋ 過去分詞＝〜される／estar ＋ 過去分詞＝〜されている（× la ventana es abierta）</td></tr>
+    <tr><td class="td-rule">quedar ＋ 過去分詞</td><td>結果としてその状態になる：<span class="mono">quedó resuelto / queda prohibido</span></td></tr>
+    <tr><td class="td-rule">se ＋ 単数 ＋ a ＋ 人</td><td>特定の人が目的語：<span class="mono">Se detuvo a los ladrones.</span>（不特定なら Se buscan camareros）</td></tr>
+    <tr><td class="td-rule">uno / tú</td><td>再帰動詞の一般論は uno：<span class="mono">Uno se acostumbra.</span></td></tr>
+    <tr><td class="td-rule">追加</td><td><span class="mono">además, incluso, es más, encima, no solo … sino también</span></td></tr>
+    <tr><td class="td-rule">対比・逆接</td><td><span class="mono">sin embargo, no obstante, en cambio, por el contrario, aun así</span></td></tr>
+    <tr><td class="td-rule">de hecho / en realidad</td><td>実際（裏付け）／実は（見かけと違う）</td></tr>
+    <tr><td class="td-rule">結果</td><td><span class="mono">así que, por eso, por lo tanto, de ahí que ＋ 接続法</span></td></tr>
+    <tr><td class="td-rule">言い換え・構成</td><td><span class="mono">es decir, o sea, mejor dicho／por un lado … por otro／en resumen, en definitiva／por cierto</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="box" style="margin-top:24px">
+  <div class="box-title">B1〜B2 編を終えて</div>
+  <p style="margin:0;font-size:13.5px;">これで B1〜B2 編（11〜20課）はすべて終わりです。PCIC（セルバンテス文化センターの基準）の B1〜B2 の文法項目を一通り扱いました。「今日の復習」と実力診断テストで、各課の問題を繰り返し解いて定着させましょう。</p>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 20 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<!-- ══ 鍛錬タブ（問題は tanren-bank.js から表示） ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div id="sec-tanren" class="sec-heading">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-intro">Lección 20 の内容を総合的に使う問題が <b>100問</b> あります。まとめクイズと同じか、少し難しいレベルです。<br>「内容ごと」は文法項目の順、「ランダム」は全範囲を混ぜた順に並びます。○△× を付けた問題は「今日の復習」に出ます。</div>
+
+<div id="tanren-app" data-lesson="20"></div>
+
+</div><!-- /tab-tanren -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① 3つの受け身の使い分け</a>
+    <a class="fn-item" href="#sec2">② 動作と状態</a>
+    <a class="fn-item" href="#sec3">③ 無人称のいろいろ</a>
+    <a class="fn-item" href="#sec4">④ つなぎの言葉①（追加・対比）</a>
+    <a class="fn-item" href="#sec5">⑤ つなぎの言葉②（結果・言い換え・構成）</a>
+    <a class="fn-item" href="#sec6">⑥ 練習問題</a>
+    <a class="fn-item" href="#sec7">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8">⑧ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['受け身','受動態','受身','pasiva'], id: 'sec1', label: '3つの受け身の使い分け（①節）' },
+  { terms: ['ser ＋ 過去分詞','fue construido','por 行為者'], id: 'ser-pasiva', label: 'ser ＋ 過去分詞（①節）' },
+  { terms: ['再帰受身','se vende','se venden','pasiva refleja'], id: 'pasiva-refleja', label: '再帰受身（①節）' },
+  { terms: ['3人称複数','無人称','dicen que','me han robado'], id: 'sanninsho', label: '3人称複数の無人称（①節）' },
+  { terms: ['estar ＋ 過去分詞','状態','está cerrada','動作と状態'], id: 'estar-kekka', label: '動作と状態（②節）' },
+  { terms: ['quedar','queda prohibido','quedó resuelto','quedarse dormido'], id: 'quedar-pp', label: 'quedar ＋ 過去分詞（②節）' },
+  { terms: ['無人称の se','se vive','impersonal'], id: 'se-muninsho', label: 'se ＋ 3人称単数（③節）' },
+  { terms: ['se detuvo a','se busca','se buscan'], id: 'se-a-hito', label: '人が目的語の無人称（③節）' },
+  { terms: ['uno','一般の tú','uno se acostumbra'], id: 'uno-tu', label: 'uno・tú（③節）' },
+  { terms: ['つなぎの言葉','接続表現','conectores','además','incluso','es más','encima','no solo'], id: 'tsuika', label: '追加のつなぎの言葉（④節）' },
+  { terms: ['sin embargo','no obstante','en cambio','por el contrario','aun así','逆接','対比'], id: 'taihi', label: '対比・逆接（④節）' },
+  { terms: ['de hecho','en realidad'], id: 'de-hecho', label: 'de hecho と en realidad（④節）' },
+  { terms: ['así que','por eso','por lo tanto','por consiguiente','de ahí que','結果'], id: 'kekka', label: '結果のつなぎの言葉（⑤節）' },
+  { terms: ['es decir','o sea','mejor dicho','言い換え'], id: 'iikae', label: '言い換え（⑤節）' },
+  { terms: ['por un lado','por otro','en primer lugar','por último','en resumen','en definitiva','por cierto'], id: 'kousei', label: '文章を組み立てる表現（⑤節）' },
+  { terms: ['練習問題','練習'], id: 'sec6', label: '練習問題（⑥節）' },
+  { terms: ['語彙','Vocabulario'], id: 'sec7', label: '語彙リスト（⑦節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec8', label: 'まとめ（⑧節）' },
+  { terms: ['鍛錬','Entrenamiento'], id: 'sec-tanren', label: '鍛錬（100問）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語文法解説集　B1〜B2 編</footer>
+
+</body>
+</html>
