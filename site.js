@@ -71,7 +71,20 @@ function applySiteLang() {
     b.classList.toggle('active', on);
     b.setAttribute('aria-pressed', on ? 'true' : 'false');
   });
+  /* 入力欄の案内文は CSS で切り替えられないので、data-placeholder-en を見て差し替える */
+  document.querySelectorAll('[data-placeholder-en]').forEach(function (el) {
+    if (!el.hasAttribute('data-placeholder-ja')) el.setAttribute('data-placeholder-ja', el.getAttribute('placeholder') || '');
+    el.setAttribute('placeholder', el.getAttribute(lang === 'en' ? 'data-placeholder-en' : 'data-placeholder-ja'));
+  });
   srsAddButtonTitles();
+}
+
+/* 要素が今の言語で表示されているか（lang="ja"/"en" の中にあれば、その言語のときだけ表示） */
+function isInCurrentLang(el) {
+  var holder = el && el.closest ? el.closest('body [lang]') : null;
+  if (!holder || !isBilingualPage()) return true;
+  var l = holder.getAttribute('lang');
+  return (l !== 'ja' && l !== 'en') || l === siteLang();
 }
 /* 英語版があるページに、表紙と目次メニューの切り替えボタンを置く */
 function setupLangSwitch() {
@@ -187,6 +200,8 @@ function runGrammarSearch(query, resultsEl) {
   }
 
   var matches = GRAMMAR_TERMS.filter(function (entry) {
+    /* 今の言語では表示されていない節（英語版だけの節など）へは飛べないので出さない */
+    if (!isInCurrentLang(document.getElementById(entry.id))) return false;
     return entry.terms.some(function (t) {
       return t.toLowerCase().indexOf(query) !== -1;
     });
