@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>Lección 13 文法解説 | B1〜B2 編</title>
+<link rel="stylesheet" href="spanish1-common.css">
+</head>
+<body>
+
+<div id="dict-overlay" onclick="if(event.target===this)closeDictModal()">
+  <div id="dict-modal">
+    <div id="dict-modal-head">
+      <span id="dict-modal-word"></span>
+      <span id="dict-modal-pos"></span>
+      <button id="dict-modal-close" onclick="closeDictModal()" title="閉じる">✕</button>
+    </div>
+    <div id="dict-modal-body"></div>
+  </div>
+</div>
+<div id="search-bar">
+  <label>検索</label>
+  <input id="search-input" type="text" placeholder="単語・文法用語…" autocomplete="off" autocorrect="off" spellcheck="false">
+  <button id="search-close" onclick="closeSearch()" title="閉じる">✕</button>
+</div>
+<div id="search-results"></div>
+
+<div id="top-nav">
+  <div id="top-toc-menu">
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;">📚 文法解説タブ</span>
+    <a class="fn-item" href="#sec1" data-tab="grammar" onclick="jumpToSection('sec1'); closeToc(); return false;">① 意味が変わる形容詞</a>
+    <a class="fn-item" href="#sec2" data-tab="grammar" onclick="jumpToSection('sec2'); closeToc(); return false;">② estar の発展用法</a>
+    <a class="fn-item" href="#sec3" data-tab="grammar" onclick="jumpToSection('sec3'); closeToc(); return false;">③ 動作と結果</a>
+    <a class="fn-item" href="#sec4" data-tab="grammar" onclick="jumpToSection('sec4'); closeToc(); return false;">④「なる」を表す動詞</a>
+    <a class="fn-item" href="#sec5" data-tab="grammar" onclick="jumpToSection('sec5'); closeToc(); return false;">⑤ 感情・状態の変化を表す動詞</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">✏️ 練習問題タブ</span>
+    <a class="fn-item" href="#sec6" data-tab="renshu" onclick="jumpToSection('sec6'); closeToc(); return false;">⑥ 練習問題</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">📖 語彙・まとめタブ</span>
+    <a class="fn-item" href="#sec7" data-tab="vocab" onclick="jumpToSection('sec7'); closeToc(); return false;">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8" data-tab="vocab" onclick="jumpToSection('sec8'); closeToc(); return false;">⑧ まとめ</a>
+    <span style="font-size:11px;color:var(--muted);padding:4px 8px;font-weight:700;width:100%;">💪 鍛錬タブ</span>
+    <a class="fn-item" href="#sec-tanren" data-tab="tanren" onclick="jumpToSection('sec-tanren'); closeToc(); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">Lección 13 文法解説</span>
+  <button id="pdf-print-btn" onclick="savePdf()">🖨 PDFで保存</button>
+  <button id="top-toc-toggle" onclick="toggleToc()">☰ 目次</button>
+  <button id="top-search-btn" onclick="openSearch()">🔍 検索</button>
+</div>
+
+<!-- ══ 表紙 ══ -->
+<div class="cover-title-block">
+  <div class="cover-title">Lección 13　文法解説</div>
+  <div class="cover-sub">B1〜B2 編　Gramática</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📚　文法解説</button>
+  <button class="tab-btn" onclick="switchTab('renshu', this)">✏️　練習問題</button>
+  <button class="tab-btn" onclick="switchTab('vocab', this)">📖　語彙・まとめ</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬</button>
+</div>
+
+<div class="cover">
+  <div class="cover-goal"><b>このレッスンを終えると…</b><br><span class="mono">ser listo</span>（賢い）と <span class="mono">estar listo</span>（準備ができた）のように、ser か estar かで意味が変わる形容詞を正しく使い分けられるようになります。「〜になる」も、<span class="mono">ponerse・volverse・hacerse・quedarse</span> などから場面に合った動詞を選べるようになります。<br><small>2課の「ser は本質、estar は状態」、5課の「ser / estar ＋ 過去分詞」が土台です。ここでは、その原則だけでは説明しきれない使い方を扱います。</small></div>
+  <div class="toc">
+    <a class="toc-item" href="#sec1" onclick="jumpToSection('sec1'); return false;">① 意味が変わる形容詞</a>
+    <a class="toc-item" href="#sec2" onclick="jumpToSection('sec2'); return false;">② estar の発展用法</a>
+    <a class="toc-item" href="#sec3" onclick="jumpToSection('sec3'); return false;">③ 動作と結果</a>
+    <a class="toc-item" href="#sec4" onclick="jumpToSection('sec4'); return false;">④「なる」を表す動詞</a>
+    <a class="toc-item" href="#sec5" onclick="jumpToSection('sec5'); return false;">⑤ 感情・状態の変化を表す動詞</a>
+    <a class="toc-item" href="#sec6" onclick="jumpToSection('sec6'); return false;">⑥ 練習問題</a>
+    <a class="toc-item" href="#sec7" onclick="jumpToSection('sec7'); return false;">⑦ 語彙リスト</a>
+    <a class="toc-item" href="#sec8" onclick="jumpToSection('sec8'); return false;">⑧ まとめ</a>
+    <a class="toc-item" href="#sec-tanren" onclick="jumpToSection('sec-tanren'); return false;">💪 鍛錬（100問）</a>
+  </div>
+  <div class="cover-search">
+    <div class="cover-search-label">単語・活用形・文法用語を検索</div>
+    <input id="cover-search-input" type="text" class="cover-search-box"
+      placeholder="例：listo　／　ponerse　／　なる…"
+      autocomplete="off" autocorrect="off" spellcheck="false">
+    <span class="cover-search-hint">スペイン語・日本語・文法用語で検索 → タッチで該当箇所へジャンプ</span>
+  </div>
+</div>
+
+<div id="cover-search-results"></div>
+
+
+<div id="tab-grammar" class="tab-content active">
+
+<!-- ① 意味が変わる形容詞 -->
+<div id="sec1" class="sec-heading">
+  <span class="sec-num">①</span>
+  <span class="sec-title">意味が変わる形容詞</span>
+  <span class="sec-es">Adjetivos que cambian de significado con «ser» y «estar»</span>
+</div>
+
+<p>2課で学んだとおり、<span class="mono hi">ser</span> は「そのものの性質」、<span class="mono hi2">estar</span> は「その時の状態」を表します。多くの形容詞はどちらとも使え、ニュアンスが少し変わるだけです（<span class="mono">es nervioso</span>「神経質な人だ」／<span class="mono">está nervioso</span>「今緊張している」）。ところが次の形容詞は、<span class="hi-r">ser と estar で別の単語のように意味が変わります</span>。</p>
+
+<div class="sub" id="hyou-adj">意味が大きく変わる形容詞の一覧</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:18%">形容詞</th><th style="width:41%;background:#dde8f5;color:var(--accent)">ser ＋ 形容詞（性質）</th><th style="background:#d8eeea;color:var(--accent2)">estar ＋ 形容詞（状態）</th></tr></thead>
+  <tbody>
+    <tr><td class="mono td-rule">listo</td><td>賢い・頭の回転が速い</td><td>準備ができた</td></tr>
+    <tr><td class="mono td-rule">malo</td><td>悪い・（人が）意地悪な</td><td>具合が悪い・（食べ物が）まずい、傷んでいる</td></tr>
+    <tr><td class="mono td-rule">bueno</td><td>良い・（人が）善良な</td><td>（食べ物が）おいしい・体調が戻った／（口語）魅力的だ</td></tr>
+    <tr><td class="mono td-rule">rico</td><td>金持ちだ</td><td>（食べ物が）おいしい</td></tr>
+    <tr><td class="mono td-rule">aburrido</td><td>退屈な・つまらない</td><td>退屈している</td></tr>
+    <tr><td class="mono td-rule">cansado</td><td>（仕事などが）疲れる・骨が折れる</td><td>疲れている</td></tr>
+    <tr><td class="mono td-rule">orgulloso</td><td>高慢な・プライドが高い</td><td>（de 〜を）誇りに思っている</td></tr>
+    <tr><td class="mono td-rule">atento</td><td>思いやりがある・親切な</td><td>注意を払っている</td></tr>
+    <tr><td class="mono td-rule">despierto</td><td>利発な・頭が切れる</td><td>目が覚めている</td></tr>
+    <tr><td class="mono td-rule">vivo</td><td>生き生きした・抜け目がない</td><td>生きている</td></tr>
+    <tr><td class="mono td-rule">verde</td><td>緑色の</td><td>（果物が）熟していない・（人が）未熟な</td></tr>
+    <tr><td class="mono td-rule">seguro</td><td>（場所・物が）安全な・確実な</td><td>（人が）確信している</td></tr>
+    <tr><td class="mono td-rule">interesado</td><td>打算的な・欲得ずくの</td><td>（en 〜に）興味がある</td></tr>
+    <tr><td class="mono td-rule">callado</td><td>無口な</td><td>（今）黙っている</td></tr>
+    <tr><td class="mono td-rule">abierto</td><td>開放的な・社交的な</td><td>開いている</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub" id="imi-kawaru-adj">例文で比べる</div>
+<div class="ex"><span class="ex-tag">ser listo</span><span class="ex-sp">Tu hija <span class="hi">es</span> muy <span class="hi">lista</span>.</span><span class="ex-ja">君の娘さんはとても賢いね。</span></div>
+<div class="ex"><span class="ex-tag">estar listo</span><span class="ex-sp">¿<span class="hi2">Estás lista</span>? Nos vamos ya.</span><span class="ex-ja">準備できた？ もう出るよ。</span></div>
+<div class="ex"><span class="ex-tag">ser aburrido</span><span class="ex-sp">La película <span class="hi">era</span> muy <span class="hi">aburrida</span>.</span><span class="ex-ja">その映画はとても退屈だった。</span></div>
+<div class="ex"><span class="ex-tag">estar aburrido</span><span class="ex-sp">Los niños <span class="hi2">están aburridos</span> porque llueve.</span><span class="ex-ja">雨なので子どもたちは退屈している。</span></div>
+<div class="ex"><span class="ex-tag">ser rico / estar rico</span><span class="ex-sp">Su familia <span class="hi">es rica</span>. ／ ¡Esta paella <span class="hi2">está riquísima</span>!</span><span class="ex-ja">彼の家はお金持ちだ。／ このパエリャ、すごくおいしい！</span><span class="ex-note"><span class="mono">riquísima</span> は <span class="mono">rica</span> の絶対最上級（4課の -ísimo）。c → qu のつづりの変化に注意</span></div>
+<div class="ex"><span class="ex-tag">ser malo / estar malo</span><span class="ex-sp">Ese hombre <span class="hi">es malo</span>. ／ Hoy no voy a clase; <span class="hi2">estoy malo</span>.</span><span class="ex-ja">あの男は悪い人だ。／ 今日は授業に行かない。具合が悪いんだ。</span><span class="ex-note">「具合が悪い」の <span class="mono">estar malo</span> は主にスペイン。中南米では <span class="mono">estar enfermo</span> が普通</span></div>
+<div class="ex"><span class="ex-tag">ser seguro / estar seguro</span><span class="ex-sp">Este barrio <span class="hi">es seguro</span>. ／ <span class="hi2">Estoy seguro de</span> que vendrá.</span><span class="ex-ja">この地区は安全だ。／ 彼はきっと来ると確信している。</span><span class="ex-note"><span class="mono">estar seguro de que</span> は11課の「前置詞 ＋ que」</span></div>
+<div class="ex"><span class="ex-tag">ser orgulloso / estar orgulloso</span><span class="ex-sp">Es tan <span class="hi">orgulloso</span> que nunca pide ayuda. ／ <span class="hi2">Estoy orgullosa de</span> ti.</span><span class="ex-ja">彼はプライドが高すぎて決して助けを求めない。／ あなたのことを誇りに思う。</span></div>
+
+<div class="box box-warn">
+  <div class="box-title">注意</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.9">
+    <li>人に対して <span class="mono">estar bueno / estar buena</span> と言うと、口語で「（性的に）魅力的だ」という意味になることがある。人の体調が戻ったことは <span class="mono">ya estoy bien</span> と言うほうが無難。</li>
+    <li>食べ物の味を言うときは <span class="mono">estar</span>：<span class="mono">La sopa está buena / rica / mala</span>。<span class="mono">ser</span> を使うと「その料理（全般）は〜だ」という性質の話になる：<span class="mono">La paella es un plato típico.</span></li>
+  </ul>
+</div>
+
+<div class="trivia">
+  <span class="trivia-icon">💡</span>
+  <span><span class="trivia-label">TRIVIA</span>　<span class="mono">ser</span> はラテン語の <span class="mono">esse</span>（ある・存在する）と <span class="mono">sedere</span>（座る）が混ざってできた動詞です。<span class="mono">estar</span> はラテン語の <span class="mono">stare</span>（立っている・とどまっている）から来ています。英語の <span class="mono">stay</span>・<span class="mono">state</span>・<span class="mono">stand</span> とも親戚です。「立っている・とどまっている」という元の意味を考えると、<span class="mono">estar</span> が「今の状態」や「場所」を表すことに納得がいくはずです。</span>
+</div>
+
+<div class="mini-check" id="L13-mc-1">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Espera un momento, todavía no <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estoy</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">準備ができた：状態</span></span> lista.</div>
+  <div class="mini-check-ja">ちょっと待って、まだ準備ができていないの。</div>
+<div class="srs-rate" data-qid="L13-mc-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-mc-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-mc-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-mc-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：意味が変わる形容詞</div>
+
+  <div class="quiz-item" id="L13-qz-1">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Esta conferencia <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">es</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">性質：退屈な講演</span></span> muy aburrida; me voy.</div>
+    <div class="quiz-ja">この講演はとても退屈だ。帰るよ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>es</b>：「退屈な（つまらない）」という講演の性質なので ser。estar aburrido なら「（人が）退屈している」。</div>
+  <div class="srs-rate" data-qid="L13-qz-1"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-1', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-1', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-1', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-2">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¡Qué ricas <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">están</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">味：状態</span></span> estas fresas!</div>
+    <div class="quiz-ja">このイチゴ、なんておいしいんだろう！</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>están</b>：食べ物の味（おいしい）は estar rico。ser rico は「金持ちだ」。</div>
+  <div class="srs-rate" data-qid="L13-qz-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-3">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Mi abuelo tiene 95 años, pero <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">es</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">性質：頭が切れる</span></span> muy despierto.</div>
+    <div class="quiz-ja">祖父は95歳だが、とても頭が切れる。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>es</b>：ser despierto は「利発な・頭が切れる」という性格。estar despierto なら「目が覚めている」。</div>
+  <div class="srs-rate" data-qid="L13-qz-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ② estar の発展用法 -->
+<div id="sec2" class="sec-heading">
+  <span class="sec-num">②</span>
+  <span class="sec-title">estar の発展用法</span>
+  <span class="sec-es">Otros usos de «estar»</span>
+</div>
+
+<div class="sub" id="shukan">1. 印象や変化を表す estar</div>
+<p>本来は ser で表す性質でも、<span class="hi">話し手がその時に受けた印象</span>や、<span class="hi">以前と比べた変化</span>を言うときは <span class="mono hi2">estar</span> を使います。</p>
+<div class="ex"><span class="ex-sp">¡Qué alto <span class="hi2">estás</span>! Ya eres más alto que tu padre.</span><span class="ex-ja">背が伸びたね！ もうお父さんより高いよ。</span><span class="ex-note"><span class="mono">eres alto</span> なら「（もともと）背が高い」。<span class="mono">estás alto</span> は「久しぶりに会ったら大きくなっていた」という驚き</span></div>
+<div class="ex"><span class="ex-sp">Hoy <span class="hi2">estás</span> muy guapa con ese vestido.</span><span class="ex-ja">今日はそのドレスでとてもきれいだね。</span></div>
+<div class="ex"><span class="ex-sp">La sopa <span class="hi2">está</span> muy salada.</span><span class="ex-ja">このスープはとてもしょっぱい。</span><span class="ex-note">今食べているスープの味の感想。<span class="mono">El agua del mar es salada</span>（海水は塩辛いものだ）は性質</span></div>
+
+<div class="box box-rule">
+  <div class="box-title">muerto は必ず estar</div>
+  <p style="margin:0;font-size:13.5px;">「死んでいる」は永続的な状態ですが、<span class="hi-r">いつも estar</span> を使います：<span class="mono">Mi abuelo <b>está</b> muerto.</span>（祖父は亡くなっている）。反対の <span class="mono">estar vivo</span>（生きている）も estar です。</p>
+</div>
+
+<div class="sub" id="estar-de">2. estar de ＋ 名詞「〜中だ・〜の状態だ」</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:38%">表現</th><th style="width:26%">意味</th><th>例</th></tr></thead>
+  <tbody>
+    <tr><td class="mono hi2">estar de vacaciones</td><td>休暇中だ</td><td><span class="mono">Mis padres están de vacaciones en Italia.</span><br>両親はイタリアで休暇中だ。</td></tr>
+    <tr><td class="mono hi2">estar de viaje</td><td>旅行中・出張中だ</td><td><span class="mono">El jefe está de viaje hasta el lunes.</span><br>上司は月曜まで出張中だ。</td></tr>
+    <tr><td class="mono hi2">estar de buen / mal humor</td><td>機嫌がいい／悪い</td><td><span class="mono">Hoy estás de buen humor.</span><br>今日は機嫌がいいね。</td></tr>
+    <tr><td class="mono hi2">estar de pie</td><td>立っている</td><td><span class="mono">Estuve de pie todo el concierto.</span><br>コンサートの間ずっと立っていた。</td></tr>
+    <tr><td class="mono hi2">estar de moda</td><td>流行している</td><td><span class="mono">Ese color está de moda este año.</span><br>その色は今年流行している。</td></tr>
+    <tr><td class="mono hi2">estar de acuerdo</td><td>賛成している</td><td><span class="mono">No estoy de acuerdo contigo.</span><br>君の意見には賛成できない。</td></tr>
+    <tr><td class="mono hi2">estar de ＋ 職業</td><td>（一時的に）〜として働いている</td><td><span class="mono">Este verano está de camarero en un bar.</span><br>この夏、彼はバルでウェイターをしている。</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ <span class="mono">Es camarero</span> は「（本職が）ウェイターだ」、<span class="mono">Está de camarero</span> は「（本職ではないが）今はウェイターとして働いている」。</p>
+
+<div class="sub" id="estar-a">3. estar a ＋ 値段・日付・気温 ／ estar con ＋ 病気</div>
+<div class="ex"><span class="ex-tag">値段</span><span class="ex-sp">¿A cuánto <span class="hi2">están</span> los tomates? — <span class="hi2">Están a</span> dos euros el kilo.</span><span class="ex-ja">トマトはいくら？ ― 1キロ2ユーロだよ。</span><span class="ex-note">日によって変わる相場の値段。定価を聞くなら <span class="mono">¿Cuánto cuesta?</span></span></div>
+<div class="ex"><span class="ex-tag">日付</span><span class="ex-sp">¿A qué día <span class="hi2">estamos</span>? — <span class="hi2">Estamos a</span> 5 de mayo.</span><span class="ex-ja">今日は何日？ ― 5月5日だよ。</span><span class="ex-note"><span class="mono">Hoy es 5 de mayo</span> とも言える</span></div>
+<div class="ex"><span class="ex-tag">気温</span><span class="ex-sp">En Sevilla <span class="hi2">estamos a</span> 40 grados.</span><span class="ex-ja">セビーリャは気温40度だ。</span></div>
+<div class="ex"><span class="ex-tag">病気</span><span class="ex-sp">Mi hijo <span class="hi2">está con</span> gripe.</span><span class="ex-ja">息子はインフルエンザにかかっている。</span></div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">salado, -a</span>（形）塩辛い ／ <span class="mono">humor</span>（男）機嫌 ／ <span class="mono">gripe</span>（女）インフルエンザ ／ <span class="mono">grado</span>（男）度</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L13-mc-2">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">No puedo quedar esta semana; <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estoy</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">estar de ＋ 名詞</span></span> de viaje.</div>
+  <div class="mini-check-ja">今週は会えないんだ。旅行中だから。</div>
+<div class="srs-rate" data-qid="L13-mc-2"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-mc-2', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-mc-2', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-mc-2', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：estar の発展用法</div>
+
+  <div class="quiz-item" id="L13-qz-4">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">¡Qué delgada <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estás</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">久しぶりに会って受けた印象</span></span>! ¿Has hecho dieta?</div>
+    <div class="quiz-ja">すごく痩せたね！ ダイエットしたの？</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>estás</b>：以前と比べた変化・印象なので estar。ser delgada なら「（もともと）細身だ」。</div>
+  <div class="srs-rate" data-qid="L13-qz-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-5">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Mi primo es arquitecto, pero ahora <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">está</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">一時的な仕事：estar de</span></span> de taxista.</div>
+    <div class="quiz-ja">いとこは建築家だが、今はタクシー運転手をしている。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>está</b>：estar de ＋ 職業で「（一時的に）〜として働いている」。本職は ser arquitecto。</div>
+  <div class="srs-rate" data-qid="L13-qz-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-6">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">—¿A cuánto <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">están</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">相場の値段：estar a</span></span> las naranjas hoy? —A un euro el kilo.</div>
+    <div class="quiz-ja">「今日のオレンジはいくら？」「1キロ1ユーロだよ」</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>están</b>：日によって変わる値段は estar a ＋ 値段。</div>
+  <div class="srs-rate" data-qid="L13-qz-6"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-6', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-6', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-6', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ③ 動作と結果 -->
+<div id="sec3" class="sec-heading">
+  <span class="sec-num">③</span>
+  <span class="sec-title">動作と結果</span>
+  <span class="sec-es">«Ser» y «estar» + participio</span>
+</div>
+
+<p>5課で学んだ <span class="mono">ser ＋ 過去分詞</span>（受身）と <span class="mono">estar ＋ 過去分詞</span>（状態）は、日本語ではどちらも「〜されている」になりがちです。違いは<span class="hi">「動作そのもの」を言うか、「動作の後に残った結果」を言うか</span>です。</p>
+
+<div class="box box-rule" id="dousa-kekka">
+  <div class="box-title">動作の受身か、結果の状態か</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th style="width:50%;background:#dde8f5;color:var(--accent)">ser ＋ 過去分詞（動作）</th><th style="background:#d8eeea;color:var(--accent2)">estar ＋ 過去分詞（結果の状態）</th></tr></thead>
+    <tbody>
+      <tr><td><span class="mono">La puerta <b>fue cerrada</b> por el portero a las diez.</span><br>ドアは10時に管理人によって閉められた。</td><td><span class="mono">Cuando llegué, la puerta ya <b>estaba cerrada</b>.</span><br>私が着いたとき、ドアはもう閉まっていた。</td></tr>
+      <tr><td><span class="mono">El puente <b>fue construido</b> en 1920.</span><br>その橋は1920年に建設された。</td><td><span class="mono">El puente <b>está construido</b> de piedra.</span><br>その橋は石でできている。</td></tr>
+      <tr><td><span class="mono">La novela <b>fue escrita</b> en un mes.</span><br>その小説は1か月で書かれた。</td><td><span class="mono">La carta <b>está escrita</b> a mano.</span><br>その手紙は手書きだ。</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note" style="margin-top:8px;">見分け方：<span class="hi">「誰が？」「いつ？」と動作について聞ける</span>なら ser、<span class="hi">「今どうなっている？」</span>という状態の話なら estar。</p>
+</div>
+
+<div class="ex"><span class="ex-sp">Las tiendas <span class="hi2">están cerradas</span> los domingos.</span><span class="ex-ja">日曜日は店が閉まっている。</span><span class="ex-note">過去分詞は主語に性数一致する（5課）</span></div>
+<div class="ex"><span class="ex-sp">El ladrón <span class="hi">fue detenido</span> por la policía ayer por la noche.</span><span class="ex-ja">泥棒は昨夜警察に逮捕された。</span></div>
+<div class="ex"><span class="ex-sp">Ahora el ladrón <span class="hi2">está detenido</span> en la comisaría.</span><span class="ex-ja">今、泥棒は警察署に拘留されている。</span></div>
+
+<div class="box box-warn">
+  <div class="box-title">話し言葉では ser 受身はあまり使わない</div>
+  <p style="margin:0;font-size:13.5px;"><span class="mono">ser ＋ 過去分詞</span> の受身は、ニュース・歴史・論文など<span class="hi">書き言葉</span>で多く使われます。会話では <span class="mono">Cerraron la puerta a las diez</span>（主語を立てない3人称複数：4課）や <span class="mono">Se cerró la puerta</span>（再帰受身：5課）のほうが自然です。受身の表し方は20課でまとめて比べます。</p>
+</div>
+
+<div class="mini-check" id="L13-mc-3">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Cuando volví a casa, las ventanas <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">estaban</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">結果の状態：開いていた</span></span> abiertas.</div>
+  <div class="mini-check-ja">家に戻ったとき、窓が開いていた。</div>
+<div class="srs-rate" data-qid="L13-mc-3"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-mc-3', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-mc-3', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-mc-3', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：動作と結果</div>
+
+  <div class="quiz-item" id="L13-qz-7">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">La catedral <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">fue</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">動作：いつ建てられたか</span></span> construida en el siglo XIII.</div>
+    <div class="quiz-ja">その大聖堂は13世紀に建てられた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>fue</b>：「いつ建てられたか」という動作を言うので ser の受身（点過去）。</div>
+  <div class="srs-rate" data-qid="L13-qz-7"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-7', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-7', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-7', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-8">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">No puedes entrar; la sala ya <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">está</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">結果の状態：予約済み</span></span> reservada.</div>
+    <div class="quiz-ja">入れないよ。その部屋はもう予約されているから。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>está</b>：予約という動作の後に残った状態（予約済み）なので estar。</div>
+  <div class="srs-rate" data-qid="L13-qz-8"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-8', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-8', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-8', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-9">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Los resultados <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">fueron</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">動作：誰が発表したか</span></span> anunciados por el director del instituto.</div>
+    <div class="quiz-ja">結果は研究所の所長によって発表された。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>fueron</b>：por ＋ 動作主があり、発表という動作を言うので ser の受身。主語が複数なので fueron。</div>
+  <div class="srs-rate" data-qid="L13-qz-9"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-9', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-9', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-9', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ④「なる」を表す動詞 -->
+<div id="sec4" class="sec-heading">
+  <span class="sec-num">④</span>
+  <span class="sec-title">「なる」を表す動詞</span>
+  <span class="sec-es">Verbos de cambio</span>
+</div>
+
+<p>日本語の「〜になる」にあたる動詞は、スペイン語には1つではありません。<span class="hi">変化が一時的か長く続くか、自然にそうなったのか努力の結果か</span>によって、動詞を使い分けます。英語の <i>become</i> や <i>get</i> と同じく、直訳できる単語はないと考えましょう。</p>
+
+<div class="sub" id="ponerse">1. ponerse ＋ 形容詞：一時的な変化（気分・体調・見た目）</div>
+<div class="ex"><span class="ex-sp">Cuando habla en público, <span class="hi">se pone</span> muy nervioso.</span><span class="ex-ja">人前で話すとき、彼はとても緊張する。</span></div>
+<div class="ex"><span class="ex-sp">Me <span class="hi">puse</span> rojo cuando me miró.</span><span class="ex-ja">彼女に見つめられて、私は赤くなった。</span></div>
+<div class="ex"><span class="ex-sp">Mi madre <span class="hi">se puso</span> enferma el mes pasado.</span><span class="ex-ja">母は先月病気になった。</span></div>
+<p class="note">※ ponerse の後ろには<span class="hi-r">形容詞だけ</span>が来る（名詞は来ない）。変化はふつう一時的で、元に戻ることが多い。</p>
+
+<div class="sub" id="volverse">2. volverse ＋ 形容詞：性格などの大きく長く続く変化</div>
+<div class="ex"><span class="ex-sp">Desde que es famoso, <span class="hi">se ha vuelto</span> muy arrogante.</span><span class="ex-ja">有名になってから、彼はとても傲慢になった。</span></div>
+<div class="ex"><span class="ex-sp">Con tanto trabajo me voy a <span class="hi">volver</span> loca.</span><span class="ex-ja">こんなに仕事があったら、気が狂いそうだ。</span></div>
+<p class="note">※ 本人の意思とは関係なく、<span class="hi">人が変わってしまった</span>ような変化に使う。悪い方向への変化が多い（<span class="mono">desconfiado</span>「疑い深い」、<span class="mono">egoísta</span>「自分勝手な」など）。</p>
+
+<div class="sub" id="hacerse">3. hacerse ＋ 形容詞・名詞：努力や過程による変化</div>
+<div class="ex"><span class="ex-sp">Trabajó mucho y <span class="hi">se hizo</span> rico.</span><span class="ex-ja">彼はよく働いて金持ちになった。</span></div>
+<div class="ex"><span class="ex-sp">Mi hermana <span class="hi">se hizo</span> vegetariana hace dos años.</span><span class="ex-ja">姉は2年前にベジタリアンになった。</span></div>
+<div class="ex"><span class="ex-sp">Vámonos, que <span class="hi">se hace</span> tarde.</span><span class="ex-ja">行こう、遅くなるから。</span><span class="ex-note"><span class="mono">hacerse tarde</span>（遅くなる）、<span class="mono">hacerse de noche</span>（夜になる）は主語のない言い方</span></div>
+<p class="note">※ 職業・宗教・主義・社会的な立場など、<span class="hi">本人が選んだ・努力した</span>結果の変化に使う：<span class="mono">hacerse médico / famoso / amigos</span>。</p>
+
+<div class="sub" id="llegar-a-ser">4. llegar a ser ＋ 名詞・形容詞：長い過程の末にたどり着く</div>
+<div class="ex"><span class="ex-sp">Empezó como camarero y <span class="hi">llegó a ser</span> dueño del restaurante.</span><span class="ex-ja">彼はウェイターから始めて、ついにはそのレストランのオーナーになった。</span></div>
+
+<div class="sub" id="convertirse">5. convertirse en ＋ 名詞：別のものに変わる</div>
+<div class="ex"><span class="ex-sp">Con el frío, el agua <span class="hi">se convirtió en</span> hielo.</span><span class="ex-ja">寒さで水は氷に変わった。</span></div>
+<div class="ex"><span class="ex-sp">Esa canción <span class="hi">se convirtió en</span> un éxito mundial.</span><span class="ex-ja">その歌は世界的なヒットになった。</span></div>
+<p class="note">※ 後ろには必ず <span class="mono">en ＋ 名詞</span>（11課の前置詞と組む動詞）。形容詞は来ない。</p>
+
+<div class="sub" id="quedarse">6. quedarse ＋ 形容詞：出来事の結果として（多くは失う方向へ）</div>
+<div class="ex"><span class="ex-sp">Después del accidente <span class="hi">se quedó</span> ciego.</span><span class="ex-ja">事故の後、彼は目が見えなくなった。</span></div>
+<div class="ex"><span class="ex-sp"><span class="hi">Me quedé</span> sin palabras.</span><span class="ex-ja">私は言葉を失った。</span></div>
+<div class="ex"><span class="ex-sp">Estaba tan cansado que <span class="hi">se quedó</span> dormido en el sofá.</span><span class="ex-ja">疲れていたので、彼はソファで眠り込んでしまった。</span></div>
+<p class="note">※ <span class="mono">quedarse sordo</span>（耳が聞こえなくなる）、<span class="mono">quedarse viudo</span>（配偶者に先立たれる）、<span class="mono">quedarse sin trabajo</span>（失業する）、<span class="mono">quedarse embarazada</span>（妊娠する）など。</p>
+
+<div class="box box-rule" id="naru-hayami">
+  <div class="box-title">「なる」の選び方 早見表</div>
+  <div class="tbl-wrap" style="margin:0">
+  <table>
+    <thead><tr><th style="width:36%">どんな変化？</th><th style="width:26%">動詞</th><th>例</th></tr></thead>
+    <tbody>
+      <tr><td>一時的な気分・体調・顔色</td><td class="mono hi">ponerse ＋ 形</td><td class="mono">ponerse nervioso / rojo</td></tr>
+      <tr><td>性格が変わってしまう（長く続く）</td><td class="mono hi">volverse ＋ 形</td><td class="mono">volverse loco / egoísta</td></tr>
+      <tr><td>努力・選択・過程の結果</td><td class="mono hi">hacerse ＋ 形・名</td><td class="mono">hacerse rico / médico</td></tr>
+      <tr><td>長い道のりの末に到達</td><td class="mono hi">llegar a ser ＋ 名・形</td><td class="mono">llegar a ser presidente</td></tr>
+      <tr><td>別のものへの変身</td><td class="mono hi">convertirse en ＋ 名</td><td class="mono">convertirse en hielo</td></tr>
+      <tr><td>出来事の結果（多くは喪失）</td><td class="mono hi">quedarse ＋ 形</td><td class="mono">quedarse ciego / sin dinero</td></tr>
+    </tbody>
+  </table>
+  </div>
+</div>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">en público</span>：人前で ／ <span class="mono">arrogante</span>（形）傲慢な ／ <span class="mono">dueño, -a</span>（名）持ち主・オーナー ／ <span class="mono">éxito</span>（男）成功・ヒット</li>
+    <li><span class="mono">Vámonos, que …</span>：この <span class="mono">que</span> は理由を軽く添える口語の接続詞（「〜だから」）</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L13-mc-4">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">Cuando vio el precio, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se puso</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">一時的な変化：顔色</span></span> pálido.</div>
+  <div class="mini-check-ja">値段を見て、彼は青ざめた。</div>
+<div class="srs-rate" data-qid="L13-mc-4"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-mc-4', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-mc-4', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-mc-4', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：「なる」を表す動詞</div>
+
+  <div class="quiz-item" id="L13-qz-10">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Estudió Derecho y <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se hizo</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">努力・選択の結果</span></span> abogado.</div>
+    <div class="quiz-ja">彼は法学を学んで弁護士になった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>se hizo</b>：職業に就くのは本人の選択・努力の結果なので hacerse。ponerse は名詞をとれない。</div>
+  <div class="srs-rate" data-qid="L13-qz-10"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-10', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-10', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-10', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-11">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">El pequeño pueblo <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se convirtió en</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">別のものに変わる：＋名詞</span></span> una ciudad turística.</div>
+    <div class="quiz-ja">その小さな村は観光都市に変わった。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>se convirtió en</b>：「別のものに変わる」は convertirse en ＋ 名詞。</div>
+  <div class="srs-rate" data-qid="L13-qz-11"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-11', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-11', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-11', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-12">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Con la crisis, muchas personas <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se quedaron</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">出来事の結果として失う</span></span> sin trabajo.</div>
+    <div class="quiz-ja">不況で多くの人が職を失った。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>se quedaron</b>：出来事の結果として何かを失う変化は quedarse（sin ＋ 名詞）。</div>
+  <div class="srs-rate" data-qid="L13-qz-12"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-12', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-12', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-12', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+<!-- ⑤ 感情・状態の変化を表す動詞 -->
+<div id="sec5" class="sec-heading">
+  <span class="sec-num">⑤</span>
+  <span class="sec-title">感情・状態の変化を表す動詞</span>
+  <span class="sec-es">Verbos pronominales de cambio de estado</span>
+</div>
+
+<div class="sub" id="kanjou-saiki">1. 感情の再帰動詞と、gustar 型・estar ＋ 過去分詞</div>
+<p>「怒る」「心配する」「退屈する」のような感情の変化は、<span class="hi">再帰動詞</span>で表すのが基本です（5課の自動詞化用法）。同じ語根から、<span class="hi">gustar 型の言い方</span>と、変化の後の状態を表す <span class="hi">estar ＋ 過去分詞</span> も作れます。3つをセットで覚えると表現の幅が一気に広がります。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:24%">動詞</th><th style="width:26%;background:#dde8f5;color:var(--accent)">再帰動詞（〜になる）</th><th style="width:26%;background:#fbe4e4;color:var(--warn)">gustar 型（〜させる）</th><th style="background:#d8eeea;color:var(--accent2)">estar ＋ 過去分詞（〜の状態）</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">aburrir</td><td class="mono">Me aburro.<br><small>退屈する</small></td><td class="mono">Me aburre la clase.<br><small>授業が退屈だ</small></td><td class="mono">Estoy aburrido.<br><small>退屈している</small></td></tr>
+    <tr><td class="mono">preocupar</td><td class="mono">Me preocupo.<br><small>心配する</small></td><td class="mono">Me preocupa tu salud.<br><small>君の健康が心配だ</small></td><td class="mono">Estoy preocupado.<br><small>心配している</small></td></tr>
+    <tr><td class="mono">enfadar</td><td class="mono">Me enfado.<br><small>怒る</small></td><td class="mono">Me enfada su actitud.<br><small>彼の態度に腹が立つ</small></td><td class="mono">Estoy enfadado.<br><small>怒っている</small></td></tr>
+    <tr><td class="mono">sorprender</td><td class="mono">Me sorprendo.<br><small>驚く</small></td><td class="mono">Me sorprende la noticia.<br><small>その知らせに驚いた</small></td><td class="mono">Estoy sorprendido.<br><small>驚いている</small></td></tr>
+    <tr><td class="mono">cansar</td><td class="mono">Me canso.<br><small>疲れる</small></td><td class="mono">Me cansa este trabajo.<br><small>この仕事は疲れる</small></td><td class="mono">Estoy cansado.<br><small>疲れている</small></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ 中南米では「怒る」に <span class="mono">enojarse</span>（<span class="mono">estar enojado</span>）をよく使う。<br>※ ほかに <span class="mono">alegrarse</span>（喜ぶ）、<span class="mono">asustarse</span>（怖がる）、<span class="mono">emocionarse</span>（感動する）、<span class="mono">enamorarse de</span>（恋に落ちる）、<span class="mono">ofenderse</span>（気を悪くする）。</p>
+
+<div class="ex"><span class="ex-sp">Mi padre <span class="hi">se enfada</span> cuando llego tarde.</span><span class="ex-ja">私が遅く帰ると父は怒る。</span></div>
+<div class="ex"><span class="ex-sp">Me <span class="hi">aburrí</span> tanto en la reunión que casi me dormí.</span><span class="ex-ja">会議があまりに退屈で、危うく眠るところだった。</span></div>
+
+<div class="sub" id="keiyoushi-doushi">2. 形容詞から作られた「〜になる」動詞</div>
+<p>変化の意味を1語で表す動詞も多くあります。<span class="hi">ponerse ＋ 形容詞</span> などより簡潔で、書き言葉でよく使われます。</p>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:26%">元の形容詞</th><th style="width:30%">動詞</th><th>例</th></tr></thead>
+  <tbody>
+    <tr><td class="mono">viejo（年老いた）</td><td class="mono hi">envejecer</td><td><span class="mono">Mi abuelo ha envejecido mucho.</span><br>祖父はずいぶん年を取った。</td></tr>
+    <tr><td class="mono">rico（金持ちの）</td><td class="mono hi">enriquecerse</td><td><span class="mono">Se enriqueció con el petróleo.</span><br>彼は石油で財を成した。</td></tr>
+    <tr><td class="mono">delgado（やせた）</td><td class="mono hi">adelgazar</td><td><span class="mono">He adelgazado tres kilos.</span><br>3キロやせた。</td></tr>
+    <tr><td class="mono">gordo（太った）</td><td class="mono hi">engordar</td><td><span class="mono">En Navidad siempre engordo.</span><br>クリスマスにはいつも太る。</td></tr>
+    <tr><td class="mono">mejor / peor</td><td class="mono hi">mejorar / empeorar</td><td><span class="mono">El tiempo ha mejorado.</span><br>天気が良くなった。</td></tr>
+    <tr><td class="mono">oscuro（暗い）</td><td class="mono hi">oscurecer</td><td><span class="mono">En invierno oscurece muy pronto.</span><br>冬はすぐ暗くなる。</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ <span class="mono">envejecer, adelgazar, engordar, mejorar, empeorar, oscurecer</span> は再帰代名詞なしで「〜になる」を表す。<span class="mono">enriquecerse</span> は再帰動詞。<span class="mono">-ecer</span> で終わる動詞は1人称単数が <span class="mono">-ezco</span>（4課の -zco 型：<span class="mono">envejezco</span>）。</p>
+
+<div class="box">
+  <div class="box-title">例文解説</div>
+  <ul style="margin:0;padding-left:18px;font-size:13.5px;line-height:1.8">
+    <li><span class="mono">actitud</span>（女）態度 ／ <span class="mono">reunión</span>（女）会議 ／ <span class="mono">casi</span>（副）ほとんど・危うく ／ <span class="mono">petróleo</span>（男）石油</li>
+  </ul>
+</div>
+
+<div class="mini-check" id="L13-mc-5">
+  <div class="mini-check-label">✔ ミニ確認</div>
+  <div class="mini-check-sentence">No <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">te preocupes</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">preocuparse：否定命令</span></span>, todo saldrá bien.</div>
+  <div class="mini-check-ja">心配しないで、すべてうまくいくよ。</div>
+<div class="srs-rate" data-qid="L13-mc-5"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-mc-5', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-mc-5', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-mc-5', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+
+<div class="quiz-block">
+  <div class="quiz-block-title">📝 まとめクイズ：感情・状態の変化を表す動詞</div>
+
+  <div class="quiz-item" id="L13-qz-13">
+    <div class="quiz-item-head">
+      <span class="quiz-num">1</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">A mí me <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">aburren</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">gustar 型：主語は las películas</span></span> las películas de guerra.</div>
+    <div class="quiz-ja">私は戦争映画が退屈だ。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>aburren</b>：gustar 型では、退屈させるもの（las películas）が主語。複数なので aburren。</div>
+  <div class="srs-rate" data-qid="L13-qz-13"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-13', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-13', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-13', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-14">
+    <div class="quiz-item-head">
+      <span class="quiz-num">2</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">Cuando le conté la verdad, <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">se enfadó</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">怒る：再帰動詞・点過去</span></span> conmigo.</div>
+    <div class="quiz-ja">本当のことを話したら、彼は私に腹を立てた。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>se enfadó</b>：enfadarse con 人「〜に腹を立てる」。変化の出来事なので点過去。</div>
+  <div class="srs-rate" data-qid="L13-qz-14"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-14', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-14', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-14', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+  <div class="quiz-item" id="L13-qz-15">
+    <div class="quiz-item-head">
+      <span class="quiz-num">3</span>
+      <button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>
+    </div>
+    <div class="quiz-sentence">En los últimos años la situación económica ha <span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span><span class="fb-answer">empeorado</span></span><span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span><span class="hc-a">peor から：悪くなる</span></span>.</div>
+    <div class="quiz-ja">ここ数年で経済状況は悪化した。</div>
+    <button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>
+    <div class="quiz-exp"><b>empeorado</b>：empeorar「悪くなる」は再帰代名詞なしで使う。現在完了なので過去分詞。</div>
+  <div class="srs-rate" data-qid="L13-qz-15"><span class="srs-rate-label">この問題の理解度：</span><button class="srs-btn srs-x" onclick="rateQuestion('L13-qz-15', 0, this)">×</button><button class="srs-btn srs-tri" onclick="rateQuestion('L13-qz-15', 1, this)">△</button><button class="srs-btn srs-o" onclick="rateQuestion('L13-qz-15', 2, this)">○</button><span class="srs-rated-msg"></span></div>
+</div>
+</div>
+
+</div><!-- /tab-grammar -->
+
+<div id="tab-renshu" class="tab-content">
+
+<!-- ⑥ 練習問題 -->
+<div id="sec6" class="sec-heading">
+  <span class="sec-num">⑥</span>
+  <span class="sec-title">練習問題と解答</span>
+  <span class="sec-es">Ejercicios y soluciones</span>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">1.</span>
+  <span class="daimon-title">ser か estar を適切な形にして入れなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">No comas esa manzana; todavía <span class="blank">______</span> verde.</div>
+      <div class="q-ja">そのリンゴは食べないで。まだ熟していないから。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">está</span></span></div>
+      <div class="q-exp">果物が「熟していない」のは状態なので <span class="mono">estar verde</span>。<span class="mono">es verde</span> なら「緑色のリンゴだ」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Mi jefe <span class="blank">______</span> muy atento con todos los empleados.</div>
+      <div class="q-ja">上司は従業員みんなにとても思いやりがある。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">es</span></span></div>
+      <div class="q-exp"><span class="mono">ser atento</span> は「思いやりがある・親切な」という性格。<span class="mono">estar atento</span> は「注意を払っている」。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">¡Cuánto tiempo! <span class="blank">______</span> muy cambiado; casi no te reconozco.</div>
+      <div class="q-ja">久しぶり！ ずいぶん変わったね。ほとんど分からなかったよ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">Estás</span></span></div>
+      <div class="q-exp">以前と比べた変化の印象なので <span class="mono">estar</span>。<span class="mono">cambiado</span> は過去分詞で、変化の結果の状態を表す。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Este trabajo <span class="blank">______</span> muy cansado: ocho horas de pie.</div>
+      <div class="q-ja">この仕事はとても疲れる。8時間立ちっぱなしだ。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">es</span></span></div>
+      <div class="q-exp">仕事の性質（骨が折れる）なので <span class="mono">ser cansado</span>。人が疲れているなら <span class="mono">estar cansado</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Hoy no <span class="blank">______</span> de buen humor; déjalo tranquilo.</div>
+      <div class="q-ja">今日は彼は機嫌が悪いんだ。そっとしておいて。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">está</span></span></div>
+      <div class="q-exp"><span class="mono">estar de buen / mal humor</span>「機嫌がいい／悪い」。<span class="mono">déjalo</span> は肯定命令＋代名詞（10課）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Esta iglesia <span class="blank">______</span> construida por los árabes en el siglo X.</div>
+      <div class="q-ja">この教会は10世紀にアラブ人によって建てられた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">fue</span></span></div>
+      <div class="q-exp">動作主（<span class="mono">por los árabes</span>）と時期があり、建てるという動作を言うので <span class="mono">ser</span> の受身。完結した過去の出来事なので点過去。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">2.</span>
+  <span class="daimon-title">（　）内から適切な「なる」の動詞を選び、正しい形にしなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Cuando le dieron la noticia, <span class="blank">______</span> muy triste.（ponerse / hacerse）</div>
+      <div class="q-ja">その知らせを聞いて、彼女はとても悲しくなった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">se puso</span></span></div>
+      <div class="q-exp">知らせを受けての一時的な気分の変化なので <span class="mono">ponerse</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Después de muchos años de esfuerzo, <span class="blank">______</span> directora del hospital.（llegar a ser / ponerse）</div>
+      <div class="q-ja">長年の努力の末、彼女は病院長になった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">llegó a ser</span></span></div>
+      <div class="q-exp">長い過程の末にたどり着いた地位なので <span class="mono">llegar a ser</span>。<span class="mono">ponerse</span> は名詞をとれない。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">Desde que perdió su dinero, <span class="blank">______</span> muy desconfiado.（volverse / quedarse）</div>
+      <div class="q-ja">お金を失ってから、彼はとても疑い深くなった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">se ha vuelto</span>（または <span class="ans-fill">se volvió</span>）</span></div>
+      <div class="q-exp">性格が変わってしまう長く続く変化なので <span class="mono">volverse</span>。<span class="mono">desde que</span>「〜以来」があり今まで続いているので、現在完了が自然。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Mi abuela <span class="blank">______</span> viuda muy joven.（quedarse / convertirse）</div>
+      <div class="q-ja">祖母はとても若くして夫を亡くした。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">se quedó</span></span></div>
+      <div class="q-exp">出来事（夫の死）の結果として失う変化なので <span class="mono">quedarse</span>。<span class="mono">convertirse</span> は <span class="mono">en ＋ 名詞</span> が必要。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Mis primos <span class="blank">______</span> budistas después de su viaje a la India.（hacerse / ponerse）</div>
+      <div class="q-ja">いとこたちはインド旅行の後、仏教徒になった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">se hicieron</span></span></div>
+      <div class="q-exp">宗教・主義を選んだ結果なので <span class="mono">hacerse</span>。hacer の点過去3人称複数は <span class="mono">hicieron</span>（6課）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Poco a poco, el hobby <span class="blank">______</span> su profesión.（convertirse en / volverse）</div>
+      <div class="q-ja">少しずつ、その趣味は彼の職業になった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text"><span class="ans-fill">se convirtió en</span></span></div>
+      <div class="q-exp">あるものが「別のもの（名詞）」に変わるので <span class="mono">convertirse en</span>。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">3.</span>
+  <span class="daimon-title">誤りを1か所見つけて直しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答</div>
+
+  <div class="q-item">
+    <span class="q-badge blue">1</span>
+    <div class="q-content">
+      <div class="q-sentence">Mi bisabuelo es muerto desde hace diez años.</div>
+      <div class="q-ja">曽祖父は10年前に亡くなっている。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Mi bisabuelo <span class="ans-fill">está</span> muerto desde hace diez años.</span></div>
+      <div class="q-exp"><span class="mono">muerto</span> は永続的な状態でも必ず <span class="mono">estar</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">2</span>
+    <div class="q-content">
+      <div class="q-sentence">Cuando me vio, se puso un poco de vergüenza.</div>
+      <div class="q-ja">私を見て、彼は少し恥ずかしそうにした。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Cuando me vio, <span class="ans-fill">le dio</span> un poco de vergüenza.</span></div>
+      <div class="q-exp"><span class="mono">ponerse</span> の後ろに名詞（vergüenza）は来ない。「恥ずかしくなる」は <span class="mono">darle vergüenza a 人</span>（gustar 型）か、<span class="mono">se puso rojo</span>（赤くなった）と形容詞で言う。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">3</span>
+    <div class="q-content">
+      <div class="q-sentence">El agua se convirtió hielo en pocos minutos.</div>
+      <div class="q-ja">水は数分で氷になった。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">El agua se convirtió <span class="ans-fill">en</span> hielo en pocos minutos.</span></div>
+      <div class="q-exp"><span class="mono">convertirse</span> は必ず <span class="mono">en ＋ 名詞</span>。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">4</span>
+    <div class="q-content">
+      <div class="q-sentence">Estoy muy interesado de la historia de México.</div>
+      <div class="q-ja">私はメキシコの歴史にとても興味がある。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Estoy muy interesado <span class="ans-fill">en</span> la historia de México.</span></div>
+      <div class="q-exp"><span class="mono">estar interesado en</span>「〜に興味がある」。前置詞は en（11課の前置詞と組む語）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">5</span>
+    <div class="q-content">
+      <div class="q-sentence">Estos niños son muy aburridos porque no pueden salir a jugar.</div>
+      <div class="q-ja">この子たちは外で遊べないので、とても退屈している。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Estos niños <span class="ans-fill">están</span> muy aburridos.</span></div>
+      <div class="q-exp">「退屈している」は状態なので <span class="mono">estar</span>。<span class="mono">son aburridos</span> だと「退屈な子たちだ（つまらない子たちだ）」になってしまう。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge blue">6</span>
+    <div class="q-content">
+      <div class="q-sentence">Me sorprendo mucho tu respuesta.</div>
+      <div class="q-ja">君の答えにはとても驚いた。</div>
+      <div class="q-answer-row"><span class="ans-label">答え</span><span class="ans-text">Me <span class="ans-fill">sorprende</span> mucho tu respuesta.</span></div>
+      <div class="q-exp">驚かせるもの（tu respuesta）を主語にするなら gustar 型の <span class="mono">me sorprende</span>。再帰動詞なら <span class="mono">Me sorprendo mucho con tu respuesta</span> と前置詞が必要。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="daimon-group">
+<div class="daimon">
+  <span class="daimon-num">4.</span>
+  <span class="daimon-title">次の文をスペイン語に訳しなさい。</span>
+</div>
+
+<div class="ex-block">
+  <div class="ex-block-title">問題と解答例</div>
+
+  <div class="q-item">
+    <span class="q-badge green">1</span>
+    <div class="q-content">
+      <div class="q-sentence">私たちが着いたとき、レストランはもう閉まっていた。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Cuando llegamos, el restaurante ya estaba cerrado.</span></span>
+      </div>
+      <div class="q-exp"><b>estaba cerrado</b>：閉めるという動作の結果の状態なので estar ＋ 過去分詞。着いた時点の背景なので線過去（7課）。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">2</span>
+    <div class="q-content">
+      <div class="q-sentence">このケーキ、すごくおいしいね。君が作ったの？</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Este pastel está buenísimo. ¿Lo has hecho tú?</span></span>
+      </div>
+      <div class="q-exp"><b>está buenísimo</b>：食べ物の味は estar（<span class="mono">está riquísimo</span> でもよい）。<b>Lo has hecho tú</b>：lo（ケーキを）、主語 tú を文末に置いて「君が」を強調。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">3</span>
+    <div class="q-content">
+      <div class="q-sentence">試験の前になると、私はいつもとても緊張する。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Antes de los exámenes siempre me pongo muy nervioso.</span></span>
+      </div>
+      <div class="q-exp"><b>me pongo nervioso</b>：一時的な気分の変化は ponerse ＋ 形容詞。話し手が女性なら nerviosa。</div>
+    </div>
+  </div>
+
+  <div class="q-item">
+    <span class="q-badge green">4</span>
+    <div class="q-content">
+      <div class="q-sentence">彼は宝くじに当たって金持ちになったが、その後とても自分勝手になってしまった。</div>
+      <div class="q-answer-row">
+        <span class="ans-label">解答例</span>
+        <span class="ans-text"><span class="ans-fill">Se hizo rico con la lotería, pero después se volvió muy egoísta.</span></span>
+      </div>
+      <div class="q-exp"><b>se hizo rico</b>：財産を得た結果の変化は hacerse（<span class="mono">se enriqueció</span> でもよい）。<b>se volvió egoísta</b>：性格が変わってしまう変化は volverse。</div>
+    </div>
+  </div>
+</div>
+</div>
+
+</div><!-- /tab-renshu -->
+
+<div id="tab-vocab" class="tab-content">
+
+<!-- ⑦ 語彙リスト -->
+<div id="sec7" class="sec-heading">
+  <span class="sec-num">⑦</span>
+  <span class="sec-title">語彙リスト</span>
+  <span class="sec-es">Vocabulario</span>
+</div>
+
+<div class="vocab-category">ser / estar で意味が変わる形容詞</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">ser listo / estar listo</span><span class="pill-pos">形</span><span class="pill-ja">賢い／準備ができた</span></span>
+  <span class="pill"><span class="pill-es">ser malo / estar malo</span><span class="pill-pos">形</span><span class="pill-ja">悪い／具合が悪い</span></span>
+  <span class="pill"><span class="pill-es">ser rico / estar rico</span><span class="pill-pos">形</span><span class="pill-ja">金持ちだ／おいしい</span></span>
+  <span class="pill"><span class="pill-es">ser aburrido / estar aburrido</span><span class="pill-pos">形</span><span class="pill-ja">退屈な／退屈している</span></span>
+  <span class="pill"><span class="pill-es">ser cansado / estar cansado</span><span class="pill-pos">形</span><span class="pill-ja">疲れる（仕事）／疲れている</span></span>
+  <span class="pill"><span class="pill-es">ser orgulloso / estar orgulloso de</span><span class="pill-pos">形</span><span class="pill-ja">高慢な／誇りに思う</span></span>
+  <span class="pill"><span class="pill-es">ser atento / estar atento</span><span class="pill-pos">形</span><span class="pill-ja">親切な／注意している</span></span>
+  <span class="pill"><span class="pill-es">ser despierto / estar despierto</span><span class="pill-pos">形</span><span class="pill-ja">利発な／目が覚めている</span></span>
+  <span class="pill"><span class="pill-es">ser vivo / estar vivo</span><span class="pill-pos">形</span><span class="pill-ja">生き生きした／生きている</span></span>
+  <span class="pill"><span class="pill-es">ser verde / estar verde</span><span class="pill-pos">形</span><span class="pill-ja">緑色の／熟していない</span></span>
+  <span class="pill"><span class="pill-es">ser seguro / estar seguro</span><span class="pill-pos">形</span><span class="pill-ja">安全な／確信している</span></span>
+  <span class="pill"><span class="pill-es">ser interesado / estar interesado en</span><span class="pill-pos">形</span><span class="pill-ja">打算的な／興味がある</span></span>
+  <span class="pill"><span class="pill-es">ser callado / estar callado</span><span class="pill-pos">形</span><span class="pill-ja">無口な／黙っている</span></span>
+  <span class="pill"><span class="pill-es">ser abierto / estar abierto</span><span class="pill-pos">形</span><span class="pill-ja">開放的な／開いている</span></span>
+</div>
+
+<div class="vocab-category">estar を使う表現</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">estar de vacaciones</span><span class="pill-pos">表現</span><span class="pill-ja">休暇中だ</span></span>
+  <span class="pill"><span class="pill-es">estar de viaje</span><span class="pill-pos">表現</span><span class="pill-ja">旅行中・出張中だ</span></span>
+  <span class="pill"><span class="pill-es">estar de buen / mal humor</span><span class="pill-pos">表現</span><span class="pill-ja">機嫌がいい／悪い</span></span>
+  <span class="pill"><span class="pill-es">estar de pie</span><span class="pill-pos">表現</span><span class="pill-ja">立っている</span></span>
+  <span class="pill"><span class="pill-es">estar de moda</span><span class="pill-pos">表現</span><span class="pill-ja">流行している</span></span>
+  <span class="pill"><span class="pill-es">estar de ＋ 職業</span><span class="pill-pos">表現</span><span class="pill-ja">（一時的に）〜として働く</span></span>
+  <span class="pill"><span class="pill-es">estar a ＋ 値段・日付・気温</span><span class="pill-pos">表現</span><span class="pill-ja">〜である（相場・今日の日付・気温）</span></span>
+  <span class="pill"><span class="pill-es">estar con gripe / fiebre</span><span class="pill-pos">表現</span><span class="pill-ja">インフルエンザ／熱がある</span></span>
+  <span class="pill"><span class="pill-es">estar muerto / vivo</span><span class="pill-pos">表現</span><span class="pill-ja">死んでいる／生きている</span></span>
+</div>
+
+<div class="vocab-category">「なる」を表す動詞</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">ponerse ＋ 形</span><span class="pill-pos">再動</span><span class="pill-ja">（一時的に）〜になる</span></span>
+  <span class="pill"><span class="pill-es">volverse ＋ 形</span><span class="pill-pos">再動</span><span class="pill-ja">（性格などが）〜になってしまう</span></span>
+  <span class="pill"><span class="pill-es">hacerse ＋ 形・名</span><span class="pill-pos">再動</span><span class="pill-ja">（努力・選択で）〜になる</span></span>
+  <span class="pill"><span class="pill-es">llegar a ser</span><span class="pill-pos">表現</span><span class="pill-ja">（ついに）〜になる</span></span>
+  <span class="pill"><span class="pill-es">convertirse en</span><span class="pill-pos">再動</span><span class="pill-ja">〜に変わる</span></span>
+  <span class="pill"><span class="pill-es">quedarse ＋ 形</span><span class="pill-pos">再動</span><span class="pill-ja">（結果として）〜になる</span></span>
+  <span class="pill"><span class="pill-es">quedarse dormido</span><span class="pill-pos">表現</span><span class="pill-ja">眠り込む・寝過ごす</span></span>
+  <span class="pill"><span class="pill-es">quedarse sin ～</span><span class="pill-pos">表現</span><span class="pill-ja">～を失う・～がなくなる</span></span>
+  <span class="pill"><span class="pill-es">hacerse tarde / de noche</span><span class="pill-pos">表現</span><span class="pill-ja">遅くなる／夜になる</span></span>
+</div>
+
+<div class="vocab-category">感情・状態の変化を表す動詞</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">enfadarse (con)</span><span class="pill-pos">再動</span><span class="pill-ja">（〜に）怒る</span></span>
+  <span class="pill"><span class="pill-es">enojarse</span><span class="pill-pos">再動</span><span class="pill-ja">怒る（中南米）</span></span>
+  <span class="pill"><span class="pill-es">preocuparse (por)</span><span class="pill-pos">再動</span><span class="pill-ja">心配する</span></span>
+  <span class="pill"><span class="pill-es">aburrirse</span><span class="pill-pos">再動</span><span class="pill-ja">退屈する</span></span>
+  <span class="pill"><span class="pill-es">cansarse</span><span class="pill-pos">再動</span><span class="pill-ja">疲れる</span></span>
+  <span class="pill"><span class="pill-es">sorprenderse</span><span class="pill-pos">再動</span><span class="pill-ja">驚く</span></span>
+  <span class="pill"><span class="pill-es">asustarse</span><span class="pill-pos">再動</span><span class="pill-ja">怖がる・驚く</span></span>
+  <span class="pill"><span class="pill-es">emocionarse</span><span class="pill-pos">再動</span><span class="pill-ja">感動する</span></span>
+  <span class="pill"><span class="pill-es">ofenderse</span><span class="pill-pos">再動</span><span class="pill-ja">気を悪くする</span></span>
+  <span class="pill"><span class="pill-es">envejecer</span><span class="pill-pos">動</span><span class="pill-ja">年を取る</span></span>
+  <span class="pill"><span class="pill-es">enriquecerse</span><span class="pill-pos">再動</span><span class="pill-ja">金持ちになる</span></span>
+  <span class="pill"><span class="pill-es">adelgazar / engordar</span><span class="pill-pos">動</span><span class="pill-ja">やせる／太る</span></span>
+  <span class="pill"><span class="pill-es">mejorar / empeorar</span><span class="pill-pos">動</span><span class="pill-ja">良くなる／悪くなる</span></span>
+  <span class="pill"><span class="pill-es">oscurecer</span><span class="pill-pos">動</span><span class="pill-ja">暗くなる</span></span>
+</div>
+
+<div class="vocab-category">例文・練習問題の重要語彙</div>
+<div class="vocab-pills">
+  <span class="pill"><span class="pill-es">salado, -a</span><span class="pill-pos">形</span><span class="pill-ja">塩辛い</span></span>
+  <span class="pill"><span class="pill-es">pálido, -a</span><span class="pill-pos">形</span><span class="pill-ja">青ざめた</span></span>
+  <span class="pill"><span class="pill-es">desconfiado, -a</span><span class="pill-pos">形</span><span class="pill-ja">疑い深い</span></span>
+  <span class="pill"><span class="pill-es">egoísta</span><span class="pill-pos">形</span><span class="pill-ja">自分勝手な</span></span>
+  <span class="pill"><span class="pill-es">arrogante</span><span class="pill-pos">形</span><span class="pill-ja">傲慢な</span></span>
+  <span class="pill"><span class="pill-es">ciego, -a / sordo, -a</span><span class="pill-pos">形</span><span class="pill-ja">目が見えない／耳が聞こえない</span></span>
+  <span class="pill"><span class="pill-es">viudo, -a</span><span class="pill-pos">形・名</span><span class="pill-ja">配偶者を亡くした（人）</span></span>
+  <span class="pill"><span class="pill-es">detener</span><span class="pill-pos">動</span><span class="pill-ja">逮捕する・止める</span></span>
+  <span class="pill"><span class="pill-es">comisaría</span><span class="pill-pos">女</span><span class="pill-ja">警察署</span></span>
+  <span class="pill"><span class="pill-es">vergüenza</span><span class="pill-pos">女</span><span class="pill-ja">恥ずかしさ</span></span>
+  <span class="pill"><span class="pill-es">darle vergüenza a 人</span><span class="pill-pos">表現</span><span class="pill-ja">〜が恥ずかしく思う</span></span>
+  <span class="pill"><span class="pill-es">actitud</span><span class="pill-pos">女</span><span class="pill-ja">態度</span></span>
+</div>
+
+<!-- ⑧ まとめ -->
+<div id="sec8" class="sec-heading">
+  <span class="sec-num">⑧</span>
+  <span class="sec-title">総まとめ：重要ポイント一覧</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:32%">テーマ</th><th>重要ポイント</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">基本の対比</td><td><b>ser ＝ 性質</b>、<b>estar ＝ その時の状態</b>（2課）</td></tr>
+    <tr><td class="td-rule">意味が変わる形容詞</td><td><span class="mono">listo, malo, bueno, rico, aburrido, cansado, orgulloso, atento, despierto, vivo, verde, seguro, interesado, callado, abierto</span></td></tr>
+    <tr><td class="td-rule">食べ物の味</td><td>estar：<span class="mono">La sopa está rica / buena / salada</span></td></tr>
+    <tr><td class="td-rule">印象・変化の estar</td><td><span class="mono">¡Qué alto estás!</span>（大きくなったね）／<span class="mono">Hoy estás guapa.</span></td></tr>
+    <tr><td class="td-rule">muerto / vivo</td><td>必ず estar：<span class="mono">Está muerto.</span></td></tr>
+    <tr><td class="td-rule">estar de ＋ 名詞</td><td><span class="mono">de vacaciones / de viaje / de buen humor / de pie / de moda / de camarero</span>（一時的な仕事）</td></tr>
+    <tr><td class="td-rule">estar a</td><td>値段・日付・気温：<span class="mono">¿A cuánto están? ／ Estamos a 5 de mayo ／ Estamos a 40 grados</span></td></tr>
+    <tr><td class="td-rule">動作と結果</td><td><span class="mono">fue cerrada</span>（閉められた：動作）／<span class="mono">estaba cerrada</span>（閉まっていた：結果の状態）</td></tr>
+    <tr><td class="td-rule">ponerse</td><td>一時的な気分・体調・顔色（＋形容詞のみ）：<span class="mono">ponerse nervioso</span></td></tr>
+    <tr><td class="td-rule">volverse</td><td>性格などの長く続く変化：<span class="mono">volverse loco / egoísta</span></td></tr>
+    <tr><td class="td-rule">hacerse</td><td>努力・選択・過程の結果：<span class="mono">hacerse rico / médico / vegetariano</span>、<span class="mono">se hace tarde</span></td></tr>
+    <tr><td class="td-rule">llegar a ser / convertirse en</td><td>長い過程の末に到達／別のもの（名詞）に変わる</td></tr>
+    <tr><td class="td-rule">quedarse</td><td>出来事の結果（多くは喪失）：<span class="mono">quedarse ciego / sin trabajo / dormido</span></td></tr>
+    <tr><td class="td-rule">感情の3点セット</td><td><span class="mono">me aburro</span>（退屈する）／<span class="mono">me aburre</span>（退屈させる：gustar 型）／<span class="mono">estoy aburrido</span>（退屈している）</td></tr>
+    <tr><td class="td-rule">1語の変化動詞</td><td><span class="mono">envejecer, adelgazar, engordar, mejorar, empeorar, oscurecer</span>（再帰代名詞なし）、<span class="mono">enriquecerse</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<p style="text-align:center; color:var(--muted); font-size:12px; margin-top:36px;">Lección 13 文法解説ページ</p>
+
+</div><!-- /tab-vocab -->
+
+<!-- ══ 鍛錬タブ（問題は tanren-bank.js から表示） ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div id="sec-tanren" class="sec-heading">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-intro">Lección 13 の内容を総合的に使う問題が <b>100問</b> あります。まとめクイズと同じか、少し難しいレベルです。<br>「内容ごと」は文法項目の順、「ランダム」は全範囲を混ぜた順に並びます。○△× を付けた問題は「今日の復習」に出ます。</div>
+
+<div id="tanren-app" data-lesson="13"></div>
+
+</div><!-- /tab-tanren -->
+
+<div id="float-nav">
+  <div id="float-nav-menu">
+    <button class="fn-search-btn" id="fn-search-btn">単語を検索</button>
+    <a class="fn-item" href="#sec1">① 意味が変わる形容詞</a>
+    <a class="fn-item" href="#sec2">② estar の発展用法</a>
+    <a class="fn-item" href="#sec3">③ 動作と結果</a>
+    <a class="fn-item" href="#sec4">④「なる」を表す動詞</a>
+    <a class="fn-item" href="#sec5">⑤ 感情・状態の変化を表す動詞</a>
+    <a class="fn-item" href="#sec6">⑥ 練習問題</a>
+    <a class="fn-item" href="#sec7">⑦ 語彙リスト</a>
+    <a class="fn-item" href="#sec8">⑧ まとめ</a>
+  </div>
+  <button id="float-nav-toggle">目次</button>
+</div>
+
+<script>
+const GRAMMAR_TERMS = [
+  { terms: ['ser estar','意味が変わる','形容詞'], id: 'sec1', label: '意味が変わる形容詞（①節）' },
+  { terms: ['listo','malo','bueno','rico','aburrido','cansado','orgulloso','atento','despierto','vivo','verde','seguro','interesado','callado','abierto'], id: 'hyou-adj', label: '意味が大きく変わる形容詞の一覧（①節）' },
+  { terms: ['es lista','está lista','riquísima','está malo'], id: 'imi-kawaru-adj', label: 'ser / estar の例文比較（①節）' },
+  { terms: ['estar の発展','estar'], id: 'sec2', label: 'estar の発展用法（②節）' },
+  { terms: ['印象','qué alto estás','estás guapa','está salada','muerto'], id: 'shukan', label: '印象や変化を表す estar（②節）' },
+  { terms: ['estar de','de vacaciones','de viaje','de buen humor','de pie','de moda','de camarero'], id: 'estar-de', label: 'estar de ＋ 名詞（②節）' },
+  { terms: ['estar a','a cuánto','estamos a','grados','estar con','gripe'], id: 'estar-a', label: 'estar a ＋ 値段・日付・気温（②節）' },
+  { terms: ['動作','結果','fue cerrada','está cerrada','ser ＋ 過去分詞','estar ＋ 過去分詞','受身'], id: 'dousa-kekka', label: '動作と結果（③節）' },
+  { terms: ['なる','変化','verbos de cambio'], id: 'sec4', label: '「なる」を表す動詞（④節）' },
+  { terms: ['ponerse','ponerse nervioso','ponerse rojo'], id: 'ponerse', label: 'ponerse（④節）' },
+  { terms: ['volverse','volverse loco'], id: 'volverse', label: 'volverse（④節）' },
+  { terms: ['hacerse','hacerse rico','se hace tarde'], id: 'hacerse', label: 'hacerse（④節）' },
+  { terms: ['llegar a ser'], id: 'llegar-a-ser', label: 'llegar a ser（④節）' },
+  { terms: ['convertirse','convertirse en'], id: 'convertirse', label: 'convertirse en（④節）' },
+  { terms: ['quedarse','quedarse ciego','quedarse dormido','quedarse sin'], id: 'quedarse', label: 'quedarse（④節）' },
+  { terms: ['早見表','なる 選び方'], id: 'naru-hayami', label: '「なる」の選び方 早見表（④節）' },
+  { terms: ['感情','再帰動詞','enfadarse','preocuparse','aburrirse','sorprenderse','enojarse'], id: 'kanjou-saiki', label: '感情の再帰動詞（⑤節）' },
+  { terms: ['envejecer','enriquecerse','adelgazar','engordar','mejorar','empeorar','oscurecer'], id: 'keiyoushi-doushi', label: '形容詞から作られた動詞（⑤節）' },
+  { terms: ['練習問題','練習'], id: 'sec6', label: '練習問題（⑥節）' },
+  { terms: ['語彙','Vocabulario'], id: 'sec7', label: '語彙リスト（⑦節）' },
+  { terms: ['まとめ','Resumen'], id: 'sec8', label: 'まとめ（⑧節）' },
+  { terms: ['鍛錬','Entrenamiento'], id: 'sec-tanren', label: '鍛錬（100問）' },
+];
+</script>
+
+<footer class="course-footer">スペイン語文法解説集　B1〜B2 編</footer>
+
+</body>
+</html>
