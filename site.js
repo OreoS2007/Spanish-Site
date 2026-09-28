@@ -5,6 +5,99 @@
    ページ先頭へ戻るボタン、を実装する。
    ============================================================ */
 
+/* ══════════════════════════════════════════════════════════
+   日本語版／英語版の切り替え
+   英語版があるページは <html data-bilingual> を持ち、本文を lang="ja" / lang="en" の
+   要素に書き分ける（どちらを隠すかは CSS が決める）。選んだ言語は localStorage の
+   "siteLang" に保存し、英語版があるページにだけ反映する。
+   JS が書き換える文言は、両方の言語を <span lang> で出しておき、表示は CSS に任せる。
+   ══════════════════════════════════════════════════════════ */
+var I18N = {
+  showAll:      { ja: 'すべて表示', en: 'Show all' },
+  hideAll:      { ja: 'すべて隠す', en: 'Hide all' },
+  showExp:      { ja: '解説を見る ▾', en: 'Show explanation ▾' },
+  hideExp:      { ja: '解説を隠す ▲', en: 'Hide explanation ▲' },
+  showHint:     { ja: 'ヒントを見る ▾', en: 'Show hint ▾' },
+  hideHint:     { ja: 'ヒントを隠す ▲', en: 'Hide hint ▲' },
+  showAns:      { ja: '答えを見る ▾', en: 'Show answer ▾' },
+  hideAns:      { ja: '答えを隠す ▲', en: 'Hide answer ▲' },
+  rateLabel:    { ja: 'この問題の理解度：', en: 'How well did you get it? ' },
+  hideJa:       { ja: '🙈 和訳を隠す', en: '🙈 Hide translations' },
+  showJa:       { ja: '👀 和訳を表示', en: '👀 Show translations' },
+  noSearchData: { ja: 'このページには検索データがありません', en: 'No search data on this page' },
+  noMatch:      { ja: '一致する項目が見つかりませんでした', en: 'No matches found' },
+  jump:         { ja: 'ジャンプ →', en: 'Go →' },
+  orderLabel:   { ja: '並び順：', en: 'Order: ' },
+  orderTopic:   { ja: '内容ごと', en: 'By topic' },
+  orderRandom:  { ja: 'ランダム', en: 'Random' },
+  reshuffle:    { ja: '🔀 並べ直す', en: '🔀 Reshuffle' },
+  tanren:       { ja: '鍛錬', en: 'Drill' },
+  items:        { ja: '問', en: ' items' }
+};
+
+function siteLangSaved() {
+  try { return localStorage.getItem('siteLang') === 'en' ? 'en' : 'ja'; } catch (e) { return 'ja'; }
+}
+function isBilingualPage() {
+  return document.documentElement.hasAttribute('data-bilingual');
+}
+/* 今ページに表示している言語 */
+function siteLang() {
+  return isBilingualPage() && document.documentElement.getAttribute('data-lang') === 'en' ? 'en' : 'ja';
+}
+/* 文言を「今の言語の文字列」で返す（title 属性など、span を入れられない所で使う） */
+function t(key) {
+  var e = I18N[key];
+  return e ? e[siteLang()] : key;
+}
+/* 両方の言語を span で返す（表示は CSS が切り替える） */
+function bi(ja, en) {
+  if (en === undefined || en === null || en === '') return ja;
+  return '<span lang="ja">' + ja + '</span><span lang="en">' + en + '</span>';
+}
+function biKey(key) { return bi(I18N[key].ja, I18N[key].en); }
+
+function setSiteLang(lang) {
+  try { localStorage.setItem('siteLang', lang); } catch (e) {}
+  applySiteLang();
+}
+function applySiteLang() {
+  if (!isBilingualPage()) return;
+  var lang = siteLangSaved();
+  document.documentElement.setAttribute('data-lang', lang);
+  document.documentElement.setAttribute('lang', lang);
+  document.querySelectorAll('.lang-switch button').forEach(function (b) {
+    var on = b.getAttribute('data-lang-btn') === lang;
+    b.classList.toggle('active', on);
+    b.setAttribute('aria-pressed', on ? 'true' : 'false');
+  });
+  srsAddButtonTitles();
+}
+/* 英語版があるページに、表紙と目次メニューの切り替えボタンを置く */
+function setupLangSwitch() {
+  if (!isBilingualPage()) return;
+  function makeSwitch() {
+    var box = document.createElement('div');
+    box.className = 'lang-switch';
+    box.setAttribute('role', 'group');
+    box.setAttribute('aria-label', 'Language');
+    [['ja', '日本語'], ['en', 'English']].forEach(function (p) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('data-lang-btn', p[0]);
+      b.textContent = p[1];
+      b.addEventListener('click', function () { setSiteLang(p[0]); });
+      box.appendChild(b);
+    });
+    return box;
+  }
+  var cover = document.querySelector('.cover-title-block');
+  if (cover) cover.appendChild(makeSwitch());
+  var menu = document.getElementById('top-toc-menu');
+  if (menu) menu.insertBefore(makeSwitch(), menu.firstChild);
+  applySiteLang();
+}
+
 /* ── タブ切り替え ── */
 function switchTab(key, btnEl) {
   document.querySelectorAll('.tab-content').forEach(function (tc) {
@@ -88,7 +181,7 @@ function runGrammarSearch(query, resultsEl) {
   if (!query) { resultsEl.classList.remove('has-results'); return; }
 
   if (typeof GRAMMAR_TERMS === 'undefined' || !GRAMMAR_TERMS.length) {
-    resultsEl.innerHTML = '<div class="sr-none">このページには検索データがありません</div>';
+    resultsEl.innerHTML = '<div class="sr-none">' + biKey('noSearchData') + '</div>';
     resultsEl.classList.add('has-results');
     return;
   }
@@ -100,14 +193,14 @@ function runGrammarSearch(query, resultsEl) {
   });
 
   if (matches.length === 0) {
-    resultsEl.innerHTML = '<div class="sr-none">一致する項目が見つかりませんでした</div>';
+    resultsEl.innerHTML = '<div class="sr-none">' + biKey('noMatch') + '</div>';
   } else {
     matches.forEach(function (m) {
       var item = document.createElement('div');
       item.className = 'sr-item';
       item.innerHTML =
-        '<span class="sr-ja">' + m.label + '</span>' +
-        '<span class="sr-jump">ジャンプ →</span>';
+        '<span class="sr-ja">' + bi(m.label, m.label_en) + '</span>' +
+        '<span class="sr-jump">' + biKey('jump') + '</span>';
       item.addEventListener('click', function () {
         jumpToSection(m.id);
         closeSearch();
@@ -134,7 +227,7 @@ function toggleHint(btn) {
   var hint = item.querySelector('.q-hint');
   var revealed = btn.classList.toggle('revealed');
   if (hint) hint.classList.toggle('visible', revealed);
-  btn.textContent = revealed ? 'ヒントを隠す ▲' : 'ヒントを見る ▾';
+  btn.innerHTML = biKey(revealed ? 'hideHint' : 'showHint');
 }
 function toggleAns(btn) {
   var item = btn.closest('.q-item');
@@ -144,7 +237,7 @@ function toggleAns(btn) {
   var revealed = btn.classList.toggle('revealed');
   if (row) row.classList.toggle('visible', revealed);
   if (exp) exp.classList.toggle('visible', revealed);
-  btn.textContent = revealed ? '答えを隠す ▲' : '答えを見る ▾';
+  btn.innerHTML = biKey(revealed ? 'hideAns' : 'showAns');
 }
 
 /* ── 穴埋め問題：クリックで個別に開閉 ── */
@@ -168,7 +261,7 @@ function toggleAllBlanks(btn) {
   blanks.forEach(function (b) {
     b.classList.toggle('revealed', anyHidden);
   });
-  btn.textContent = anyHidden ? 'すべて隠す' : 'すべて表示';
+  btn.innerHTML = biKey(anyHidden ? 'hideAll' : 'showAll');
 }
 
 /* ── まとめクイズ／ミニ確認：解説の表示切り替え ── */
@@ -176,7 +269,7 @@ function toggleQuizExp(btn) {
   var exp = btn.nextElementSibling;
   var revealed = btn.classList.toggle('revealed');
   if (exp) exp.classList.toggle('visible', revealed);
-  btn.textContent = revealed ? '解説を隠す ▲' : '解説を見る ▾';
+  btn.innerHTML = biKey(revealed ? 'hideExp' : 'showExp');
 }
 
 /* ══════════════════════════════════════════════════════════
@@ -205,18 +298,18 @@ function tanrenShuffle(list) {
 }
 
 function tanrenItemHtml(q, num, showGroup) {
-  var exp = (showGroup ? '<span class="tanren-exp-group">' + q.group_num + ' ' + q.group_title + '</span>' : '') +
-    q.explanation_html;
+  var exp = (showGroup ? '<span class="tanren-exp-group">' + q.group_num + ' ' + bi(q.group_title, q.group_title_en) + '</span>' : '') +
+    bi(q.explanation_html, q.explanation_html_en);
   return '<div class="quiz-item" id="' + q.id + '">' +
     '<div class="quiz-item-head">' +
       '<span class="quiz-num tanren-num">' + num + '</span>' +
-      '<button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">すべて表示</button>' +
+      '<button class="quiz-toggle-all-btn" onclick="toggleAllBlanks(this)">' + biKey('showAll') + '</button>' +
     '</div>' +
     '<div class="quiz-sentence">' + q.sentence_html + '</div>' +
-    '<div class="quiz-ja">' + q.ja + '</div>' +
-    '<button class="quiz-exp-btn" onclick="toggleQuizExp(this)">解説を見る ▾</button>' +
+    '<div class="quiz-ja">' + bi(q.ja, q.en) + '</div>' +
+    '<button class="quiz-exp-btn" onclick="toggleQuizExp(this)">' + biKey('showExp') + '</button>' +
     '<div class="quiz-exp">' + exp + '</div>' +
-    '<div class="srs-rate" data-qid="' + q.id + '"><span class="srs-rate-label">この問題の理解度：</span>' +
+    '<div class="srs-rate" data-qid="' + q.id + '"><span class="srs-rate-label">' + biKey('rateLabel') + '</span>' +
       '<button class="srs-btn srs-x" onclick="rateQuestion(\'' + q.id + '\', 0, this)">×</button>' +
       '<button class="srs-btn srs-tri" onclick="rateQuestion(\'' + q.id + '\', 1, this)">△</button>' +
       '<button class="srs-btn srs-o" onclick="rateQuestion(\'' + q.id + '\', 2, this)">○</button>' +
@@ -235,7 +328,7 @@ function tanrenUpdateSummary(questions) {
     if (p && typeof p.lastRating === 'number') counts[p.lastRating] += 1;
   });
   var done = counts[0] + counts[1] + counts[2];
-  el.innerHTML = '記録済み <b>' + done + '</b> / ' + questions.length + ' 問　' +
+  el.innerHTML = bi('記録済み <b>' + done + '</b> / ' + questions.length + ' 問', 'Rated <b>' + done + '</b> / ' + questions.length) + '　' +
     '<span class="tanren-count-o">○ ' + counts[2] + '</span>　' +
     '<span class="tanren-count-tri">△ ' + counts[1] + '</span>　' +
     '<span class="tanren-count-x">× ' + counts[0] + '</span>';
@@ -256,17 +349,18 @@ function renderTanren() {
   var isRandom = tanrenState.order === 'random';
   var html =
     '<div class="tanren-controls">' +
-      '<span class="tanren-controls-label">並び順：</span>' +
-      '<div class="tanren-seg" role="group" aria-label="並び順">' +
-        '<button class="tanren-seg-btn' + (isRandom ? '' : ' active') + '" aria-pressed="' + !isRandom + '" onclick="tanrenSetOrder(\'topic\')">内容ごと</button>' +
-        '<button class="tanren-seg-btn' + (isRandom ? ' active' : '') + '" aria-pressed="' + isRandom + '" onclick="tanrenSetOrder(\'random\')">ランダム</button>' +
+      '<span class="tanren-controls-label">' + biKey('orderLabel') + '</span>' +
+      '<div class="tanren-seg" role="group" aria-label="並び順 / Order">' +
+        '<button class="tanren-seg-btn' + (isRandom ? '' : ' active') + '" aria-pressed="' + !isRandom + '" onclick="tanrenSetOrder(\'topic\')">' + biKey('orderTopic') + '</button>' +
+        '<button class="tanren-seg-btn' + (isRandom ? ' active' : '') + '" aria-pressed="' + isRandom + '" onclick="tanrenSetOrder(\'random\')">' + biKey('orderRandom') + '</button>' +
       '</div>' +
-      (isRandom ? '<button class="tanren-reshuffle-btn" onclick="tanrenReshuffle()">🔀 並べ直す</button>' : '') +
+      (isRandom ? '<button class="tanren-reshuffle-btn" onclick="tanrenReshuffle()">' + biKey('reshuffle') + '</button>' : '') +
     '</div>' +
     '<div class="tanren-summary" id="tanren-summary"></div>';
 
   if (isRandom) {
-    html += '<div class="quiz-block tanren-block"><div class="quiz-block-title">💪 鍛錬：ランダム（' + questions.length + '問）</div>';
+    html += '<div class="quiz-block tanren-block"><div class="quiz-block-title">💪 ' +
+      bi('鍛錬：ランダム（' + questions.length + '問）', 'Drill: random (' + questions.length + ' items)') + '</div>';
     tanrenState.shuffled.forEach(function (q, i) { html += tanrenItemHtml(q, i + 1, true); });
     html += '</div>';
   } else {
@@ -274,12 +368,13 @@ function renderTanren() {
     var groups = [];
     questions.forEach(function (q) {
       var last = groups[groups.length - 1];
-      if (!last || last.num !== q.group_num) groups.push(last = { num: q.group_num, title: q.group_title, items: [] });
+      if (!last || last.num !== q.group_num) groups.push(last = { num: q.group_num, title: q.group_title, title_en: q.group_title_en, items: [] });
       last.items.push(q);
     });
     groups.forEach(function (g) {
-      html += '<div class="quiz-block tanren-block"><div class="quiz-block-title">💪 鍛錬：' + g.num + ' ' + g.title +
-        '<span class="tanren-block-count">' + g.items.length + '問</span></div>';
+      html += '<div class="quiz-block tanren-block"><div class="quiz-block-title">💪 ' +
+        bi('鍛錬：' + g.num + ' ' + g.title, g.title_en ? 'Drill: ' + g.num + ' ' + g.title_en : '') +
+        '<span class="tanren-block-count">' + bi(g.items.length + '問', g.items.length + ' items') + '</span></div>';
       g.items.forEach(function (q) { num += 1; html += tanrenItemHtml(q, num, false); });
       html += '</div>';
     });
@@ -392,9 +487,9 @@ function srsRate(qid, rating) {
 
 /* 評価を記録したときに表示する文 */
 function srsRatedMessage(entry) {
-  if (entry.days === null) return '記録しました（復習には出しません）';
-  if (entry.days === 1) return '記録しました（明日の復習に出ます）';
-  return '記録しました（' + entry.days + '日後の復習に出ます）';
+  if (entry.days === null) return bi('記録しました（復習には出しません）', 'Saved (won’t come up for review)');
+  if (entry.days === 1) return bi('記録しました（明日の復習に出ます）', 'Saved (review tomorrow)');
+  return bi('記録しました（' + entry.days + '日後の復習に出ます）', 'Saved (review in ' + entry.days + ' days)');
 }
 
 function srsGetDueIds(progress) {
@@ -411,14 +506,17 @@ function srsGetDueIds(progress) {
 
 /* ○△×ボタンにマウスを乗せたとき、意味が分かるように説明を付ける */
 var SRS_BUTTON_TITLES = {
-  'srs-x':   '×：わからなかった（明日の復習に出ます）',
-  'srs-tri': '△：今は分かったが復習が必要（3日後の復習に出ます。続けて△だと間隔が伸びます）',
-  'srs-o':   '○：完全に理解した（復習には出しません）'
+  'srs-x':   { ja: '×：わからなかった（明日の復習に出ます）',
+               en: '×: Didn’t get it (review tomorrow)' },
+  'srs-tri': { ja: '△：今は分かったが復習が必要（3日後の復習に出ます。続けて△だと間隔が伸びます）',
+               en: '△: Got it now but need review (in 3 days; the gap grows with each △)' },
+  'srs-o':   { ja: '○：完全に理解した（復習には出しません）',
+               en: '○: Fully understood (won’t come up for review)' }
 };
 function srsAddButtonTitles(root) {
   Object.keys(SRS_BUTTON_TITLES).forEach(function (cls) {
     (root || document).querySelectorAll('.srs-btn.' + cls).forEach(function (b) {
-      b.title = SRS_BUTTON_TITLES[cls];
+      b.title = SRS_BUTTON_TITLES[cls][siteLang()];
     });
   });
 }
@@ -432,7 +530,7 @@ function rateQuestion(qid, rating, btnEl) {
   btnEl.classList.add('active');
   var msg = container.querySelector('.srs-rated-msg');
   if (msg) {
-    msg.textContent = '✓ ' + srsRatedMessage(entry);
+    msg.innerHTML = '✓ ' + srsRatedMessage(entry);
     setTimeout(function () { msg.textContent = ''; }, 3000);
   }
 }
@@ -467,7 +565,7 @@ function setupJaToggle() {
   function apply(hidden) {
     document.body.classList.toggle('hide-ja', hidden);
     document.querySelectorAll('.ex-ja.revealed').forEach(function (el) { el.classList.remove('revealed'); });
-    btn.textContent = hidden ? '👀 和訳を表示' : '🙈 和訳を隠す';
+    btn.innerHTML = biKey(hidden ? 'showJa' : 'hideJa');
     btn.setAttribute('aria-pressed', hidden ? 'true' : 'false');
   }
   btn.addEventListener('click', function () {
@@ -486,6 +584,7 @@ function setupJaToggle() {
 /* ── ページ読み込み時の初期化 ── */
 document.addEventListener('DOMContentLoaded', function () {
 
+  setupLangSwitch();
   setupJaToggle();
 
   /* 鍛錬タブがあるページでは問題を並べる（評価ボタンの復元より先に行う） */

@@ -511,3 +511,24 @@ body.hide-ja #ja-toggle-btn { background: var(--accent2); color: #fff; }
 }
 body.is-printing #ja-toggle-btn { display: none !important; }
 @media print { #ja-toggle-btn { display: none !important; } }
+html[data-lang="en"] body.hide-ja:not(.is-printing) .ex-ja:not(.revealed)::before { content: "▸ Tap to show translation"; }
+
+/* ── 日本語版／英語版の切り替え ──
+   英語版があるページは <html data-bilingual> を持ち、本文を lang="ja" / lang="en" の要素に書き分ける。
+   選ばれていない言語を隠す。英語版がないページや JS が動かないときは日本語を表示する。 */
+html:not([data-lang="en"]) body [lang="en"],
+html[data-lang="en"] body [lang="ja"] { display: none !important; }
+
+.lang-switch {
+  display: inline-flex; margin-top: 10px; border: 1.5px solid var(--accent);
+  border-radius: 6px; overflow: hidden; vertical-align: middle;
+}
+.lang-switch button {
+  border: none; background: var(--surface); color: var(--accent);
+  font-family: var(--sans); font-size: 12.5px; font-weight: 700;
+  padding: 4px 12px; cursor: pointer;
+}
+.lang-switch button.active { background: var(--accent); color: #fff; }
+#top-toc-menu .lang-switch { margin: 0 0 4px; width: 100%; }
+#top-toc-menu .lang-switch button { flex: 1; }
+@media print { .lang-switch { display: none !important; } }

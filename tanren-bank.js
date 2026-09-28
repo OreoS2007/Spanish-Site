@@ -6,6 +6,11 @@
    書き方：
      TANREN_SOURCE[課番号] = [ { num, title, items: [ [問題文, 和訳, 解説], ... ] }, ... ]
      問題文の [[答え|ヒント]] が穴埋めになる（ヒントは省略可）。
+
+   英語版（任意）：
+     グループに title_en を足す。問題の4つ目の要素に { en: 英訳, exp: 英語の解説 } を足す。
+     ヒントは [[答え|日本語のヒント|英語のヒント]] と書く。
+     英語がない問題は、英語版のページでも日本語のまま表示される。
      問題のIDは「L課-tr-通し番号」。既存の問題の順番を入れ替えると
      復習の記録とずれるため、問題を追加するときは各課の末尾（最後のグループの後ろ）に足す。
    ============================================================ */
@@ -3217,12 +3222,14 @@ function tanrenEscapeHtml(s) {
 }
 
 function tanrenSentenceHtml(src) {
-  return src.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, function (_, answer, hint) {
+  return src.replace(/\[\[([^\]|]+)(?:\|([^\]|]+))?(?:\|([^\]]+))?\]\]/g, function (_, answer, hint, hintEn) {
     var html = '<span class="fillblank" onclick="toggleBlank(this)"><span class="fb-mask">______</span>' +
       '<span class="fb-answer">' + tanrenEscapeHtml(answer) + '</span></span>';
     if (hint) {
+      var h = tanrenEscapeHtml(hint);
+      if (hintEn) h = '<span lang="ja">' + h + '</span><span lang="en">' + tanrenEscapeHtml(hintEn) + '</span>';
       html += '<span class="hintchip" onclick="toggleHintChip(this)"><span class="hc-q"></span>' +
-        '<span class="hc-a">' + tanrenEscapeHtml(hint) + '</span></span>';
+        '<span class="hc-a">' + h + '</span></span>';
     }
     return html;
   });
@@ -3243,10 +3250,13 @@ Object.keys(TANREN_SOURCE).forEach(function (lesson) {
         section_title: group.num + ' ' + group.title,
         group_num: group.num,
         group_title: group.title,
+        group_title_en: group.title_en || '',
         type: 'sentence',
         sentence_html: tanrenSentenceHtml(item[0]),
         ja: item[1],
+        en: (item[3] && item[3].en) || '',
         explanation_html: item[2],
+        explanation_html_en: (item[3] && item[3].exp) || '',
         answers: answers
       });
     });
