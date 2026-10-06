@@ -142,7 +142,7 @@
 
     var q = queue[0];
     var isTable = q.type === 'table';
-    var sectionLabel = 'Lección ' + q.lesson + (q.section_num ? '　' + q.section_num + ' ' + q.section_title : '');
+    var sectionLabel = (q.lesson_label || 'Lección ' + q.lesson) + (q.section_num ? '　' + q.section_num + ' ' + q.section_title : (q.lesson_label ? '　' + q.section_title : ''));
 
     var bodyHtml = '<div class="review-sentence">' + q.sentence_html + '</div>';
     if (q.ja) bodyHtml += '<div class="review-ja">' + q.ja + '</div>';

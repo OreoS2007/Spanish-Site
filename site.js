@@ -394,6 +394,8 @@ function renderTanren() {
     tanrenState.shuffled = tanrenShuffle(questions);
   }
 
+  /* 見出しの「鍛錬」は data-label で差し替えられる（小テスト対策など） */
+  var blockLabel = app.getAttribute('data-label') || '鍛錬';
   var isRandom = tanrenState.order === 'random';
   var html =
     '<div class="tanren-controls">' +
@@ -408,7 +410,7 @@ function renderTanren() {
 
   if (isRandom) {
     html += '<div class="quiz-block tanren-block"><div class="quiz-block-title">💪 ' +
-      bi('鍛錬：ランダム（' + questions.length + '問）', 'Drill: random (' + questions.length + ' items)') + '</div>';
+      bi(blockLabel + '：ランダム（' + questions.length + '問）', 'Drill: random (' + questions.length + ' items)') + '</div>';
     tanrenState.shuffled.forEach(function (q, i) { html += tanrenItemHtml(q, i + 1, true); });
     html += '</div>';
   } else {
@@ -421,7 +423,7 @@ function renderTanren() {
     });
     groups.forEach(function (g) {
       html += '<div class="quiz-block tanren-block"><div class="quiz-block-title">💪 ' +
-        bi('鍛錬：' + g.num + ' ' + g.title, g.title_en ? 'Drill: ' + g.num + ' ' + g.title_en : '') +
+        bi(blockLabel + '：' + g.num + ' ' + g.title, g.title_en ? 'Drill: ' + g.num + ' ' + g.title_en : '') +
         '<span class="tanren-block-count">' + bi(g.items.length + '問', g.items.length + ' items') + '</span></div>';
       g.items.forEach(function (q) { num += 1; html += tanrenItemHtml(q, num, false); });
       html += '</div>';
