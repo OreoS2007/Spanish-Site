@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="spanish1-common.css">
 <script src="question-bank.js" defer></script>
 <script src="tanren-bank.js" defer></script>
+<script src="sync.js" defer></script>
 <script src="site.js" defer></script>
 <style>
   #review-app { max-width: 100%; }
@@ -192,6 +193,11 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     renderApp();
+  });
+
+  /* 別の端末の記録が同期で届いたら、まだ1問も評価していなければ復習リストを作り直す */
+  window.addEventListener('srs-synced', function (e) {
+    if (e.detail && e.detail.changed && !lastRatedMsg) renderApp();
   });
 })();
 </script>

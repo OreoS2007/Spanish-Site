@@ -80,6 +80,49 @@
     font-size: 12px; font-weight: 700; color: var(--accent2);
     border-top: 1px solid var(--rule); padding: 5px 14px 6px;
   }
+  /* 進捗の同期とバックアップ */
+  #sync-panel {
+    background: var(--surface); border: 1px solid var(--rule); border-radius: 8px;
+    margin-top: 14px; overflow: hidden;
+  }
+  #sync-panel > summary {
+    cursor: pointer; list-style: none; padding: 12px 16px;
+    font-family: var(--serif); font-weight: 700; font-size: 15.5px; color: var(--accent);
+  }
+  #sync-panel > summary::-webkit-details-marker { display: none; }
+  #sync-panel > summary::after { content: '▾'; float: right; color: var(--muted); }
+  #sync-panel[open] > summary::after { content: '▴'; }
+  .sync-body { padding: 4px 16px 16px; border-top: 1px solid var(--rule); }
+  .sync-h {
+    font-weight: 700; font-size: 14px; color: var(--ink);
+    margin: 16px 0 6px; padding-left: 8px; border-left: 3px solid var(--accent2);
+  }
+  .sync-note { font-size: 13px; color: var(--mid); line-height: 1.75; }
+  #sync-status { margin-top: 10px; font-size: 13.5px; }
+  .sync-count { color: var(--mid); }
+  .sync-state.on { color: var(--accent2); font-weight: 700; }
+  .sync-state.off { color: var(--muted); font-weight: 700; }
+  .sync-sub { color: var(--muted); font-size: 12.5px; }
+  .sync-error { color: #b42318; font-size: 13px; margin-top: 4px; }
+  .sync-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+  .sync-input, .sync-code {
+    width: 100%; font-size: 16px; padding: 8px 10px; border: 1px solid var(--rule);
+    border-radius: 6px; background: #fff; color: var(--ink); font-family: monospace;
+  }
+  .sync-code { font-size: 12px; height: 84px; resize: vertical; margin-top: 8px; word-break: break-all; }
+  .sync-btn {
+    font: inherit; font-size: 14px; font-weight: 700; padding: 8px 14px; border-radius: 6px;
+    border: 1px solid var(--accent); background: var(--accent); color: #fff; cursor: pointer;
+  }
+  .sync-btn.secondary { background: #fff; color: var(--accent); }
+  .sync-btn.danger { background: #fff; color: #b42318; border-color: #b42318; }
+  .sync-btn:disabled { opacity: .5; cursor: default; }
+  .sync-msg { font-size: 13px; color: var(--accent2); margin-top: 6px; min-height: 1em; }
+  .sync-msg.error { color: #b42318; }
+  .sync-steps { font-size: 13px; color: var(--mid); margin-top: 8px; }
+  .sync-steps summary { cursor: pointer; color: var(--accent); font-weight: 700; }
+  .sync-steps ol { padding-left: 20px; margin-top: 6px; line-height: 1.8; }
+  .sync-steps b { color: var(--ink); }
   footer {
     border-top: 1px solid var(--rule); padding-top: 20px;
     font-size: 12.5px; color: var(--muted); text-align: center; margin-top: 32px;
@@ -112,6 +155,57 @@
       <div class="quick-link-sub">CEFR目安・弱点分析つき</div>
     </a>
   </div>
+
+  <details id="sync-panel">
+    <summary>🔄 進捗の同期とバックアップ</summary>
+    <div class="sync-body">
+      <div id="sync-status"></div>
+
+      <div class="sync-h">自動同期（GitHub）</div>
+      <div id="sync-off-controls">
+        <p class="sync-note">GitHub のトークンを入れると、○△× の記録があなたの GitHub（非公開の Gist）にも保存され、ほかの端末と自動でそろいます。トークンは端末ごとに1回入れるだけです。</p>
+        <details class="sync-steps">
+          <summary>トークンの作り方</summary>
+          <ol>
+            <li>PC で github.com にログインし、右上のアイコン → <b>Settings</b> を開く</li>
+            <li>左メニューのいちばん下の <b>Developer settings</b> を開く</li>
+            <li><b>Personal access tokens</b> → <b>Tokens (classic)</b> を開く</li>
+            <li><b>Generate new token</b> → <b>Generate new token (classic)</b> を押す</li>
+            <li><b>Note</b> に「スペイン語サイトの同期」など分かる名前を入れ、<b>Expiration</b>（有効期限）を選ぶ</li>
+            <li><b>Select scopes</b> では <b>gist だけ</b>にチェックを入れる（ほかは入れない）</li>
+            <li>いちばん下の <b>Generate token</b> を押し、表示された <b>ghp_</b> で始まる文字列をコピーする（この画面を離れると二度と表示されない）</li>
+            <li>下の欄に貼り付けて「接続する」を押す。ほかの端末にも同じトークンを貼り付ける</li>
+          </ol>
+          <p>※ トークンはパスワードと同じように扱い、人に見せないでください。不要になったら、同じ画面からいつでも削除（無効に）できます。</p>
+        </details>
+        <input id="sync-token-input" class="sync-input" type="password" placeholder="ghp_… を貼り付け" autocomplete="off" autocapitalize="off" spellcheck="false" style="margin-top:10px">
+        <div class="sync-row"><button id="sync-connect-btn" class="sync-btn" type="button">接続する</button></div>
+        <div id="sync-connect-msg" class="sync-msg"></div>
+      </div>
+      <div id="sync-on-controls" hidden>
+        <p class="sync-note">ページを開いたときと、○△× を付けたときに自動で同期します。2台で別々に解いた場合は、問題ごとに新しい記録を残して合わせます。</p>
+        <div class="sync-row">
+          <button id="sync-now-btn" class="sync-btn" type="button">今すぐ同期</button>
+          <button id="sync-disconnect-btn" class="sync-btn danger" type="button">この端末の同期を解除</button>
+        </div>
+        <div id="sync-on-msg" class="sync-msg"></div>
+      </div>
+
+      <div class="sync-h">引き継ぎコード（手動）</div>
+      <p class="sync-note">記録を1つのコードにして書き出します。メモなどに保存しておけばバックアップになり、別の端末で読み込めば記録を移せます。</p>
+      <div class="sync-row"><button id="sync-export-btn" class="sync-btn secondary" type="button">書き出してコピー</button></div>
+      <textarea id="sync-export-code" class="sync-code" readonly hidden></textarea>
+      <div id="sync-export-msg" class="sync-msg"></div>
+
+      <textarea id="sync-import-code" class="sync-code" placeholder="SPS1. で始まるコードを貼り付け" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>
+      <div class="sync-row">
+        <button id="sync-import-merge-btn" class="sync-btn secondary" type="button">合わせる</button>
+        <button id="sync-import-replace-btn" class="sync-btn danger" type="button">置き換える</button>
+      </div>
+      <p class="sync-note" style="margin-top:6px">「合わせる」は問題ごとに新しい記録を残します。「置き換える」はこの端末の記録を消して、コードの内容にします。</p>
+      <div id="sync-import-msg" class="sync-msg"></div>
+    </div>
+  </details>
 </div>
 
 <div class="section-block">
@@ -312,5 +406,6 @@
   スペイン語一列① 文法解説集
 </footer>
 
+<script src="sync.js"></script>
 </body>
 </html>

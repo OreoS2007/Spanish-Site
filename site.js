@@ -497,6 +497,8 @@ function srsLoadProgress() {
 function srsSaveProgress(progress) {
   try {
     localStorage.setItem('srs_progress', JSON.stringify(progress));
+    /* 自動同期がオンなら、少し待って GitHub にも保存する（sync.js） */
+    if (window.SiteSync) window.SiteSync.schedulePush();
     return true;
   } catch (e) {
     return false;
@@ -525,7 +527,9 @@ function srsRate(qid, rating) {
     nextReview: days === null ? null : srsAddDays(today, days),
     lastRating: rating,
     lastDate: today,
-    triStreak: streak
+    triStreak: streak,
+    /* 端末どうしの記録を合わせるとき、新しいほうを選ぶための日時（sync.js） */
+    updatedAt: new Date().toISOString()
   };
   progress[qid] = entry;
   srsSaveProgress(progress);
@@ -588,6 +592,8 @@ function srsRestoreRatingButtons() {
   var progress = srsLoadProgress();
   document.querySelectorAll('.srs-rate').forEach(function (el) {
     var qid = el.getAttribute('data-qid');
+    /* 同期で記録が変わったときにも呼ぶので、いったん全部消してから付け直す */
+    el.querySelectorAll('.srs-btn.active').forEach(function (b) { b.classList.remove('active'); });
     if (progress[qid] && typeof progress[qid].lastRating === 'number') {
       var idx = progress[qid].lastRating;
       var classes = ['srs-x', 'srs-tri', 'srs-o'];
@@ -641,6 +647,17 @@ document.addEventListener('DOMContentLoaded', function () {
   /* 復習：以前の評価があればボタンを復元し、ボタンに説明を付ける */
   srsRestoreRatingButtons();
   srsAddButtonTitles();
+
+  /* 別の端末の記録が同期で届いたら、○△× の表示と鍛錬の記録数を更新する */
+  window.addEventListener('srs-synced', function (e) {
+    if (!e.detail || !e.detail.changed) return;
+    srsRestoreRatingButtons();
+    var app = document.getElementById('tanren-app');
+    if (app && typeof TANREN_BANK !== 'undefined') {
+      var lesson = Number(app.getAttribute('data-lesson'));
+      tanrenUpdateSummary(TANREN_BANK.filter(function (q) { return q.lesson === lesson; }));
+    }
+  });
 
   /* トグルボタンを持たない問題は、答え・解説・ヒントを最初から表示する */
   document.querySelectorAll('.q-item').forEach(function (item) {
