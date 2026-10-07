@@ -40,6 +40,30 @@
   }
   function writeLocal(progress) { return lsSet(PROGRESS_KEY, JSON.stringify(progress)); }
 
+  /* ── 問題 ID の引き継ぎ（id-map.js の TANREN_ID_MAP：古い ID → 新しい ID） ──
+     古い ID の記録を新しい ID に付け替える。A → B → C のように何度か変わっていてもたどる。
+     新しい ID にもすでに記録があれば、新しいほうを残す。変わったら true を返す。 */
+  function remapIds(progress) {
+    var map = window.TANREN_ID_MAP;
+    if (!map) return false;
+    var changed = false;
+    Object.keys(progress).forEach(function (k) {
+      var t = k, steps = 0;
+      while (Object.prototype.hasOwnProperty.call(map, t) && steps < 50) { t = map[t]; steps++; }
+      if (t === k) return;
+      var entry = progress[k];
+      if (!progress[t] || stamp(entry) > stamp(progress[t])) progress[t] = entry;
+      delete progress[k];
+      changed = true;
+    });
+    return changed;
+  }
+  /* ページを開いたらすぐ（site.js が記録を読む前に）この端末の記録を付け替える */
+  (function () {
+    var p = readLocal();
+    if (remapIds(p)) writeLocal(p);
+  })();
+
   /* ── 記録を合わせる ── */
   function stamp(entry) {
     if (!entry) return '';
@@ -164,6 +188,8 @@
       return progressFromGist(gist).then(function (remote) {
         /* 通信中に付けた ○△× を失わないよう、書き込む直前の記録と合わせる */
         var local = readLocal();
+        remapIds(local);
+        remapIds(remote);
         var merged = merge(local, remote);
         var localChanged = !sameProgress(merged, local);
         if (localChanged) writeLocal(merged);
@@ -261,6 +287,7 @@
   /* mode: 'merge'（合わせる）または 'replace'（置き換える） */
   function importCode(code, mode) {
     var incoming = parseCode(code);
+    remapIds(incoming);
     var result = mode === 'replace' ? incoming : merge(readLocal(), incoming);
     writeLocal(result);
     var p;

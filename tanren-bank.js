@@ -6490,16 +6490,40 @@ function tanrenSentenceHtml(src) {
   });
 }
 
+/* ── 問題の ID は「内容」から作る ──
+   問題文（ヒントを除き、答えは残す）から計算した短い文字列を ID にする。
+   問題を挟んだり並べ替えたりしても、同じ問題なら ID は変わらず、○△× の記録がずれない。
+   問題文や答えを直すと ID が変わるので、記録の引き継ぎは id-map.js の対応表で行う
+   （.claude/tools/tanren-ids.ps1 が直す前と後を比べて対応表を作る）。
+   同じレッスン内で同じ文が2つあれば、2つ目以降に -2, -3 … を付ける。 */
+function tanrenIdKey(src) {
+  return String(src)
+    .replace(/\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/g, '[[$1]]')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+function tanrenHash(s) {
+  /* FNV-1a（32ビット） */
+  var h = 0x811c9dc5;
+  for (var i = 0; i < s.length; i++) {
+    h ^= s.charCodeAt(i);
+    h = Math.imul(h, 0x01000193) >>> 0;
+  }
+  return h.toString(36);
+}
+
 const TANREN_BANK = [];
 Object.keys(TANREN_SOURCE).forEach(function (lesson) {
-  var n = 0;
+  var used = {};
   TANREN_SOURCE[lesson].forEach(function (group) {
     group.items.forEach(function (item) {
-      n += 1;
       var answers = [];
       item[0].replace(/\[\[([^\]|]+)/g, function (_, a) { answers.push(a); });
+      var id = 'L' + lesson + '-tr-h' + tanrenHash(tanrenIdKey(item[0]));
+      used[id] = (used[id] || 0) + 1;
+      if (used[id] > 1) id += '-' + used[id];
       TANREN_BANK.push({
-        id: 'L' + lesson + '-tr-' + n,
+        id: id,
         lesson: Number(lesson),
         lesson_label: TANREN_LABELS[lesson] || '',
         section_num: TANREN_LABELS[lesson] ? '' : '鍛錬',
