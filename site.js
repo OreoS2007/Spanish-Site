@@ -387,8 +387,10 @@ function renderTanren() {
   if (!app || typeof TANREN_BANK === 'undefined') return;
   var lesson = Number(app.getAttribute('data-lesson'));
   var questions = TANREN_BANK.filter(function (q) { return q.lesson === lesson; });
+  /* data-order="random" のページは常にランダム（並び順の切り替えは出さない） */
+  var fixedOrder = app.getAttribute('data-order') || '';
   if (tanrenState.lesson !== lesson) {
-    tanrenState = { lesson: lesson, order: tanrenLoadOrder(), shuffled: null };
+    tanrenState = { lesson: lesson, order: fixedOrder || tanrenLoadOrder(), shuffled: null };
   }
   if (tanrenState.order === 'random' && !tanrenState.shuffled) {
     tanrenState.shuffled = tanrenShuffle(questions);
@@ -399,11 +401,12 @@ function renderTanren() {
   var isRandom = tanrenState.order === 'random';
   var html =
     '<div class="tanren-controls">' +
+      (fixedOrder ? '' :
       '<span class="tanren-controls-label">' + biKey('orderLabel') + '</span>' +
       '<div class="tanren-seg" role="group" aria-label="並び順 / Order">' +
         '<button class="tanren-seg-btn' + (isRandom ? '' : ' active') + '" aria-pressed="' + !isRandom + '" onclick="tanrenSetOrder(\'topic\')">' + biKey('orderTopic') + '</button>' +
         '<button class="tanren-seg-btn' + (isRandom ? ' active' : '') + '" aria-pressed="' + isRandom + '" onclick="tanrenSetOrder(\'random\')">' + biKey('orderRandom') + '</button>' +
-      '</div>' +
+      '</div>') +
       (isRandom ? '<button class="tanren-reshuffle-btn" onclick="tanrenReshuffle()">' + biKey('reshuffle') + '</button>' : '') +
     '</div>' +
     '<div class="tanren-summary" id="tanren-summary"></div>';
