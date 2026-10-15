@@ -326,14 +326,27 @@ function toggleQuizExp(btn) {
    まとめクイズと同じ形式で並べる。「内容ごと」と「ランダム」を切り替えられる。
    ══════════════════════════════════════════════════════════ */
 
-var tanrenState = { lesson: null, order: 'topic', shuffled: null };
-
-function tanrenLoadOrder() {
-  try { return localStorage.getItem('tanren_order') === 'random' ? 'random' : 'topic'; }
-  catch (e) { return 'topic'; }
+/* 1ページに問題集を複数置けるよう、状態は問題集（.tanren-app / #tanren-app）ごとに持つ */
+function tanrenApps() {
+  return Array.prototype.slice.call(document.querySelectorAll('#tanren-app, .tanren-app'));
 }
-function tanrenSaveOrder(order) {
-  try { localStorage.setItem('tanren_order', order); } catch (e) {}
+function tanrenAppOf(el) {
+  return el && el.closest ? el.closest('#tanren-app, .tanren-app') : null;
+}
+
+/* 並び順：data-order があるページ（小テスト対策）は問題集ごとに覚え、最初は data-order の順。
+   ないページ（各課の鍛錬）は、これまでどおり全ページ共通の設定。 */
+function tanrenLoadOrder(app) {
+  var key = app && app.getAttribute('data-order') ? 'tanren_order_' + app.getAttribute('data-lesson') : 'tanren_order';
+  var fallback = (app && app.getAttribute('data-order')) || 'topic';
+  try {
+    var v = localStorage.getItem(key);
+    return v === 'random' || v === 'topic' ? v : fallback;
+  } catch (e) { return fallback; }
+}
+function tanrenSaveOrder(app, order) {
+  var key = app && app.getAttribute('data-order') ? 'tanren_order_' + app.getAttribute('data-lesson') : 'tanren_order';
+  try { localStorage.setItem(key, order); } catch (e) {}
 }
 
 function tanrenShuffle(list) {
@@ -365,10 +378,16 @@ function tanrenItemHtml(q, num, showGroup) {
   '</div>';
 }
 
+function tanrenQuestions(app) {
+  var lesson = Number(app.getAttribute('data-lesson'));
+  return TANREN_BANK.filter(function (q) { return q.lesson === lesson; });
+}
+
 /* ○△× の記録数を数えて表示する */
-function tanrenUpdateSummary(questions) {
-  var el = document.getElementById('tanren-summary');
+function tanrenUpdateSummary(app) {
+  var el = app && app.querySelector('.tanren-summary');
   if (!el) return;
+  var questions = tanrenQuestions(app);
   var progress = srsLoadProgress();
   var counts = [0, 0, 0];
   questions.forEach(function (q) {
@@ -382,39 +401,32 @@ function tanrenUpdateSummary(questions) {
     '<span class="tanren-count-x">× ' + counts[0] + '</span>';
 }
 
-function renderTanren() {
-  var app = document.getElementById('tanren-app');
-  if (!app || typeof TANREN_BANK === 'undefined') return;
-  var lesson = Number(app.getAttribute('data-lesson'));
-  var questions = TANREN_BANK.filter(function (q) { return q.lesson === lesson; });
-  /* data-order="random" のページは常にランダム（並び順の切り替えは出さない） */
-  var fixedOrder = app.getAttribute('data-order') || '';
-  if (tanrenState.lesson !== lesson) {
-    tanrenState = { lesson: lesson, order: fixedOrder || tanrenLoadOrder(), shuffled: null };
-  }
-  if (tanrenState.order === 'random' && !tanrenState.shuffled) {
-    tanrenState.shuffled = tanrenShuffle(questions);
-  }
+/* app を省略すると、ページ内のすべての問題集を並べる */
+function renderTanren(app) {
+  if (typeof TANREN_BANK === 'undefined') return;
+  if (!app) { tanrenApps().forEach(function (a) { renderTanren(a); }); return; }
+  var questions = tanrenQuestions(app);
+  var st = app._tanren || (app._tanren = { order: tanrenLoadOrder(app), shuffled: null });
+  if (st.order === 'random' && !st.shuffled) st.shuffled = tanrenShuffle(questions);
 
   /* 見出しの「鍛錬」は data-label で差し替えられる（小テスト対策など） */
   var blockLabel = app.getAttribute('data-label') || '鍛錬';
-  var isRandom = tanrenState.order === 'random';
+  var isRandom = st.order === 'random';
   var html =
     '<div class="tanren-controls">' +
-      (fixedOrder ? '' :
       '<span class="tanren-controls-label">' + biKey('orderLabel') + '</span>' +
       '<div class="tanren-seg" role="group" aria-label="並び順 / Order">' +
-        '<button class="tanren-seg-btn' + (isRandom ? '' : ' active') + '" aria-pressed="' + !isRandom + '" onclick="tanrenSetOrder(\'topic\')">' + biKey('orderTopic') + '</button>' +
-        '<button class="tanren-seg-btn' + (isRandom ? ' active' : '') + '" aria-pressed="' + isRandom + '" onclick="tanrenSetOrder(\'random\')">' + biKey('orderRandom') + '</button>' +
-      '</div>') +
-      (isRandom ? '<button class="tanren-reshuffle-btn" onclick="tanrenReshuffle()">' + biKey('reshuffle') + '</button>' : '') +
+        '<button class="tanren-seg-btn' + (isRandom ? '' : ' active') + '" aria-pressed="' + !isRandom + '" onclick="tanrenSetOrder(\'topic\', this)">' + biKey('orderTopic') + '</button>' +
+        '<button class="tanren-seg-btn' + (isRandom ? ' active' : '') + '" aria-pressed="' + isRandom + '" onclick="tanrenSetOrder(\'random\', this)">' + biKey('orderRandom') + '</button>' +
+      '</div>' +
+      (isRandom ? '<button class="tanren-reshuffle-btn" onclick="tanrenReshuffle(this)">' + biKey('reshuffle') + '</button>' : '') +
     '</div>' +
-    '<div class="tanren-summary" id="tanren-summary"></div>';
+    '<div class="tanren-summary"></div>';
 
   if (isRandom) {
     html += '<div class="quiz-block tanren-block"><div class="quiz-block-title">💪 ' +
       bi(blockLabel + '：ランダム（' + questions.length + '問）', 'Drill: random (' + questions.length + ' items)') + '</div>';
-    tanrenState.shuffled.forEach(function (q, i) { html += tanrenItemHtml(q, i + 1, true); });
+    st.shuffled.forEach(function (q, i) { html += tanrenItemHtml(q, i + 1, true); });
     html += '</div>';
   } else {
     var num = 0;
@@ -436,29 +448,30 @@ function renderTanren() {
   app.innerHTML = html;
   srsRestoreRatingButtons();
   srsAddButtonTitles(app);
-  tanrenUpdateSummary(questions);
+  tanrenUpdateSummary(app);
   if (!app.getAttribute('data-listening')) {
     app.setAttribute('data-listening', '1');
     app.addEventListener('click', function (e) {
-      if (e.target.closest('.srs-btn')) tanrenUpdateSummary(questions);
+      if (e.target.closest('.srs-btn')) tanrenUpdateSummary(app);
     });
   }
 }
 
-function tanrenSetOrder(order) {
-  if (tanrenState.order === order) return;
-  tanrenState.order = order;
-  tanrenSaveOrder(order);
-  renderTanren();
+function tanrenSetOrder(order, btn) {
+  var app = tanrenAppOf(btn) || tanrenApps()[0];
+  if (!app || !app._tanren || app._tanren.order === order) return;
+  app._tanren.order = order;
+  tanrenSaveOrder(app, order);
+  renderTanren(app);
 }
 
-function tanrenReshuffle() {
-  tanrenState.shuffled = null;
-  renderTanren();
-  var app = document.getElementById('tanren-app');
-  if (app) app.scrollIntoView({ behavior: 'smooth', block: 'start' });
+function tanrenReshuffle(btn) {
+  var app = tanrenAppOf(btn) || tanrenApps()[0];
+  if (!app || !app._tanren) return;
+  app._tanren.shuffled = null;
+  renderTanren(app);
+  app.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
-
 /* ══════════════════════════════════════════════════════════
    復習スケジュール
    localStorage キー: "srs_progress"
@@ -657,11 +670,7 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('srs-synced', function (e) {
     if (!e.detail || !e.detail.changed) return;
     srsRestoreRatingButtons();
-    var app = document.getElementById('tanren-app');
-    if (app && typeof TANREN_BANK !== 'undefined') {
-      var lesson = Number(app.getAttribute('data-lesson'));
-      tanrenUpdateSummary(TANREN_BANK.filter(function (q) { return q.lesson === lesson; }));
-    }
+    if (typeof TANREN_BANK !== 'undefined') tanrenApps().forEach(tanrenUpdateSummary);
   });
 
   /* トグルボタンを持たない問題は、答え・解説・ヒントを最初から表示する */

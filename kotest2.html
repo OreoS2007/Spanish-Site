@@ -8,7 +8,7 @@
 <script src="site.js" defer></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 <meta name="theme-color" content="#1a365d">
-<title>小テスト対策 第2回 鍛錬 | 未来と過去未来</title>
+<title>小テスト対策 第2回 | 未来と過去未来</title>
 <link rel="stylesheet" href="spanish1-common.css">
 <style>
   .kt-howto { font-size: 13.5px; line-height: 1.85; }
@@ -19,20 +19,29 @@
 
 <div id="top-nav">
   <a id="home-btn" href="index.html">🏠 ホーム</a>
-  <span id="top-nav-title">第2回 鍛錬</span>
+  <span id="top-nav-title">小テスト対策 第2回</span>
 </div>
 
 <div class="cover-title-block">
-  <div class="cover-title">小テスト対策　第2回　鍛錬</div>
+  <div class="cover-title">小テスト対策　第2回</div>
   <div class="cover-sub">未来と過去未来　Futuro y condicional</div>
 </div>
 
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📘　基礎（110問）</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬（100問）</button>
+</div>
+
+<!-- ══ 基礎 ══ -->
+<div id="tab-grammar" class="tab-content active">
+
 <div class="cover">
-  <div class="cover-goal"><b>このページについて</b><br>小テストと同じ形式で、日本語に合うように（　）内の不定詞を<b>適切な時制（点過去・線過去・未来・過去未来）</b>に活用させる問題が <b>100問</b> あります。配布プリントと8課の未来・過去未来をもとに、第1回の点過去・線過去も混ぜて、<b>毎回ランダムな順番</b>で出題します。基本は <a href="kotest2-kiso.html">第2回 基礎</a> で確認できます。</div>
+  <div class="cover-goal"><b>基礎について</b><br>配布された写真の内容（プリント2枚・練習プリント2枚・小テストの例題）を<b>すべて</b>問題にしました。まずここで基本を固めてから「鍛錬」に進んでください。</div>
   <ul class="kt-howto">
-    <li>「🔀 並べ直す」を押すと、別の順番で解き直せます。各問題の解説の最初に、どの分類（①〜⑤）の問題かが出ます。</li>
-    <li><b>______</b> をタップすると答え、<b>ヒント</b> をタップすると不定詞（主語がないときは主語も）が出ます。</li>
-    <li>○△× を付けた問題は「今日の復習」に出ます。</li>
+    <li><b>①②活用表</b>：プリントの活用表（規則動詞と不規則動詞11個、oír のアクセントの注意）を、全人称で答えます。</li>
+    <li><b>③④用法</b>：プリントの例文と「時の表現」を、小テストの形式（和訳つきの文）で答えます。</li>
+    <li><b>⑤⑥練習プリント</b>：不定詞と人称だけの問題は、同じ動詞・人称の文に作り直しました。<b>⑦</b>は小テストの例題そのままです。</li>
+    <li>「内容ごと」と「ランダム」を切り替えられます。<b>______</b> をタップすると答え、<b>ヒント</b> をタップすると不定詞（主語がないときは主語も）が出ます。</li>
   </ul>
 </div>
 
@@ -69,13 +78,37 @@
 </div>
 <p class="note">※ 伝える動詞が現在なら未来（<span class="mono">Ana dice que vendrá</span>）、過去なら過去未来（<span class="mono">Ana dijo que vendría / Les prometí que haría…</span>）。<br>※ 過去のことでも、確かな事実なら点過去・線過去（<span class="mono">Eran las diez</span>）、推量なら過去未来（<span class="mono">Serían las diez</span>：10時ごろだっただろう）。</p>
 
-<div class="sec-heading" id="sec-tanren">
-  <span class="sec-num">✏️</span>
-  <span class="sec-title">対策問題（100問）</span>
-  <span class="sec-es">Ejercicios</span>
+<div class="sec-heading" id="sec-kiso">
+  <span class="sec-num">📘</span>
+  <span class="sec-title">基礎問題（110問）</span>
+  <span class="sec-es">Ejercicios básicos</span>
 </div>
 
-<div id="tanren-app" data-lesson="102" data-label="鍛錬" data-order="random"></div>
+<div class="tanren-app" data-lesson="103" data-label="基礎" data-order="topic"></div>
+
+</div><!-- /tab-grammar -->
+
+<!-- ══ 鍛錬 ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div class="cover">
+  <div class="cover-goal"><b>鍛錬について</b><br>小テストと同じ形式で、日本語に合うように（　）内の不定詞を<b>適切な時制（点過去・線過去・未来・過去未来）</b>に活用させる問題が <b>100問</b> あります。配布プリントと8課の未来・過去未来をもとに、第1回の点過去・線過去も混ぜています。</div>
+  <ul class="kt-howto">
+    <li>最初は<b>ランダムな順番</b>で出ます。「内容ごと」に切り替えると①〜⑤の分類順になります。「🔀 並べ直す」で別の順番になります。</li>
+    <li>ランダムのときは、解説の最初にどの分類（①〜⑤）の問題かが出ます。</li>
+    <li>○△× を付けた問題は「今日の復習」に出ます。</li>
+  </ul>
+</div>
+
+<div class="sec-heading" id="sec-tanren">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬（100問）</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-app" data-lesson="102" data-label="鍛錬" data-order="random"></div>
+
+</div><!-- /tab-tanren -->
 
 <footer class="course-footer">スペイン語文法解説集　小テスト対策</footer>
 
