@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
+<script src="id-map.js" defer></script>
+<script src="sync.js" defer></script>
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>小テスト対策 第3回 | 未来完了と過去未来完了</title>
+<link rel="stylesheet" href="spanish1-common.css">
+<style>
+  .kt-howto { font-size: 13.5px; line-height: 1.85; }
+  .kt-howto li { margin-bottom: 2px; }
+</style>
+</head>
+<body>
+
+<div id="top-nav">
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">小テスト対策 第3回</span>
+</div>
+
+<div class="cover-title-block">
+  <div class="cover-title">小テスト対策　第3回</div>
+  <div class="cover-sub">未来完了と過去未来完了　Futuro perfecto y condicional perfecto</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📘　基礎（75問）</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬（100問）</button>
+</div>
+
+<!-- ══ 基礎 ══ -->
+<div id="tab-grammar" class="tab-content active">
+
+<div class="cover">
+  <div class="cover-goal"><b>基礎について</b><br>配布された資料（プリント2枚・未来完了形と過去未来完了形の練習プリント・教科書 p.67・練習問題）の内容を<b>すべて</b>問題にしました。まずここで基本を固めてから「鍛錬」に進んでください。</div>
+  <ul class="kt-howto">
+    <li><b>①②活用表</b>：未来完了・過去未来完了を全人称で答えます。練習プリントに出てくる不規則な過去分詞も確認します。</li>
+    <li><b>③④⑤用法</b>：プリントの例文と「推量表現のまとめ」の表（断定と推量の10文）を、小テストの形式で答えます。</li>
+    <li><b>⑥⑦練習プリント・⑧教科書 p.67</b>：不定詞と人称だけの問題は、同じ動詞・人称の文に作り直しました。<b>⑨</b>は練習問題（小テストの形式）そのままです。</li>
+    <li>「内容ごと」と「ランダム」を切り替えられます。<b>______</b> をタップすると答え、<b>ヒント</b> をタップすると不定詞（主語がないときは主語も）が出ます。</li>
+  </ul>
+</div>
+
+<div class="sec-heading" id="kt-points">
+  <span class="sec-num">📌</span>
+  <span class="sec-title">要点</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div class="sub">1. 形：haber ＋ 過去分詞</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:30%">時制</th><th>haber の形（yo, tú, él, nosotros, vosotros, ellos）＋ 過去分詞</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">未来完了</td><td><span class="mono">habré, habrás, habrá, habremos, habréis, habrán</span> ＋ <span class="mono">tomado / comido / vivido</span></td></tr>
+    <tr><td class="td-rule">過去未来完了</td><td><span class="mono">habría, habrías, habría, habríamos, habríais, habrían</span> ＋ <span class="mono">tomado / comido / vivido</span></td></tr>
+  </tbody>
+</table>
+</div>
+<p class="note">※ 不規則な過去分詞：<span class="mono">dicho, hecho, puesto, visto, escrito, abierto, vuelto, devuelto, muerto, roto, descubierto</span>。leído・oído は í にアクセント記号。<br>※ 再帰代名詞・目的格代名詞は haber の前：<span class="mono">se habrán ido / lo habré dejado</span>。</p>
+
+<div class="sub">2. 用法</div>
+<div class="tbl-wrap">
+<table class="summary">
+  <thead><tr><th style="width:50%">未来完了</th><th>過去未来完了</th></tr></thead>
+  <tbody>
+    <tr><td>未来のある時点までに完了<br><span class="mono">Para las tres Ana habrá terminado.</span></td><td>過去から見た未来のある時点までに完了<br><span class="mono">Ana dijo que para las tres habría terminado.</span></td></tr>
+    <tr><td>現在完了の推量「〜しただろう」<br><span class="mono">¿Quién habrá dejado eso ahí?</span></td><td>過去完了の推量「〜していただろう」<br><span class="mono">Cuando llegó, habría empezado la película.</span></td></tr>
+    <tr><td>—</td><td>過去の仮定の帰結「〜しただろうに」<br><span class="mono">Yo, en tu lugar, no habría salido de casa.</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sub">3. 推量表現のまとめ：断定を1つ「未来側」にずらすと推量</div>
+<div class="tbl-wrap">
+<table>
+  <thead><tr><th style="width:30%">断定 → 推量</th><th>例と訳</th></tr></thead>
+  <tbody>
+    <tr><td class="td-rule">現在 → 未来</td><td><span class="mono">Ahora Eva está / estará en París.</span><br>今エバはパリにいる／いるだろう。</td></tr>
+    <tr><td class="td-rule">点過去・線過去 → 過去未来</td><td><span class="mono">Ayer Eva estuvo / estaría en París.</span><br>昨日エバはパリにいた／いただろう。</td></tr>
+    <tr><td class="td-rule">現在完了 → 未来完了</td><td><span class="mono">Esta mañana Eva ha estado / habrá estado en París.</span><br>今朝エバはパリにいた／いただろう。</td></tr>
+    <tr><td class="td-rule">過去完了 → 過去未来完了</td><td><span class="mono">Cuando llegó Ana, Eva ya se había ido / se habría ido.</span><br>アナが着いた時、エバはもう行ってしまっていた／いただろう。</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="sec-heading" id="sec-kiso">
+  <span class="sec-num">📘</span>
+  <span class="sec-title">基礎問題（75問）</span>
+  <span class="sec-es">Ejercicios básicos</span>
+</div>
+
+<div class="tanren-app" data-lesson="105" data-label="基礎" data-order="topic"></div>
+
+</div><!-- /tab-grammar -->
+
+<!-- ══ 鍛錬 ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div class="cover">
+  <div class="cover-goal"><b>鍛錬について</b><br>小テストと同じ形式で、（　）内の動詞を<b>適切な時制（点過去・線過去・未来形・過去未来形・未来完了形・過去未来完了）</b>にして文を完成させる問題が <b>100問</b> あります。配布資料と8課の未来完了・過去未来完了をもとに、第1回・第2回の内容も混ぜています。</div>
+  <ul class="kt-howto">
+    <li>最初は<b>ランダムな順番</b>で出ます。「内容ごと」に切り替えると①〜⑤の分類順になります。「🔀 並べ直す」で別の順番になります。</li>
+    <li>ランダムのときは、解説の最初にどの分類（①〜⑤）の問題かが出ます。</li>
+    <li>○△× を付けた問題は「今日の復習」に出ます。</li>
+  </ul>
+</div>
+
+<div class="sec-heading" id="sec-tanren">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬（100問）</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-app" data-lesson="104" data-label="鍛錬" data-order="random"></div>
+
+</div><!-- /tab-tanren -->
+
+<footer class="course-footer">スペイン語文法解説集　小テスト対策</footer>
+
+</body>
+</html>
