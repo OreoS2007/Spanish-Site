@@ -82,6 +82,15 @@ a:focus-visible, button:focus-visible, input:focus-visible,
   transition: background .12s; white-space: nowrap; display: inline-flex; align-items: center;
 }
 #home-btn:hover { background: #155f50; }
+/* 前後のページへ移る「←」「→」（site.js の setupPageArrows が置く） */
+.page-arrow {
+  background: var(--surface); color: var(--accent); border: 1.5px solid var(--accent);
+  border-radius: 6px; padding: 5px 11px; font-size: 15px; font-weight: 700; line-height: 1.3;
+  font-family: var(--sans); text-decoration: none; white-space: nowrap;
+  display: inline-flex; align-items: center; transition: background .12s;
+}
+a.page-arrow:hover { background: var(--head-bg); }
+.page-arrow.disabled { opacity: .3; cursor: default; }
 #top-toc-menu {
   position: absolute; top: 100%; left: -12px; right: -12px;
   background: var(--surface); border-bottom: 2px solid var(--accent);
@@ -517,6 +526,13 @@ body.is-printing #top-nav            { display: none  !important; }
   #top-nav-title { display: none; }
   #home-btn { margin-right: auto; }
   #home-btn, #pdf-print-btn, #top-toc-toggle, #top-search-btn { padding: 7px 10px; }
+  .page-arrow { padding: 6px 8px; }
+  /* ← → を足した分、「PDFで保存」は絵文字だけにして、ボタンが画面からはみ出さないようにする */
+  #pdf-print-btn { font-size: 0; padding: 7px 9px; }
+  #pdf-print-btn::before { content: '🖨'; font-size: 14px; }
+  /* ← → は「ホーム」のすぐ右に寄せる（右側のボタンは右端にまとめる） */
+  #top-nav.has-arrows #home-btn { margin-right: 0; }
+  .page-arrow.next { margin-right: auto; }
   .cover-title { font-size: 21px; }
   .tab-btn { flex: 1 1 0; padding: 10px 4px; font-size: 13px; white-space: nowrap; }
   .sec-heading { gap: 3px; }

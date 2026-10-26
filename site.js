@@ -629,6 +629,48 @@ function jaHiddenLoad() {
 function jaHiddenSave(hidden) {
   try { localStorage.setItem('hideJa', hidden ? '1' : '0'); } catch (e) {}
 }
+/* ── 前後のページへ移るボタン（上部ナビの「ホーム」の右に「←」「→」を置く） ──
+   ページの並び順はここで決める。新しいレッスン・小テスト対策のページを足したら、ここにも足す。 */
+var SITE_PAGES = [
+  ['Spanish1_lesson2.html', 'Lección 2'], ['Spanish1_lesson3.html', 'Lección 3'], ['Spanish1_lesson4.html', 'Lección 4'],
+  ['Spanish1_lesson5.html', 'Lección 5'], ['Spanish1_lesson6.html', 'Lección 6'], ['Spanish1_lesson7.html', 'Lección 7'],
+  ['Spanish1_lesson8.html', 'Lección 8'], ['Spanish1_lesson9.html', 'Lección 9'], ['Spanish1_lesson10.html', 'Lección 10'],
+  ['Spanish1_lesson11.html', 'Lección 11'], ['Spanish1_lesson12.html', 'Lección 12'], ['Spanish1_lesson13.html', 'Lección 13'],
+  ['Spanish1_lesson14.html', 'Lección 14'], ['Spanish1_lesson15.html', 'Lección 15'], ['Spanish1_lesson16.html', 'Lección 16'],
+  ['Spanish1_lesson17.html', 'Lección 17'], ['Spanish1_lesson18.html', 'Lección 18'], ['Spanish1_lesson19.html', 'Lección 19'],
+  ['Spanish1_lesson20.html', 'Lección 20'],
+  ['kotest1.html', '小テスト対策 第1回'], ['kotest2.html', '小テスト対策 第2回'], ['kotest3.html', '小テスト対策 第3回']
+];
+
+function setupPageArrows() {
+  var home = document.getElementById('home-btn');
+  if (!home) return;
+  var file = (location.pathname.split('/').pop() || '').toLowerCase();
+  var idx = -1;
+  SITE_PAGES.forEach(function (p, i) { if (p[0].toLowerCase() === file) idx = i; });
+  if (idx < 0) return;
+  function make(dir, arrow) {
+    var target = SITE_PAGES[idx + dir];
+    var el = document.createElement(target ? 'a' : 'span');
+    el.className = 'page-arrow' + (target ? '' : ' disabled');
+    el.textContent = arrow;
+    var name = dir < 0 ? '前のページ' : '次のページ';
+    el.setAttribute('aria-label', target ? name + '：' + target[1] : name + 'はありません');
+    if (target) {
+      el.href = target[0];
+      el.title = name + '：' + target[1];
+    } else {
+      el.setAttribute('aria-disabled', 'true');
+    }
+    return el;
+  }
+  var prev = make(-1, '←'), next = make(1, '→');
+  home.parentNode.insertBefore(prev, home.nextSibling);
+  next.classList.add('next');
+  home.parentNode.insertBefore(next, prev.nextSibling);
+  home.parentNode.classList.add('has-arrows');
+}
+
 function setupJaToggle() {
   if (!document.querySelector('.ex-ja')) return;
   var btn = document.createElement('button');
@@ -656,6 +698,7 @@ function setupJaToggle() {
 /* ── ページ読み込み時の初期化 ── */
 document.addEventListener('DOMContentLoaded', function () {
 
+  setupPageArrows();
   setupJaToggle();
   setupLangSwitch();
 
