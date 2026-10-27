@@ -639,7 +639,7 @@ var SITE_PAGES = [
   ['Spanish1_lesson14.html', 'Lección 14'], ['Spanish1_lesson15.html', 'Lección 15'], ['Spanish1_lesson16.html', 'Lección 16'],
   ['Spanish1_lesson17.html', 'Lección 17'], ['Spanish1_lesson18.html', 'Lección 18'], ['Spanish1_lesson19.html', 'Lección 19'],
   ['Spanish1_lesson20.html', 'Lección 20'],
-  ['kotest1.html', '小テスト対策 第1回'], ['kotest2.html', '小テスト対策 第2回'], ['kotest3.html', '小テスト対策 第3回']
+  ['kotest1.html', '小テスト対策 第1回'], ['kotest2.html', '小テスト対策 第2回'], ['kotest3.html', '小テスト対策 第3回'], ['kotest4.html', '小テスト対策 第4回']
 ];
 
 function setupPageArrows() {

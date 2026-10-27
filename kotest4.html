@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<script src="tanren-bank.js" defer></script>
+<script src="id-map.js" defer></script>
+<script src="sync.js" defer></script>
+<script src="site.js" defer></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#1a365d">
+<title>小テスト対策 第4回 | 接続法現在</title>
+<link rel="stylesheet" href="spanish1-common.css">
+<style>
+  .kt-howto { font-size: 13.5px; line-height: 1.85; }
+  .kt-howto li { margin-bottom: 2px; }
+
+  /* ── 活用の早見表（1画面にまとめたもの） ── */
+  .ref { font-size: 12.5px; line-height: 1.3; color: var(--ink); }
+  .ref .steps { margin: 0 0 3px; font-size: 1em; line-height: 1.38; }
+  .ref .ex { margin: 3px 0 4px; font-family: var(--mono); font-size: .88em; line-height: 1.45; color: var(--mid); }
+  .ref table.rt { width: 100%; min-width: 0; border-collapse: collapse; margin: 0 0 2px; font-size: inherit; }
+  .ref .rt th, .ref .rt td {
+    border: 1px solid var(--rule); padding: 0 2px; text-align: center; white-space: nowrap; font-size: 1em; line-height: 1.28;
+  }
+  .ref .rt thead th { background: var(--accent); color: #fff; font-weight: 700; }
+  .ref .rt tbody th { text-align: left; background: var(--head-bg); color: var(--accent); font-weight: 700; padding-left: 4px; }
+  .ref .rt tr.end td { color: var(--accent2); font-weight: 700; }
+  .ref .rt tr.note td { text-align: left; white-space: normal; font-size: .92em; color: var(--mid); background: #fafaf6; padding: 2px 4px; }
+  .ref .rt.st td { font-family: var(--mono); font-weight: 600; }
+  .ref .rt.st .vb { font-family: var(--mono); font-weight: 600; color: var(--ink); }
+  .ref .rt.yo td { text-align: left; font-family: var(--mono); font-size: .92em; }
+  .ref .sech { margin: 4px 0 2px; padding: 0 5px; line-height: 1.3; background: var(--accent2); color: #fff; font-weight: 700; border-radius: 3px; }
+  .ref .chg { color: var(--warn); font-weight: 700; }
+  .ref .sech .chg { color: #ffd9d4; }
+  .ref .spell { margin: 3px 0 0; font-size: .95em; line-height: 1.4; }
+  .ref .spell span { white-space: nowrap; }
+  .ref .spell i { font-style: normal; font-family: var(--mono); color: var(--accent2); font-weight: 600; }
+  #ref-fab {
+    position: fixed; right: 16px; bottom: 74px; z-index: 950;
+    height: 40px; padding: 0 14px; border-radius: 20px;
+    border: 2px solid var(--accent2); background: var(--accent2); color: #fff;
+    font-family: var(--sans); font-size: 13px; font-weight: 700; cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+  }
+  #ref-overlay {
+    position: fixed; inset: 0; z-index: 1200; background: rgba(0,0,0,.5);
+    display: none; align-items: center; justify-content: center; padding: 6px;
+  }
+  #ref-overlay.open { display: flex; }
+  #ref-panel {
+    background: var(--surface); border-radius: 10px; width: 100%; max-width: 780px; max-height: 100%;
+    display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 8px 30px rgba(0,0,0,.35);
+  }
+  #ref-head {
+    display: flex; align-items: center; justify-content: space-between; gap: 8px;
+    padding: 5px 8px 5px 10px; border-bottom: 2px solid var(--accent);
+    font-family: var(--serif); font-weight: 700; font-size: 14px; color: var(--accent);
+  }
+  #ref-close {
+    border: none; background: var(--accent); color: #fff; border-radius: 6px;
+    padding: 4px 12px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: var(--sans);
+  }
+  #ref-scroll { overflow-y: auto; padding: 6px 7px 8px; }
+  #ref-overlay .ref { font-size: min(11.6px, 3.1vw); }
+  @media (min-width: 640px) { #ref-overlay .ref { font-size: 14px; } .ref .rt th, .ref .rt td { padding: 2px 6px; } }
+  @media print { #ref-fab, #ref-overlay { display: none !important; } }
+</style>
+</head>
+<body>
+
+<div id="top-nav">
+  <a id="home-btn" href="index.html">🏠 ホーム</a>
+  <span id="top-nav-title">小テスト対策 第4回</span>
+</div>
+
+<div class="cover-title-block">
+  <div class="cover-title">小テスト対策　第4回</div>
+  <div class="cover-sub">接続法現在　Presente de subjuntivo</div>
+</div>
+
+<div class="tab-nav">
+  <button class="tab-btn active-grammar" onclick="switchTab('grammar', this)">📘　基礎（90問）</button>
+  <button class="tab-btn" onclick="switchTab('tanren', this)">💪　鍛錬（100問）</button>
+</div>
+
+<!-- ══ 基礎 ══ -->
+<div id="tab-grammar" class="tab-content active">
+
+<div class="cover">
+  <div class="cover-goal"><b>基礎について</b><br>配布された資料（接続法現在の活用形の作り方・プリントの問題3枚分・教科書のつづり字と用法）を<b>すべて</b>問題にしました。まずここで基本を固めてから「鍛錬」に進んでください。</div>
+  <ul class="kt-howto">
+    <li><b>①〜③</b>：プリントの問題（「esperar（3複）」のように、動詞と人称から接続法現在形を答える）です。<b>④</b>は教科書の「つづり字に注意する動詞」、<b>⑤</b>は活用表（全人称）、<b>⑥</b>は用法の例文です。</li>
+    <li><b>______</b> をタップすると答え、<b>ヒント</b> をタップすると<b>何型の動詞か</b>と、yo形から作る手順が出ます。</li>
+    <li>「解説を見る」には、<b>6つの活用形すべて</b>（答えの人称が色つき）と、<b>-ar型・e→ie型などの型</b>、作り方を書いています。</li>
+    <li>画面の右下の <b>「📋 活用表」</b> を押すと、活用の早見表（1画面）がいつでも開けます。</li>
+  </ul>
+</div>
+
+<div class="sec-heading" id="kt-points">
+  <span class="sec-num">📌</span>
+  <span class="sec-title">活用の早見表</span>
+  <span class="sec-es">Resumen</span>
+</div>
+
+<div id="ref-inline"></div>
+
+<div class="sec-heading" id="sec-kiso">
+  <span class="sec-num">📘</span>
+  <span class="sec-title">基礎問題（90問）</span>
+  <span class="sec-es">Ejercicios básicos</span>
+</div>
+
+<div class="tanren-app" data-lesson="107" data-label="基礎" data-order="topic"></div>
+
+</div><!-- /tab-grammar -->
+
+<!-- ══ 鍛錬 ══ -->
+<div id="tab-tanren" class="tab-content">
+
+<div class="cover">
+  <div class="cover-goal"><b>鍛錬について</b><br>小テストと同じ形式（動詞と人称から、接続法現在形を答える）の問題が <b>100問</b> あります。規則活用、つづり字の変化、語幹母音変化（-ar・-er／-ir）、再帰動詞、yo形不規則・完全不規則を、すべて練習します。</div>
+  <ul class="kt-howto">
+    <li>最初は<b>ランダムな順番</b>で出ます。「内容ごと」に切り替えると①〜⑤の分類順になります。「🔀 並べ直す」で別の順番になります。</li>
+    <li>分からないときは、右下の <b>「📋 活用表」</b> でいつでも早見表を開けます（本番では見られないので、まずは見ずに解いてください）。</li>
+    <li>解説には、6つの活用形すべてと、何型の動詞かが出ます。○△× を付けた問題は「今日の復習」に出ます。</li>
+  </ul>
+</div>
+
+<div class="sec-heading" id="sec-tanren">
+  <span class="sec-num">💪</span>
+  <span class="sec-title">鍛錬（100問）</span>
+  <span class="sec-es">Entrenamiento</span>
+</div>
+
+<div class="tanren-app" data-lesson="106" data-label="鍛錬" data-order="random"></div>
+
+</div><!-- /tab-tanren -->
+
+<!-- ══ 活用表をいつでも開くボタンと、早見表 ══ -->
+<button id="ref-fab" type="button" aria-haspopup="dialog" aria-controls="ref-overlay">📋 活用表</button>
+<div id="ref-overlay" role="dialog" aria-modal="true" aria-label="接続法現在の活用表">
+  <div id="ref-panel">
+    <div id="ref-head"><span>接続法現在の活用表（早見表）</span><button id="ref-close" type="button">✕ 閉じる</button></div>
+    <div id="ref-scroll"></div>
+  </div>
+</div>
+
+<template id="ref-template"><div class="ref"><p class="steps"><b>作り方</b>　① 直説法現在の <b>yo形</b>（hablo）→ ② <b>-o を取る</b>（habl-）→ ③ <b>反対の母音</b>の語尾（規則動詞はこれだけ）</p><table class="rt"><thead><tr><th>語尾</th><th>yo</th><th>tú</th><th>él</th><th>nos.</th><th>vos.</th><th>ellos</th></tr></thead><tbody><tr class="end"><th>-ar</th><td>-e</td><td>-es</td><td>-e</td><td>-emos</td><td>-éis</td><td>-en</td></tr><tr class="end"><th>-er/-ir</th><td>-a</td><td>-as</td><td>-a</td><td>-amos</td><td>-áis</td><td>-an</td></tr></tbody></table><div class="sech">語幹の母音が変わる動詞（<b class="chg">赤</b>＝変化）</div><table class="rt st"><thead><tr><th>型・例</th><th>yo・tú・él・ellos</th><th>nos.・vos.</th></tr></thead><tbody><tr><th>ie 型 <span class="vb">pensar</span></th><td>p<b class="chg">ie</b>ns-</td><td>pens-</td></tr><tr><th>ue 型 <span class="vb">poder</span></th><td>p<b class="chg">ue</b>d-</td><td>pod-</td></tr><tr><th>i 型 <span class="vb">pedir</span></th><td>p<b class="chg">i</b>d-</td><td>p<b class="chg">i</b>d-</td></tr><tr><th>ie-i 型 <span class="vb">sentir</span></th><td>s<b class="chg">ie</b>nt-</td><td>s<b class="chg">i</b>nt-</td></tr><tr><th>ue-u 型 <span class="vb">dormir</span></th><td>d<b class="chg">ue</b>rm-</td><td>d<b class="chg">u</b>rm-</td></tr><tr class="note"><td colspan="3">-ar・-er 動詞は nos.・vos. が変わらない。-ir 動詞は nos.・vos. も変わる。</td></tr></tbody></table><div class="sech">yo形が不規則 → その語幹を全人称で使う</div><table class="rt yo"><tbody><tr><td><b>tener</b> tengo→<b class="chg">teng</b>-</td><td><b>venir</b> vengo→<b class="chg">veng</b>-</td></tr><tr><td><b>salir</b> salgo→<b class="chg">salg</b>-</td><td><b>hacer</b> hago→<b class="chg">hag</b>-</td></tr><tr><td><b>poner</b> pongo→<b class="chg">pong</b>-</td><td><b>decir</b> digo→<b class="chg">dig</b>-</td></tr><tr><td><b>ver</b> veo→<b class="chg">ve</b>-</td><td><b>conocer</b> conozco→<b class="chg">conozc</b>-</td></tr><tr class="note"><td colspan="2">traer traigo→traig- ／ oír oigo→oig- ／ construir construyo→construy- ／ producir produzco→produzc-</td></tr></tbody></table><div class="sech">完全不規則（yo形が -o で終わらない6つ）</div><table class="rt"><thead><tr><th></th><th>yo</th><th>tú</th><th>él</th><th>nos.</th><th>vos.</th><th>ellos</th></tr></thead><tbody><tr><th>dar</th><td>dé</td><td>des</td><td>dé</td><td>demos</td><td>deis</td><td>den</td></tr><tr><th>estar</th><td>esté</td><td>estés</td><td>esté</td><td>estemos</td><td>estéis</td><td>estén</td></tr><tr><th>haber</th><td>haya</td><td>hayas</td><td>haya</td><td>hayamos</td><td>hayáis</td><td>hayan</td></tr><tr><th>ir</th><td>vaya</td><td>vayas</td><td>vaya</td><td>vayamos</td><td>vayáis</td><td>vayan</td></tr><tr><th>saber</th><td>sepa</td><td>sepas</td><td>sepa</td><td>sepamos</td><td>sepáis</td><td>sepan</td></tr><tr><th>ser</th><td>sea</td><td>seas</td><td>sea</td><td>seamos</td><td>seáis</td><td>sean</td></tr></tbody></table><p class="spell"><b>つづり字</b>　-car→qu <i>busque</i> ／ -gar→gu <i>pague</i> ／ -zar→c <i>alcance</i> ／ -guar→gü <i>averigüe</i> ／ -ger,-gir→j <i>coja</i> ／ -cer,-cir→z <i>venza</i> ／ -guir→g <i>distinga</i></p></div></template>
+
+<footer class="course-footer">スペイン語文法解説集　小テスト対策</footer>
+
+<script>
+(function () {
+  var tpl = document.getElementById('ref-template');
+  var overlay = document.getElementById('ref-overlay');
+  var scroll = document.getElementById('ref-scroll');
+  function mount(target) { target.appendChild(tpl.content.cloneNode(true)); }
+  mount(document.getElementById('ref-inline'));
+  mount(scroll);
+
+  /* 画面に収まらないときは、文字を少しずつ小さくして1画面におさめる */
+  function fit() {
+    var ref = scroll.firstElementChild;
+    ref.style.fontSize = '';
+    var fs = parseFloat(getComputedStyle(ref).fontSize);
+    while (scroll.scrollHeight > scroll.clientHeight + 1 && fs > 8.5) {
+      fs -= 0.25;
+      ref.style.fontSize = fs + 'px';
+    }
+  }
+  function open() {
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+    fit();
+    document.getElementById('ref-close').focus();
+  }
+  function close() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    document.getElementById('ref-fab').focus();
+  }
+  document.getElementById('ref-fab').addEventListener('click', open);
+  document.getElementById('ref-close').addEventListener('click', close);
+  overlay.addEventListener('click', function (e) { if (e.target === overlay) close(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && overlay.classList.contains('open')) close(); });
+  window.addEventListener('resize', function () { if (overlay.classList.contains('open')) fit(); });
+})();
+</script>
+
+</body>
+</html>
